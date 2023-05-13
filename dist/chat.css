@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  padding: 0;
+  
+  font-family: Hind Kochi,Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  position: relative;
+  overflow: hidden;
+  
+}
+
+#nav-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #7fd6d0;
+  height: 12vh;
+}
+
+#nav-bar  .head_img {
+  height: 7vh;
+  width: auto;
+  margin-left: 3vh;
+}
+
+#nav-bar  #back {
+  height: 4vh;
+  width: auto;
+  margin-left: 5px;
+}
+
+#nav-bar h3 {
+  margin: 0 10px;
+  color: white;
+  font: 90% Hind Kochi;
+  margin-bottom: 15px;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#content {
+  height: calc(100vh - 22vh);
+  overflow-y: auto;
+  padding: 10px;
+}
+
+#content div {
+  display: block;
+  text-align: right; /*暫時*/
+  font-size: 100%;
+}
+
+#bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #e8e8e8;
+  border-top: 1px solid #ddd;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 10vh;
+}
+
+#bottom input[type="text"] {
+  flex-grow: 1;
+  margin-right: 30px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 28px;
+  height: 4vh;
+}
+
+#bottom button[type="submit"] {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #D9D9D9;
+  color: #000;
+  font-size: 26px;
+}
+
+.add {
+  width: auto;
+  height: 3vh;
+  margin-right: 40px;
+}
+
+#nav-bar button {
+  padding: 10px 30px;
+  margin-top: 5px;
+  margin-left: 30vw;
+  border-radius: 20px;
+  border: none;
+  background-color: #fff;
+  color: #7fd6d0;
+  font-size: 100%;
+  height: 5vh;
+}
+
+.self-message {
+  position: relative;  
+  display: inline-block;
+  max-width: 70%; 
+  background-color: #f5f5f5; 
+  color: #171515; 
+  padding: 30px; 
+  margin: 5px 0; 
+  border-radius: 20px; 
+  overflow-wrap: break-word; 
+  border: 1px solid #f5f5f5;
+  text-align: right;
+
+}
+
+.other-message {
+  position: relative; 
+  display: inline-block; 
+  max-width: 70%; 
+  background-color: #f5f5f5; 
+  color: #171515; 
+  padding: 30px; 
+  margin: 15px 5px; 
+  border-radius: 20px; 
+  overflow-wrap: break-word; 
+  border: 1px solid #f5f5f5;
+  text-align: right;
+}
+
+#msg-form {
+  display: flex;
+  /*margin-top: 10px;*/
+}
+
+#msg-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  height: 40px; 
+}

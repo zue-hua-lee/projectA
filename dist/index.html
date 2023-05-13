@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>Chat Room</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./chat.css">
+  </head>
+  <body>
+    <div id="nav-bar">
+      <img src="./Lugg_repo/back.png" id="back" alt="back" >
+      <img src="./Lugg_repo/head_img.png" border="0" class="head_img" alt="head img">
+      <h3 id="username">Nancy Lin<br>在線上</h3>
+      <button type="button" id="deal">成交</button>
+    </div>
+
+    <div id="chat-container">
+      <div id="content">
+        
+      </div>
+      <div id="bottom">
+        <img src="./Lugg_repo/add.png" class="add">
+        <form id="msg-form">
+          <input type="text" id="msg-input" size="40" placeholder="輸入私訊...">
+          <button type="submit">輸入</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script src="./chat.js"></script>
+  </body>
+</html>
