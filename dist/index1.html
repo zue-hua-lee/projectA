@@ -33,25 +33,53 @@
       </div>
     </div>
 
-    <div id="add_new_journey">
-      <div id="user_menu">
-        <div id="top">
-          <div class="logo_user">
+    <div id="user_menu">
+      <div id="top">
+        <div class="logo_user">
+          <div>
             <span class="title_word1">We</span>
             <span class="title_word2">Lugg</span>
-            <span class="user_id"></span>
           </div>
-          <img class="bell" src="https://ppt.cc/fix7Kx@.png" alt="bell">
+          <div class="user_id"></div>
         </div>
-        <div id="character">
-          <input class="mid_luggage" type="image" src="https://ppt.cc/fSTb8x@.png" alt="mid_luggage">
-          <span class="character_word1">我是代購者</span>
-          <img class="short_line" src="https://ppt.cc/fN2cGx@.png" alt="short_line">
-          <input class="shopping_bag" type="image" src="https://ppt.cc/fbG27x@.png" alt="shopping_bag">
-          <span class="character_word2">我是購買者</span>
-        </div>
+        <img class="bell" src="https://ppt.cc/fix7Kx@.png" alt="bell">
       </div>
-      
+      <div id="character">
+        <input class="mid_luggage" type="image" src="https://ppt.cc/fSTb8x@.png" alt="mid_luggage">
+        <span class="character_word1">我是代購者</span>
+        <img class="short_line" src="https://ppt.cc/fN2cGx@.png" alt="short_line">
+        <input class="shopping_bag" type="image" src="https://ppt.cc/f4q7ux@.png" alt="shopping_bag">
+        <span class="character_word2">我是購買者</span>
+      </div>
+    </div>
+
+    <div id="menu_bar">
+      <input class="home" type="image" src="https://ppt.cc/fYnODx@.png" alt="home">
+      <input class="user_profile" type="image" src="https://ppt.cc/fX072x@.png" alt="user_profile">
+      <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
+      <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
+    </div>
+
+    <div id="selbar"> 
+      <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
+      <span class="select_w">篩選</span>
+    </div>
+
+    <div id="mainpage">
+      <!-- <div class="bottom_bar">
+        <img class="bm_back" src="https://ppt.cc/fDiZ0x@.png" alt="back icon.png" width="29.06px" height="25.42px" style="margin-top:24px; margin-left:42px;">
+        <img class="bm_ppl" src="https://ppt.cc/fu5QAx@.png" alt="ppl icon.png" width="23.93px" height="23.93px" style="margin-top:0px; margin-left:60.94px;">
+        <img class="bm_cart" src="https://ppt.cc/f8Hdyx@.png" alt="cart icon.png" width="27px" height="28.5px" style="margin-top:0px; margin-left:61.07px;">
+        <img class="bm_chat" src="https://ppt.cc/fxa1Px@.png" alt="chat icon.png" width="31.13px" height="27.24px" style="margin-top:0px; margin-left:61px;">
+      </div> -->
+
+      <div id="recommend_w">推薦代購者</div>
+      <button type="submit" id="bm_add_schedule">填寫行程</button>
+      <div id="show_schedule"></div>
+      <div id="show_need"></div>
+    </div>
+
+    <div id="add_new_journey">
       <form id="journey_data">
         <div id="journey">
           <img class="journey_title" src="https://ppt.cc/fWvz0x@.png" alt="journey_title">
@@ -201,155 +229,114 @@
           </div>
           <input id="submit_trip" type="image" src="https://ppt.cc/f6sEox@.png" alt="submit_trip">
       </form>
+    </div>
 
-      <div id="menu_bar">
-          <input class="home" type="image" src="https://ppt.cc/fYnODx@.png" alt="home">
-          <input class="user_profile" type="image" src="https://ppt.cc/fX072x@.png" alt="user_profile">
-          <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
-          <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
+    <div id="subpage_title">
+      <img src="https://ppt.cc/fe14cx@.png" alt="backicon.png" class="case_back_button">
+      <div class="subpage_word">聊天紀錄</div>
+    </div>
+
+    <div id="chat_main">
+      <div id="show_chatmain">
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="accept_case_list">
+      <div id="no_customer">
+        <img src="https://ppt.cc/fsDkMx@.png" alt="backpic.png">
+        <p>你還沒設定行程喔</p>
+      </div>
+      <div id="has_customer">
+        <div class="cus_list">
+          <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png" >
+          <div>
+            <p class="cus_list_name">Vennesa Chen</p>
+            <p class="cus_list_dis">商品: 烏龜玉米脆片<br>數量: 兩盒</p>
+          </div>
+          <div>
+            <img class="cus_list_circle" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png">
+            <img class="cus_list_check1" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png">
+          </div>
+        </div>
+        <div class="cus_list">
+          <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png">
+          <div>
+            <p class="cus_list_name">user1</p>
+            <p class="cus_list_dis">商品: Press Butter Sand焦糖<br>數量: 三盒</p>
+          </div>
+          <div>
+            <img class="cus_list_circle" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png">
+            <img class="cus_list_check2" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png">
+          </div>
+        </div>
       </div>
     </div>
 
     <div id="deal_agree">
-        <div class="deal">
-          <div class="description">
-            <p style="font-size: 17px;">你是否確定要成交?</p>
-          </div>
-          <div class="deal_button">
-            <p class="deal_no" style="font-size: 17px; border-right: 3px solid lightgrey; border-bottom-left-radius: 25px;">取消</p>
-            <p class="deal_yes" style="font-size: 17px; border-bottom-right-radius: 25px;">成交</p>
-          </div>
-        </div>
-    </div>
-      
-      <div id="deal_success">
-        <div class="background_deal">
-          <div class="top"></div>
-        </div>
-        <div class="card">
-          <div class="pic">
-            <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png" width="151px" height="103px">
-          </div>
-          <div class="word">
-            <p class="title" style="font-size: 25px;">成功交易</p>
-            <div class="description">
-              <p style="font-size: 13px;">你已成功與Vennesa Chen配對交易<span style="font-size: 13px;">請依時完成代購，並與購買者保持聯繫。</span><span style="font-size: 13px;">如有任何問題可以聯絡客服人員。</span></p>
-            </div>
-          </div>
-          <div class="to_list">
-            <p style="font-size: 20px;">進入代購清單</p>
-          </div>
-          <div class="to_mainpage">
-            <p style="font-size: 20px;">回首頁</p>
-          </div>
-        </div>
-      </div>
-      
-      <div id="accept_case_list">
-        <div class="background_case">
-          <div class="top"></div>
-          <p style="font-size: 20px;">代購清單</p>
-          <div class="case_back_button">
-            <img src="https://ppt.cc/fe14cx@.png" alt="backicon.png" width="31px" height="31.02px">
-          </div>
-        </div>
-        <div class="show_case">
-          <div class="no_customer">
-            <img src="https://ppt.cc/fsDkMx@.png" alt="backpic.png" width="88px" height="112px">
-            <p style="font-size: 25px;">你還沒設定行程喔</p>
-          </div>
-          <div class="has_customer">
-            <div class="cus_list">
-              <p class="cus_list_name" style="font-size: 17px;">Vennesa Chen</p>
-              <p class="cus_list_dis" style="font-size: 13px;">商品: 烏龜玉米脆片<br>數量: 兩盒</p>
-              <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png" width="55px" height="55px">
-              <img class="cus_list_circle1" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png" width="33px" height="33px">
-              <img class="cus_list_check1" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png" width="22.68px" height="18.35px">
-            </div>
-            <div class="cus_list">
-              <p class="cus_list_name" style="font-size: 17px;">user1</p>
-              <p class="cus_list_dis" style="font-size: 13px;">商品: Press Butter Sand焦糖<br>數量: 三盒</p>
-              <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png" width="55px" height="55px">
-              <img class="cus_list_circle2" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png" width="33px" height="33px">
-              <img class="cus_list_check2" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png" width="22.68px" height="18.35px">
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="mainpage">
-        <div class="background_mainpage">
-          <div class="topbar">
-            <img class="notif" src="https://ppt.cc/fq5vRx@.png" alt="notification icon.png" width="22px" height="20.44px">
-            <p class="we" style="font-size: 15px;">We</p>
-            <p class="lugg" style="font-size: 15px;">Lugg</p>
-            <img class="suitcase" src="https://ppt.cc/fFan2x@.png" alt="suitcase icon.png" width="39px" height="52px">
-            <img class="line" src="https://ppt.cc/fWHE0x@.png" alt="line icon.png" width="79px">
-            <p class="suitcase_w" style="font-size: 13px;">我是代購者</p>
-            <img class="bag" src="https://ppt.cc/ffZyfx@.png" alt="bag icon.png" width="39px" height="52px">
-            <p class="bag_w" style="font-size: 13px;">我是購買者</p>
-          </div>
-          <div class="selbar"> 
-            <p class="select_w" style="font-size: 13px;">篩選</p>
-            <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
-          </div>
-          <p class="recommend_w" style="font-size: 13px; margin-top:240px; margin-left:17px; position: absolute; color: #939191; z-index: 4;">推薦購買者</p>
-          <div class="bottom_bar">
-            <img class="bm_back" src="https://ppt.cc/fDiZ0x@.png" alt="back icon.png" width="29.06px" height="25.42px" style="margin-top:24px; margin-left:42px;">
-            <img class="bm_ppl" src="https://ppt.cc/fu5QAx@.png" alt="ppl icon.png" width="23.93px" height="23.93px" style="margin-top:0px; margin-left:60.94px;">
-            <img class="bm_cart" src="https://ppt.cc/f8Hdyx@.png" alt="cart icon.png" width="27px" height="28.5px" style="margin-top:0px; margin-left:61.07px;">
-            <img class="bm_chat" src="https://ppt.cc/fxa1Px@.png" alt="chat icon.png" width="31.13px" height="27.24px" style="margin-top:0px; margin-left:61px;">
-          </div>
-        </div>
-        <button type="submit" id="bm_add_schedule">填寫行程</button>
-        <div id="show_schedule"></div>
-        <div id="show_need"></div>
-      </div>
-
-    <div id="chat_main">
-      <div class="background_case">
-        <div class="top"></div>
-        <p style="font-size: 20px;">聊天紀錄</p>
-        <div class="case_back_button">
-          <img src="https://ppt.cc/fe14cx@.png" alt="backicon.png" width="31px" height="31.02px">
-        </div>
-      </div>
-
-      <div id="show_chatmain">
-        <div class="name1">
-          <img src="https://ppt.cc/ftqehx@.png" alt="name1" class="w" width="338px" height="95.17px">
-          <div class="gray">
-            <div class="chat_button1">
-              <p class="chat_no" style="font-size: 17px; border-radius: 7px;">個人資料</p>
-              <p class="chat_yes" style="font-size: 17px; border-radius: 7px;">進行聊天</p>
-            </div>
-          </div>
+      <div id="deal_box">
+        <div class="deal_description">你是否確定要成交?</div>
+        <div class="deal_button">
+          <p class="deal_no">取消</p>
+          <p class="deal_yes">成交</p>
         </div>
       </div>
     </div>
+      
+    <div id="deal_success">
+      <div id="background_top"></div>
+      <div id="deal_success_card">
+        <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png">
+        <p class="word">成功交易</p>
+        <p>你已成功與Vennesa Chen配對交易</p>
+        <p>請依時完成代購，並與購買者保持聯繫。</p>
+        <p>如有任何問題可以聯絡客服人員。</p>
+        <button type="submit" name="to_list">進入代購清單</button>
+        <button type="submit" name="to_mainpage">回首頁</button>
+      </div>
+    </div>
 
-    <!-- <div id="chat_box">
-      <div id="nav-bar">
+    <div id="chat_box">
+      <div id="chat_top">
         <img src="https://ppt.cc/fe14cx@.png" class="back" alt="back" >
         <img src="https://ppt.cc/fgoZ3x@.png" class="head_img" alt="head img">
-        <h3 id="username">Nancy Lin<br>在線上</h3>
-        <button type="button" onclick="location.href='to_check_link'" id="deal">成交</button>
+        <h3>Nancy Lin<br>在線上</h3>
+        <button type="button" id="chat_deal">成交</button>
       </div>
-
-      <div id="chat-container">
-        <div id="content"></div>
-        <div id="bottom">
-          <img src="https://ppt.cc/flvILx@.png" class="add">
-          <form id="msg-form">
-            <input type="text" id="msg-input" size="40" placeholder="輸入私訊...">
-            <button type="submit" name="chat_submit">輸入</button>
-          </form>
-        </div>
+      <div id="chat_content"></div>
+      <div id="chat_bottom">
+        <img src="https://ppt.cc/flvILx@.png" class="add">
+        <input type="text" name="msg-input" placeholder="輸入私訊...">
+        <button type="submit" name="chat_submit">輸入</button>
       </div>
-    </div> -->
+    </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script> -->
-    <!-- <script src="http://luffy.ncku.edu.tw:9444/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
     <script src="./WeLugg.js"></script>
   </body>

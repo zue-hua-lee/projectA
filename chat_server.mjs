@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import fs from 'fs'
@@ -7,8 +5,6 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import http from 'http'
 import { Server } from 'socket.io'
-
-
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)

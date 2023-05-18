@@ -1,25 +1,57 @@
-#!/usr/bin/env node
-
-import fs from 'fs'
 import express from 'express'
+import bodyParser from 'body-parser'
+import fs from 'fs'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import http from 'http'
+import { Server } from 'socket.io'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9444
+const port = 9444 // change the port number
 
-app.listen(port, () => {
-  console.log(`listening on port: ${port}`)
-})
 app.use(express.static(`${__dirname}/dist`))
-
-import bodyParser from 'body-parser'
-import { Console } from 'console'
 app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(bodyParser.json())
 
+const server = http.createServer(app)
+const io = new Server(server)
+
+io.on('connection', (socket) => {
+  console.log('a user connected')
+
+    // 建立讀取聊天紀錄的路由(ajax)
+    app.get('/chat_history', (req, res) => {
+      fs.readFile(`${__dirname}/chat.txt`, 'utf8', (err, data) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Internal Server Error');
+        }
+        res.send(data);
+      });
+    });
+
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg)
+    io.emit('chat message', msg)
+    fs.appendFile(`${__dirname}/chat.txt`, `${msg}\n`, (err) => {
+      if (err) console.log(err)
+    })
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+})
+
+server.listen(port, () => {
+  console.log(`listening on port: ${port}`)
+})
+
+// homepage
 app.post('/login', (req, res) => {
   if(`${req.body.account}` == "" || `${req.body.password}` == ""){
     res.send("請輸入帳號及密碼。")
@@ -31,7 +63,6 @@ app.post('/login', (req, res) => {
     var found = 0
     for(var key in data){
       if(key == `${req.body.account}` && data[key]["password"] == `${req.body.password}`){
-        // jump
         res.send("帳號密碼正確")
         return 0
       }  
@@ -59,11 +90,11 @@ app.post('/register', (req, res) => {
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
-    // 註冊成功，login
     res.send("註冊成功！")
   })
 })
 
+// add_new_journey
 app.get('/journey_data', (req, res) => { //用get傳
   fs.readFile('./data.json', function (err, data) {
       if (err) throw err;
@@ -92,24 +123,11 @@ app.get('/journey_data', (req, res) => { //用get傳
           console.log('Add new trip...')
       })
   })
+  res.send("aaa")
 })
 
-//ccc
+// main
 app.post('/list',(req,res)=>{
-  //console.log(`listing...`);
   const data = JSON.parse(fs.readFileSync('data.json'));
   res.send(data);
-})
-
-//fff
-app.get('/start', (req,res) => {
-  const data = JSON.parse(fs.readFileSync('jump_state.json'));
-  const state = data['state']
-  // console.log(data['state'])
-  data['state'] = 'to_main'
-  var str = JSON.stringify(data);
-  fs.writeFile('jump_state.json', str, function (err) {
-      if (err) {console.error(err);}
-  })
-  res.send(state)
 })
