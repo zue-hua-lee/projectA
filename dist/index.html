@@ -1,36 +1,344 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
   <head>
-    
-    <title>Chat Room</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.cdnfonts.com/css/hind-kochi" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="./chat.css">
+    <link href="./WeLugg.css" rel="stylesheet" type="text/css">
   </head>
+
   <body>
-    <div id="nav-bar">
-      <img src="./Lugg_repo/back.png" id="back" alt="back" >
-      <img src="./Lugg_repo/head_img.png" border="0" class="head_img" alt="head img">
-      <h3 id="username">Nancy Lin<br>在線上</h3>
-      <button type="button" id="deal">成交</button>
+    <div id="homepage">
+      <div id="homepage_logo"></div>
+      <div id="homepage_logo_box"><span class="word1">We</span><span class="word2">Lugg</span></div>
+      <div class="word3">透過代購交易<br>讓您的行李箱成為旅程中的收入來源</div>
+  
+      <input type="text" name="account" placeholder="帳號">
+      <input type="text" name="password" placeholder="密碼">
+      <div id="homepage_output"><br></div>
+      
+      <div id="homepage_box1"> 
+        <button type="submit" name="login">登入</button>
+        <button type="submit" name="register">註冊</button>
+        <input type="checkbox"><span>記住密碼</span>
+        <span class="word5"><ins>忘記密碼</ins></span>
+        <div id="homepage_line"></div>
+      </div>
+      
+      <div id="homepage_box2"> 
+        <button type="submit" name="register_submit">確定</button>
+        <button type="submit" name="backto_homepage">返回登入</button>
+      </div>
     </div>
 
-    <div id="chat-container">
-      <div id="content">
-        
+    <div id="user_menu">
+      <div id="top">
+        <div class="logo_user">
+          <div>
+            <span class="title_word1">We</span>
+            <span class="title_word2">Lugg</span>
+          </div>
+          <div class="user_id"></div>
+        </div>
+        <img class="bell" src="https://ppt.cc/fix7Kx@.png" alt="bell">
       </div>
-      <div id="bottom">
-        <img src="./Lugg_repo/add.png" class="add">
-        <form id="msg-form">
-          <input type="text" id="msg-input" size="40" placeholder="輸入私訊...">
-          <button type="submit">輸入</button>
-        </form>
+      <div id="character">
+        <input class="mid_luggage" type="image" src="https://ppt.cc/fSTb8x@.png" alt="mid_luggage">
+        <span class="character_word1">我是代購者</span>
+        <img class="short_line" src="https://ppt.cc/fN2cGx@.png" alt="short_line">
+        <input class="shopping_bag" type="image" src="https://ppt.cc/f4q7ux@.png" alt="shopping_bag">
+        <span class="character_word2">我是購買者</span>
       </div>
     </div>
 
+    <div id="menu_bar">
+      <input class="home" type="image" src="https://ppt.cc/fYnODx@.png" alt="home">
+      <input class="user_profile" type="image" src="https://ppt.cc/fX072x@.png" alt="user_profile">
+      <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
+      <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
+    </div>
+
+    <div id="selbar"> 
+      <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
+      <span class="select_w">篩選</span>
+    </div>
+
+    <div id="mainpage">
+      <!-- <div class="bottom_bar">
+        <img class="bm_back" src="https://ppt.cc/fDiZ0x@.png" alt="back icon.png" width="29.06px" height="25.42px" style="margin-top:24px; margin-left:42px;">
+        <img class="bm_ppl" src="https://ppt.cc/fu5QAx@.png" alt="ppl icon.png" width="23.93px" height="23.93px" style="margin-top:0px; margin-left:60.94px;">
+        <img class="bm_cart" src="https://ppt.cc/f8Hdyx@.png" alt="cart icon.png" width="27px" height="28.5px" style="margin-top:0px; margin-left:61.07px;">
+        <img class="bm_chat" src="https://ppt.cc/fxa1Px@.png" alt="chat icon.png" width="31.13px" height="27.24px" style="margin-top:0px; margin-left:61px;">
+      </div> -->
+
+      <div id="recommend_w">推薦代購者</div>
+      <button type="submit" id="bm_add_schedule">填寫行程</button>
+      <div id="show_schedule"></div>
+      <div id="show_need"></div>
+    </div>
+
+    <div id="add_new_journey">
+      <form id="journey_data">
+        <div id="journey">
+          <img class="journey_title" src="https://ppt.cc/fWvz0x@.png" alt="journey_title">
+              <div class="sub_title1">
+                  <p id="departure" class="title_list">出發地點</p>
+                  <select name="departure_country" id="departure_country" class="select_list">
+                      <option value="" disabled selected hidden>國家</option>
+                      <optgroup label="東亞">
+                          <option value="台灣">台灣</option>
+                          <option value="日本">日本</option>
+                          <option value="韓國">韓國</option>
+                          <option value="中國">中國</option>
+                      </optgroup>
+                      <optgroup label="歐美">
+                          <option value="美國">美國</option>
+                          <option value="法國">法國</option>
+                          <option value="德國">德國</option>
+                      </optgroup>
+                  </select>
+                  <select name="departure_city" id="departure_city" class="select_list" disabled>
+                      <option value="" disabled selected hidden>城市</option>
+                  </select>
+              </div>
+              <div class="sub_title2">
+                  <p id="entry" class="title_list">抵達地點</p>
+                  <select name="entry_country" id="entry_country" class="select_list">
+                      <option value="" disabled selected hidden>國家</option>
+                      <optgroup label="東亞">
+                          <option value="台灣">台灣</option>
+                          <option value="日本">日本</option>
+                          <option value="韓國">韓國</option>
+                          <option value="中國">中國</option>
+                      </optgroup>
+                      <optgroup label="歐美">
+                          <option value="美國">美國</option>
+                          <option value="法國">法國</option>
+                          <option value="德國">德國</option>
+                      </optgroup>
+                  </select>
+                  <select name="entry_city" id="entry_city" class="select_list" disabled>
+                      <option value="" disabled selected hidden>城市</option>
+                  </select>
+              </div>
+              <div class="sub_title3">
+                  <p id="departure_time" class="title_list">出發日期</p>
+                  <select name="departure_year" id="departure_year" class="select_list">
+                      <option value="" disabled selected hidden>年份</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                  </select>
+                  <select name="departure_month" id="departure_month" class="select_list">
+                      <option value="" disabled selected hidden>月份</option>
+                      <option value="1">1月</option>
+                      <option value="2">2月</option>
+                      <option value="3">3月</option>
+                      <option value="4">4月</option>
+                      <option value="5">5月</option>
+                      <option value="6">6月</option>
+                      <option value="7">7月</option>
+                      <option value="8">8月</option>
+                      <option value="9">9月</option>
+                      <option value="10">10月</option>
+                      <option value="11">11月</option>
+                      <option value="12">12月</option>
+                  </select>
+                  <select name="departure_date" id="departure_date" class="select_list" disabled>
+                      <option value="" disabled selected hidden>日期</option>
+                  </select>
+              </div>
+              <div class="sub_title4">
+                  <p id="entry_time" class="title_list">抵達日期</p>
+                  <select name="entry_year" id="entry_year" class="select_list">
+                      <option value="" disabled selected hidden>年份</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                  </select>
+                  <select name="entry_month" id="entry_month" class="select_list">
+                      <option value="" disabled selected hidden>月份</option>
+                      <option value="1">1月</option>
+                      <option value="2">2月</option>
+                      <option value="3">3月</option>
+                      <option value="4">4月</option>
+                      <option value="5">5月</option>
+                      <option value="6">6月</option>
+                      <option value="7">7月</option>
+                      <option value="8">8月</option>
+                      <option value="9">9月</option>
+                      <option value="10">10月</option>
+                      <option value="11">11月</option>
+                      <option value="12">12月</option>
+                  </select>
+                  <select name="entry_date" id="entry_date" class="select_list" disabled>
+                      <option value="" disabled selected hidden>日期</option>
+                  </select>
+              </div>
+        </div>
+
+
+          <div id="product">
+              <img class="product_title" src="https://ppt.cc/fy8FOx@.png" alt="product_title">
+              <div class="sub_title5">
+                  <p id="product_kind" class="title_list" >種類</p>
+                  <select name="product_list" id="product_list" class="select_list">
+                      <option value="" disabled selected hidden>種類</option>
+                      <option value="Food">食物類</option>
+                      <option value="Apparel">服飾類</option>
+                      <option value="Cosmetic">彩妝保養類</option>
+                      <option value="Daily">生活用品類</option>
+                  </select>
+              </div>
+          </div>
+
+          <div id="luggage">
+              <img class="luggage_title" src="https://ppt.cc/fRjqfx@.png" alt="luggage_title">
+              <div class="sub_title6">
+                  <p id="luggage_size" class="title_list">尺寸</p>
+                  <select name="luggage_size_list" id="luggage_size_list" class="select_list">
+                      <option value="" disabled selected hidden>吋 inches</option>
+                      <option value="20">20吋以下</option>
+                      <option value="21">21~24吋</option>
+                      <option value="25">25~28吋</option>
+                      <option value="29">29吋以上</option>
+                  </select>
+              </div>
+              <div class="sub_title7">
+                  <p id="luggage_space" class="title_list">代購空間</p>
+                  <select name="luggage_space_list" id="luggage_space_list" class="select_list">
+                      <option value="" disabled selected hidden>百分比 %</option>
+                      <option value="20">20%</option>
+                      <option value="40">40%</option>
+                      <option value="60">60%</option>
+                      <option value="80">80%</option>
+                      <option value="100">100%</option>
+                  </select>
+              </div>
+              <img id="big_luggage" src="https://ppt.cc/fDoTwx@.png" alt="big_luggage">
+          </div>
+
+          <div id="cost">
+              <img class="cost_title" src="https://ppt.cc/fpvtGx@.png" alt="cost_title">
+              <div class="sub_title8">
+                  <p id="tip" class="title_list">代購小費</p>
+                  <input type="text" name="set_tip" id="set_tip" class="select_list" placeholder="請輸入小費 ( NTD )">
+              </div>
+          </div>
+          <input id="submit_trip" type="image" src="https://ppt.cc/f6sEox@.png" alt="submit_trip">
+      </form>
+    </div>
+
+    <div id="subpage_title">
+      <img src="https://ppt.cc/fe14cx@.png" alt="backicon.png" class="case_back_button">
+      <div class="subpage_word">聊天紀錄</div>
+    </div>
+
+    <div id="chat_main">
+      <div id="show_chatmain">
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+        <div class="name1">
+          <div class="w"><div class="n">user2</div>居住地: 台灣,台南 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;抵達地: 日本,大阪<br>旅行日期: 2024 / 2 / 1 - 2024 / 1 / 4<br>行李箱: 21吋/inch &nbsp; &nbsp; &nbsp;代購容量: 40%</div>
+          <div class="gray"><div class="chat_button"><p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="accept_case_list">
+      <div id="no_customer">
+        <img src="https://ppt.cc/fsDkMx@.png" alt="backpic.png">
+        <p>你還沒設定行程喔</p>
+      </div>
+      <div id="has_customer">
+        <div class="cus_list">
+          <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png" >
+          <div>
+            <p class="cus_list_name">Vennesa Chen</p>
+            <p class="cus_list_dis">商品: 烏龜玉米脆片<br>數量: 兩盒</p>
+          </div>
+          <div>
+            <img class="cus_list_circle" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png">
+            <img class="cus_list_check1" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png">
+          </div>
+        </div>
+        <div class="cus_list">
+          <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png">
+          <div>
+            <p class="cus_list_name">user1</p>
+            <p class="cus_list_dis">商品: Press Butter Sand焦糖<br>數量: 三盒</p>
+          </div>
+          <div>
+            <img class="cus_list_circle" src="https://ppt.cc/fzDEvx@.png" alt="headicon.png">
+            <img class="cus_list_check2" src="https://ppt.cc/fxxoQx@.png" alt="headicon.png">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="deal_agree">
+      <div id="deal_box">
+        <div class="deal_description">你是否確定要成交?</div>
+        <div class="deal_button">
+          <p class="deal_no">取消</p>
+          <p class="deal_yes">成交</p>
+        </div>
+      </div>
+    </div>
+      
+    <div id="deal_success">
+      <div id="background_top"></div>
+      <div id="deal_success_card">
+        <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png">
+        <p class="word">成功交易</p>
+        <p>你已成功與Vennesa Chen配對交易</p>
+        <p>請依時完成代購，並與購買者保持聯繫。</p>
+        <p>如有任何問題可以聯絡客服人員。</p>
+        <button type="submit" name="to_list">進入代購清單</button>
+        <button type="submit" name="to_mainpage">回首頁</button>
+      </div>
+    </div>
+
+    <div id="chat_box">
+      <div id="chat_top">
+        <img src="https://ppt.cc/fe14cx@.png" class="back" alt="back" >
+        <img src="https://ppt.cc/fgoZ3x@.png" class="head_img" alt="head img">
+        <h3>Nancy Lin<br>在線上</h3>
+        <button type="button" id="chat_deal">成交</button>
+      </div>
+      <div id="chat_content"></div>
+      <div id="chat_bottom">
+        <img src="https://ppt.cc/flvILx@.png" class="add">
+        <input type="text" name="msg-input" placeholder="輸入私訊...">
+        <button type="submit" name="chat_submit">輸入</button>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <script src="./chat.js"></script>
+    <script src="./WeLugg.js"></script>
   </body>
+
 </html>
