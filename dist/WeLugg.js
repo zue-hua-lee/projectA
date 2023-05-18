@@ -2,6 +2,35 @@ var user_name = ""
 var state1 = "homepage"
 var state2 = "homepage"
 
+// chat_box
+//用ajax的方法把聊天紀錄補出來
+//loadChatHistory();
+const loadChatHistory = () => {
+  $.get('/chat_history', (data) => {
+    console.log(data)
+    const messages = data.trim().split('\n');
+    messages.forEach((message) => {
+      appendMessage(message);
+    });
+  });
+};
+loadChatHistory();
+//function appendMessage
+//把message加到畫面上
+const appendMessage = (message, isSelf) => {
+  const div = document.createElement('div');
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  if (isSelf) {
+    messageDiv.classList.add('self-message');
+  } else {
+    messageDiv.classList.add('other-message');
+  }
+  messageDiv.style.display = 'inline-block';
+  div.appendChild(messageDiv);
+  $('#chat_content').append(div);
+}
+
 function all_display_none() {
   $('#homepage').css({'display':'none'})
   $('#homepage_box1').css({'display':'none'})
@@ -500,34 +529,6 @@ $(document).ready(function() {
   })
 
   const socket = io();
-  //function appendMessage
-  //把message加到畫面上
-  const appendMessage = (message, isSelf) => {
-    const div = document.createElement('div');
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = message;
-    if (isSelf) {
-      messageDiv.classList.add('self-message');
-    } else {
-      messageDiv.classList.add('other-message');
-    }
-    messageDiv.style.display = 'inline-block';
-    div.appendChild(messageDiv);
-    $('#chat_content').append(div);
-  }
-  
-  //用ajax的方法把聊天紀錄補出來
-  //loadChatHistory();
-  const loadChatHistory = () => {
-    $.get('/chat_history', (data) => {
-      const messages = data.trim().split('\n');
-      messages.forEach((message) => {
-        appendMessage(message);
-      });
-    });
-  };
-  loadChatHistory();
-
   //一個傳送訊息的函数
   const sendMessage = () => {
     const message = $('#chat_box input[name="msg-input"]').val();
