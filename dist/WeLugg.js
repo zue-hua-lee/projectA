@@ -55,12 +55,12 @@ function all_display_none() {
   $('#deal_success').css({'display':'none'})
   $('#chat_box').css({'display':'none'})
 }
-function to_mainpage_schedule() {
-  $('#user_menu .mid_luggage').css({'opacity':'1'});
-  $('#user_menu .shopping_bag').css({'opacity':'0.5'});
+function to_mainpage_need() {
+  $('#user_menu .mid_luggage').css({'opacity':'0.5'});
+  $('#user_menu .shopping_bag').css({'opacity':'1'});
   $('#show_schedule').css({'display':'block'});
   $('#show_need').css({'display':'none'});
-  $('#recommend_w').html('推薦購買者');
+  $('#recommend_w').html('推薦代購者');
   $('#bm_add_schedule').html('填寫行程');
   $('#bm_add_schedule').css({'background-color':'#7FD6D0'});
   $('#show_schedule').html('');
@@ -118,12 +118,12 @@ function to_mainpage_schedule() {
     },
   })
 }
-function to_mainpage_need() {
-  $('#user_menu .mid_luggage').css({'opacity':'0.5'});
-  $('#user_menu .shopping_bag').css({'opacity':'1'});
+function to_mainpage_schedule() {
+  $('#user_menu .mid_luggage').css({'opacity':'1'});
+  $('#user_menu .shopping_bag').css({'opacity':'0.5'});
   $('#show_schedule').css({'display':'none'});
   $('#show_need').css({'display':'block'});
-  $('#recommend_w').html('推薦代購者');
+  $('#recommend_w').html('推薦購買者');
   $('#bm_add_schedule').html('填寫商品');
   $('#bm_add_schedule').css({'background-color':'#556B94'});
   $('#show_need').html('');
@@ -138,13 +138,13 @@ function to_mainpage_need() {
              namelist += `居住地: ${data[name][id]},`;
           }
           if(id=="live_city"){
-            namelist += `${data[name][id]} &nbsp; &nbsp; &nbsp;`;
+            namelist += `${data[name][id]} &nbsp;`;
           }
           if(id=="good_country"){
             namelist += `商品地: ${data[name][id]},`;
           }
           if(id=="good_city"){
-            namelist += `${data[name][id]} &nbsp; &nbsp; &nbsp;`;
+            namelist += `${data[name][id]} &nbsp;`;
           }
           if(id=="arrive_year"){
             namelist += `${data[name][id]}/`;
