@@ -46,6 +46,7 @@ function all_display_none() {
   $('#show_need').css({'display':'none'})
 
   $('#add_new_journey').css({'display':'none'})
+  $('#add_new_request').css({'display':'none'})
   $('#chat_main').css({'display':'none'})
   $('#accept_case_list').css({'display':'none'})
   $('#accept_case_list #no_customer').css({'display':'none'})
@@ -323,7 +324,7 @@ $(document).ready(function() {
     console.log(nn)
   });
 
-  // schedule
+  // schedule 代購者頁面
   $('#user_menu .shopping_bag').click((event) => {
     if(state2 == "mainpage_schedule")
       show("mainpage_need")
@@ -337,10 +338,19 @@ $(document).ready(function() {
       $('#selbar').css({'display':'none'})
     }
   })
-  // need
+  // need 購買者頁面
   $('#user_menu .mid_luggage').click((event) => {
     if(state2 == "mainpage_need")
       show("mainpage_schedule")
+  })
+  $('#bm_add_schedule').click((event) => {
+    if(state2 == "mainpage_need"){
+      state1 = state2
+      state2 = "add_new_request"
+      $('#add_new_request').css({'display':'block'})
+      $('#mainpage').css({'display':'none'})
+      $('#selbar').css({'display':'none'})
+    }
   })
 
   // menu_bar
@@ -404,6 +414,7 @@ $(document).ready(function() {
     // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
   });
+
 
   // add_new_journey
   var city = new Array();
@@ -527,6 +538,88 @@ $(document).ready(function() {
       //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
   })
+
+
+  // add_new_request
+  var city = new Array();
+  city[1] = ['台北','台中','台南','高雄']; //台灣
+  city[2] = ['東京','大阪','京都','北海道']; //日本
+  city[3] = ['首爾','釜山']; //韓國
+  city[4] = ['北京','上海','香港']; //中國
+  city[5] = ['紐約','洛杉磯','舊金山']; //美國
+  city[6] = ['巴黎','馬賽','里昂']; //法國
+  city[7] = ['慕尼黑','法蘭克福','柏林']; //德國
+
+  $('#product_place_country_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#product_place_city').html(Sinner);
+      $('#product_place_city').attr("disabled",false);
+  });
+
+  $('#shipping_address_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#shipping_address_city').html(Sinner);
+      $('#shipping_address_city').attr("disabled",false);
+  });
+
+  $('#product_arrive_month').change(function(){
+      index = this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
+          for(var i=1;i<=31;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==4 || index==6 || index==9 || index==11){
+          for(var i=1;i<=30;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==2){
+          for(var i=1;i<=28;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+
+      $('#product_arrive_date').html(Sinner);
+      $('#product_arrive_date').attr("disabled",false);
+  });
+
+  $('#submit_request').click((event) => {
+    event.preventDefault()
+    $.get('./request_data', {
+      user_name: user_name,
+      set_product_name: $('#request_data input[name=set_product_name]').val(),
+      product_place_country: $('#request_data select[name=product_place_country]').val(),
+      product_place_city: $('#request_data select[name=product_place_city]').val(),
+      set_shop_name: $('#request_data input[name=set_shop_name]').val(),
+      set_shop_address: $('#request_data input[name=set_shop_address]').val(),
+      request_product_list: $('#request_data select[name=request_product_list]').val(),
+      set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
+      shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
+      shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
+      product_arrive_year: $('#request_data select[name=product_arrivee_year]').val(),
+      product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
+      product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
+      request_remark: $('#request_data input[name=request_remark]').val(),
+
+      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
+      //name: $('#add input[name=name]').val(),
+    }, (data) => {
+      show("mainpage_need")
+      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+    })
+  })
+
+
 
   const socket = io();
   //一個傳送訊息的函数
