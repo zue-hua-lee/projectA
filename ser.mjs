@@ -126,6 +126,37 @@ app.get('/journey_data', (req, res) => { //用get傳
   res.send("aaa")
 })
 
+// add_new_request
+app.get('/request_data', (req, res) => { //用get傳
+  fs.readFile('./data.json', function (err, data) {
+      if (err) throw err;
+      //將二進制數據轉換為字串符
+      //var stu_list = data.toString();
+      //將字符串轉換為 JSON 對象
+      data = JSON.parse(data);
+      //將傳來的資訊推送到數組對象中
+      data[req.query.user_name]['set_product_name'] = req.query.set_product_name
+      data[req.query.user_name]['product_place_country'] = req.query.product_place_country
+      data[req.query.user_name]['product_place_city'] = req.query.product_place_city
+      data[req.query.user_name]['set_shop_name'] = req.query.set_shop_name
+      data[req.query.user_name]['set_shop_address'] = req.query.set_shop_address
+      data[req.query.user_name]['request_product_list'] = req.query.request_product_list
+      data[req.query.user_name]['set_product_quantity'] = req.query.set_product_quantity
+      data[req.query.user_name]['shipping_address_country'] = req.query.shipping_address_country
+      data[req.query.user_name]['shipping_address_city'] = req.query.shipping_address_city
+      data[req.query.user_name]['product_arrive_year'] = req.query.product_arrive_year
+      data[req.query.user_name]['product_arrive_month'] = req.query.product_arrive_month
+      data[req.query.user_name]['product_arrive_date'] = req.query.product_arrive_date
+      data[req.query.user_name]['request_remark'] = req.query.request_remark
+      var str = JSON.stringify(data);
+      fs.writeFile('data.json', str, function (err) {
+          if (err) {console.error(err);}
+          console.log('Add new request...')
+      })
+  })
+  res.send("bbb")
+})
+
 // main
 app.post('/list',(req,res)=>{
   const data = JSON.parse(fs.readFileSync('data.json'));
