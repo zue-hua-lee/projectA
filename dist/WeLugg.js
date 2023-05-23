@@ -680,3 +680,18 @@ $(document).ready(function() {
     show("mainpage_schedule")
   });
 })
+
+
+//select bar in mainpage
+$('#selbar').click(function() {
+    $("#choose").css({'display':'block'});
+});
+$(document).click(function (event) {
+  //目標--點這些東西之外就會不見
+  let testInput1 = $('#selbar');
+  let testInput2 = $('#choose');
+  let testInput4 = $('.choose_pic');
+  let testInput3 = $('#select_country');
+  if (!testInput1.is(event.target) && !testInput2.is(event.target) && !testInput3.is(event.target))
+    $("#choose").slideUp(4);
+});
