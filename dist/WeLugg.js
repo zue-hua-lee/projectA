@@ -596,3 +596,8 @@ $(document).ready(function() {
     show("mainpage_schedule")
   });
 })
+
+//select bar in mainpage
+$('#selbar').click(function() {
+  $("#choose").css({'display':'block'});
+});
