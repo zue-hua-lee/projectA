@@ -959,7 +959,7 @@ body{
   padding-left: 14%;
   padding-top: 9%;
 }
-.select_checkbox{
+#select_checkbox1,#select_checkbox2,#select_checkbox3,#select_checkbox4{
   margin-top: -5%;
   margin-left: 5%;
   position: absolute;
@@ -969,10 +969,7 @@ body{
   width: 100%;
   height: 18%;
 }
-#select_country {
-  flex-grow: 1;
-}
-.choose_list{
+.choose_list_buy,.choose_list_prod,.choose_list_type{
   background-color: #F6F3F3;
   border-color: #F6F3F3;
   color: #939191;
@@ -984,6 +981,61 @@ body{
   margin-top: -6%;
   margin-left: 40%;
   z-index: 2;
+}
+.choose_list_year{
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.8vh;
+  font-weight: 400;
+  width: 25%;
+  border-radius: 5px;
+  position: absolute;
+  margin-top: -6%;
+  margin-left: 40%;
+  z-index: 2;
+}
+.choose_list_month{
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.8vh;
+  font-weight: 400;
+  width: 25%;
+  border-radius: 5px;
+  position: absolute;
+  margin-top: -6%;
+  margin-left: 70%;
+  z-index: 2;
+}
+#cho_submit{
+  background-color: #556B94;
+  color: #FFFFFF;
+  width: 25%;
+  height: 5vh;
+  margin-top: 5%;
+  margin-left: 38%;
+  position: relative;
+  border-radius: 9px;
+  border: none;
+}
+#blank{
+  background-color: #F6F3F3;
+  width: 100%;
+  height: 23vh;
+  margin-top: -43%;
+  position: absolute;
+  z-index: 6;
+  opacity: 0;
+}
+#blank2{
+  background-color: #F6F3F3;
+  width: 100%;
+  height: 35vh;
+  margin-top: 77%;
+  position: absolute;
+  opacity: 0;
+  z-index: 6;
 }
 
 /* #homepage{display:none} */
@@ -1009,3 +1061,5 @@ body{
 #deal_success{display:none}
 #chat_box{display:none}
 #add_new_request{display:none}
+#blank{display:none}
+#blank2{display:none}

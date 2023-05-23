@@ -59,17 +59,17 @@
       <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
       <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
     </div>
-
+    <div id="blank"></div>
     <div id="selbar"> 
       <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
       <span class="select_w">篩選</span>
     </div>
-
+    <div id="blank2"></div>
     <div id="choose">
       <form id="choose_place">
         <div class="select_title">購買者地點</div>
-        <img class="select_checkbox" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
-        <select name="select_country" id="select_country" class="choose_list">
+        <img id="select_checkbox1" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
+        <select name="select_country" id="select_country" class="choose_list_buy">
           <option value="" disabled selected hidden>國家</option>
           <optgroup label="東亞">
               <option value="台灣">台灣</option>
@@ -85,18 +85,63 @@
         </select>
       </form>
 
-      <div class="cho_product_place">
+      <form class="cho_product_place">
         <div class="select_title">商品地點</div>
-        <img class="select_checkbox" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
-      </div>
-      <div class="cho_date">
+        <img id="select_checkbox2" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
+        <select name="select_product_country" id="select_product_country" class="choose_list_prod">
+          <option value="" disabled selected hidden>國家</option>
+          <optgroup label="東亞">
+              <option value="台灣">台灣</option>
+              <option value="日本">日本</option>
+              <option value="韓國">韓國</option>
+              <option value="中國">中國</option>
+          </optgroup>
+          <optgroup label="歐美">
+              <option value="美國">美國</option>
+              <option value="法國">法國</option>
+              <option value="德國">德國</option>
+          </optgroup>
+        </select>
+      </form>
+
+      <form class="cho_date">
         <div class="select_title">日期</div>
-        <img class="select_checkbox" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
-      </div>
-      <div class="cho_product_type">
+        <img id="select_checkbox3" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
+        <select name="select_year" id="select_year" class="choose_list_year">
+          <option value="" disabled selected hidden>年份</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+        <select name="select_month" id="select_month" class="choose_list_month">
+          <option value="" disabled selected hidden>月份</option>
+          <option value="1">1月</option>
+          <option value="2">2月</option>
+          <option value="3">3月</option>
+          <option value="4">4月</option>
+          <option value="5">5月</option>
+          <option value="6">6月</option>
+          <option value="7">7月</option>
+          <option value="8">8月</option>
+          <option value="9">9月</option>
+          <option value="10">10月</option>
+          <option value="11">11月</option>
+          <option value="12">12月</option>
+        </select>
+      </form>
+
+      <form class="cho_product_type">
         <div class="select_title">商品種類</div>
-        <img class="select_checkbox" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
-      </div>
+        <img id="select_checkbox4" src="https://ppt.cc/fHvwIx@.png" alt="select icon.png" width="15px">
+        <select name="select_type" id="select_type" class="choose_list_type">
+          <option value="" disabled selected hidden>種類</option>
+          <option value="Food">食物類</option>
+          <option value="Apparel">服飾類</option>
+          <option value="Cosmetic">彩妝保養類</option>
+          <option value="Daily">生活用品類</option>
+        </select>
+      </form>
+      <button type="submit" id="cho_submit">確定</button>
     </div>
 
     <div id="mainpage">
