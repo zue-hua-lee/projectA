@@ -237,6 +237,121 @@
       </form>
     </div>
 
+    <div id="add_new_request">
+      <form id="request_data">
+          <div id="request_product">
+              <img class="request_product_title" src="https://ppt.cc/fy8FOx@.png" alt="request_product_title">
+              <div class="sub_title9">
+                  <p id="product_name" class="title_list">商品名稱</p>
+                  <input type="text" name="set_product_name" id="set_product_name" class="select_list" placeholder="請輸入">
+                  <input id="upload_product_picture" type="image" src="https://ppt.cc/fFepex@.png" alt="upload_product_picture">
+              </div>
+              <div class="sub_title10">
+                  <p id="product_place" class="title_list">商品地點</p>
+                  <select name="product_place_country" id="product_place_country" class="select_list">
+                      <option value="" disabled selected hidden>國家</option>
+                      <optgroup label="東亞">
+                          <option value="台灣">台灣</option>
+                          <option value="日本">日本</option>
+                          <option value="韓國">韓國</option>
+                          <option value="中國">中國</option>
+                      </optgroup>
+                      <optgroup label="歐美">
+                          <option value="美國">美國</option>
+                          <option value="法國">法國</option>
+                          <option value="德國">德國</option>
+                      </optgroup>
+                  </select>
+                  <select name="product_place_city" id="product_place_city" class="select_list" disabled>
+                      <option value="" disabled selected hidden>城市</option>
+                  </select>
+              </div>
+              <div class="sub_title11">
+                  <p id="shop_name" class="title_list">店家名稱</p>
+                  <input type="text" name="set_shop_name" id="set_shop_name" class="select_list" placeholder="請輸入 ( 選填 )">
+              </div>
+              <div class="sub_title12">
+                <p id="shop_address" class="title_list">店家地址</p>
+                <input type="text" name="set_shop_address" id="set_shop_address" class="select_list" placeholder="請輸入 ( 選填 )">
+              </div>
+              <div class="sub_title13">
+                <p id="request_product_kind" class="title_list" >種類</p>
+                <select name="request_product_list" id="request_product_list" class="select_list">
+                    <option value="" disabled selected hidden>種類</option>
+                    <option value="Food">食物類</option>
+                    <option value="Apparel">服飾類</option>
+                    <option value="Cosmetic">彩妝保養類</option>
+                    <option value="Daily">生活用品類</option>
+                </select>
+              </div>
+              <div class="sub_title14">
+                <p id="product_quantity" class="title_list">商品數量</p>
+                <input type="text" name="set_product_quantity" id="set_product_quantity" class="select_list" placeholder="請輸入件數">
+              </div>
+          </div>
+
+          <div id="shipping">
+              <img class="shipping_title" src="https://ppt.cc/fXGnwx@.png" alt="shipping_title">
+              <div class="sub_title15">
+                  <p id="shipping_address" class="title_list">居住地</p>
+                  <select name="shipping_address_country" id="shipping_address_country" class="select_list">
+                      <option value="" disabled selected hidden>國家</option>
+                      <optgroup label="東亞">
+                          <option value="台灣">台灣</option>
+                          <option value="日本">日本</option>
+                          <option value="韓國">韓國</option>
+                          <option value="中國">中國</option>
+                      </optgroup>
+                      <optgroup label="歐美">
+                          <option value="美國">美國</option>
+                          <option value="法國">法國</option>
+                          <option value="德國">德國</option>
+                      </optgroup>
+                  </select>
+                  <select name="shipping_address_city" id="shipping_address_city" class="select_list" disabled>
+                      <option value="" disabled selected hidden>城市</option>
+                  </select>
+              </div>
+              <div class="sub_title16">
+                  <p id="product_arrive_time" class="title_list">到貨日期</p>
+                  <select name="product_arrive_year" id="product_arrive_year" class="select_list">
+                      <option value="" disabled selected hidden>年份</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                  </select>
+                  <select name="product_arrive_month" id="product_arrive_month" class="select_list">
+                      <option value="" disabled selected hidden>月份</option>
+                      <option value="1">1月</option>
+                      <option value="2">2月</option>
+                      <option value="3">3月</option>
+                      <option value="4">4月</option>
+                      <option value="5">5月</option>
+                      <option value="6">6月</option>
+                      <option value="7">7月</option>
+                      <option value="8">8月</option>
+                      <option value="9">9月</option>
+                      <option value="10">10月</option>
+                      <option value="11">11月</option>
+                      <option value="12">12月</option>
+                  </select>
+                  <select name="product_arrive_date" id="product_arrive_date" class="select_list" disabled>
+                      <option value="" disabled selected hidden>日期</option>
+                  </select>
+              </div>
+          </div>
+
+          <div id="remark">
+              <img class="remark_title" src="https://ppt.cc/fofVYx@.png" alt="remark_title">
+              <div class="sub_title17">
+                  <input type="text" name="request_remark" id="request_remark" class="select_list" placeholder="請輸入...">
+              </div>
+          </div>
+
+          <input id="submit_request" type="image" src="https://ppt.cc/fw7Xyx@.png" alt="submit_request">
+      </form>
+    </div>
+
     <div id="subpage_title">
       <img src="https://ppt.cc/fe14cx@.png" alt="backicon.png" class="case_back_button">
       <div class="subpage_word">聊天紀錄</div>
