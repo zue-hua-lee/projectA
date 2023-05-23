@@ -400,6 +400,161 @@ body{
   right: 10%;
   top: 83%;
 }
+/***************request_data***************/
+#request_data .title_list {
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  margin: 0.5vh 0 0 0;
+}
+#request_data .select_list {
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  border-radius: 5px;
+}
+#request_product {
+  position: absolute;
+  height: 32.01%;
+  width: 100%;
+  top: 21.24%;
+  padding: 0 8%;
+}
+#request_product .request_product_title {
+  position: absolute;
+  height: 8%;
+  left: 3.5%;
+}
+#request_product .sub_title9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 15%;
+}
+#upload_product_picture {
+  height: 100%;
+}
+#request_product .sub_title10 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 30%;
+}
+#product_place_country, #product_place_city {
+  flex-grow: 0.2;
+}
+#request_product .sub_title11 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 45%;
+}
+#request_product .sub_title12 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 60%;
+}
+#request_product .sub_title13 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 75%;
+}
+#request_product .sub_title14 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 90%;
+}
+#request_product_list{
+  flex-grow: 0.7;
+}
+#set_shop_name, #set_shop_address, #set_product_quantity{
+  flex-grow: 0.5;
+}
+#shipping {
+  position: absolute;
+  height: 12.36%;
+  width: 100%;
+  top: 55.54%;
+  padding: 0 8%;
+}
+#shipping .shipping_title {
+  position: absolute;
+  height: 24%;
+  left: 3.5%;
+}
+#shipping .sub_title15 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 35.52%;
+}
+#shipping_address_country, #shipping_address_city {
+  flex-grow: 0.2;
+}
+#shipping .sub_title16 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 70%;
+}
+#remark {
+  position: absolute;
+  height: 14.08%;
+  width: 100%;
+  top: 72.29%;
+  padding: 0 8%;
+}
+#remark .remark_title {
+  position: absolute;
+  height: 22%;
+  left: 3.5%;
+}
+#remark .sub_title17 {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 69.67%;
+  width: 74%;
+  top: 30%;
+}
+#request_remark{
+  padding: 0 15% 15% 0;
+}
+#submit_request {
+  position: absolute;
+  height: 6.5vh;
+  right: 10%;
+  top: 83.2%;
+}
 /***************main_page***************/
 #mainpage{
   width: 100%;
@@ -802,6 +957,7 @@ body{
 #show_need{display:none}
 
 #add_new_journey{display:none}
+#add_new_request{display:none}
 #chat_main{display:none}
 #accept_case_list{display:none}
 /* #accept_case_list #no_customer{display:none} */

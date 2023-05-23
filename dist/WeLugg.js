@@ -541,16 +541,7 @@ $(document).ready(function() {
 
 
   // add_new_request
-  var city = new Array();
-  city[1] = ['台北','台中','台南','高雄']; //台灣
-  city[2] = ['東京','大阪','京都','北海道']; //日本
-  city[3] = ['首爾','釜山']; //韓國
-  city[4] = ['北京','上海','香港']; //中國
-  city[5] = ['紐約','洛杉磯','舊金山']; //美國
-  city[6] = ['巴黎','馬賽','里昂']; //法國
-  city[7] = ['慕尼黑','法蘭克福','柏林']; //德國
-
-  $('#product_place_country_country').change(function(){
+  $('#product_place_country').change(function(){
       index=this.selectedIndex; //從1開始 第幾個選項(數字)
       var Sinner='';
       for(var i=0;i<city[index].length;i++){
