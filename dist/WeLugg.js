@@ -1,6 +1,10 @@
 var user_name = ""
 var state1 = "homepage"
 var state2 = "homepage"
+var choose_box1=0;
+var choose_box2=0;
+var choose_box3=0;
+var choose_box4=0;
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -65,6 +69,7 @@ function to_mainpage_need() {
   $('#bm_add_schedule').html('填寫行程');
   $('#bm_add_schedule').css({'background-color':'#7FD6D0'});
   $('#show_schedule').html('');
+  console.log('代購者'+choose_box1);
   $.ajax({
     type: 'POST',
     url: './list',
@@ -128,9 +133,33 @@ function to_mainpage_schedule() {
   $('#bm_add_schedule').html('填寫商品');
   $('#bm_add_schedule').css({'background-color':'#556B94'});
   $('#show_need').html('');
+  let sel_country;
+  let sel_prod_country;
+  let sel_year;
+  let sel_month;
+  let sel_type;
+
+  if(choose_box1==1){
+    sel_country = $('#choose_place select[name=select_country]').val()
+  }
+  if(choose_box2==1){
+    sel_prod_country = $('#choose select[name=select_product_country]').val()
+  }
+  if(choose_box3==1){
+    sel_year = $('#choose select[name=select_year]').val()
+    sel_month = $('#choose select[name=select_month]').val()
+  }
+  if(choose_box4==1){
+    sel_type = $('#choose select[name=select_type]').val()
+  }
+  console.log('box1'+choose_box1+sel_country);
+  console.log('box2'+choose_box2+sel_prod_country);
+  console.log('box3'+choose_box3+sel_year+sel_month);
+  console.log('box4'+choose_box4+sel_type);
   $.ajax({
     type: 'POST',
     url: './list',
+    contentType: 'application/json',
     success: (data) => {
       for (const name in data) {
         let namelist = '';
@@ -688,6 +717,7 @@ $('#selbar').click(function() {
     $("#blank").css({'display':'block'});
     $("#blank2").css({'display':'block'});
 });
+
 //let select bar disappear
 $('#blank').click(function() {
   $("#choose").css({'display':'none'});
@@ -700,6 +730,39 @@ $('#blank2').click(function() {
   $("#blank2").css({'display':'none'});
 });
 
+$('#select_checkbox1').click(function() {
+  choose_box1=1;
+  $("#select_check1").css({'display':'block'});
+});
+$('#select_check1').click(function() {
+  choose_box1=0;
+  $("#select_check1").css({'display':'none'});
+  console.log( 'state'+choose_box1)
+});
+$('#select_checkbox2').click(function() {
+  choose_box2=1;
+  $("#select_check2").css({'display':'block'});
+});
+$('#select_check2').click(function() {
+  choose_box2=0;
+  $("#select_check2").css({'display':'none'});
+});
+$('#select_checkbox3').click(function() {
+  choose_box3=1;
+  $("#select_check3").css({'display':'block'});
+});
+$('#select_check3').click(function() {
+  choose_box3=0;
+  $("#select_check3").css({'display':'none'});
+});
+$('#select_checkbox4').click(function() {
+  choose_box4=1;
+  $("#select_check4").css({'display':'block'});
+});
+$('#select_check4').click(function() {
+  choose_box4=0;
+  $("#select_check4").css({'display':'none'});
+});
 // $(document).click(function (event) {
 //   //目標--點這些東西之外就會不見
 //   let testInput1 = $('#selbar');

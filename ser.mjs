@@ -157,8 +157,9 @@ app.get('/request_data', (req, res) => { //用get傳
   res.send("bbb")
 })
 
-// main
+// main //select bar
 app.post('/list',(req,res)=>{
   const data = JSON.parse(fs.readFileSync('data.json'));
   res.send(data);
 })
+

@@ -964,6 +964,12 @@ body{
   margin-left: 5%;
   position: absolute;
 }
+#select_check1,#select_check2,#select_check3,#select_check4{
+  margin-top: -4%;
+  margin-left: 5.4%;
+  position: absolute;
+  display: none;
+}
 #choose_place,.cho_product_place,.cho_date,.cho_product_type{
   position: relative;
   width: 100%;
