@@ -1020,8 +1020,19 @@ body{
   width: 25%;
   height: 5vh;
   margin-top: 5%;
-  margin-left: 38%;
+  margin-left: 51%;
   position: relative;
+  border-radius: 9px;
+  border: none;
+}
+#cho_reset{
+  background-color: #D6D6D6;
+  color: #6C6C6C;
+  width: 25%;
+  height: 5vh;
+  margin-top: 5%;
+  margin-left: -52%;
+  position: absolute;
   border-radius: 9px;
   border: none;
 }

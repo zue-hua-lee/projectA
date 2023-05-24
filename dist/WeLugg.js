@@ -5,6 +5,7 @@ var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
 var choose_box4=0;
+var cho_submit=0;
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -138,7 +139,6 @@ function to_mainpage_schedule() {
   let sel_year;
   let sel_month;
   let sel_type;
-
   if(choose_box1==1){
     sel_country = $('#choose_place select[name=select_country]').val()
   }
@@ -164,6 +164,8 @@ function to_mainpage_schedule() {
       for (const name in data) {
         let namelist = '';
         for(const id in data[name]){
+          // if(choose_box1==1){
+          //   if(id=="live_country" && data[name][id]==sel_country){
           if(id=="live_country"){
              namelist += `居住地: ${data[name][id]},`;
           }
@@ -191,6 +193,9 @@ function to_mainpage_schedule() {
           if(id=="amount"){
             namelist += `數量: ${data[name][id]} 件<br>`;
           }
+          //   }
+          // }
+         
         }
         if(namelist!=''){
           var contener = document.getElementById("show_need")
@@ -762,6 +767,16 @@ $('#select_checkbox4').click(function() {
 $('#select_check4').click(function() {
   choose_box4=0;
   $("#select_check4").css({'display':'none'});
+});
+$('#cho_submit').click(function() {
+  cho_submit=1;
+  $("#choose").css({'display':'none'});
+  show("mainpage_schedule")
+});
+$('#cho_reset').click(function() {
+  //cho_submit=1;
+  $("#choose").css({'display':'none'});
+  show("mainpage_schedule")
 });
 // $(document).click(function (event) {
 //   //目標--點這些東西之外就會不見
