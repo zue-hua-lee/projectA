@@ -1,6 +1,5 @@
 var user_name = ""
-var state1 = "homepage"
-var state2 = "homepage"
+let state = ["homepage"]
 var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
@@ -37,9 +36,8 @@ const appendMessage = (message, isSelf) => {
 }
 
 function all_display_none() {
-  $('#homepage').css({'display':'none'})
-  $('#homepage_box1').css({'display':'none'})
-  $('#homepage_box2').css({'display':'none'})
+  $('#homepage1').css({'display':'none'})
+  $('#homepage2').css({'display':'none'})
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
@@ -210,29 +208,40 @@ function to_mainpage_schedule() {
 function show(string){
   if(string == "mainpage_schedule"){
     all_display_none()
+    state.push("mainpage_schedule")
     $('#mainpage').css({'display':'block'})
     $('#user_menu').css({'display':'block'})
     $('#user_menu .user_id').html("username:"+user_name)
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
-    state1 = state2
-    state2 = "mainpage_schedule"
     to_mainpage_schedule()
   }
   else if(string == "mainpage_need"){
     all_display_none()
+    state.push("mainpage_need")
     $('#mainpage').css({'display':'block'})
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
-    state1 = state2
-    state2 = "mainpage_need"
     to_mainpage_need()
+  }
+  else if(string == "add_new_journey"){
+    all_display_none()
+    state.push("add_new_journey")
+    $('#add_new_journey').css({'display':'block'})
+    $('#user_menu').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
+  }
+  else if(string == "add_new_request"){
+    all_display_none()
+    state.push("add_new_request")
+    $('#add_new_request').css({'display':'block'})
+    $('#user_menu').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
   }
   else if(string == "accept_case_list"){
     all_display_none()
-    state1 = state2
-    state2 = "accept_case_list"
+    state.push("accept_case_list")
     $('#accept_case_list').css({'display':'block'})
     $('#subpage_title').css({'display':'block'})
     $('#subpage_title .subpage_word').html("代購清單")
@@ -241,8 +250,7 @@ function show(string){
   }
   else if(string == "chat_main"){
     all_display_none()
-    state1 = state2
-    state2 = "chat_main"
+    state.push("chat_main")
     $('#chat_main').css({'display':'block'})
     $('#subpage_title').css({'display':'block'})
     $('#subpage_title .subpage_word').html("聊天紀錄")
@@ -250,8 +258,7 @@ function show(string){
   }
   else if(string == "chat_box"){
     all_display_none()
-    state1 = state2
-    state2 = "chat_box"
+    state.push("chat_box")
     $('#chat_box').css({'display':'block'})
   }
   else{
@@ -259,57 +266,46 @@ function show(string){
   }
 }
 
-// // jump_state
-// $(document).ready(function() {
-//   $.get('./start', (data) => {
-//     if(data == "to_chatlist"){
-//       $('#chat_main').css({'display':'block'})
-//     }
-//     else if(data == "to_deal"){
-//       $('#deal_agree').css({'display':'block'})
-//     }
-//     else{
-//       $('#homepage').css({'display':'block'})
-//     }
-//   })
-// })
-
 // homepage
 $(document).ready(function() {
-  $('#homepage button[name="login"]').click((event) => {
+  $('#homepage1 button[name="login"]').click((event) => {
     event.preventDefault()
     $.post('./login', {
-      account: $('#homepage input[name="account"]').val(),
-      password: $('#homepage input[name="password"]').val(),
+      account: $('#homepage1 input[name="account"]').val(),
+      password: $('#homepage1 input[name="password"]').val(),
     }, (res) => {
-      $('#homepage_output').html(res)
+      $('#homepage_output1').html(res)
       if(res=="帳號密碼正確"){
-        user_name = $('#homepage input[name="account"]').val()
+        user_name = $('#homepage1 input[name="account"]').val()
         show("mainpage_schedule")
       }
     })
   })
 
-  $('#homepage button[name="register"]').click((event) => {
-    $('#homepage_box1').css({'display':'none'})
-    $('#homepage_box2').css({'display':'block'})
-    $('#homepage_output').html("<br>")
+  $('#homepage1 button[name="register"]').click((event) => {
+    $('#homepage1').css({'display':'none'})
+    $('#homepage2').css({'display':'flex'})
+    $('#homepage_output1').html("<br>")
   })
 
-  $('#homepage button[name="register_submit"]').click((event) => {
+  $('#homepage2 button[name="register_submit"]').click((event) => {
     event.preventDefault()
     $.post('./register', {
-      account: $('#homepage input[name="account"]').val(),
-      password: $('#homepage input[name="password"]').val(),
+      user_name: $('#homepage2 input[name="user_name"]').val(),
+      user_phone: $('#homepage2 input[name="user_phone"]').val(),
+      user_mail: $('#homepage2 input[name="user_mail"]').val(),
+      user_password1: $('#homepage2 input[name="user_password1"]').val(),
+      user_password2: $('#homepage2 input[name="user_password2"]').val(),
     }, (res) => {
-      $('#homepage_output').html(res)
+    console.log(res)
+      $('#homepage_output2').html(res)
     })
   })
 
-  $('#homepage button[name="backto_homepage"]').click((event) => {
-    $('#homepage_box1').css({'display':'block'})
-    $('#homepage_box2').css({'display':'none'})
-    $('#homepage_output').html("<br>")
+  $('#backto_homepage').click((event) => {
+    $('#homepage1').css({'display':'flex'})
+    $('#homepage2').css({'display':'none'})
+    $('#homepage_output2').html("<br>")
   })
 
   // mainpage-我是代購者
@@ -360,30 +356,22 @@ $(document).ready(function() {
 
   // schedule 代購者頁面
   $('#user_menu .shopping_bag').click((event) => {
-    if(state2 == "mainpage_schedule")
+    if(state[state.length-1] == "mainpage_schedule")
       show("mainpage_need")
   })
   $('#bm_add_schedule').click((event) => {
-    if(state2 == "mainpage_schedule"){
-      state1 = state2
-      state2 = "add_new_journey"
-      $('#add_new_journey').css({'display':'block'})
-      $('#mainpage').css({'display':'none'})
-      $('#selbar').css({'display':'none'})
+    if(state[state.length-1] == "mainpage_schedule"){
+      show("add_new_journey")
     }
   })
   // need 購買者頁面
   $('#user_menu .mid_luggage').click((event) => {
-    if(state2 == "mainpage_need")
+    if(state[state.length-1] == "mainpage_need")
       show("mainpage_schedule")
   })
   $('#bm_add_schedule').click((event) => {
-    if(state2 == "mainpage_need"){
-      state1 = state2
-      state2 = "add_new_request"
-      $('#add_new_request').css({'display':'block'})
-      $('#mainpage').css({'display':'none'})
-      $('#selbar').css({'display':'none'})
+    if(state[state.length-1] == "mainpage_need"){
+      show("add_new_request")
     }
   })
 
@@ -401,7 +389,8 @@ $(document).ready(function() {
   })
   // subpage
   $('#subpage_title .case_back_button').click((event) => {
-    show("mainpage_schedule")
+    state.pop()
+    show(state.pop())
   })
   // accept_case_list
   var check_state1 = 0;
@@ -686,7 +675,8 @@ $(document).ready(function() {
   }
   // chat_box: back
   $('#chat_box .back').click(function(){
-    show("mainpage_schedule")
+    state.pop()
+    show(state.pop())
   })
   // chat_box: chat_deal
   $('#chat_deal').click(function(){

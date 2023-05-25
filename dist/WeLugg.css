@@ -11,21 +11,24 @@ body{
 }
 
 /***************homepage***************/
-#homepage{
+/***************homepage***************/
+#homepage1{
   position: absolute;
-  width: 80vw;
-  height: 80vh;
-  margin: 10vh 10vw;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;        
 }
 #homepage_logo{
   background: url(https://ppt.cc/fdccdx@.png) no-repeat center/contain;
-  width: 100%;
-  height: 17%;
-  margin-bottom: 1vh;
+  width: 15vh;
+  height: 15vh;
 }
 #homepage_logo_box{
-  width: 100%;
-  font-size: 5vh;
+  font-size: 4vh;
+  font-weight: 600;
   line-height: 6vh;
   text-align: center;
   white-space: nowrap;
@@ -36,80 +39,160 @@ body{
 #homepage_logo_box .word2{
   color: #556B94;
 }
-#homepage .word3{
+#homepage1 .word3, #homepage2 .word3{
   font-weight: 400;
-  font-size: 2.2vh;
-  line-height: 3vh;
+  font-size: 1.7vh;
   text-align: center;
   letter-spacing: 0.1em;
   color: #939191;
   white-space: nowrap;
 }
-#homepage input[name="account"], #homepage input[name="password"]{
-  width: 75%;
-  padding: 2%;
-  margin: 1vh 12%;
-  font-size: 2.2vh;
+#homepage1 input[type="text"]{
+  width: 65vw;
+  padding: 10px;
+  margin: 1vh;
+  font-size: 2vh;
   background: #FFFFFF;
   border: 1px solid #ACACAC;
   border-radius: 4px;
 }
-#homepage input[name="account"]{
-  margin-top: 5vh;
+#homepage1 input[name="account"]{
+  margin-top: 3vh;
 }
-#homepage button{
-  width: 77%;
-  padding: 2%;
-  margin: 3vh 12%;
+#homepage_output1{
+  width: 65vw;
+  font-weight: 400;
+  font-size: 1.8vh;
+  letter-spacing: 0.1em;
+  text-align: left;
+  color: #939191;
+  white-space: nowrap;
+}
+#homepage1 button, #homepage2 button{
+  width: 65vw;
+  padding: 10px;
+  margin: 3vh;
   border: none;
   border-radius: 8px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
-  font-size: 3.5vh;
-  letter-spacing: 0.1em;
+  font-size: 2.5vh;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   color: #FFFFFF;
 }
-#homepage button[name="login"]{
+#homepage1 button[name="login"]{
   background: #556B94;
 }
-#homepage button[name="register"]{
-  position: absolute;
+#homepage1 button[name="register"]{
   background: #7FD6D0;
-  margin-top: 12vh;
 }
-#homepage_box1 input[type="checkbox"]{
-  margin-left: 12%;
-  margin-right: 1%;
+#homepage_word_box1{
+  width: 65vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#homepage_word_box2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;        
+}
+#homepage1 input[type="checkbox"]{
+  margin-right: 10px;
   height: 2vh;
+  width: 2vh;
 }
-#homepage_box1 span{
+#homepage1 .word4{
+  margin-top: 0.5vh;
   font-weight: 400;
-  font-size: 2.3vh;
+  font-size: 2vh;
   letter-spacing: 0.1em;
   color: #939191;
   white-space: nowrap;
 }
-#homepage_box1 .word5{
-  position: absolute;
-  right: 12%;
-}
 #homepage_line{
   background-color: #939191;
-  width: 100%;
+  width: 80vw;
   height: 1px;
   margin-top: 2vh;
 }
-#homepage button[name="register_submit"]{
+
+#homepage2{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;        
+}
+#backto_homepage{
+  background: url(https://ppt.cc/fXMX1x@.png) no-repeat center/contain;
+  width: 3.6vh;
+  height: 3.6vh;
+  position: absolute;
+  left: 5vw;
+}
+#homepage2 .homepage_title{
+  width: 100vw;
+  color:#7FD6D0;
+  font-size: 3vh;
+  text-align: center;
+  padding: 1vh;
+  border-color: #D9D9D9;
+  border-style: solid;
+  border-width: 0 0 0.5vh 0;
+  letter-spacing: 0.1em;
+}
+#homepage2 .word5{
+  width: 80vw;
+  font-weight: 400;
+  font-size: 1vh;
+  /* letter-spacing: 0.1em; */
+  text-align: left;
+  color: #939191;
+  white-space: nowrap;
+}
+#homepage2 input[type="text"]{
+  width: 80vw;
+  padding: 10px 10px 10px 5vh;
+  margin: 1vh;
+  font-size: 2vh;
+  background: #FFFFFF;
+  border: none;
+  border-bottom: 1px solid #ACACAC;
+}
+#homepage_lock{
+  background: url(https://ppt.cc/fBeFLx@.png) no-repeat center/contain;
+  position: absolute;
+  width: 2.5vh;
+  height: 2.5vh;
+  margin: 1.6vh 2vh;
+}
+#homepage_call{
+  background: url(https://ppt.cc/fl9vMx@.png) no-repeat center/contain;
+  position: absolute;
+  width: 2.5vh;
+  height: 2.5vh;
+  margin: 1.6vh 2vh;
+}
+#homepage_mail{
+  background: url(https://ppt.cc/fi18Mx@.png) no-repeat center/contain;
+  position: absolute;
+  width: 2.5vh;
+  height: 2.5vh;
+  margin: 1.6vh 2vh;
+}
+#homepage2 button[name="register_submit"]{
+  margin-top: 4.5vh;
   background: #556B94;
 }
-#homepage button[name="backto_homepage"]{
-  background: #7FD6D0;
-  margin: 1.5vh 12%;
-}
-#homepage_output{
-  margin-left: 12%;
+#homepage_output2{
+  width: 80vw;
   font-weight: 400;
-  font-size: 2.3vh;
+  font-size: 1.8vh;
   letter-spacing: 0.1em;
+  text-align: left;
   color: #939191;
   white-space: nowrap;
 }
@@ -1055,8 +1138,7 @@ body{
   z-index: 6;
 }
 
-/* #homepage{display:none} */
-#homepage_box2{display:none}
+#homepage2{display:none}
 
 #user_menu{display:none}
 #menu_bar{display:none}
