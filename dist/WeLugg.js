@@ -37,9 +37,8 @@ const appendMessage = (message, isSelf) => {
 }
 
 function all_display_none() {
-  $('#homepage').css({'display':'none'})
-  $('#homepage_box1').css({'display':'none'})
-  $('#homepage_box2').css({'display':'none'})
+  $('#homepage1').css({'display':'none'})
+  $('#homepage2').css({'display':'none'})
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
@@ -259,57 +258,46 @@ function show(string){
   }
 }
 
-// // jump_state
-// $(document).ready(function() {
-//   $.get('./start', (data) => {
-//     if(data == "to_chatlist"){
-//       $('#chat_main').css({'display':'block'})
-//     }
-//     else if(data == "to_deal"){
-//       $('#deal_agree').css({'display':'block'})
-//     }
-//     else{
-//       $('#homepage').css({'display':'block'})
-//     }
-//   })
-// })
-
 // homepage
 $(document).ready(function() {
-  $('#homepage button[name="login"]').click((event) => {
+  $('#homepage1 button[name="login"]').click((event) => {
     event.preventDefault()
     $.post('./login', {
-      account: $('#homepage input[name="account"]').val(),
-      password: $('#homepage input[name="password"]').val(),
+      account: $('#homepage1 input[name="account"]').val(),
+      password: $('#homepage1 input[name="password"]').val(),
     }, (res) => {
-      $('#homepage_output').html(res)
+      $('#homepage_output1').html(res)
       if(res=="帳號密碼正確"){
-        user_name = $('#homepage input[name="account"]').val()
+        user_name = $('#homepage1 input[name="account"]').val()
         show("mainpage_schedule")
       }
     })
   })
 
-  $('#homepage button[name="register"]').click((event) => {
-    $('#homepage_box1').css({'display':'none'})
-    $('#homepage_box2').css({'display':'block'})
-    $('#homepage_output').html("<br>")
+  $('#homepage1 button[name="register"]').click((event) => {
+    $('#homepage1').css({'display':'none'})
+    $('#homepage2').css({'display':'flex'})
+    $('#homepage_output1').html("<br>")
   })
 
-  $('#homepage button[name="register_submit"]').click((event) => {
+  $('#homepage2 button[name="register_submit"]').click((event) => {
     event.preventDefault()
     $.post('./register', {
-      account: $('#homepage input[name="account"]').val(),
-      password: $('#homepage input[name="password"]').val(),
+      user_name: $('#homepage2 input[name="user_name"]').val(),
+      user_phone: $('#homepage2 input[name="user_phone"]').val(),
+      user_mail: $('#homepage2 input[name="user_mail"]').val(),
+      user_password1: $('#homepage2 input[name="user_password1"]').val(),
+      user_password2: $('#homepage2 input[name="user_password2"]').val(),
     }, (res) => {
-      $('#homepage_output').html(res)
+    console.log(res)
+      $('#homepage_output2').html(res)
     })
   })
 
-  $('#homepage button[name="backto_homepage"]').click((event) => {
-    $('#homepage_box1').css({'display':'block'})
-    $('#homepage_box2').css({'display':'none'})
-    $('#homepage_output').html("<br>")
+  $('#backto_homepage').click((event) => {
+    $('#homepage1').css({'display':'flex'})
+    $('#homepage2').css({'display':'none'})
+    $('#homepage_output2').html("<br>")
   })
 
   // mainpage-我是代購者

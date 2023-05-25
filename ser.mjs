@@ -71,22 +71,35 @@ app.post('/login', (req, res) => {
   })
 })
 app.post('/register', (req, res) => {
-  if(`${req.body.account}` == "" || `${req.body.password}` == ""){
-    res.send("請輸入帳號及密碼。")
+  if(`${req.body.user_name}` == "" || `${req.body.user_mail}` == "" || `${req.body.user_phone}` == "" || 
+     `${req.body.user_password1}` == "" || `${req.body.user_password2}` == ""){
+    res.send("請輸入基本資料及密碼。")
     return 0
-  }  
+  }
+  if(`${req.body.user_password1}` != `${req.body.user_password2}`){
+    res.send("重複密碼錯誤，請重新輸入。")
+    return 0
+  }
+  if(`${req.body.user_password1}`.toUpperCase() == `${req.body.user_password1}` ||
+     `${req.body.user_password1}`.toLowerCase() == `${req.body.user_password1}` ||
+     `${req.body.user_password1}`.length < 6 || `${req.body.user_password1}`.length > 18){
+    res.send("密碼輸入有誤，請確認格式是否正確。")
+    return 0
+  }
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
     data = JSON.parse(data)
     for(var key in data){
-      if(key == `${req.body.account}`){
+      if(key == `${req.body.user_name}`){
         res.send("帳號名稱已經存在，請重新命名。")
         return 0
       }  
     }
     
-    data[`${req.body.account}`] = {}
-    data[`${req.body.account}`]["password"] = `${req.body.password}`
+    data[`${req.body.user_name}`] = {}
+    data[`${req.body.user_name}`]["phone"] = `${req.body.user_phone}`
+    data[`${req.body.user_name}`]["mail"] = `${req.body.user_mail}`
+    data[`${req.body.user_name}`]["password"] = `${req.body.user_password1}`
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
