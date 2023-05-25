@@ -66,8 +66,8 @@ function to_mainpage_need() {
   $('#show_schedule').css({'display':'block'});
   $('#show_need').css({'display':'none'});
   $('#recommend_w').html('推薦代購者');
-  $('#bm_add_schedule').html('填寫行程');
-  $('#bm_add_schedule').css({'background-color':'#7FD6D0'});
+  $('#bm_add_schedule').html('填寫商品');
+  $('#bm_add_schedule').css({'background-color':'#556B94'});
   $('#show_schedule').html('');
   console.log('代購者'+choose_box1);
   $.ajax({
@@ -130,8 +130,8 @@ function to_mainpage_schedule() {
   $('#show_schedule').css({'display':'none'});
   $('#show_need').css({'display':'block'});
   $('#recommend_w').html('推薦購買者');
-  $('#bm_add_schedule').html('填寫商品');
-  $('#bm_add_schedule').css({'background-color':'#556B94'});
+  $('#bm_add_schedule').html('填寫行程');
+  $('#bm_add_schedule').css({'background-color':'#7FD6D0'});
   $('#show_need').html('');
   let sel_country;
   let sel_prod_country;
