@@ -874,7 +874,7 @@ body{
   height: 15.8vh;
   position: relative;
 }
-#deal_box .deal_description{
+.deal_description{
   width: 100%;
   height: 50%;
   color: #5D5B5B;
@@ -886,14 +886,14 @@ body{
   justify-content: center;    
   align-items: center;  
 }
-#deal_box .deal_button{
+.deal_button{
   width: 100%;
   height: 49%;
   display: flex;
   justify-content: space-between;
   margin-top: 1%;
 }
-#deal_box .deal_button p{
+.deal_button p{
   width: 49.5%;
   background-color: #FBFBFB;
   display: flex;
@@ -1330,11 +1330,30 @@ body{
   border-top: 1px solid #FFFFFF;
   text-align:center;
 }
+/***************personal_page_unsaved***************/
+#personal_page_unsaved{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.7);
+  display: flex;
+  justify-content: center;    
+  align-items: center;  
+  position: absolute;
+  top: 0;
+  z-index: 20;
+}
+#unsaved_box{
+  width: 72vw;
+  height: 15.8vh;
+  position: relative;
+}
+
 
 /* #homepage1{display:none} */
 #homepage2{display:none}
 #register_success{display:none}
 #personal_page{display:none}
+#personal_page_unsaved{display:none}
 
 #user_menu{display:none}
 #menu_bar{display:none}

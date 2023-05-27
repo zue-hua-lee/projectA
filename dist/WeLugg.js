@@ -1,5 +1,5 @@
 var user_name = ""
-let state = ["register_success"]
+let state = [""]
 var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
@@ -350,7 +350,20 @@ $(document).ready(function() {
       edit_state = 0
     }
   });
-
+  //選不要儲存變更
+  $("#personal_page_unsaved .deal_no").click(function() {
+    $("#personal_page_unsaved").css({'display':'none'});
+  });
+  //選同意儲存變更
+  $("#personal_page_unsaved .deal_yes").click(function() {
+    $("#personal_page_unsaved").css({'display':'none'});
+    state.pop()
+    show(state.pop())
+    $('#personal_box2 input[type="text"]').attr("disabled", true);
+    $('#personal_box2 input[type="text"]').css({'border':'solid 1px #F7F7F7'})
+    $('#bm_edit_personal').text("編輯內容")
+    edit_state = 0
+  });
 
 
   // mainpage-我是代購者
@@ -435,8 +448,13 @@ $(document).ready(function() {
   })
   // subpage
   $('#subpage_title .case_back_button').click((event) => {
-    state.pop()
-    show(state.pop())
+    if(state[state.length-1] == "personal_page" && edit_state){
+      $('#personal_page_unsaved').css({'display':'flex'})
+    }
+    else{
+      state.pop()
+      show(state.pop())
+    }
   })
   // accept_case_list
   var check_state1 = 0;
@@ -733,12 +751,11 @@ $(document).ready(function() {
   $("#deal_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
   });
-  
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
-      all_display_none()
-      $("#deal_success").css({'display':'block'});
-    });
+    all_display_none()
+    $("#deal_success").css({'display':'block'});
+  });
   
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
