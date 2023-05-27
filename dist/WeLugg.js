@@ -1,5 +1,5 @@
 var user_name = ""
-let state = ["homepage"]
+let state = ["register_success"]
 var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
@@ -38,6 +38,8 @@ const appendMessage = (message, isSelf) => {
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
   $('#homepage2').css({'display':'none'})
+  $('#register_success').css({'display':'none'})
+  $('#personal_page').css({'display':'none'})
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
@@ -206,7 +208,19 @@ function to_mainpage_schedule() {
   })
 }
 function show(string){
-  if(string == "mainpage_schedule"){
+  if(string == "register_success"){
+    all_display_none()
+    state.push("register_success")
+    $('#register_success').css({'display':'block'})
+  }
+  else if(string == "personal_page"){
+    all_display_none()
+    state.push("personal_page")
+    $('#subpage_title').css({'display':'block'})
+    $('#subpage_title .subpage_word').html("Nancy Lin")
+    $('#personal_page').css({'display':'block'})
+  }
+  else if(string == "mainpage_schedule"){
     all_display_none()
     state.push("mainpage_schedule")
     $('#mainpage').css({'display':'block'})
@@ -297,8 +311,12 @@ $(document).ready(function() {
       user_password1: $('#homepage2 input[name="user_password1"]').val(),
       user_password2: $('#homepage2 input[name="user_password2"]').val(),
     }, (res) => {
-    console.log(res)
       $('#homepage_output2').html(res)
+      if(res=="註冊成功！"){
+        all_display_none()
+        $("#register_success").css({'display':'block'})
+        user_name = $('#homepage2 input[name="user_name"]').val()
+      }
     })
   })
 
@@ -307,6 +325,33 @@ $(document).ready(function() {
     $('#homepage2').css({'display':'none'})
     $('#homepage_output2').html("<br>")
   })
+
+  // register_success
+  $('#register_success button[name="to_personal"]').click(function() {
+    show("personal_page")
+  });
+  $('#register_success button[name="to_mainpage"]').click(function() {
+    show("mainpage_schedule")
+  });
+
+  // personal_page
+  var edit_state = 0;
+  $('#bm_edit_personal').click(function() {
+    if(!edit_state){
+      $('#personal_box2 input[type="text"]').attr("disabled", false);
+      $('#personal_box2 input[type="text"]').css({'border':'solid 1px #D4D4D4'})
+      $(this).text("儲存變更")
+      edit_state = 1
+    }
+    else{
+      $('#personal_box2 input[type="text"]').attr("disabled", true);
+      $('#personal_box2 input[type="text"]').css({'border':'solid 1px #F7F7F7'})
+      $(this).text("編輯內容")
+      edit_state = 0
+    }
+  });
+
+
 
   // mainpage-我是代購者
   var prenum = 0;
@@ -380,6 +425,7 @@ $(document).ready(function() {
     show("mainpage_schedule")
   })
   $('#menu_bar .user_profile').click((event) => {
+    show("personal_page")
   })
   $('#menu_bar .case_list').click((event) => {
     show("accept_case_list")

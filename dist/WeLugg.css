@@ -11,7 +11,6 @@ body{
 }
 
 /***************homepage***************/
-/***************homepage***************/
 #homepage1{
   position: absolute;
   width: 100vw;
@@ -196,7 +195,54 @@ body{
   color: #939191;
   white-space: nowrap;
 }
-
+/***************deal_success***************/
+#register_success{
+  width: 100%;
+  height: 100%;
+  background-color: #F6F3F3;
+}
+#register_success_card{
+  width: 84vw;
+  height: 84vh;
+  margin: 8vh 8vw;
+  background-color:#FFFFFF;
+  position: absolute;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#register_success_card img{
+  margin-top: 9vh;
+  height: 12vh;
+}
+#register_success_card p{
+  margin-top: 0.5vh;
+  font-size: 1.5vh;
+}
+#register_success_card .word{
+  margin: 4vh 0 0.5vh 0;
+  font-size: 3vh;
+  color:#7FD6D0;
+}
+#register_success_card button[name="to_personal"],
+#register_success_card button[name="to_mainpage"]{
+  width: 54.5vw;
+  padding: 1vh;
+  margin: 6vh 0 2.5vh 0;
+  border: none;
+  background-color:#556B94; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2.5vh;
+  letter-spacing: 0.1em;
+}
+#register_success_card button[name="to_mainpage"]{
+  margin: 0;
+  background-color:#7FD6D0; 
+}
 /***************user_menu***************/
 #user_menu {
   position: relative;
@@ -1138,7 +1184,157 @@ body{
   z-index: 6;
 }
 
+/************personal_page*************/
+#personal_page{
+  width: 100%;
+  height: 90.6vh;
+  position: relative;
+  overflow: auto;
+}
+#personal_box1{
+  width: 80vw;
+  margin: 1vh 10vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#personal_box_img{
+  position: relative;
+  width: 12vh;
+  height: 12vh;
+}
+#personal_box_img #personal_img{
+  background: url(https://ppt.cc/fnvSlx@.png) no-repeat center/contain;
+  border-radius: 50%;
+  width: 12vh;
+  height: 12vh;
+}
+#personal_box_img #personal_star{
+  background: url(https://ppt.cc/ftbLux@.png) no-repeat left/contain;
+  height: 2.3vh;
+  width: 20vw;
+  position: absolute;
+  left: 55%;
+  bottom: -1vh;
+}
+#personal_box1 .word1{
+  font-size: 2.3vh;
+  letter-spacing: 0.1em;
+  margin: 2vh 0 1vh 0;
+}
+#personal_box1 .word2{
+  font-size: 0.5vh;
+  letter-spacing: 0.1em;
+}
+#personal_box_state{
+  margin-top: 0.2vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#personal_state1{
+  background: url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain;
+  width: 45%;
+  height: 3vh; 
+}
+#personal_state2{
+  background: url(https://ppt.cc/fD6GLx@.png) no-repeat right/contain;
+  width: 45%;
+  height: 3vh; 
+}
+#personal_box1_right{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#history_count{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+  font-size: 1.3vh;
+}
+#history_count .word{
+  font-size: 3vh;
+}
+#bmto_credit_card, #bm_edit_personal{
+  background: #E8E8E8;
+  border-radius: 5px;
+  width: 80%;
+  padding-top: 0.5vh;
+  margin-top: 1.5vh;
+  font-size: 1vh;
+  text-align: center;
+}
+
+#personal_box2{
+  width: 80vw;
+  margin: 3vh 10vw;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #F7F7F7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+  font-size: 1.3vh;
+}
+#personal_box2 div{
+  margin: 1vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  white-space: nowrap;
+}
+#personal_box2 input[type="text"]{
+  color: #384244;
+  width: 70%;
+  padding: 5px;
+  background: #F7F7F7;
+  border: solid 1px #F7F7F7;
+  border-radius: 4px;
+  text-align: right;
+}
+#history_contry_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+#history_contry_box img{
+  margin: 2px 1px;
+  height: 2vh;
+  border-radius: 10px;
+}
+#personal_comment{
+  background: #D4D4D4;
+  padding-top: 1vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  position: fixed;
+  bottom: 0;
+}
+#personal_comment .word{
+  width: 10vh;
+  padding: 0.5vh;
+  color: #FFFFFF;
+  font-size: 1.3vh;
+  letter-spacing: 0.1em;
+  border-top: 1px solid #FFFFFF;
+  text-align:center;
+}
+
+/* #homepage1{display:none} */
 #homepage2{display:none}
+#register_success{display:none}
+#personal_page{display:none}
 
 #user_menu{display:none}
 #menu_bar{display:none}

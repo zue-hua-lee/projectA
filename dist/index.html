@@ -46,6 +46,18 @@
       <button type="submit" name="register_submit">送出</button>
     </div>
 
+    <div id="register_success">
+      <div id="register_success_card">
+        <img src="https://ppt.cc/fmcT4x@.png" alt="logo.png">
+        <p class="word">成功註冊</p>
+        <p>您已成功註冊成為WeLugg會員</p>
+        <p>可以馬上與人進行代購服務</p>
+        <p>如有任何問題可以聯絡客服人員。</p>
+        <button type="submit" name="to_personal">填寫個人資料</button>
+        <button type="submit" name="to_mainpage">回首頁</button>
+      </div>
+    </div>
+
     <div id="user_menu">
       <div id="top">
         <div class="logo_user">
@@ -72,11 +84,13 @@
       <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
       <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
     </div>
-    <div id="blank"></div>
+
     <div id="selbar"> 
       <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
       <span class="select_w">篩選</span>
     </div>
+
+    <div id="blank"></div>
     <div id="blank2"></div>
 
     <div id="choose">
@@ -545,6 +559,61 @@
         <input type="text" name="msg-input" placeholder="輸入私訊...">
         <button type="submit" name="chat_submit">輸入</button>
       </div>
+    </div>
+
+    <div id="personal_page">
+      <div id="personal_box1">
+        <div>
+          <div id="personal_box_img">
+            <div id="personal_img"></div>
+            <div id="personal_star"></div>
+          </div>
+          <div class="word1">Nancy Lin</div>
+          <div class="word2">最近登入時間： 今天9:00</div>
+          <div class="word2">最後交易日期： 2023/2/10</div>
+          <div id="personal_box_state">
+            <div id="personal_state1"></div>
+            <div id="personal_state2"></div>
+          </div>
+        </div>
+
+        <div id="personal_box1_right">
+          <div id="history_count">
+            <div class="word">3</div>
+            <div>代購次數</div>
+          </div>
+          <div id="history_count">
+            <div class="word">30</div>
+            <div>購物次數</div>
+          </div><br>
+          <div id="bmto_credit_card">銀行帳號/信用卡</div>
+          <div id="bm_edit_personal">編輯內容</div>
+        </div>
+      </div>
+      <div id="personal_box2">
+        <div>姓名<input type="text" name="personal_name" disabled="disabled" value="Nancy Lin"></div>
+        <div>性別<input type="text" name="personal_sex" disabled="disabled" value="女性"></div>
+        <div>國籍<input type="text" name="personal_contry" disabled="disabled" value="台灣,台北"></div>
+        <div>生日<input type="text" name="personal_birth" disabled="disabled" value="2001-04-01"></div>
+        <div>電子郵件<input type="text" name="personal_mail" disabled="disabled" value="nancylin123@gmail.com"></div>
+        <div>聯絡電話<input type="text" name="personal_phone" disabled="disabled" value="06 275 275"></div>
+      </div>
+      <div id="personal_box2">
+        <div>曾旅遊地方
+          <div id="history_contry_box">
+            <img src="https://ppt.cc/fTGGFx@.png">
+            <img src="https://ppt.cc/fTh4fx@.png">
+            <img src="https://ppt.cc/fWPE6x@.png">
+            <img src="https://ppt.cc/fW5UBx@.png">
+            <img src="https://ppt.cc/fGQnhx@.png">
+            <img src="https://ppt.cc/fEhI3x@.png">
+            <img src="https://ppt.cc/fT5tGx@.png">
+            <img src="https://ppt.cc/fMIlax@.png">
+            <img src="https://ppt.cc/fZAyzx@.png">
+          </div>
+        </div>
+      </div>
+      <div id="personal_comment"><div class="word">評論</div></div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script> 
