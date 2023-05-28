@@ -368,14 +368,18 @@ $(document).ready(function() {
   $('#bm_edit_personal').click(function() {
     if(!edit_state){
       $('#personal_box2 input[type="text"]').attr("disabled", false);
-      $('#personal_box2 input[type="text"]').css({'border':'solid 1px #D4D4D4'})
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #939191','text-align':'left'})
+      $('#personal_box_img #personal_mask').css({'display':'block'})
+      $(this).css({'background':'#556B94','color':'#f6f6f6'})
       $(this).text("儲存變更")
       edit_state = 1
     }
     else{
       save_personal_page()
       $('#personal_box2 input[type="text"]').attr("disabled", true);
-      $('#personal_box2 input[type="text"]').css({'border':'solid 1px #F7F7F7'})
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $(this).css({'background':'#E8E8E8','color':'#000000'})
       $(this).text("編輯內容")
       edit_state = 0
     }
@@ -391,10 +395,17 @@ $(document).ready(function() {
     state.pop()
     show(state.pop())
     $('#personal_box2 input[type="text"]').attr("disabled", true);
-    $('#personal_box2 input[type="text"]').css({'border':'solid 1px #F7F7F7'})
-    $('#bm_edit_personal').text("編輯內容")
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $('#bm_edit_personal').css({'background':'#E8E8E8','color':'#000000'})
+      $('#bm_edit_personal').text("編輯內容")
     edit_state = 0
   });
+
+  $("#personal_box_img #personal_img").click(function() {
+    if(edit_state){}
+  });
+  $("#personal_box_img #personal_img").click(function() {});
 
 
   // mainpage-我是代購者

@@ -866,7 +866,9 @@ body{
   z-index: 3;
 }
 /***************deal_agree***************/
-#deal_agree{
+#deal_agree,
+#personal_page_unsaved,
+#change_personal_img{
   width: 100%;
   height: 100%;
   background-color: rgba(217, 217, 217, 0.7);
@@ -874,9 +876,10 @@ body{
   justify-content: center;    
   align-items: center;  
   position: absolute;
+  top: 0;
   z-index: 10;
 }
-#deal_box{
+#deal_box, #unsaved_box{
   width: 72vw;
   height: 15.8vh;
   position: relative;
@@ -1216,6 +1219,16 @@ body{
   width: 12vh;
   height: 12vh;
 }
+#personal_box_img #personal_mask{
+  display: none;
+  position: absolute;
+  background: url(https://ppt.cc/fVKlpx@.png) no-repeat center/contain;
+  width: 5vh;
+  height: 5vh;
+  margin: 3.5vh;
+  opacity: 0.5;
+  z-index: 10;
+}
 #personal_box_img #personal_star{
   background: url(https://ppt.cc/ftbLux@.png) no-repeat left/contain;
   height: 2.3vh;
@@ -1300,8 +1313,8 @@ body{
   width: 70%;
   padding: 5px;
   background: #F7F7F7;
-  border: solid 1px #F7F7F7;
-  border-radius: 4px;
+  border: none;
+  border-bottom: solid 1px #F7F7F7;
   text-align: right;
 }
 #history_contry_box{
@@ -1337,30 +1350,53 @@ body{
   border-top: 1px solid #FFFFFF;
   text-align:center;
 }
-/***************personal_page_unsaved***************/
-#personal_page_unsaved{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(217, 217, 217, 0.7);
-  display: flex;
-  justify-content: center;    
-  align-items: center;  
-  position: absolute;
-  top: 0;
-  z-index: 20;
-}
-#unsaved_box{
+/**********change_personal_img*************/
+#change_img_box{
   width: 72vw;
-  height: 15.8vh;
   position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  font-size: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  text-align: center;
+}
+#change_img_box .word{
+  width: 100%;
+  margin-top: 2vh;
+}
+#change_img_button{
+  width: 100%;
+  font-size: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2vh;
+}
+#change_img1{
+  background: url(https://ppt.cc/fiJfsx@.png) no-repeat center/contain;
+  border-radius: 50%;
+  width: 7vh;
+  height: 7vh;
+  margin: 1vh;
+}
+#change_img2{
+  background: url(https://ppt.cc/fSrc0x@.png) no-repeat center/contain;
+  border-radius: 50%;
+  width: 7vh;
+  height: 7vh;
+  margin: 1vh;
 }
 
 
-/* #homepage1{display:none} */
+#homepage1{display:none}
 #homepage2{display:none}
 #register_success{display:none}
-#personal_page{display:none}
+/* #personal_page{display:none} */
 #personal_page_unsaved{display:none}
+/* #change_personal_img{display:none} */
 
 #user_menu{display:none}
 #menu_bar{display:none}
