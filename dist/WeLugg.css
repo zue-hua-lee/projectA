@@ -1391,12 +1391,12 @@ body{
 }
 
 
-#homepage1{display:none}
+/* #homepage1{display:none} */
 #homepage2{display:none}
 #register_success{display:none}
-/* #personal_page{display:none} */
+#personal_page{display:none}
 #personal_page_unsaved{display:none}
-/* #change_personal_img{display:none} */
+#change_personal_img{display:none}
 
 #user_menu{display:none}
 #menu_bar{display:none}
