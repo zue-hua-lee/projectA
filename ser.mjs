@@ -71,18 +71,18 @@ app.post('/login', (req, res) => {
   })
 })
 app.post('/register', (req, res) => {
-  if(`${req.body.user_name}` == "" || `${req.body.user_mail}` == "" || `${req.body.user_phone}` == "" || 
-     `${req.body.user_password1}` == "" || `${req.body.user_password2}` == ""){
+  if(`${req.body.name}` == "" || `${req.body.mail}` == "" || `${req.body.phone}` == "" || 
+     `${req.body.password1}` == "" || `${req.body.password2}` == ""){
     res.send("請輸入基本資料及密碼。")
     return 0
   }
-  if(`${req.body.user_password1}` != `${req.body.user_password2}`){
+  if(`${req.body.password1}` != `${req.body.password2}`){
     res.send("重複密碼錯誤，請重新輸入。")
     return 0
   }
-  if(`${req.body.user_password1}`.toUpperCase() == `${req.body.user_password1}` ||
-     `${req.body.user_password1}`.toLowerCase() == `${req.body.user_password1}` ||
-     `${req.body.user_password1}`.length < 6 || `${req.body.user_password1}`.length > 18){
+  if(`${req.body.password1}`.toUpperCase() == `${req.body.password1}` ||
+     `${req.body.password1}`.toLowerCase() == `${req.body.password1}` ||
+     `${req.body.password1}`.length < 6 || `${req.body.password1}`.length > 18){
     res.send("密碼輸入有誤，請確認格式是否正確。")
     return 0
   }
@@ -90,16 +90,18 @@ app.post('/register', (req, res) => {
     if(err){return console.error(err)}
     data = JSON.parse(data)
     for(var key in data){
-      if(key == `${req.body.user_name}`){
+      if(key == `${req.body.name}`){
         res.send("帳號名稱已經存在，請重新命名。")
         return 0
       }  
     }
-    
-    data[`${req.body.user_name}`] = {}
-    data[`${req.body.user_name}`]["phone"] = `${req.body.user_phone}`
-    data[`${req.body.user_name}`]["mail"] = `${req.body.user_mail}`
-    data[`${req.body.user_name}`]["password"] = `${req.body.user_password1}`
+    data[`${req.body.name}`] = {}
+    data[`${req.body.name}`]["gender"] = "尚未填寫"
+    data[`${req.body.name}`]["born"] = "尚未填寫"
+    data[`${req.body.name}`]["birth"] = "尚未填寫"
+    data[`${req.body.name}`]["mail"] = `${req.body.mail}`
+    data[`${req.body.name}`]["phone"] = `${req.body.phone}`
+    data[`${req.body.name}`]["password"] = `${req.body.password1}`
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
@@ -176,3 +178,35 @@ app.post('/list',(req,res)=>{
   res.send(data);
 })
 
+// personal_page
+app.post('/read_personal', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    var array = ["","","","",""]
+    data = JSON.parse(data)
+    array[0] = data[`${req.body.name}`]["gender"]
+    array[1] = data[`${req.body.name}`]["born"]
+    array[2] = data[`${req.body.name}`]["birth"]
+    array[3] = data[`${req.body.name}`]["mail"]
+    array[4] = data[`${req.body.name}`]["phone"]
+    res.send(array)
+  })
+})
+app.post('/save_personal', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[`${req.body.old_name}`]["gender"] = `${req.body.gender}`
+    data[`${req.body.old_name}`]["born"] = `${req.body.born}`
+    data[`${req.body.old_name}`]["birth"] = `${req.body.birth}`
+    data[`${req.body.old_name}`]["mail"] = `${req.body.mail}`
+    data[`${req.body.old_name}`]["phone"] = `${req.body.phone}`
+    if(`${req.body.new_name}` != `${req.body.old_name}`){
+      data[`${req.body.new_name}`] = data[`${req.body.old_name}`]
+      delete data[`${req.body.old_name}`]
+    }
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+    })
+  })
+})

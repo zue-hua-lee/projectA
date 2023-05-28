@@ -207,6 +207,32 @@ function to_mainpage_schedule() {
     },
   })
 }
+function read_personal_page(){
+  event.preventDefault()
+  $.post('./read_personal', {
+    name: user_name,
+  }, (res) => {
+    $('#personal_box2 input[name="personal_name"]').val(user_name)
+    $('#personal_box2 input[name="personal_gender"]').val(res[0])
+    $('#personal_box2 input[name="personal_born"]').val(res[1])
+    $('#personal_box2 input[name="personal_birth"]').val(res[2])
+    $('#personal_box2 input[name="personal_mail"]').val(res[3])
+    $('#personal_box2 input[name="personal_phone"]').val(res[4])
+  })
+}
+function save_personal_page(){
+  event.preventDefault()
+  $.post('./save_personal', {
+    old_name: user_name,
+    new_name: $('#personal_box2 input[name="personal_name"]').val(),
+    gender: $('#personal_box2 input[name="personal_gender"]').val(),
+    born: $('#personal_box2 input[name="personal_born"]').val(),
+    birth: $('#personal_box2 input[name="personal_birth"]').val(),
+    mail: $('#personal_box2 input[name="personal_mail"]').val(),
+    phone: $('#personal_box2 input[name="personal_phone"]').val(),
+  },{})
+  user_name = $('#personal_box2 input[name="personal_name"]').val()
+}
 function show(string){
   if(string == "register_success"){
     all_display_none()
@@ -217,8 +243,10 @@ function show(string){
     all_display_none()
     state.push("personal_page")
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("Nancy Lin")
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
+    read_personal_page()
   }
   else if(string == "mainpage_schedule"){
     all_display_none()
@@ -280,6 +308,8 @@ function show(string){
   }
 }
 
+
+
 // homepage
 $(document).ready(function() {
   $('#homepage1 button[name="login"]').click((event) => {
@@ -305,16 +335,15 @@ $(document).ready(function() {
   $('#homepage2 button[name="register_submit"]').click((event) => {
     event.preventDefault()
     $.post('./register', {
-      user_name: $('#homepage2 input[name="user_name"]').val(),
-      user_phone: $('#homepage2 input[name="user_phone"]').val(),
-      user_mail: $('#homepage2 input[name="user_mail"]').val(),
-      user_password1: $('#homepage2 input[name="user_password1"]').val(),
-      user_password2: $('#homepage2 input[name="user_password2"]').val(),
+      name: $('#homepage2 input[name="user_name"]').val(),
+      phone: $('#homepage2 input[name="user_phone"]').val(),
+      mail: $('#homepage2 input[name="user_mail"]').val(),
+      password1: $('#homepage2 input[name="user_password1"]').val(),
+      password2: $('#homepage2 input[name="user_password2"]').val(),
     }, (res) => {
       $('#homepage_output2').html(res)
       if(res=="註冊成功！"){
-        all_display_none()
-        $("#register_success").css({'display':'block'})
+        show("register_success")
         user_name = $('#homepage2 input[name="user_name"]').val()
       }
     })
@@ -344,6 +373,7 @@ $(document).ready(function() {
       edit_state = 1
     }
     else{
+      save_personal_page()
       $('#personal_box2 input[type="text"]').attr("disabled", true);
       $('#personal_box2 input[type="text"]').css({'border':'solid 1px #F7F7F7'})
       $(this).text("編輯內容")
@@ -357,6 +387,7 @@ $(document).ready(function() {
   //選同意儲存變更
   $("#personal_page_unsaved .deal_yes").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
+    save_personal_page()
     state.pop()
     show(state.pop())
     $('#personal_box2 input[type="text"]').attr("disabled", true);
