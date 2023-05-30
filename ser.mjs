@@ -102,6 +102,8 @@ app.post('/register', (req, res) => {
     data[`${req.body.name}`]["mail"] = `${req.body.mail}`
     data[`${req.body.name}`]["phone"] = `${req.body.phone}`
     data[`${req.body.name}`]["password"] = `${req.body.password1}`
+    data[`${req.body.name}`]["trip_num"] = 0 //總行程數
+    data[`${req.body.name}`]["product_num"] = 0 //總商品數
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
@@ -118,20 +120,25 @@ app.get('/journey_data', (req, res) => { //用get傳
       //將字符串轉換為 JSON 對象
       data = JSON.parse(data);
       //將傳來的資訊推送到數組對象中
-      data[req.query.user_name]['departure_country'] = req.query.departure_country
-      data[req.query.user_name]['departure_city'] = req.query.departure_city
-      data[req.query.user_name]['entry_country'] = req.query.entry_country
-      data[req.query.user_name]['entry_city'] = req.query.entry_city
-      data[req.query.user_name]['departure_year'] = req.query.departure_year
-      data[req.query.user_name]['departure_month'] = req.query.departure_month
-      data[req.query.user_name]['departure_date'] = req.query.departure_date
-      data[req.query.user_name]['entry_year'] = req.query.entry_year
-      data[req.query.user_name]['entry_month'] = req.query.entry_month
-      data[req.query.user_name]['entry_date'] = req.query.entry_date
-      data[req.query.user_name]['product_list'] = req.query.product_list
-      data[req.query.user_name]['luggage_size_list'] = req.query.luggage_size_list
-      data[req.query.user_name]['luggage_space_list'] = req.query.luggage_space_list
-      data[req.query.user_name]['set_tip'] = req.query.set_tip
+      var n = data[req.query.user_name]['trip_num']
+      data[req.query.user_name]['trip'+n] = {}
+      data[req.query.user_name]['trip'+n]['departure_country'] = req.query.departure_country
+      data[req.query.user_name]['trip'+n]['departure_city'] = req.query.departure_city
+      data[req.query.user_name]['trip'+n]['entry_country'] = req.query.entry_country
+      data[req.query.user_name]['trip'+n]['entry_city'] = req.query.entry_city
+      data[req.query.user_name]['trip'+n]['departure_year'] = req.query.departure_year
+      data[req.query.user_name]['trip'+n]['departure_month'] = req.query.departure_month
+      data[req.query.user_name]['trip'+n]['departure_date'] = req.query.departure_date
+      data[req.query.user_name]['trip'+n]['entry_year'] = req.query.entry_year
+      data[req.query.user_name]['trip'+n]['entry_month'] = req.query.entry_month
+      data[req.query.user_name]['trip'+n]['entry_date'] = req.query.entry_date
+      data[req.query.user_name]['trip'+n]['product_list'] = req.query.product_list
+      data[req.query.user_name]['trip'+n]['luggage_size_list'] = req.query.luggage_size_list
+      data[req.query.user_name]['trip'+n]['luggage_space_list'] = req.query.luggage_space_list
+      data[req.query.user_name]['trip'+n]['set_tip'] = req.query.set_tip
+
+      data[req.query.user_name]['trip_num'] = parseInt(n,10)+1 //總行程數+1
+
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
@@ -150,19 +157,24 @@ app.get('/request_data', (req, res) => { //用get傳
       //將字符串轉換為 JSON 對象
       data = JSON.parse(data);
       //將傳來的資訊推送到數組對象中
-      data[req.query.user_name]['set_product_name'] = req.query.set_product_name
-      data[req.query.user_name]['product_place_country'] = req.query.product_place_country
-      data[req.query.user_name]['product_place_city'] = req.query.product_place_city
-      data[req.query.user_name]['set_shop_name'] = req.query.set_shop_name
-      data[req.query.user_name]['set_shop_address'] = req.query.set_shop_address
-      data[req.query.user_name]['request_product_list'] = req.query.request_product_list
-      data[req.query.user_name]['set_product_quantity'] = req.query.set_product_quantity
-      data[req.query.user_name]['shipping_address_country'] = req.query.shipping_address_country
-      data[req.query.user_name]['shipping_address_city'] = req.query.shipping_address_city
-      data[req.query.user_name]['product_arrive_year'] = req.query.product_arrive_year
-      data[req.query.user_name]['product_arrive_month'] = req.query.product_arrive_month
-      data[req.query.user_name]['product_arrive_date'] = req.query.product_arrive_date
-      data[req.query.user_name]['request_remark'] = req.query.request_remark
+      var n = data[req.query.user_name]['product_num']
+      data[req.query.user_name]['product'+n] = {}
+      data[req.query.user_name]['product'+n]['set_product_name'] = req.query.set_product_name
+      data[req.query.user_name]['product'+n]['product_place_country'] = req.query.product_place_country
+      data[req.query.user_name]['product'+n]['product_place_city'] = req.query.product_place_city
+      data[req.query.user_name]['product'+n]['set_shop_name'] = req.query.set_shop_name
+      data[req.query.user_name]['product'+n]['set_shop_address'] = req.query.set_shop_address
+      data[req.query.user_name]['product'+n]['request_product_list'] = req.query.request_product_list
+      data[req.query.user_name]['product'+n]['set_product_quantity'] = req.query.set_product_quantity
+      data[req.query.user_name]['product'+n]['shipping_address_country'] = req.query.shipping_address_country
+      data[req.query.user_name]['product'+n]['shipping_address_city'] = req.query.shipping_address_city
+      data[req.query.user_name]['product'+n]['product_arrive_year'] = req.query.product_arrive_year
+      data[req.query.user_name]['product'+n]['product_arrive_month'] = req.query.product_arrive_month
+      data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
+      data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
+
+      data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
+
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
