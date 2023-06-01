@@ -40,11 +40,15 @@ function all_display_none() {
   $('#homepage2').css({'display':'none'})
   $('#register_success').css({'display':'none'})
   $('#personal_page').css({'display':'none'})
+  $('#bm_personal_togood').css({'display':'none'})
+  $('#bm_personal_totrip').css({'display':'none'})
+  $('#bm_personal_tochat').css({'display':'none'})
+
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
   $('#selbar').css({'display':'none'})
-  $('#subpage_title').css({'display':'none'})
+  $('#subpage_title').css({'display':'none','background-color':'#7FD6D0'})
 
   $('#mainpage').css({'display':'none'})
   $('#show_schedule').css({'display':'none'})
@@ -239,13 +243,44 @@ function show(string){
     state.push("register_success")
     $('#register_success').css({'display':'block'})
   }
-  else if(string == "personal_page"){
+  else if(string == "personal_page_my"){
     all_display_none()
-    state.push("personal_page")
+    state.push("personal_page_my")
     $('#subpage_title').css({'display':'block'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain'});
     $('#subpage_title .subpage_word').html(user_name)
     $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
+    read_personal_page()
+  }
+  else if(string == "personal_page_other_green"){
+    all_display_none()
+    state.push("personal_page_other_green")
+    $('#subpage_title').css({'display':'block'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain'});
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
+    $('#personal_page').css({'display':'block'})
+
+    $('#bm_credit_card').css({'display':'none'})
+    $('#bm_edit_personal').css({'display':'none'})
+    $('#bm_personal_togood').css({'display':'block'})
+    $('#bm_personal_tochat').css({'display':'block'})
+    read_personal_page()
+  }
+  else if(string == "personal_page_other_blue"){
+    all_display_none()
+    state.push("personal_page_other_blue")
+    $('#subpage_title').css({'display':'block','background-color':'#556B94'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/fH0Tyx@.png) no-repeat left/contain'});
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
+    $('#personal_page').css({'display':'block'})
+
+    $('#bm_credit_card').css({'display':'none'})
+    $('#bm_edit_personal').css({'display':'none'})
+    $('#bm_personal_totrip').css({'display':'block'})
+    $('#bm_personal_tochat').css({'display':'block'})
     read_personal_page()
   }
   else if(string == "mainpage_schedule"){
@@ -357,7 +392,7 @@ $(document).ready(function() {
 
   // register_success
   $('#register_success button[name="to_personal"]').click(function() {
-    show("personal_page")
+    show("personal_page_my")
   });
   $('#register_success button[name="to_mainpage"]').click(function() {
     show("mainpage_schedule")
@@ -384,11 +419,11 @@ $(document).ready(function() {
       edit_state = 0
     }
   });
-  //選不要儲存變更
+  // 選不要儲存變更
   $("#personal_page_unsaved .deal_no").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
   });
-  //選同意儲存變更
+  // 選同意儲存變更
   $("#personal_page_unsaved .deal_yes").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
     save_personal_page()
@@ -401,12 +436,27 @@ $(document).ready(function() {
       $('#bm_edit_personal').text("編輯內容")
     edit_state = 0
   });
-
-  $("#personal_box_img #personal_img").click(function() {
-    if(edit_state){}
+  // 改變個人頭像
+  $('#personal_box_img #personal_mask').click(function() {
+    $('#change_personal_img').css({'display':'flex'})
   });
-  $("#personal_box_img #personal_img").click(function() {});
-
+  $('#personal_box_img #personal_img').click(function() {
+    if(edit_state){
+      $('#change_personal_img').css({'display':'flex'})
+    }
+  });
+  $('#change_personal_img').click(function() {
+    $('#change_personal_img').css({'display':'none'})
+  });
+  $('#change_img1').click(function(event){ 
+    console.log("change_img1")
+    // all_display_none()
+  });
+  $('#change_img2').click(function(event){ 
+    console.log("change_img2")
+    // all_display_none()
+  });
+  
 
   // mainpage-我是代購者
   var prenum = 0;
@@ -453,6 +503,13 @@ $(document).ready(function() {
     show("chat_box")
     console.log(nn)
   });
+  $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
+    var nn = $(this).parent().parent().parent().attr('class')
+    // var num=$(this).parent().parent().parent().index()+1;
+    // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
+    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
+    show("personal_page_other_green")
+  });
 
   // schedule 代購者頁面
   $('#user_menu .shopping_bag').click((event) => {
@@ -480,7 +537,7 @@ $(document).ready(function() {
     show("mainpage_schedule")
   })
   $('#menu_bar .user_profile').click((event) => {
-    show("personal_page")
+    show("personal_page_my")
   })
   $('#menu_bar .case_list').click((event) => {
     show("accept_case_list")
@@ -490,7 +547,7 @@ $(document).ready(function() {
   })
   // subpage
   $('#subpage_title .case_back_button').click((event) => {
-    if(state[state.length-1] == "personal_page" && edit_state){
+    if(state[state.length-1] == "personal_page_my" && edit_state){
       $('#personal_page_unsaved').css({'display':'flex'})
     }
     else{
