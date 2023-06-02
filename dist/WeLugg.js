@@ -162,46 +162,51 @@ function to_mainpage_schedule() {
     contentType: 'application/json',
     success: (data) => {
       for (const name in data) {
-        let namelist = '';
+        // let namelist = '';
         for(const id in data[name]){
+          let namelist = '';
           // if(choose_box1==1){
           //   if(id=="live_country" && data[name][id]==sel_country){
-          if(id=="live_country"){
-             namelist += `居住地: ${data[name][id]},`;
+          if (id.substring(0,7)=="product" && id.substring(0,8)!="product_")
+          {
+            //console.log(id);
+            for(const ids in data[name][id]){
+              if(ids=="shipping_address_country"){
+                namelist += `居住地: ${data[name][id][ids]},`;
+              }
+              if(ids=="shipping_address_city"){
+                namelist += `${data[name][id][ids]} &nbsp;`;
+              }
+              if(ids=="product_place_country"){
+                namelist += `商品地: ${data[name][id][ids]},`;
+              }
+              if(ids=="product_place_city"){
+                namelist += `${data[name][id][ids]} &nbsp;`;
+              }
+              if(ids=="product_arrive_year"){
+                namelist += `${data[name][id][ids]}/`;
+              }
+              if(ids=="product_arrive_month"){
+                namelist += `${data[name][id][ids]}/`;
+              }
+              if(ids=="product_arrive_date"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="set_product_name"){
+                namelist += `需求商品: ${data[name][id][ids]}<br>`;
+              }
+              if(ids=="set_product_quantity"){
+                namelist += `數量: ${data[name][id][ids]} 件<br>`;
+              }
+            }
           }
-          if(id=="live_city"){
-            namelist += `${data[name][id]} &nbsp;`;
-          }
-          if(id=="good_country"){
-            namelist += `商品地: ${data[name][id]},`;
-          }
-          if(id=="good_city"){
-            namelist += `${data[name][id]} &nbsp;`;
-          }
-          if(id=="arrive_year"){
-            namelist += `${data[name][id]}/`;
-          }
-          if(id=="arrive_month"){
-            namelist += `${data[name][id]}/`;
-          }
-          if(id=="arrive_date"){
-            namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="good_name"){
-            namelist += `需求商品: ${data[name][id]}<br>`;
-          }
-          if(id=="amount"){
-            namelist += `數量: ${data[name][id]} 件<br>`;
-          }
-          //   }
-          // }
-         
-        }
-        if(namelist!=''){
+          
+         if(namelist!=''){
           var contener = document.getElementById("show_need")
           $('#show_need').append('<div class="'+name+'"><div class="w">'
           +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
           '<p class="chat_no">個人資料</p><p class="chat_yes">進行聊天</p></div></div></div>');
+        }
         }
       }
     },
@@ -726,7 +731,7 @@ $(document).ready(function() {
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
       shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
       shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
-      product_arrive_year: $('#request_data select[name=product_arrivee_year]').val(),
+      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
       product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
       product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),

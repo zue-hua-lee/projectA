@@ -50,6 +50,7 @@
             "set_product_quantity": "14",
             "shipping_address_country": "日本",
             "shipping_address_city": "東京",
+            "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
             "request_remark": ""
@@ -64,6 +65,7 @@
             "set_product_quantity": "11",
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
+            "product_arrive_year": "2023",
             "product_arrive_month": "3",
             "product_arrive_date": "1",
             "request_remark": "none"
