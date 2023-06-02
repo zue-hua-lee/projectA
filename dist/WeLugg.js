@@ -1,5 +1,5 @@
 var user_name = ""
-let state = ["homepage"]
+let state = [""]
 var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
@@ -38,6 +38,8 @@ const appendMessage = (message, isSelf) => {
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
   $('#homepage2').css({'display':'none'})
+  $('#register_success').css({'display':'none'})
+  $('#personal_page').css({'display':'none'})
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
@@ -205,8 +207,48 @@ function to_mainpage_schedule() {
     },
   })
 }
+function read_personal_page(){
+  event.preventDefault()
+  $.post('./read_personal', {
+    name: user_name,
+  }, (res) => {
+    $('#personal_box2 input[name="personal_name"]').val(user_name)
+    $('#personal_box2 input[name="personal_gender"]').val(res[0])
+    $('#personal_box2 input[name="personal_born"]').val(res[1])
+    $('#personal_box2 input[name="personal_birth"]').val(res[2])
+    $('#personal_box2 input[name="personal_mail"]').val(res[3])
+    $('#personal_box2 input[name="personal_phone"]').val(res[4])
+  })
+}
+function save_personal_page(){
+  event.preventDefault()
+  $.post('./save_personal', {
+    old_name: user_name,
+    new_name: $('#personal_box2 input[name="personal_name"]').val(),
+    gender: $('#personal_box2 input[name="personal_gender"]').val(),
+    born: $('#personal_box2 input[name="personal_born"]').val(),
+    birth: $('#personal_box2 input[name="personal_birth"]').val(),
+    mail: $('#personal_box2 input[name="personal_mail"]').val(),
+    phone: $('#personal_box2 input[name="personal_phone"]').val(),
+  },{})
+  user_name = $('#personal_box2 input[name="personal_name"]').val()
+}
 function show(string){
-  if(string == "mainpage_schedule"){
+  if(string == "register_success"){
+    all_display_none()
+    state.push("register_success")
+    $('#register_success').css({'display':'block'})
+  }
+  else if(string == "personal_page"){
+    all_display_none()
+    state.push("personal_page")
+    $('#subpage_title').css({'display':'block'})
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
+    $('#personal_page').css({'display':'block'})
+    read_personal_page()
+  }
+  else if(string == "mainpage_schedule"){
     all_display_none()
     state.push("mainpage_schedule")
     $('#mainpage').css({'display':'block'})
@@ -266,6 +308,8 @@ function show(string){
   }
 }
 
+
+
 // homepage
 $(document).ready(function() {
   $('#homepage1 button[name="login"]').click((event) => {
@@ -291,14 +335,17 @@ $(document).ready(function() {
   $('#homepage2 button[name="register_submit"]').click((event) => {
     event.preventDefault()
     $.post('./register', {
-      user_name: $('#homepage2 input[name="user_name"]').val(),
-      user_phone: $('#homepage2 input[name="user_phone"]').val(),
-      user_mail: $('#homepage2 input[name="user_mail"]').val(),
-      user_password1: $('#homepage2 input[name="user_password1"]').val(),
-      user_password2: $('#homepage2 input[name="user_password2"]').val(),
+      name: $('#homepage2 input[name="user_name"]').val(),
+      phone: $('#homepage2 input[name="user_phone"]').val(),
+      mail: $('#homepage2 input[name="user_mail"]').val(),
+      password1: $('#homepage2 input[name="user_password1"]').val(),
+      password2: $('#homepage2 input[name="user_password2"]').val(),
     }, (res) => {
-    console.log(res)
       $('#homepage_output2').html(res)
+      if(res=="註冊成功！"){
+        show("register_success")
+        user_name = $('#homepage2 input[name="user_name"]').val()
+      }
     })
   })
 
@@ -307,6 +354,59 @@ $(document).ready(function() {
     $('#homepage2').css({'display':'none'})
     $('#homepage_output2').html("<br>")
   })
+
+  // register_success
+  $('#register_success button[name="to_personal"]').click(function() {
+    show("personal_page")
+  });
+  $('#register_success button[name="to_mainpage"]').click(function() {
+    show("mainpage_schedule")
+  });
+
+  // personal_page
+  var edit_state = 0;
+  $('#bm_edit_personal').click(function() {
+    if(!edit_state){
+      $('#personal_box2 input[type="text"]').attr("disabled", false);
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #939191','text-align':'left'})
+      $('#personal_box_img #personal_mask').css({'display':'block'})
+      $(this).css({'background':'#556B94','color':'#f6f6f6'})
+      $(this).text("儲存變更")
+      edit_state = 1
+    }
+    else{
+      save_personal_page()
+      $('#personal_box2 input[type="text"]').attr("disabled", true);
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $(this).css({'background':'#E8E8E8','color':'#000000'})
+      $(this).text("編輯內容")
+      edit_state = 0
+    }
+  });
+  //選不要儲存變更
+  $("#personal_page_unsaved .deal_no").click(function() {
+    $("#personal_page_unsaved").css({'display':'none'});
+  });
+  //選同意儲存變更
+  $("#personal_page_unsaved .deal_yes").click(function() {
+    $("#personal_page_unsaved").css({'display':'none'});
+    save_personal_page()
+    state.pop()
+    show(state.pop())
+    $('#personal_box2 input[type="text"]').attr("disabled", true);
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $('#bm_edit_personal').css({'background':'#E8E8E8','color':'#000000'})
+      $('#bm_edit_personal').text("編輯內容")
+    edit_state = 0
+  });
+
+  $("#personal_box_img #personal_img").click(function() {
+    if(edit_state){}
+  });
+  $("#personal_box_img #personal_img").click(function() {});
+
 
   // mainpage-我是代購者
   var prenum = 0;
@@ -380,6 +480,7 @@ $(document).ready(function() {
     show("mainpage_schedule")
   })
   $('#menu_bar .user_profile').click((event) => {
+    show("personal_page")
   })
   $('#menu_bar .case_list').click((event) => {
     show("accept_case_list")
@@ -389,8 +490,13 @@ $(document).ready(function() {
   })
   // subpage
   $('#subpage_title .case_back_button').click((event) => {
-    state.pop()
-    show(state.pop())
+    if(state[state.length-1] == "personal_page" && edit_state){
+      $('#personal_page_unsaved').css({'display':'flex'})
+    }
+    else{
+      state.pop()
+      show(state.pop())
+    }
   })
   // accept_case_list
   var check_state1 = 0;
@@ -687,12 +793,11 @@ $(document).ready(function() {
   $("#deal_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
   });
-  
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
-      all_display_none()
-      $("#deal_success").css({'display':'block'});
-    });
+    all_display_none()
+    $("#deal_success").css({'display':'block'});
+  });
   
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
