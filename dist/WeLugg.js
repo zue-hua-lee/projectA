@@ -81,50 +81,55 @@ function to_mainpage_need() {
     url: './list',
     success: (data) => {
       for (const name in data) {
-        let namelist = '';
         for(const id in data[name]){
-          if(id=="departure_country"){
-              namelist += `居住地: ${data[name][id]},`;
+          let namelist = '';
+          if (id.substring(0,4)=="trip" && id.substring(0,5)!="trip_")
+          {
+            for(const ids in data[name][id]){
+              if(ids=="departure_country"){
+                namelist += `居住地: ${data[name][id][ids]},`;
+              }
+              if(ids=="departure_city"){
+                namelist += `${data[name][id][ids]} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`;
+              }
+              if(ids=="entry_country"){
+                namelist += `抵達地: ${data[name][id][ids]},`;
+              }
+              if(ids=="entry_city"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="departure_year"){
+                namelist += `旅行日期: ${data[name][id][ids]} / `;
+              }
+              if(ids=="departure_month"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="departure_date"){
+                namelist += `${data[name][id][ids]} - `;
+              }
+              if(ids=="entry_year"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="entry_month"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="entry_date"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="luggage_size_list"){
+                namelist += `行李箱: ${data[name][id][ids]}吋/inch &nbsp; &nbsp; &nbsp;`;
+              }
+              if(ids=="luggage_space_list"){
+                namelist += `代購容量: ${data[name][id][ids]}%`;
+              }
+            }
           }
-          if(id=="departure_city"){
-            namelist += `${data[name][id]} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`;
+          if(namelist != ''){
+            var contener = document.getElementById("show_schedule")
+            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w">'
+              +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+              '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
           }
-          if(id=="entry_country"){
-          namelist += `抵達地: ${data[name][id]},`;
-          }
-          if(id=="entry_city"){
-          namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="departure_year"){
-            namelist += `旅行日期: ${data[name][id]} / `;
-          }
-          if(id=="departure_month"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="departure_date"){
-          namelist += `${data[name][id]} - `;
-          }
-          if(id=="entry_year"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="entry_month"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="entry_date"){
-          namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="luggage_size_list"){
-          namelist += `行李箱: ${data[name][id]}吋/inch &nbsp; &nbsp; &nbsp;`;
-          }
-          if(id=="luggage_space_list"){
-          namelist += `代購容量: ${data[name][id]}%`;
-          }
-        }
-        if(namelist != ''){
-          var contener = document.getElementById("show_schedule")
-          $('#show_schedule').append('<div class="'+name+'"><div class="w">'
-          +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
-          '<p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
         }
       }
     },
@@ -167,14 +172,12 @@ function to_mainpage_schedule() {
     contentType: 'application/json',
     success: (data) => {
       for (const name in data) {
-        // let namelist = '';
         for(const id in data[name]){
           let namelist = '';
           // if(choose_box1==1){
           //   if(id=="live_country" && data[name][id]==sel_country){
           if (id.substring(0,7)=="product" && id.substring(0,8)!="product_")
           {
-            //console.log(id);
             for(const ids in data[name][id]){
               if(ids=="shipping_address_country"){
                 namelist += `居住地: ${data[name][id][ids]},`;
@@ -206,12 +209,24 @@ function to_mainpage_schedule() {
             }
           }
           
-         if(namelist!=''){
-          var contener = document.getElementById("show_need")
-          $('#show_need').append('<div class="'+name+'"><div class="w">'
-          +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
-          '<p class="chat_no">個人資料</p><p class="chat_yes">進行聊天</p></div></div></div>');
-        }
+          if(namelist!=''){
+            var contener = document.getElementById("show_need")
+            $('#show_need').append('<div class="'+name+' '+id+'"><div class="w">'
+            +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+            '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+            // 等同於下列程式碼
+            // <div class="user1 product1">
+            //   <div class="w">
+            //     <div class="n">user1</div>namelist
+            //   </div>
+            //   <div class="gray">
+            //     <div class="chat_button">
+            //       <p class="chat_no">旅遊詳情</p>
+            //       <p class="chat_yes">進行聊天</p>
+            //     </div>
+            //   </div>
+            // </div>
+          }
         }
       }
     },
@@ -345,8 +360,6 @@ function show(string){
   }
 }
 
-
-
 // homepage
 $(document).ready(function() {
   $('#homepage1 button[name="login"]').click((event) => {
@@ -479,11 +492,13 @@ $(document).ready(function() {
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
-    // var num=$(this).parent().parent().parent().index()+1;
-    // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
-    console.log(nn)
+  });
+  $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
+    var nn = $(this).parent().parent().parent().attr('class')
+    let ss = nn.split(/\s/);
+    console.log(ss[0]) // user1
+    console.log(ss[1]) // trip0
   });
 
   // mainpage-我是購買者
@@ -510,10 +525,9 @@ $(document).ready(function() {
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
-    // var num=$(this).parent().parent().parent().index()+1;
-    // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
-    show("personal_page_other_green")
+    let ss = nn.split(/\s/);
+    console.log(ss[0]) // user1
+    console.log(ss[1]) // product0
   });
 
   // schedule 代購者頁面
