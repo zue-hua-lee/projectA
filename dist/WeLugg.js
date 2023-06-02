@@ -40,10 +40,11 @@ function all_display_none() {
   $('#homepage2').css({'display':'none'})
   $('#register_success').css({'display':'none'})
   $('#personal_page').css({'display':'none'})
+  $('#bm_credit_card').css({'display':'none'})
+  $('#bm_edit_personal').css({'display':'none'})
   $('#bm_personal_togood').css({'display':'none'})
   $('#bm_personal_totrip').css({'display':'none'})
   $('#bm_personal_tochat').css({'display':'none'})
-
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
@@ -251,6 +252,8 @@ function show(string){
     $('#subpage_title .subpage_word').html(user_name)
     $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
+    $('#bm_credit_card').css({'display':'block'})
+    $('#bm_edit_personal').css({'display':'block'})
     read_personal_page()
   }
   else if(string == "personal_page_other_green"){
@@ -261,9 +264,6 @@ function show(string){
     $('#subpage_title .subpage_word').html(user_name)
     $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
-
-    $('#bm_credit_card').css({'display':'none'})
-    $('#bm_edit_personal').css({'display':'none'})
     $('#bm_personal_togood').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
     read_personal_page()
@@ -276,9 +276,6 @@ function show(string){
     $('#subpage_title .subpage_word').html(user_name)
     $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
-
-    $('#bm_credit_card').css({'display':'none'})
-    $('#bm_edit_personal').css({'display':'none'})
     $('#bm_personal_totrip').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
     read_personal_page()
@@ -447,6 +444,9 @@ $(document).ready(function() {
   });
   $('#change_personal_img').click(function() {
     $('#change_personal_img').css({'display':'none'})
+  });
+  $("#change_img_box").click(function(event){ 
+    event.stopPropagation(); 
   });
   $('#change_img1').click(function(event){ 
     console.log("change_img1")
@@ -866,7 +866,6 @@ $(document).ready(function() {
     show("mainpage_schedule")
   });
 })
-
 
 //select bar in mainpage
 $('#selbar').click(function() {
