@@ -877,7 +877,7 @@ body{
   align-items: center;  
   position: absolute;
   top: 0;
-  z-index: 10;
+  z-index: 5;
 }
 #deal_box, #unsaved_box{
   width: 72vw;
@@ -1278,7 +1278,11 @@ body{
 #history_count .word{
   font-size: 3vh;
 }
-#bmto_credit_card, #bm_edit_personal{
+#bm_credit_card,
+#bm_edit_personal,
+#bm_personal_totrip,
+#bm_personal_togood,
+#bm_personal_tochat{
   background: #E8E8E8;
   border-radius: 5px;
   width: 80%;
@@ -1362,6 +1366,7 @@ body{
   flex-direction: column;
   align-items: center;  
   text-align: center;
+  z-index: 6;
 }
 #change_img_box .word{
   width: 100%;
@@ -1394,9 +1399,14 @@ body{
 /* #homepage1{display:none} */
 #homepage2{display:none}
 #register_success{display:none}
+
 #personal_page{display:none}
 #personal_page_unsaved{display:none}
 #change_personal_img{display:none}
+#bm_personal_togood{display:none}
+#bm_personal_totrip{display:none}
+#bm_personal_tochat{display:none}
+
 
 #user_menu{display:none}
 #menu_bar{display:none}

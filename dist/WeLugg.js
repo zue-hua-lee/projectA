@@ -40,11 +40,16 @@ function all_display_none() {
   $('#homepage2').css({'display':'none'})
   $('#register_success').css({'display':'none'})
   $('#personal_page').css({'display':'none'})
+  $('#bm_credit_card').css({'display':'none'})
+  $('#bm_edit_personal').css({'display':'none'})
+  $('#bm_personal_togood').css({'display':'none'})
+  $('#bm_personal_totrip').css({'display':'none'})
+  $('#bm_personal_tochat').css({'display':'none'})
 
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
   $('#selbar').css({'display':'none'})
-  $('#subpage_title').css({'display':'none'})
+  $('#subpage_title').css({'display':'none','background-color':'#7FD6D0'})
 
   $('#mainpage').css({'display':'none'})
   $('#show_schedule').css({'display':'none'})
@@ -76,50 +81,55 @@ function to_mainpage_need() {
     url: './list',
     success: (data) => {
       for (const name in data) {
-        let namelist = '';
         for(const id in data[name]){
-          if(id=="departure_country"){
-              namelist += `居住地: ${data[name][id]},`;
+          let namelist = '';
+          if (id.substring(0,4)=="trip" && id.substring(0,5)!="trip_")
+          {
+            for(const ids in data[name][id]){
+              if(ids=="departure_country"){
+                namelist += `居住地: ${data[name][id][ids]},`;
+              }
+              if(ids=="departure_city"){
+                namelist += `${data[name][id][ids]} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`;
+              }
+              if(ids=="entry_country"){
+                namelist += `抵達地: ${data[name][id][ids]},`;
+              }
+              if(ids=="entry_city"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="departure_year"){
+                namelist += `旅行日期: ${data[name][id][ids]} / `;
+              }
+              if(ids=="departure_month"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="departure_date"){
+                namelist += `${data[name][id][ids]} - `;
+              }
+              if(ids=="entry_year"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="entry_month"){
+                namelist += `${data[name][id][ids]} / `;
+              }
+              if(ids=="entry_date"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="luggage_size_list"){
+                namelist += `行李箱: ${data[name][id][ids]}吋/inch &nbsp; &nbsp; &nbsp;`;
+              }
+              if(ids=="luggage_space_list"){
+                namelist += `代購容量: ${data[name][id][ids]}%`;
+              }
+            }
           }
-          if(id=="departure_city"){
-            namelist += `${data[name][id]} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`;
+          if(namelist != ''){
+            var contener = document.getElementById("show_schedule")
+            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w">'
+              +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+              '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
           }
-          if(id=="entry_country"){
-          namelist += `抵達地: ${data[name][id]},`;
-          }
-          if(id=="entry_city"){
-          namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="departure_year"){
-            namelist += `旅行日期: ${data[name][id]} / `;
-          }
-          if(id=="departure_month"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="departure_date"){
-          namelist += `${data[name][id]} - `;
-          }
-          if(id=="entry_year"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="entry_month"){
-          namelist += `${data[name][id]} / `;
-          }
-          if(id=="entry_date"){
-          namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="luggage_size_list"){
-          namelist += `行李箱: ${data[name][id]}吋/inch &nbsp; &nbsp; &nbsp;`;
-          }
-          if(id=="luggage_space_list"){
-          namelist += `代購容量: ${data[name][id]}%`;
-          }
-        }
-        if(namelist != ''){
-          var contener = document.getElementById("show_schedule")
-          $('#show_schedule').append('<div class="'+name+'"><div class="w">'
-          +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
-          '<p class="chat_no">查看詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
         }
       }
     },
@@ -162,46 +172,61 @@ function to_mainpage_schedule() {
     contentType: 'application/json',
     success: (data) => {
       for (const name in data) {
-        let namelist = '';
         for(const id in data[name]){
+          let namelist = '';
           // if(choose_box1==1){
           //   if(id=="live_country" && data[name][id]==sel_country){
-          if(id=="live_country"){
-             namelist += `居住地: ${data[name][id]},`;
+          if (id.substring(0,7)=="product" && id.substring(0,8)!="product_")
+          {
+            for(const ids in data[name][id]){
+              if(ids=="shipping_address_country"){
+                namelist += `居住地: ${data[name][id][ids]},`;
+              }
+              if(ids=="shipping_address_city"){
+                namelist += `${data[name][id][ids]} &nbsp;`;
+              }
+              if(ids=="product_place_country"){
+                namelist += `商品地: ${data[name][id][ids]},`;
+              }
+              if(ids=="product_place_city"){
+                namelist += `${data[name][id][ids]} &nbsp;`;
+              }
+              if(ids=="product_arrive_year"){
+                namelist += `${data[name][id][ids]}/`;
+              }
+              if(ids=="product_arrive_month"){
+                namelist += `${data[name][id][ids]}/`;
+              }
+              if(ids=="product_arrive_date"){
+                namelist += `${data[name][id][ids]}<br>`;
+              }
+              if(ids=="set_product_name"){
+                namelist += `需求商品: ${data[name][id][ids]}<br>`;
+              }
+              if(ids=="set_product_quantity"){
+                namelist += `數量: ${data[name][id][ids]} 件<br>`;
+              }
+            }
           }
-          if(id=="live_city"){
-            namelist += `${data[name][id]} &nbsp;`;
+          
+          if(namelist!=''){
+            var contener = document.getElementById("show_need")
+            $('#show_need').append('<div class="'+name+' '+id+'"><div class="w">'
+            +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+            '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+            // 等同於下列程式碼
+            // <div class="user1 product1">
+            //   <div class="w">
+            //     <div class="n">user1</div>namelist
+            //   </div>
+            //   <div class="gray">
+            //     <div class="chat_button">
+            //       <p class="chat_no">旅遊詳情</p>
+            //       <p class="chat_yes">進行聊天</p>
+            //     </div>
+            //   </div>
+            // </div>
           }
-          if(id=="good_country"){
-            namelist += `商品地: ${data[name][id]},`;
-          }
-          if(id=="good_city"){
-            namelist += `${data[name][id]} &nbsp;`;
-          }
-          if(id=="arrive_year"){
-            namelist += `${data[name][id]}/`;
-          }
-          if(id=="arrive_month"){
-            namelist += `${data[name][id]}/`;
-          }
-          if(id=="arrive_date"){
-            namelist += `${data[name][id]}<br>`;
-          }
-          if(id=="good_name"){
-            namelist += `需求商品: ${data[name][id]}<br>`;
-          }
-          if(id=="amount"){
-            namelist += `數量: ${data[name][id]} 件<br>`;
-          }
-          //   }
-          // }
-         
-        }
-        if(namelist!=''){
-          var contener = document.getElementById("show_need")
-          $('#show_need').append('<div class="'+name+'"><div class="w">'
-          +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
-          '<p class="chat_no">個人資料</p><p class="chat_yes">進行聊天</p></div></div></div>');
         }
       }
     },
@@ -239,13 +264,40 @@ function show(string){
     state.push("register_success")
     $('#register_success').css({'display':'block'})
   }
-  else if(string == "personal_page"){
+  else if(string == "personal_page_my"){
     all_display_none()
-    state.push("personal_page")
+    state.push("personal_page_my")
     $('#subpage_title').css({'display':'block'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain'});
     $('#subpage_title .subpage_word').html(user_name)
     $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
+    $('#bm_credit_card').css({'display':'block'})
+    $('#bm_edit_personal').css({'display':'block'})
+    read_personal_page()
+  }
+  else if(string == "personal_page_other_green"){
+    all_display_none()
+    state.push("personal_page_other_green")
+    $('#subpage_title').css({'display':'block'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain'});
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
+    $('#personal_page').css({'display':'block'})
+    $('#bm_personal_togood').css({'display':'block'})
+    $('#bm_personal_tochat').css({'display':'block'})
+    read_personal_page()
+  }
+  else if(string == "personal_page_other_blue"){
+    all_display_none()
+    state.push("personal_page_other_blue")
+    $('#subpage_title').css({'display':'block','background-color':'#556B94'})
+    $("#personal_state1").css({'background':'url(https://ppt.cc/fH0Tyx@.png) no-repeat left/contain'});
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
+    $('#personal_page').css({'display':'block'})
+    $('#bm_personal_totrip').css({'display':'block'})
+    $('#bm_personal_tochat').css({'display':'block'})
     read_personal_page()
   }
   else if(string == "mainpage_schedule"){
@@ -308,8 +360,6 @@ function show(string){
   }
 }
 
-
-
 // homepage
 $(document).ready(function() {
   $('#homepage1 button[name="login"]').click((event) => {
@@ -357,7 +407,7 @@ $(document).ready(function() {
 
   // register_success
   $('#register_success button[name="to_personal"]').click(function() {
-    show("personal_page")
+    show("personal_page_my")
   });
   $('#register_success button[name="to_mainpage"]').click(function() {
     show("mainpage_schedule")
@@ -384,11 +434,11 @@ $(document).ready(function() {
       edit_state = 0
     }
   });
-  //選不要儲存變更
+  // 選不要儲存變更
   $("#personal_page_unsaved .deal_no").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
   });
-  //選同意儲存變更
+  // 選同意儲存變更
   $("#personal_page_unsaved .deal_yes").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
     save_personal_page()
@@ -401,12 +451,30 @@ $(document).ready(function() {
       $('#bm_edit_personal').text("編輯內容")
     edit_state = 0
   });
-
-  $("#personal_box_img #personal_img").click(function() {
-    if(edit_state){}
+  // 改變個人頭像
+  $('#personal_box_img #personal_mask').click(function() {
+    $('#change_personal_img').css({'display':'flex'})
   });
-  $("#personal_box_img #personal_img").click(function() {});
-
+  $('#personal_box_img #personal_img').click(function() {
+    if(edit_state){
+      $('#change_personal_img').css({'display':'flex'})
+    }
+  });
+  $('#change_personal_img').click(function() {
+    $('#change_personal_img').css({'display':'none'})
+  });
+  $("#change_img_box").click(function(event){ 
+    event.stopPropagation(); 
+  });
+  $('#change_img1').click(function(event){ 
+    console.log("change_img1")
+    // all_display_none()
+  });
+  $('#change_img2').click(function(event){ 
+    console.log("change_img2")
+    // all_display_none()
+  });
+  
 
   // mainpage-我是代購者
   var prenum = 0;
@@ -424,11 +492,13 @@ $(document).ready(function() {
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
-    // var num=$(this).parent().parent().parent().index()+1;
-    // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
-    console.log(nn)
+  });
+  $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
+    var nn = $(this).parent().parent().parent().attr('class')
+    let ss = nn.split(/\s/);
+    console.log(ss[0]) // user1
+    console.log(ss[1]) // trip0
   });
 
   // mainpage-我是購買者
@@ -452,6 +522,12 @@ $(document).ready(function() {
     // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
     console.log(nn)
+  });
+  $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
+    var nn = $(this).parent().parent().parent().attr('class')
+    let ss = nn.split(/\s/);
+    console.log(ss[0]) // user1
+    console.log(ss[1]) // product0
   });
 
   // schedule 代購者頁面
@@ -480,7 +556,7 @@ $(document).ready(function() {
     show("mainpage_schedule")
   })
   $('#menu_bar .user_profile').click((event) => {
-    show("personal_page")
+    show("personal_page_my")
   })
   $('#menu_bar .case_list').click((event) => {
     show("accept_case_list")
@@ -490,7 +566,7 @@ $(document).ready(function() {
   })
   // subpage
   $('#subpage_title .case_back_button').click((event) => {
-    if(state[state.length-1] == "personal_page" && edit_state){
+    if(state[state.length-1] == "personal_page_my" && edit_state){
       $('#personal_page_unsaved').css({'display':'flex'})
     }
     else{
@@ -726,7 +802,7 @@ $(document).ready(function() {
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
       shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
       shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
-      product_arrive_year: $('#request_data select[name=product_arrivee_year]').val(),
+      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
       product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
       product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),
@@ -809,7 +885,6 @@ $(document).ready(function() {
     show("mainpage_schedule")
   });
 })
-
 
 //select bar in mainpage
 $('#selbar').click(function() {

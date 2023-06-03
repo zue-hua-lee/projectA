@@ -76,6 +76,10 @@ app.post('/register', (req, res) => {
     res.send("請輸入基本資料及密碼。")
     return 0
   }
+  if(/\s/.test(`${req.body.name}`)){
+    res.send("帳號名稱不可包含空格，請重新輸入。")
+    return 0
+  }
   if(`${req.body.password1}` != `${req.body.password2}`){
     res.send("重複密碼錯誤，請重新輸入。")
     return 0
