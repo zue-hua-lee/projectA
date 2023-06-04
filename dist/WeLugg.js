@@ -834,18 +834,18 @@ $(document).ready(function() {
     event.preventDefault()
     $.get('./request_data', {
       user_name: user_name,
-      set_product_name: $('#request_data input[name=set_product_name]').val(),
+      shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
+      shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
       product_place_country: $('#request_data select[name=product_place_country]').val(),
       product_place_city: $('#request_data select[name=product_place_city]').val(),
+      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
+      product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
+      product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
+      set_product_name: $('#request_data input[name=set_product_name]').val(),
       set_shop_name: $('#request_data input[name=set_shop_name]').val(),
       set_shop_address: $('#request_data input[name=set_shop_address]').val(),
       request_product_list: $('#request_data select[name=request_product_list]').val(),
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
-      shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
-      shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
-      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
-      product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
-      product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),
 
       //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者

@@ -163,20 +163,19 @@ app.get('/request_data', (req, res) => { //用get傳
       //將傳來的資訊推送到數組對象中
       var n = data[req.query.user_name]['product_num']
       data[req.query.user_name]['product'+n] = {}
-      data[req.query.user_name]['product'+n]['set_product_name'] = req.query.set_product_name
+      data[req.query.user_name]['product'+n]['shipping_address_country'] = req.query.shipping_address_country
+      data[req.query.user_name]['product'+n]['shipping_address_city'] = req.query.shipping_address_city
       data[req.query.user_name]['product'+n]['product_place_country'] = req.query.product_place_country
       data[req.query.user_name]['product'+n]['product_place_city'] = req.query.product_place_city
+      data[req.query.user_name]['product'+n]['product_arrive_year'] = req.query.product_arrive_year
+      data[req.query.user_name]['product'+n]['product_arrive_month'] = req.query.product_arrive_month
+      data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
+      data[req.query.user_name]['product'+n]['set_product_name'] = req.query.set_product_name
       data[req.query.user_name]['product'+n]['set_shop_name'] = req.query.set_shop_name
       data[req.query.user_name]['product'+n]['set_shop_address'] = req.query.set_shop_address
       data[req.query.user_name]['product'+n]['request_product_list'] = req.query.request_product_list
       data[req.query.user_name]['product'+n]['set_product_quantity'] = req.query.set_product_quantity
-      data[req.query.user_name]['product'+n]['shipping_address_country'] = req.query.shipping_address_country
-      data[req.query.user_name]['product'+n]['shipping_address_city'] = req.query.shipping_address_city
-      data[req.query.user_name]['product'+n]['product_arrive_year'] = req.query.product_arrive_year
-      data[req.query.user_name]['product'+n]['product_arrive_month'] = req.query.product_arrive_month
-      data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
-
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
 
       var str = JSON.stringify(data);
