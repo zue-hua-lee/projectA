@@ -691,6 +691,189 @@ body{
   right: 10%;
   top: 83.2%;
 }
+/***************product_contant***************/
+#product_contant .title_list {
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  margin: 0.5vh 0 0 0;
+}
+#product_contant .select_list {
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  border-radius: 5px;
+}
+#buyer {
+  position: absolute;
+  width: 100%;
+  height: 16.28%;
+  top: 21.24%;
+}
+#buyer_profile_img {
+  position: absolute;
+  width: 26.7%;
+  left: 17.3%;
+  top: 13.8%;
+}
+#buyer_name {
+  position: absolute;
+  font-size: 3.5vh;
+  width: 40%;
+  left: 49.11%;
+  top: 15%
+}
+#buyer_page {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 41.13%;
+}
+#buyer_chat {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 65.24%;
+}
+#buyer_request_product {
+  position: absolute;
+  height: 32.01%;
+  width: 100%;
+  top: 40%;
+  padding: 0 8%;
+}
+#buyer_request_product .buyer_request_product_title {
+  position: absolute;
+  height: 8%;
+  left: 3.5%;
+}
+#buyer_request_product .buyer_sub_title9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 15%;
+}
+#buyer_request_product .buyer_sub_title10 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 30%;
+}
+#buyer_product_place_country, #buyer_product_place_city {
+  flex-grow: 0.2;
+}
+#buyer_request_product .buyer_sub_title11 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 45%;
+}
+#buyer_request_product .buyer_sub_title12 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 60%;
+}
+#buyer_request_product .buyer_sub_title13 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 75%;
+}
+#buyer_request_product .buyer_sub_title14 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 90%;
+}
+#buyer_request_product_list{
+  flex-grow: 0.7;
+}
+#buyer_set_shop_name, #buyer_set_shop_address, #buyer_set_product_quantity{
+  flex-grow: 0.5;
+}
+#buyer_shipping {
+  position: absolute;
+  height: 12.36%;
+  width: 100%;
+  top: 55.54%;
+  padding: 0 8%;
+}
+#buyer_shipping .buyer_shipping_title {
+  position: absolute;
+  height: 24%;
+  left: 3.5%;
+}
+#buyer_shipping .buyer_sub_title15 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 35.52%;
+}
+#buyer_shipping_address_country, #buyer_shipping_address_city {
+  flex-grow: 0.2;
+}
+#buyer_shipping .buyer_sub_title16 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 70%;
+}
+#buyer_remark {
+  position: absolute;
+  height: 14.08%;
+  width: 100%;
+  top: 72.29%;
+  padding: 0 8%;
+}
+#buyer_remark .buyer_remark_title {
+  position: absolute;
+  height: 22%;
+  left: 3.5%;
+}
+#buyer_remark .buyer_sub_title17 {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 69.67%;
+  width: 74%;
+  top: 30%;
+}
+#buyer_request_remark{
+  padding: 0 15% 15% 0;
+}
+#buyer_other_ptoduct {
+  position: absolute;
+  height: 6.5vh;
+  right: 10%;
+  top: 83.2%;
+}
 /***************main_page***************/
 #mainpage{
   width: 100%;
@@ -1416,6 +1599,7 @@ body{
 #mainpage{display:none}
 #show_schedule{display:none}
 #show_need{display:none}
+#product_contant{display:none}
 
 #add_new_journey{display:none}
 #add_new_request{display:none}

@@ -188,6 +188,21 @@ app.get('/request_data', (req, res) => { //用get傳
   res.send("bbb")
 })
 
+//product_contant
+app.post('/product_contant', (req, res) => { //用get傳
+  fs.readFile('./data.json', function (err, data) {
+      if (err) throw err;
+      //將二進制數據轉換為字串符
+      //var stu_list = data.toString();
+      //將字符串轉換為 JSON 對象
+      data = JSON.parse(data);
+      //將傳來的資訊推送到數組對象中
+      let str = []
+      str = data[req.body.user_name][req.body.product]
+      res.send(str)
+  })
+})
+
 // main //select bar
 app.post('/list',(req,res)=>{
   const data = JSON.parse(fs.readFileSync('data.json'));

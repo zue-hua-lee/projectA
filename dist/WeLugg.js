@@ -65,6 +65,7 @@ function all_display_none() {
   $('#deal_agree').css({'display':'none'})
   $('#deal_success').css({'display':'none'})
   $('#chat_box').css({'display':'none'})
+  $('#product_contant').css({'display':'none'})
 }
 function to_mainpage_need() {
   $('#user_menu .mid_luggage').css({'opacity':'0.5'});
@@ -355,6 +356,13 @@ function show(string){
     state.push("chat_box")
     $('#chat_box').css({'display':'block'})
   }
+  else if(string == "product_contant"){
+    all_display_none()
+    state.push("product_contant")
+    $('#product_contant').css({'display':'block'})
+    $('#user_menu').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
+  }
   else{
     console.log("changing error.")
   }
@@ -526,8 +534,41 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     let ss = nn.split(/\s/);
+    show("product_contant")
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
+
+    event.preventDefault()
+    $.post('./product_contant', {
+      user_name: ss[0],
+      product: ss[1],
+      // set_product_name: $('#request_data input[name=set_product_name]').val(),
+      // product_place_country: $('#request_data select[name=product_place_country]').val(),
+      // product_place_city: $('#request_data select[name=product_place_city]').val(),
+      // set_shop_name: $('#request_data input[name=set_shop_name]').val(),
+      // set_shop_address: $('#request_data input[name=set_shop_address]').val(),
+      // request_product_list: $('#request_data select[name=request_product_list]').val(),
+      // set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
+      // shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
+      // shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
+      // product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
+      // product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
+      // product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
+      // request_remark: $('#request_data input[name=request_remark]').val(),
+
+      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
+      //name: $('#add input[name=name]').val(),
+    }, (data) => {
+      $('#buyer_name').html(ss[0])
+      console.log(data)
+      console.log(data[set_product_name])
+      console.log(data[0])
+      $('#buyer_set_product_name').html(`${data[set_product_name]}`)
+      $('#buyer_product_place_country').html(data[product_place_country])
+      $('#buyer_product_place_city').html(data[product_place_city])
+      show("product_contant")
+      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+    })
   });
 
   // schedule 代購者頁面
