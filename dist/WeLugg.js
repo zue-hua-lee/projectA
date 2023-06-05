@@ -67,6 +67,16 @@ function all_display_none() {
   $('#chat_box').css({'display':'none'})
   $('#product_contant').css({'display':'none'})
 }
+function user_url(name){
+  return new Promise(function(resolve, reject) {
+    event.preventDefault()
+    $.post('./read_personal', {
+      name: name,
+    }, (res) => {
+      resolve(res[5])
+    })
+  })
+}
 function to_mainpage_need() {
   $('#user_menu .mid_luggage').css({'opacity':'0.5'});
   $('#user_menu .shopping_bag').css({'opacity':'1'});
@@ -80,11 +90,11 @@ function to_mainpage_need() {
   $.ajax({
     type: 'POST',
     url: './list',
-    success: (data) => {
+    success: async (data) => {
       for (const name in data) {
         for(const id in data[name]){
           let namelist = '';
-          if (id.substring(0,4)=="trip" && id.substring(0,5)!="trip_")
+          if (id.substring(0,4)=="trip")
           {
             for(const ids in data[name][id]){
               if(ids=="departure_country"){
@@ -127,8 +137,8 @@ function to_mainpage_need() {
           }
           if(namelist != ''){
             var contener = document.getElementById("show_schedule")
-            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w">'
-              +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
+              +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
               '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
           }
         }
@@ -173,13 +183,13 @@ function to_mainpage_schedule() {
     type: 'POST',
     url: './list',
     contentType: 'application/json',
-    success: (data) => {
+    success: async (data) => {
       for (const name in data) {
         for(const id in data[name]){
           let namelist = '';
           // if(choose_box1==1){
           //   if(id=="live_country" && data[name][id]==sel_country){
-          if (id.substring(0,7)=="product" && id.substring(0,8)!="product_")
+          if (id.substring(0,7)=="product")
           {
             for(const ids in data[name][id]){
               // if(choose_box1==1){
@@ -217,8 +227,8 @@ function to_mainpage_schedule() {
           
           if(namelist!=''){
             var contener = document.getElementById("show_need")
-            $('#show_need').append('<div class="'+name+' '+id+'"><div class="w">'
-            +'<div class="n">'+name+'</div>'+namelist+'</div><div class="gray"><div class="chat_button">'+
+            $('#show_need').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
+            +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
             '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
             // 等同於下列程式碼
             // <div class="user1 product1">
@@ -243,26 +253,35 @@ function read_personal_page(){
   $.post('./read_personal', {
     name: user_name,
   }, (res) => {
+    $('#subpage_title .subpage_word').html(user_name)
+    $('#personal_box1 .word1').html(user_name)
     $('#personal_box2 input[name="personal_name"]').val(user_name)
     $('#personal_box2 input[name="personal_gender"]').val(res[0])
     $('#personal_box2 input[name="personal_born"]').val(res[1])
     $('#personal_box2 input[name="personal_birth"]').val(res[2])
     $('#personal_box2 input[name="personal_mail"]').val(res[3])
     $('#personal_box2 input[name="personal_phone"]').val(res[4])
+    $('#personal_img').css({'background':'url('+res[5]+') no-repeat center/contain'})
   })
 }
 function save_personal_page(){
-  event.preventDefault()
-  $.post('./save_personal', {
-    old_name: user_name,
-    new_name: $('#personal_box2 input[name="personal_name"]').val(),
-    gender: $('#personal_box2 input[name="personal_gender"]').val(),
-    born: $('#personal_box2 input[name="personal_born"]').val(),
-    birth: $('#personal_box2 input[name="personal_birth"]').val(),
-    mail: $('#personal_box2 input[name="personal_mail"]').val(),
-    phone: $('#personal_box2 input[name="personal_phone"]').val(),
-  },{})
-  user_name = $('#personal_box2 input[name="personal_name"]').val()
+  return new Promise(function(resolve, reject) {
+    event.preventDefault()
+    $.post('./save_personal', {
+      old_name: user_name,
+      new_name: $('#personal_box2 input[name="personal_name"]').val(),
+      gender: $('#personal_box2 input[name="personal_gender"]').val(),
+      born: $('#personal_box2 input[name="personal_born"]').val(),
+      birth: $('#personal_box2 input[name="personal_birth"]').val(),
+      mail: $('#personal_box2 input[name="personal_mail"]').val(),
+      phone: $('#personal_box2 input[name="personal_phone"]').val(),
+    },(res) => {
+      user_name = $('#personal_box2 input[name="personal_name"]').val()
+      $('#subpage_title .subpage_word').html(user_name)
+      $('#personal_box1 .word1').html(user_name)
+      resolve()
+    })
+  })
 }
 function show(string){
   if(string == "register_success"){
@@ -287,8 +306,6 @@ function show(string){
     state.push("personal_page_other_green")
     $('#subpage_title').css({'display':'block'})
     $("#personal_state1").css({'background':'url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain'});
-    $('#subpage_title .subpage_word').html(user_name)
-    $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_togood').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
@@ -299,8 +316,6 @@ function show(string){
     state.push("personal_page_other_blue")
     $('#subpage_title').css({'display':'block','background-color':'#556B94'})
     $("#personal_state1").css({'background':'url(https://ppt.cc/fH0Tyx@.png) no-repeat left/contain'});
-    $('#subpage_title .subpage_word').html(user_name)
-    $('#personal_box1 .word1').html(user_name)
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_totrip').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
@@ -311,9 +326,9 @@ function show(string){
     state.push("mainpage_schedule")
     $('#mainpage').css({'display':'block'})
     $('#user_menu').css({'display':'block'})
-    $('#user_menu .user_id').html("username:"+user_name)
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
+    $('#user_menu .user_id').html("username:"+user_name)
     to_mainpage_schedule()
   }
   else if(string == "mainpage_need"){
@@ -323,6 +338,7 @@ function show(string){
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
+    $('#user_menu .user_id').html("username:"+user_name)
     to_mainpage_need()
   }
   else if(string == "add_new_journey"){
@@ -428,7 +444,7 @@ $(document).ready(function() {
 
   // personal_page
   var edit_state = 0;
-  $('#bm_edit_personal').click(function() {
+  $('#bm_edit_personal').click(async function() {
     if(!edit_state){
       $('#personal_box2 input[type="text"]').attr("disabled", false);
       $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #939191','text-align':'left'})
@@ -438,7 +454,7 @@ $(document).ready(function() {
       edit_state = 1
     }
     else{
-      save_personal_page()
+      await save_personal_page()
       $('#personal_box2 input[type="text"]').attr("disabled", true);
       $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
       $('#personal_box_img #personal_mask').css({'display':'none'})
@@ -452,9 +468,9 @@ $(document).ready(function() {
     $("#personal_page_unsaved").css({'display':'none'});
   });
   // 選同意儲存變更
-  $("#personal_page_unsaved .deal_yes").click(function() {
+  $("#personal_page_unsaved .deal_yes").click(async function() {
     $("#personal_page_unsaved").css({'display':'none'});
-    save_personal_page()
+    await save_personal_page()
     state.pop()
     show(state.pop())
     $('#personal_box2 input[type="text"]').attr("disabled", true);
@@ -467,27 +483,97 @@ $(document).ready(function() {
   // 改變個人頭像
   $('#personal_box_img #personal_mask').click(function() {
     $('#change_personal_img').css({'display':'flex'})
+    $('#change_img_box').css({'display':'flex'})
   });
   $('#personal_box_img #personal_img').click(function() {
     if(edit_state){
       $('#change_personal_img').css({'display':'flex'})
+      $('#change_img_box').css({'display':'flex'})
     }
   });
   $('#change_personal_img').click(function() {
-    $('#change_personal_img').css({'display':'none'})
+    $(this).css({'display':'none'})
   });
   $("#change_img_box").click(function(event){ 
     event.stopPropagation(); 
   });
+  $("#upload_img_box").click(function(event){ 
+    event.stopPropagation(); 
+  });
   $('#change_img1').click(function(event){ 
-    console.log("change_img1")
-    // all_display_none()
+    $('#upload_file').click()
   });
   $('#change_img2').click(function(event){ 
     console.log("change_img2")
     // all_display_none()
   });
-  
+
+  // 上傳個人照片
+  var $uploadCrop;
+  function readFile(input){
+      if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $uploadCrop.croppie('bind', {
+          url: e.target.result
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    else {
+      alert("Sorry - you're browser doesn't support the FileReader API");
+    }
+  }
+  function cropAndUpload() {
+    $uploadCrop.croppie("result", "blob").then(function (blob) {
+      var formData = new FormData();
+      formData.append("image", blob);
+      // 上傳圖片到後端
+      $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          console.log("圖片上傳成功！");
+          console.log("圖片網址：", response.url);
+          $('#personal_img').css({'background':'url('+response.url+') no-repeat center/contain'})
+          $.post('./store_personal_img', {
+            name: user_name,
+            url: response.url,
+          },{})
+        },
+        error: function (error) {
+          console.log("圖片上傳失敗：", error);
+        }
+      });
+    });
+  }
+  $uploadCrop = $('#upload_demo').croppie({
+    viewport: {
+      width: 150,
+      height: 150,
+      type: 'circle'
+    },
+    boundary: {
+      width: 200,
+      height: 200
+    },
+    showZoomer: false,
+  });
+  $('#upload_file').on('change', function () {
+    $('#change_img_box').css({'display':'none'})
+    $('#upload_img_box').css({'display':'flex'})
+    readFile(this);
+  });
+  $('#upload_result').on('click', function (ev) {
+    $uploadCrop.croppie('result', 'canvas').then(function (resp) {
+      cropAndUpload();
+      $('#change_personal_img').css({'display':'none'});
+      $('#upload_img_box').css({'display':'none'});
+    });
+  });
 
   // mainpage-我是代購者
   var prenum = 0;

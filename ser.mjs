@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9424 // change the port number9444
+const port = 9484 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -100,14 +100,13 @@ app.post('/register', (req, res) => {
       }  
     }
     data[`${req.body.name}`] = {}
+    data[`${req.body.name}`]["url"] = "/src/user"
     data[`${req.body.name}`]["gender"] = "尚未填寫"
     data[`${req.body.name}`]["born"] = "尚未填寫"
     data[`${req.body.name}`]["birth"] = "尚未填寫"
     data[`${req.body.name}`]["mail"] = `${req.body.mail}`
     data[`${req.body.name}`]["phone"] = `${req.body.phone}`
     data[`${req.body.name}`]["password"] = `${req.body.password1}`
-    data[`${req.body.name}`]["trip_num"] = 0 //總行程數
-    data[`${req.body.name}`]["product_num"] = 0 //總商品數
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
@@ -212,13 +211,14 @@ app.post('/list',(req,res)=>{
 app.post('/read_personal', (req, res) => {
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
-    var array = ["","","","",""]
+    var array = ["","","","","",""]
     data = JSON.parse(data)
     array[0] = data[`${req.body.name}`]["gender"]
     array[1] = data[`${req.body.name}`]["born"]
     array[2] = data[`${req.body.name}`]["birth"]
     array[3] = data[`${req.body.name}`]["mail"]
     array[4] = data[`${req.body.name}`]["phone"]
+    array[5] = data[`${req.body.name}`]["url"]
     res.send(array)
   })
 })
@@ -235,6 +235,30 @@ app.post('/save_personal', (req, res) => {
       data[`${req.body.new_name}`] = data[`${req.body.old_name}`]
       delete data[`${req.body.old_name}`]
     }
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save personal success.")
+    })
+  })
+})
+
+// upload personal img
+import multer from 'multer'
+const upload = multer({ dest: "src/" });
+app.use("/src", express.static("src"));
+
+app.post("/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("沒有選擇圖片");
+  }
+  const imageUrl = "/src/" + req.file.filename;
+  res.json({ url: imageUrl });
+});
+app.post('/store_personal_img', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[`${req.body.name}`]["url"] = `${req.body.url}`
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
