@@ -150,18 +150,20 @@ function to_mainpage_schedule() {
   let sel_year;
   let sel_month;
   let sel_type;
-  if(choose_box1==1){
-    sel_country = $('#choose_place select[name=select_country]').val()
-  }
-  if(choose_box2==1){
-    sel_prod_country = $('#choose select[name=select_product_country]').val()
-  }
-  if(choose_box3==1){
-    sel_year = $('#choose select[name=select_year]').val()
-    sel_month = $('#choose select[name=select_month]').val()
-  }
-  if(choose_box4==1){
-    sel_type = $('#choose select[name=select_type]').val()
+  if(cho_submit==1){
+    if(choose_box1==1){
+      sel_country = $('#choose_place select[name=select_country]').val()
+    }
+    if(choose_box2==1){
+      sel_prod_country = $('#choose select[name=select_product_country]').val()
+    }
+    if(choose_box3==1){
+      sel_year = $('#choose select[name=select_year]').val()
+      sel_month = $('#choose select[name=select_month]').val()
+    }
+    if(choose_box4==1){
+      sel_type = $('#choose select[name=select_type]').val()
+    }
   }
   console.log('box1'+choose_box1+sel_country);
   console.log('box2'+choose_box2+sel_prod_country);
@@ -180,6 +182,9 @@ function to_mainpage_schedule() {
           if (id.substring(0,7)=="product" && id.substring(0,8)!="product_")
           {
             for(const ids in data[name][id]){
+              // if(choose_box1==1){
+              //   data=1;
+              // }
               if(ids=="shipping_address_country"){
                 namelist += `居住地: ${data[name][id][ids]},`;
               }
