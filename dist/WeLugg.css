@@ -730,9 +730,19 @@ body{
   background-color: #FFFFFF;
   box-shadow: 1px 0px 12px rgba(0, 0, 0, 0.25);
   margin: 3vh 7vw;
-  padding: 10px 40px;
+  padding: 10px 20px;
   position: relative;
   z-index: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#show_schedule .user_img,
+#show_need .user_img,
+#chat_main .user_img{
+  margin-right: 2vw;
+  width: 7vh;
+  height: 7vh;
 }
 #show_schedule .w .n,
 #show_need .w .n,
@@ -1214,7 +1224,6 @@ body{
   height: 12vh;
 }
 #personal_box_img #personal_img{
-  background: url(https://ppt.cc/fnvSlx@.png) no-repeat center/contain;
   border-radius: 50%;
   width: 12vh;
   height: 12vh;
@@ -1226,7 +1235,7 @@ body{
   width: 5vh;
   height: 5vh;
   margin: 3.5vh;
-  opacity: 0.5;
+  opacity: 0.7;
   z-index: 10;
 }
 #personal_box_img #personal_star{
@@ -1394,6 +1403,33 @@ body{
   height: 7vh;
   margin: 1vh;
 }
+/**********upload_img*************/
+#upload_file{display:none;}
+#upload_img_box{
+  width: 72vw;
+  padding: 2vh;
+  position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display:none;
+}
+#upload_img_box button{
+  width: 60%;
+  padding: 10px;
+  margin: 1vh;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+  font-size: 2.5vh;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  background: #7FD6D0;
+}
 
 
 /* #homepage1{display:none} */
@@ -1403,10 +1439,11 @@ body{
 #personal_page{display:none}
 #personal_page_unsaved{display:none}
 #change_personal_img{display:none}
+#upload_img_box{display:none}
+
 #bm_personal_togood{display:none}
 #bm_personal_totrip{display:none}
 #bm_personal_tochat{display:none}
-
 
 #user_menu{display:none}
 #menu_bar{display:none}
@@ -1430,3 +1467,5 @@ body{
 #add_new_request{display:none}
 #blank{display:none}
 #blank2{display:none}
+
+#product_contant{display:none}
