@@ -782,13 +782,13 @@ body{
   border-width: 3px 0 3px 0;
   border-style: solid;
 }
-#left_arrow {
+.left_arrow {
   position: absolute;
   width: 8.65%;
   top: 48.7%;
   left: 4%;
 }
-#right_arrow {
+.right_arrow {
   position: absolute;
   width: 8.65%;
   top: 48.7%;
@@ -1870,6 +1870,7 @@ input[type="file"]{display:none;}
 #show_need{display:none}
 #product_contant{display:none}
 #self_product{display:none}
+#self_product_page_unsaved{display:none}
 
 #add_new_journey{display:none}
 #add_new_request{display:none}

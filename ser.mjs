@@ -220,7 +220,7 @@ app.post('/product_contant', (req, res) => { //用get傳
       str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_month"]
       str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_date"]
       str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["request_remark"]
-      url_place = 13
+      var url_place = 13
 
       for(const id in data[`${req.body.user_name}`][`${req.body.product}`]){
         if(id.substring(0, 3) == "url"){

@@ -5,8 +5,8 @@ var choose_box2 = 0;
 var choose_box3 = 0;
 var choose_box4 = 0;
 var cho_submit = 0;
-var product_img_state;
-let product_img = [];
+var add_product_img_state;
+let add_product_img = [];
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -992,17 +992,21 @@ $(document).ready(function() {
       $('#buyer_product_arrive_month').html(data[10])
       $('#buyer_product_arrive_date').html(data[11])
       $('#buyer_request_remark').html(data[12])
-      product_img_num = 0;
+      add_product_img_num = 0;
       for(var i=13; i < data.length; i++){
-        product_img[product_img_num] = data[i];
-        product_img_num++;
+        add_product_img[add_product_img_num] = data[i];
+        add_product_img_num++;
+      }
+
+      if(add_product_img[0]){
+        $('#buyer_product_img').attr("src", add_product_img[0])
+        add_product_img_state = 0;
       }
       
       show("product_contant")
       //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
 
-    product_img_state = 0;
     // product_img[0] = "https://ppt.cc/fjLLEx@.png"
     // product_img[1] = "https://ppt.cc/fCBEmx@.png"
     // product_img[2] = "https://ppt.cc/fpJrYx@.png"
@@ -1300,27 +1304,27 @@ $(document).ready(function() {
 
   //product contant page
   $('.right_arrow').click((event) => {
-    if(product_img_state < (product_img.length-1)){
-      product_img_state = product_img_state+1;
+    if(add_product_img_state < (add_product_img.length-1)){
+      add_product_img_state = add_product_img_state+1;
     }
     else {
-      product_img_state = 0;
+      add_product_img_state = 0;
     }
-    console.log(product_img_state)
-    console.log(product_img[product_img_state])
-    $('#buyer_product_img').attr("src", product_img[product_img_state])
+    console.log(add_product_img_state)
+    console.log(add_product_img[add_product_img_state])
+    $('#buyer_product_img').attr("src", add_product_img[add_product_img_state])
   })
 
   $('.left_arrow').click((event) => {
-    if(product_img_state == 0){
-      product_img_state = product_img.length-1;
+    if(add_product_img_state == 0){
+      add_product_img_state = add_product_img.length-1;
     }
     else {
-      product_img_state = product_img_state - 1;
+      add_product_img_state = add_product_img_state - 1;
     }
-    console.log(product_img_state)
-    console.log(product_img[product_img_state])
-    $('#buyer_product_img').attr("src", product_img[product_img_state])
+    console.log(add_product_img_state)
+    console.log(add_product_img[add_product_img_state])
+    $('#buyer_product_img').attr("src", add_product_img[add_product_img_state])
   })
 
   //self_product_page
