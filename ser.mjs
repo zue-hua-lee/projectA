@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9464 // change the port number9444
+const port = 9494 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -90,6 +90,10 @@ app.post('/register', (req, res) => {
     res.send("密碼輸入有誤，請確認格式是否正確。")
     return 0
   }
+  if(`${req.body.name}` == "user"){
+    res.send("帳號名稱已經存在，請重新命名。")
+    return 0
+  }
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
     data = JSON.parse(data)
@@ -97,7 +101,7 @@ app.post('/register', (req, res) => {
       if(key == `${req.body.name}`){
         res.send("帳號名稱已經存在，請重新命名。")
         return 0
-      }  
+      }
     }
     data[`${req.body.name}`] = {}
     data[`${req.body.name}`]["url"] = "/src/user"
@@ -154,7 +158,8 @@ app.get('/journey_data', (req, res) => { //用get傳
 
 // add_new_request
 app.get('/request_data', (req, res) => { //用get傳
-  fs.readFile('./data.json', function (err, data) {
+    console.log(req.query.product_img)
+    fs.readFile('./data.json', function (err, data) {
       if (err) throw err;
       //將二進制數據轉換為字串符
       //var stu_list = data.toString();
@@ -177,7 +182,11 @@ app.get('/request_data', (req, res) => { //用get傳
       data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
-
+      if(req.query.product_img != null){
+        for(var i = 0; i < req.query.product_img.length; i++){
+          data[req.query.user_name]['product'+n]['url'+i] = req.query.product_img[i]
+        }
+      }
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
@@ -268,6 +277,16 @@ app.post("/upload", upload.single("image"), (req, res) => {
   res.json({ url: imageUrl });
 });
 app.post('/store_personal_img', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[`${req.body.name}`]["url"] = `${req.body.url}`
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+    })
+  })
+})
+app.post('/store_product_img', (req, res) => {
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
     data = JSON.parse(data)
