@@ -90,6 +90,10 @@ app.post('/register', (req, res) => {
     res.send("密碼輸入有誤，請確認格式是否正確。")
     return 0
   }
+  if(`${req.body.name}` == "user"){
+    res.send("帳號名稱已經存在，請重新命名。")
+    return 0
+  }
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
     data = JSON.parse(data)
@@ -97,7 +101,7 @@ app.post('/register', (req, res) => {
       if(key == `${req.body.name}`){
         res.send("帳號名稱已經存在，請重新命名。")
         return 0
-      }  
+      }
     }
     data[`${req.body.name}`] = {}
     data[`${req.body.name}`]["url"] = "/src/user"
@@ -141,8 +145,8 @@ app.get('/journey_data', (req, res) => { //用get傳
       data[req.query.user_name]['trip'+n]['luggage_size_list'] = req.query.luggage_size_list
       data[req.query.user_name]['trip'+n]['luggage_space_list'] = req.query.luggage_space_list
       data[req.query.user_name]['trip'+n]['set_tip'] = req.query.set_tip
+      data[req.query.user_name]['trip'+n]['accept'] = 0 //接受交易
       data[req.query.user_name]['trip_num'] = parseInt(n,10)+1 //總行程數+1
-
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
@@ -154,7 +158,8 @@ app.get('/journey_data', (req, res) => { //用get傳
 
 // add_new_request
 app.get('/request_data', (req, res) => { //用get傳
-  fs.readFile('./data.json', function (err, data) {
+    console.log(req.query.product_img)
+    fs.readFile('./data.json', function (err, data) {
       if (err) throw err;
       //將二進制數據轉換為字串符
       //var stu_list = data.toString();
@@ -176,8 +181,13 @@ app.get('/request_data', (req, res) => { //用get傳
       data[req.query.user_name]['product'+n]['product_arrive_month'] = req.query.product_arrive_month
       data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
+      data[req.query.user_name]['product'+n]['accept'] = 0 //接受交易
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
-
+      if(req.query.product_img != null){
+        for(var i = 0; i < req.query.product_img.length; i++){
+          data[req.query.user_name]['product'+n]['url'+i] = req.query.product_img[i]
+        }
+      }
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
