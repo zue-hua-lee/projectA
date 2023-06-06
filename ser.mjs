@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9464 // change the port number9444
+const port = 9444 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -210,6 +210,14 @@ app.post('/product_contant', (req, res) => { //用get傳
       str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_month"]
       str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_date"]
       str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["request_remark"]
+      url_place = 13
+
+      for(const id in data[`${req.body.user_name}`][`${req.body.product}`]){
+        if(id.substring(0, 3) == "url"){
+          str[url_place] = data[`${req.body.user_name}`][`${req.body.product}`][id];
+          url_place++;
+        }
+      }
       res.send(str)
   })
 })
@@ -274,6 +282,54 @@ app.post('/store_personal_img', (req, res) => {
     data[`${req.body.name}`]["url"] = `${req.body.url}`
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
+    })
+  })
+})
+
+// self_product_page
+app.post('/read_self_product', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    let str = []
+    str[0] = data[`${req.body.user_name}`][`${req.body.product}`]["set_product_name"]
+    str[1] = data[`${req.body.user_name}`][`${req.body.product}`]["product_place_country"]
+    str[2] = data[`${req.body.user_name}`][`${req.body.product}`]["product_place_city"]
+    str[3] = data[`${req.body.user_name}`][`${req.body.product}`]["set_shop_name"]
+    str[4] = data[`${req.body.user_name}`][`${req.body.product}`]["set_shop_address"]
+    str[5] = data[`${req.body.user_name}`][`${req.body.product}`]["request_product_list"]
+    str[6] = data[`${req.body.user_name}`][`${req.body.product}`]["set_product_quantity"]
+    str[7] = data[`${req.body.user_name}`][`${req.body.product}`]["shipping_address_country"]
+    str[8] = data[`${req.body.user_name}`][`${req.body.product}`]["shipping_address_city"]
+    str[9] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_year"]
+    str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_month"]
+    str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_date"]
+    str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["request_remark"]
+    res.send(str)
+  })
+})
+app.post('/save_self_product', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+
+    data[req.query.user_name][req.body.product]['shipping_address_country'] = req.query.self_shipping_address_country
+    data[req.query.user_name][req.body.product]['shipping_address_city'] = req.query.self_shipping_address_city
+    data[req.query.user_name][req.body.product]['product_place_country'] = req.query.self_product_place_country
+    data[req.query.user_name][req.body.product]['product_place_city'] = req.query.self_product_place_city
+    data[req.query.user_name][req.body.product]['set_product_name'] = req.query.self_set_product_name
+    data[req.query.user_name][req.body.product]['set_shop_name'] = req.query.self_set_shop_name
+    data[req.query.user_name][req.body.product]['set_shop_address'] = req.query.self_set_shop_address
+    data[req.query.user_name][req.body.product]['request_product_list'] = req.query.self_product_list
+    data[req.query.user_name][req.body.product]['set_product_quantity'] = req.query.self_set_product_quantity
+    data[req.query.user_name][req.body.product]['product_arrive_year'] = req.query.self_product_arrive_year
+    data[req.query.user_name][req.body.product]['product_arrive_month'] = req.query.self_product_arrive_month
+    data[req.query.user_name][req.body.product]['product_arrive_date'] = req.query.self_product_arrive_date
+    data[req.query.user_name][req.body.product]['request_remark'] = req.query.self_request_remark
+
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
     })
   })
 })

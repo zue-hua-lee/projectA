@@ -1,6 +1,5 @@
 var user_name = ""
 let state = [""]
-<<<<<<< HEAD
 var choose_box1=0;
 var choose_box2=0;
 var choose_box3=0;
@@ -8,13 +7,6 @@ var choose_box4=0;
 var cho_submit=0;
 var product_img_state;
 let product_img = [];
-=======
-var choose_box1 = 0;
-var choose_box2 = 0;
-var choose_box3 = 0;
-var choose_box4 = 0;
-var cho_submit = 0;
->>>>>>> 9de2b4b02f0c86049392b90861ca6aa4b4ba7462
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -76,6 +68,7 @@ function all_display_none() {
   $('#deal_success').css({ 'display': 'none' })
   $('#chat_box').css({ 'display': 'none' })
   $('#product_contant').css({ 'display': 'none' })
+  $('#self_product').css({ 'display': 'none' })
 }
 function user_url(name) {
   return new Promise(function (resolve, reject) {
@@ -441,6 +434,52 @@ function save_personal_page() {
     })
   })
 }
+function read_self_product_page() {
+  event.preventDefault()
+  $.post('./read_self_product', {
+    user_name: user_name,
+    product: "product0",
+  }, (res) => {
+    $('#self_set_product_name').val(res[0])
+    $('#self_product_place_country').val(res[1])
+    $('#self_product_place_city').val(res[2])
+    $('#self_set_shop_name').val(res[3])
+    $('#self_set_shop_address').val(res[4])
+    $('#self_product_list').val(res[5])
+    $('#self_set_product_quantity').val(res[6])
+    $('#self_shipping_address_country').val(res[7])
+    $('#self_shipping_address_city').val(res[8])
+    $('#self_product_arrive_year').val(res[9])
+    $('#self_product_arrive_month').val(res[10])
+    $('#self_product_arrive_date').val(res[11])
+    $('#self_request_remark').val(res[12])
+    //$('#personal_img').css({ 'background': 'url(' + res[13] + ') no-repeat center/contain' })
+  })
+}
+function save_self_product_page() {
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./save_self_product', {
+      user_name: user_name,
+      product: "product0",
+      self_shipping_address_country: $('#self_product select[name=self_shipping_address_country]').val(),
+      self_shipping_address_city: $('#self_product select[name=self_shipping_address_city]').val(),
+      self_product_place_country: $('#self_product select[name=self_product_place_country]').val(),
+      self_product_place_city: $('#self_product select[name=self_product_place_city]').val(),
+      self_set_product_name: $('#self_product input[name=self_set_product_name]').val(),
+      self_set_shop_name: $('#self_product input[name=self_set_shop_name]').val(),
+      self_set_shop_address: $('#self_product input[name=self_set_shop_address]').val(),
+      self_product_list: $('#self_product select[name=self_product_list]').val(),
+      self_set_product_quantity: $('#self_product input[name=self_set_product_quantity]').val(),
+      self_product_arrive_year: $('#self_product select[name=self_product_arrive_year]').val(),
+      self_product_arrive_month: $('#self_product select[name=self_product_arrive_month]').val(),
+      self_product_arrive_date: $('#self_product select[name=self_product_arrive_date]').val(),
+      self_request_remark: $('#self_product input[name=self_request_remark]').val(),
+    }, (res) => {
+      resolve()
+    })
+  })
+}
 function show(string) {
   if (string == "register_success") {
     all_display_none()
@@ -540,6 +579,12 @@ function show(string) {
     state.push("product_contant")
     $('#product_contant').css({ 'display': 'block' })
     $('#user_menu').css({ 'display': 'block' })
+    $('#menu_bar').css({ 'display': 'flex' })
+  }
+  else if (string == "self_product") {
+    all_display_none()
+    state.push("self_product")
+    $('#self_product').css({ 'display': 'block' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
   else {
@@ -792,22 +837,6 @@ $(document).ready(function () {
     $.post('./product_contant', {
       user_name: ss[0],
       product: ss[1],
-      // set_product_name: $('#request_data input[name=set_product_name]').val(),
-      // product_place_country: $('#request_data select[name=product_place_country]').val(),
-      // product_place_city: $('#request_data select[name=product_place_city]').val(),
-      // set_shop_name: $('#request_data input[name=set_shop_name]').val(),
-      // set_shop_address: $('#request_data input[name=set_shop_address]').val(),
-      // request_product_list: $('#request_data select[name=request_product_list]').val(),
-      // set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
-      // shipping_address_country: $('#request_data select[name=shipping_address_country]').val(),
-      // shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
-      // product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
-      // product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
-      // product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
-      // request_remark: $('#request_data input[name=request_remark]').val(),
-
-      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
-      //name: $('#add input[name=name]').val(),
     }, (data) => {
       $('#buyer_name').html(ss[0])
       console.log(data)
@@ -825,15 +854,21 @@ $(document).ready(function () {
       $('#buyer_product_arrive_month').html(data[10])
       $('#buyer_product_arrive_date').html(data[11])
       $('#buyer_request_remark').html(data[12])
+      product_img_num = 0;
+      for(var i=13; i < data.length; i++){
+        product_img[product_img_num] = data[i];
+        product_img_num++;
+      }
+      
       show("product_contant")
       //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
 
     product_img_state = 0;
-    product_img[0] = "https://ppt.cc/fjLLEx@.png"
-    product_img[1] = "https://ppt.cc/fCBEmx@.png"
-    product_img[2] = "https://ppt.cc/fpJrYx@.png"
-    product_img[3] = "https://ppt.cc/fvMcWx@.png"
+    // product_img[0] = "https://ppt.cc/fjLLEx@.png"
+    // product_img[1] = "https://ppt.cc/fCBEmx@.png"
+    // product_img[2] = "https://ppt.cc/fpJrYx@.png"
+    // product_img[3] = "https://ppt.cc/fvMcWx@.png"
   });
 
   // schedule 代購者頁面
@@ -1117,7 +1152,7 @@ $(document).ready(function () {
   })
 
   //product contant page
-  $('#right_arrow').click((event) => {
+  $('.right_arrow').click((event) => {
     if(product_img_state < (product_img.length-1)){
       product_img_state = product_img_state+1;
     }
@@ -1129,7 +1164,7 @@ $(document).ready(function () {
     $('#buyer_product_img').attr("src",product_img[product_img_state])
   })
 
-  $('#left_arrow').click((event) => {
+  $('.left_arrow').click((event) => {
     if(product_img_state == 0){
       product_img_state = product_img.length-1;
     }
@@ -1140,6 +1175,47 @@ $(document).ready(function () {
     console.log(product_img[product_img_state])
     $('#buyer_product_img').attr("src",product_img[product_img_state])
   })
+
+  //self_product_page
+  var edit_product_state = 0;
+  $('#edit_product').click(async function () {
+    if (!edit_product_state) {
+      $('#self_product input[type="text"]').attr("disabled", false);
+      $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #939191'})
+      $('#self_product select').attr("disabled", false);
+      $('#self_product_img_place #self_product_img_mask').css({ 'display': 'block' })
+      $(this).text("儲存變更")
+      edit_product_state = 1
+    }
+    else {
+      await save_self_product_page()
+      $('#self_product input[type="text"]').attr("disabled", true);
+      $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+      $('#self_product select').attr("disabled", true);
+      $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
+      $(this).text("編輯內容")
+      edit_state = 0
+    }
+  });
+  
+  // 選不要儲存變更
+  $("#self_product_page_unsaved .deal_no").click(function () {
+    $("#self_product_page_unsaved").css({ 'display': 'none' });
+  });
+  // 選同意儲存變更
+  $("#self_product_page_unsaved .deal_yes").click(async function () {
+    $("#self_product_page_unsaved").css({ 'display': 'none' });
+    await save_self_product_page()
+    state.pop()
+    show(state.pop())
+    $('#self_product input[type="text"]').attr("disabled", true);
+    $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+    $('#self_product select').attr("disabled", true);
+    $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
+    $(this).text("編輯內容")
+    edit_state = 0
+  });
+  
 
   const socket = io();
   //一個傳送訊息的函数
@@ -1273,6 +1349,21 @@ $('#cho_submit').click(function () {
   }
 });
 $('#cho_reset,.mid_luggage,.shopping_bag').click(function () {
+  cho_submit = 0;
+  $("#select_check1").css({ 'display': 'none' });
+  $("#select_check2").css({ 'display': 'none' });
+  $("#select_check3").css({ 'display': 'none' });
+  $("#select_check4").css({ 'display': 'none' });
+  $("#choose").css({ 'display': 'none' });
+  if (state[state.length - 1] == "mainpage_schedule") {
+    to_mainpage_schedule()
+  }
+  else {
+    to_mainpage_need()
+  }
+});
+
+$('#user_menu .bell').click(function () {
   cho_submit = 0;
   $("#select_check1").css({ 'display': 'none' });
   $("#select_check2").css({ 'display': 'none' });
