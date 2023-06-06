@@ -5,6 +5,8 @@ var choose_box2=0;
 var choose_box3=0;
 var choose_box4=0;
 var cho_submit=0;
+var product_img_state;
+let product_img = [];
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -534,6 +536,7 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     let ss = nn.split(/\s/);
+
     show("product_contant")
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
@@ -561,14 +564,29 @@ $(document).ready(function() {
     }, (data) => {
       $('#buyer_name').html(ss[0])
       console.log(data)
-      console.log(data[set_product_name])
-      console.log(data[0])
-      $('#buyer_set_product_name').html(`${data[set_product_name]}`)
-      $('#buyer_product_place_country').html(data[product_place_country])
-      $('#buyer_product_place_city').html(data[product_place_city])
+      console.log(data[6])
+      $('#buyer_set_product_name').html(data[0])
+      $('#buyer_product_place_country').html(data[1])
+      $('#buyer_product_place_city').html(data[2])
+      $('#buyer_set_shop_name').html(data[3])
+      $('#buyer_set_shop_address').html(data[4])
+      $('#buyer_request_product_list').html(data[5])
+      $('#buyer_set_product_quantity').html(data[6])
+      $('#buyer_shipping_address_country').html(data[7])
+      $('#buyer_shipping_address_city').html(data[8])
+      $('#buyer_product_arrive_year').html(data[9])
+      $('#buyer_product_arrive_month').html(data[10])
+      $('#buyer_product_arrive_date').html(data[11])
+      $('#buyer_request_remark').html(data[12])
       show("product_contant")
       //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
+
+    product_img_state = 0;
+    product_img[0] = "https://ppt.cc/fjLLEx@.png"
+    product_img[1] = "https://ppt.cc/fCBEmx@.png"
+    product_img[2] = "https://ppt.cc/fpJrYx@.png"
+    product_img[3] = "https://ppt.cc/fvMcWx@.png"
   });
 
   // schedule 代購者頁面
@@ -785,7 +803,6 @@ $(document).ready(function() {
     })
   })
 
-
   // add_new_request
   $('#product_place_country').change(function(){
       index=this.selectedIndex; //從1開始 第幾個選項(數字)
@@ -856,7 +873,30 @@ $(document).ready(function() {
     })
   })
 
+  //product contant page
+  $('#right_arrow').click((event) => {
+    if(product_img_state < (product_img.length-1)){
+      product_img_state = product_img_state+1;
+    }
+    else {
+      product_img_state = 0;
+    }
+    console.log(product_img_state)
+    console.log(product_img[product_img_state])
+    $('#buyer_product_img').attr("src",product_img[product_img_state])
+  })
 
+  $('#left_arrow').click((event) => {
+    if(product_img_state == 0){
+      product_img_state = product_img.length-1;
+    }
+    else {
+      product_img_state = product_img_state-1;
+    }
+    console.log(product_img_state)
+    console.log(product_img[product_img_state])
+    $('#buyer_product_img').attr("src",product_img[product_img_state])
+  })
 
   const socket = io();
   //一個傳送訊息的函数

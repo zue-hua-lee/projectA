@@ -198,7 +198,19 @@ app.post('/product_contant', (req, res) => { //用get傳
       data = JSON.parse(data);
       //將傳來的資訊推送到數組對象中
       let str = []
-      str = data[req.body.user_name][req.body.product]
+      str[0] = data[`${req.body.user_name}`][`${req.body.product}`]["set_product_name"]
+      str[1] = data[`${req.body.user_name}`][`${req.body.product}`]["product_place_country"]
+      str[2] = data[`${req.body.user_name}`][`${req.body.product}`]["product_place_city"]
+      str[3] = data[`${req.body.user_name}`][`${req.body.product}`]["set_shop_name"]
+      str[4] = data[`${req.body.user_name}`][`${req.body.product}`]["set_shop_address"]
+      str[5] = data[`${req.body.user_name}`][`${req.body.product}`]["request_product_list"]
+      str[6] = data[`${req.body.user_name}`][`${req.body.product}`]["set_product_quantity"]
+      str[7] = data[`${req.body.user_name}`][`${req.body.product}`]["shipping_address_country"]
+      str[8] = data[`${req.body.user_name}`][`${req.body.product}`]["shipping_address_city"]
+      str[9] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_year"]
+      str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_month"]
+      str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_date"]
+      str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["request_remark"]
       res.send(str)
   })
 })
