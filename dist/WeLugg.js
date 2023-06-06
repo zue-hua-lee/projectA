@@ -1,10 +1,12 @@
 var user_name = ""
 let state = [""]
-var choose_box1=0;
-var choose_box2=0;
-var choose_box3=0;
-var choose_box4=0;
-var cho_submit=0;
+var choose_box1 = 0;
+var choose_box2 = 0;
+var choose_box3 = 0;
+var choose_box4 = 0;
+var cho_submit = 0;
+var product_img_state;
+let product_img = [];
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -55,20 +57,96 @@ function all_display_none() {
   $('#show_schedule').css({'display':'none'})
   $('#show_need').css({'display':'none'})
 
-  $('#add_new_journey').css({'display':'none'})
-  $('#add_new_request').css({'display':'none'})
-  $('#chat_main').css({'display':'none'})
-  $('#accept_case_list').css({'display':'none'})
-  $('#accept_case_list #no_customer').css({'display':'none'})
-  $('#accept_case_list #has_customer').css({'display':'none'})
-
-  $('#deal_agree').css({'display':'none'})
-  $('#deal_success').css({'display':'none'})
-  $('#chat_box').css({'display':'none'})
-  $('#product_contant').css({'display':'none'})
+  $('#add_new_journey').css({ 'display': 'none' })
+  $('#add_new_request').css({ 'display': 'none' })
+  $('#chat_main').css({ 'display': 'none' })
+  $('#accept_case_list').css({ 'display': 'none' })
+  $('#accept_case_list #no_customer').css({ 'display': 'none' })
+  $('#accept_case_list #has_customer').css({ 'display': 'none' })
+  $('#aft_shopping_cart').css({ 'display': 'none' })
+  $('#deal_agree').css({ 'display': 'none' })
+  $('#deal_success').css({ 'display': 'none' })
+  $('#chat_box').css({ 'display': 'none' })
+  $('#product_contant').css({ 'display': 'none' })
 }
-function user_url(name){
-  return new Promise(function(resolve, reject) {
+
+function accept_case() {
+  $('#accept_case_list').css({ 'display': 'block' });
+  $('#accept_case_list #has_customer').css({ 'display': 'flex' })
+  $('#accept_case_list #has_customer').html('');
+  console.log("hahhahah")
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      console.log("hahhahahaaaa")
+      for (const name in data) {
+        for (const id in data[name]) {
+          let prd_name = '';
+          if (id.substring(0, 7) == "product") {
+            if (data[name][id]["accept"] == 1 && data[name][id]["accepter"] == user_name) {
+              for (const ids in data[name][id]) {
+                if (ids == "set_product_name") {
+                  prd_name = ` ${data[name][id][ids]}`;
+                }
+                if (ids == "request_product_list") {
+                  if(data[name][id][ids] == "food"){
+                    prd_type = `食物類`;
+                  }
+                  else if(data[name][id][ids] == "Apparel"){
+                    prd_type = `服飾類`;
+                  }
+                  else if(data[name][id][ids] == "Cosmetic"){
+                    prd_type = `彩妝保養類`;
+                  }
+                  else{
+                    prd_type = `生活用品類`;
+                  }
+                }
+                if (ids == "product_place_country") {
+                  prd_country = `${data[name][id][ids]},`;
+                }
+                if (ids == "product_place_city") {
+                  prd_country += `${data[name][id][ids]}`;
+                }
+                if (ids == "set_shop_address") {
+                  prd_place = `${data[name][id][ids]}`;
+                }
+
+              }
+              if (prd_name != '') {
+                var contener = document.getElementById("has_customer")
+                console.log("aaaaaaaaaaaaaaaaaa")
+                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                  '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
+                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
+                  '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
+                // 等同於下列程式碼
+                //    <div class="user1 product0">
+                //          <img class="prd_img" src="/src/user" />
+                //          <div class="prd_name">prd_name</div>
+            //              <div class="prd_type">prd_type</div>
+            //              <div class="prd_country">prd_country</div>
+            //              <div class="prd_place">prd_place</div>
+            //              <img class="prd_img" src="/src/user" />
+            //              <div class="btm">
+                      //        <p class="bn_up">個人專頁</p>
+                      //        <p class="bn_dn">進行聊天</p>
+                //          </div>
+                //    </div>
+
+              }
+            }
+
+          }
+        }
+      }
+    },
+  })
+}
+
+function user_url(name) {
+  return new Promise(function (resolve, reject) {
     event.preventDefault()
     $.post('./read_personal', {
       name: name,
@@ -135,11 +213,50 @@ function to_mainpage_need() {
               }
             }
           }
-          if(namelist != ''){
-            var contener = document.getElementById("show_schedule")
-            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
-              +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
-              '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+          for (var ll = 0; ll < realshow.length; ll++) {
+            let namelist = '';
+            for (const ids in realshow[ll]) {
+              if (ids == "departure_country") {
+                namelist += `居住地: ${realshow[ll][ids]},`;
+              }
+              if (ids == "departure_city") {
+                namelist += `${realshow[ll][ids]} &nbsp;`;
+              }
+              if (ids == "entry_country") {
+                namelist += `商品地: ${realshow[ll][ids]},`;
+              }
+              if (ids == "entry_city") {
+                namelist += `${realshow[ll][ids]} &nbsp; <br>`;
+              }
+              if (ids == "departure_month") {
+                namelist += `${realshow[ll][ids]} / `;
+              }
+              if (ids == "departure_date") {
+                namelist += `${realshow[ll][ids]} - `;
+              }
+              if (ids == "entry_year") {
+                namelist += `${realshow[ll][ids]} / `;
+              }
+              if (ids == "entry_month") {
+                namelist += `${realshow[ll][ids]} / `;
+              }
+              if (ids == "entry_date") {
+                namelist += `${realshow[ll][ids]}<br>`;
+              }
+              if (ids == "luggage_size_list") {
+                namelist += `行李箱: ${realshow[ll][ids]}吋/inch &nbsp; &nbsp; &nbsp;`;
+              }
+              if (ids == "luggage_space_list") {
+                namelist += `代購容量: ${realshow[ll][ids]}%`;
+              }
+            }
+
+            if (namelist != '') {
+              var contener = document.getElementById("show_schedule")
+              $('#show_schedule').append('<div class="' + name + ' ' + id + '"><div class="w"><img class="user_img" src="' + (await user_url(name)) + '"/>'
+                + '<div><div class="n">' + name + '</div>' + namelist + '</div></div><div class="gray"><div class="chat_button">' +
+                '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+            }
           }
         }
       }
@@ -355,14 +472,26 @@ function show(string){
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
   }
-  else if(string == "accept_case_list"){
+  /////
+  else if (string == "aft_shopping_cart") {
+    all_display_none()
+    state.push("aft_shopping_cart")
+    $('#aft_shopping_cart').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'display': 'block' })
+    $('#subpage_title .subpage_word').html("交易清單")
+    $('#menu_bar').css({ 'display': 'flex' })
+    //$('#has_customer').css({ 'display': 'block' })
+  }
+  else if (string == "accept_case_list") {
     all_display_none()
     state.push("accept_case_list")
-    $('#accept_case_list').css({'display':'block'})
-    $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("代購清單")
-    $('#menu_bar').css({'display':'flex'})
-    $('#has_customer').css({'display':'block'})
+    $('#accept_case_list').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'display': 'block' })
+    $('#aft_shopping_cart').css({ 'display': 'none' })
+    $('#subpage_title .subpage_word').html("我的代購清單")
+    $('#menu_bar').css({ 'display': 'flex' })
+    $('#has_customer').css({ 'display': 'block' })
+    accept_case()
   }
   else if(string == "chat_main"){
     all_display_none()
@@ -742,6 +871,9 @@ $(document).ready(function() {
     show("personal_page_my")
   })
   $('#menu_bar .case_list').click((event) => {
+    show("aft_shopping_cart")
+  })
+  $('#aft_shopping_cart .to_sellist').click((event) => {
     show("accept_case_list")
   })
   $('#menu_bar .chat_list').click((event) => {
@@ -1000,6 +1132,30 @@ $(document).ready(function() {
   })
 
 
+  //product contant page
+  $('#right_arrow').click((event) => {
+    if (product_img_state < (product_img.length - 1)) {
+      product_img_state = product_img_state + 1;
+    }
+    else {
+      product_img_state = 0;
+    }
+    console.log(product_img_state)
+    console.log(product_img[product_img_state])
+    $('#buyer_product_img').attr("src", product_img[product_img_state])
+  })
+
+  $('#left_arrow').click((event) => {
+    if (product_img_state == 0) {
+      product_img_state = product_img.length - 1;
+    }
+    else {
+      product_img_state = product_img_state - 1;
+    }
+    console.log(product_img_state)
+    console.log(product_img[product_img_state])
+    $('#buyer_product_img').attr("src", product_img[product_img_state])
+  })
 
   const socket = io();
   //一個傳送訊息的函数

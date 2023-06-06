@@ -8,7 +8,7 @@
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
         "trip_num": 2,
-        "product_num": 4,
+        "product_num": 5,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台北",
@@ -23,7 +23,9 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 0,
+            "accepter": "user3"
         },
         "trip1": {
             "departure_country": "韓國",
@@ -39,29 +41,33 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 0,
+            "accepter": "user3"
         },
         "product0": {
             "shipping_address_country": "日本",
             "shipping_address_city": "東京",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "123",
+            "set_product_name": "New York Perfect Cheese cake",
             "set_shop_name": "12345",
-            "set_shop_address": "124235",
+            "set_shop_address": "パクモグテラス New York New",
             "request_product_list": "Food",
             "set_product_quantity": "14",
             "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user3"
         },
         "product1": {
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
             "product_place_country": "中國",
             "product_place_city": "北京",
-            "set_product_name": "456",
+            "set_product_name": "四種芝士柑橘",
             "set_shop_name": "6789",
             "set_shop_address": "6789",
             "request_product_list": "Apparel",
@@ -69,7 +75,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "3",
             "product_arrive_date": "1",
-            "request_remark": "none"
+            "request_remark": "none",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -84,7 +92,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "9",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -99,7 +109,26 @@
             "product_arrive_year": "2024",
             "product_arrive_month": "8",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user2"
+        },
+        "product4": {
+            "shipping_address_country": "法國",
+            "shipping_address_city": "巴黎",
+            "product_place_country": "台灣",
+            "product_place_city": "台北",
+            "set_product_name": "2",
+            "set_shop_name": "hihi",
+            "set_shop_address": "sdfdd",
+            "request_product_list": "Apparel",
+            "set_product_quantity": "2",
+            "product_arrive_year": "2024",
+            "product_arrive_month": "8",
+            "product_arrive_date": "1",
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user3"
         }
     },
     "user2": {
@@ -124,7 +153,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 1,
+            "accepter": "user1"
         },
         "product0": {
             "shipping_address_country": "法國",
@@ -139,7 +170,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "8",
             "product_arrive_date": "12",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user1"
         }
     },
     "user3": {
@@ -164,7 +197,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 1,
+            "accepter": "user1"
         }
     }
 }
