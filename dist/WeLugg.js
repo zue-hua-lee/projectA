@@ -1,20 +1,12 @@
 var user_name = ""
 let state = [""]
-<<<<<<< HEAD
-var choose_box1=0;
-var choose_box2=0;
-var choose_box3=0;
-var choose_box4=0;
-var cho_submit=0;
-var product_img_state;
-let product_img = [];
-=======
 var choose_box1 = 0;
 var choose_box2 = 0;
 var choose_box3 = 0;
 var choose_box4 = 0;
 var cho_submit = 0;
->>>>>>> 9de2b4b02f0c86049392b90861ca6aa4b4ba7462
+var product_img_state;
+let product_img = [];
 
 // chat_box
 //用ajax的方法把聊天紀錄補出來
@@ -77,6 +69,82 @@ function all_display_none() {
   $('#chat_box').css({ 'display': 'none' })
   $('#product_contant').css({ 'display': 'none' })
 }
+
+function accept_case() {
+  $('#accept_case_list').css({ 'display': 'block' });
+  $('#accept_case_list #has_customer').css({ 'display': 'flex' })
+  $('#accept_case_list #has_customer').html('');
+  console.log("hahhahah")
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      console.log("hahhahahaaaa")
+      for (const name in data) {
+        for (const id in data[name]) {
+          let prd_name = '';
+          if (id.substring(0, 7) == "product") {
+            if (data[name][id]["accept"] == 1 && data[name][id]["accepter"] == user_name) {
+              for (const ids in data[name][id]) {
+                if (ids == "set_product_name") {
+                  prd_name = ` ${data[name][id][ids]}`;
+                }
+                if (ids == "request_product_list") {
+                  if(data[name][id][ids] == "food"){
+                    prd_type = `食物類`;
+                  }
+                  else if(data[name][id][ids] == "Apparel"){
+                    prd_type = `服飾類`;
+                  }
+                  else if(data[name][id][ids] == "Cosmetic"){
+                    prd_type = `彩妝保養類`;
+                  }
+                  else{
+                    prd_type = `生活用品類`;
+                  }
+                }
+                if (ids == "product_place_country") {
+                  prd_country = `${data[name][id][ids]},`;
+                }
+                if (ids == "product_place_city") {
+                  prd_country += `${data[name][id][ids]}`;
+                }
+                if (ids == "set_shop_address") {
+                  prd_place = `${data[name][id][ids]}`;
+                }
+
+              }
+              if (prd_name != '') {
+                var contener = document.getElementById("has_customer")
+                console.log("aaaaaaaaaaaaaaaaaa")
+                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                  '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
+                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
+                  '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
+                // 等同於下列程式碼
+                //    <div class="user1 product0">
+                //          <img class="prd_img" src="/src/user" />
+                //          <div class="prd_name">prd_name</div>
+            //              <div class="prd_type">prd_type</div>
+            //              <div class="prd_country">prd_country</div>
+            //              <div class="prd_place">prd_place</div>
+            //              <img class="prd_img" src="/src/user" />
+            //              <div class="btm">
+                      //        <p class="bn_up">個人專頁</p>
+                      //        <p class="bn_dn">進行聊天</p>
+                //          </div>
+                //    </div>
+
+              }
+            }
+
+          }
+        }
+      }
+    },
+  })
+}
+
 function user_url(name) {
   return new Promise(function (resolve, reject) {
     event.preventDefault()
@@ -201,11 +269,11 @@ function to_mainpage_need() {
               }
             }
 
-            if(namelist != ''){
-            var contener = document.getElementById("show_schedule")
-            $('#show_schedule').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
-              +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
-              '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+            if (namelist != '') {
+              var contener = document.getElementById("show_schedule")
+              $('#show_schedule').append('<div class="' + name + ' ' + id + '"><div class="w"><img class="user_img" src="' + (await user_url(name)) + '"/>'
+                + '<div><div class="n">' + name + '</div>' + namelist + '</div></div><div class="gray"><div class="chat_button">' +
+                '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
             }
           }
         }
@@ -529,9 +597,10 @@ function show(string) {
     $('#accept_case_list').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
     $('#aft_shopping_cart').css({ 'display': 'none' })
-    $('#subpage_title .subpage_word').html("代購清單")
+    $('#subpage_title .subpage_word').html("我的代購清單")
     $('#menu_bar').css({ 'display': 'flex' })
     $('#has_customer').css({ 'display': 'block' })
+    accept_case()
   }
   else if (string == "chat_main") {
     all_display_none()
@@ -1133,27 +1202,27 @@ $(document).ready(function () {
 
   //product contant page
   $('#right_arrow').click((event) => {
-    if(product_img_state < (product_img.length-1)){
-      product_img_state = product_img_state+1;
+    if (product_img_state < (product_img.length - 1)) {
+      product_img_state = product_img_state + 1;
     }
     else {
       product_img_state = 0;
     }
     console.log(product_img_state)
     console.log(product_img[product_img_state])
-    $('#buyer_product_img').attr("src",product_img[product_img_state])
+    $('#buyer_product_img').attr("src", product_img[product_img_state])
   })
 
   $('#left_arrow').click((event) => {
-    if(product_img_state == 0){
-      product_img_state = product_img.length-1;
+    if (product_img_state == 0) {
+      product_img_state = product_img.length - 1;
     }
     else {
-      product_img_state = product_img_state-1;
+      product_img_state = product_img_state - 1;
     }
     console.log(product_img_state)
     console.log(product_img[product_img_state])
-    $('#buyer_product_img').attr("src",product_img[product_img_state])
+    $('#buyer_product_img').attr("src", product_img[product_img_state])
   })
 
   const socket = io();
@@ -1219,10 +1288,6 @@ $(document).ready(function () {
     $("#deal_success").css({ 'display': 'none' });
     show("accept_case_list")
   });
-  // $('#deal_success button[name="to_list"]').click(function () {
-  //   $("#deal_success").css({ 'display': 'none' });
-  //   show("accept_case_list")
-  // });
   $('#deal_success button[name="to_mainpage"]').click(function () {
     $("#deal_success").css({ 'display': 'none' });
     show("mainpage_schedule")
