@@ -1614,6 +1614,25 @@ body{
   background: #7FD6D0;
 }
 
+/*after click shopping cart icon*/
+#aft_shopping_cart button[name="to_sellist"],
+#aft_shopping_cart button[name="to_buylist"]{
+  width: 54.5vw;
+  padding: 1vh;
+  margin-top: 27vh;
+  margin-left: 10vh;
+  border: none;
+  background-color:#7FD6D0; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2.5vh;
+  letter-spacing: 0.1em;
+}
+#aft_shopping_cart button[name="to_buylist"]{
+  background-color:#556B94; 
+  margin-top: 10vh;
+}
 
 /* #homepage1{display:none} */
 #homepage2{display:none}
@@ -1642,6 +1661,7 @@ body{
 #add_new_request{display:none}
 #chat_main{display:none}
 #accept_case_list{display:none}
+#aft_shopping_cart{display:none}
 /* #accept_case_list #no_customer{display:none} */
 /* #accept_case_list #has_customer{display:none} */
 

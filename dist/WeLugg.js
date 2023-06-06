@@ -61,7 +61,7 @@ function all_display_none() {
   $('#accept_case_list').css({ 'display': 'none' })
   $('#accept_case_list #no_customer').css({ 'display': 'none' })
   $('#accept_case_list #has_customer').css({ 'display': 'none' })
-
+  $('#aft_shopping_cart').css({ 'display': 'none' })
   $('#deal_agree').css({ 'display': 'none' })
   $('#deal_success').css({ 'display': 'none' })
   $('#chat_box').css({ 'display': 'none' })
@@ -503,11 +503,22 @@ function show(string) {
     $('#user_menu').css({ 'display': 'block' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
+  /////
+  else if (string == "aft_shopping_cart") {
+    all_display_none()
+    state.push("aft_shopping_cart")
+    $('#aft_shopping_cart').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'display': 'block' })
+    $('#subpage_title .subpage_word').html("交易清單")
+    $('#menu_bar').css({ 'display': 'flex' })
+    //$('#has_customer').css({ 'display': 'block' })
+  }
   else if (string == "accept_case_list") {
     all_display_none()
     state.push("accept_case_list")
     $('#accept_case_list').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
+    $('#aft_shopping_cart').css({ 'display': 'none' })
     $('#subpage_title .subpage_word').html("代購清單")
     $('#menu_bar').css({ 'display': 'flex' })
     $('#has_customer').css({ 'display': 'block' })
@@ -532,6 +543,7 @@ function show(string) {
     $('#user_menu').css({ 'display': 'block' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
+
   else {
     console.log("changing error.")
   }
@@ -839,6 +851,9 @@ $(document).ready(function () {
     show("personal_page_my")
   })
   $('#menu_bar .case_list').click((event) => {
+    show("aft_shopping_cart")
+  })
+  $('#aft_shopping_cart .to_sellist').click((event) => {
     show("accept_case_list")
   })
   $('#menu_bar .chat_list').click((event) => {
@@ -1155,6 +1170,10 @@ $(document).ready(function () {
     $("#deal_success").css({ 'display': 'none' });
     show("accept_case_list")
   });
+  // $('#deal_success button[name="to_list"]').click(function () {
+  //   $("#deal_success").css({ 'display': 'none' });
+  //   show("accept_case_list")
+  // });
   $('#deal_success button[name="to_mainpage"]').click(function () {
     $("#deal_success").css({ 'display': 'none' });
     show("mainpage_schedule")
