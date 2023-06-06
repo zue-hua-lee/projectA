@@ -186,64 +186,161 @@ function to_mainpage_schedule() {
     success: async (data) => {
       for (const name in data) {
         for(const id in data[name]){
-          let namelist = '';
-          // if(choose_box1==1){
-          //   if(id=="live_country" && data[name][id]==sel_country){
+          let realshow =[];
           if (id.substring(0,7)=="product")
-          {
-            for(const ids in data[name][id]){
-              // if(choose_box1==1){
-              //   data=1;
-              // }
+            {
+              var data_imp=0;
+              for(const ids in data[name][id]){
+                if(ids=="shipping_address_country" && data[name][id][ids]==sel_country){
+                  data_imp++;
+                }
+                else if(ids=="shipping_address_country" && sel_country==undefined){ 
+                  data_imp++;
+                }
+                if(ids=="product_place_country" && data[name][id][ids]==sel_prod_country){
+                  data_imp++;
+                }
+                else if(ids=="product_place_country" && sel_prod_country==undefined){ 
+                  data_imp++;
+                }
+                if(ids=="product_arrive_year" && data[name][id][ids]==sel_year){
+                  data_imp++;
+                }
+                else if(ids=="product_arrive_year" && sel_year==undefined){ 
+                  data_imp++;
+                }
+                if(ids=="product_arrive_month" && data[name][id][ids]==sel_month){
+                  data_imp++;
+                }
+                else if(ids=="product_arrive_month" && sel_month==undefined){ 
+                  data_imp++;
+                }
+                if(ids=="request_product_list" && data[name][id][ids]==sel_type){
+                  data_imp++;
+                }
+                else if(ids=="request_product_list" && sel_type==undefined){ 
+                  data_imp++;
+                }
+              }
+
+              if(data_imp==5)
+              {
+                console.log('addadd')
+                realshow[realshow.length]=data[name][id];
+              }
+              console.log(realshow);
+              console.log('njn'+data_imp);
+            }
+
+          for(var ll=0; ll<realshow.length; ll++){
+          let namelist = '';
+          for(const ids in realshow[ll])
+            {
               if(ids=="shipping_address_country"){
-                namelist += `居住地: ${data[name][id][ids]},`;
+                    namelist += `居住地: ${realshow[ll][ids]},`;
               }
               if(ids=="shipping_address_city"){
-                namelist += `${data[name][id][ids]} &nbsp;`;
+                    namelist += `${realshow[ll][ids]} &nbsp;`;
               }
               if(ids=="product_place_country"){
-                namelist += `商品地: ${data[name][id][ids]},`;
+                namelist += `商品地: ${realshow[ll][ids]},`;
               }
               if(ids=="product_place_city"){
-                namelist += `${data[name][id][ids]} &nbsp;`;
-              }
-              if(ids=="product_arrive_year"){
-                namelist += `${data[name][id][ids]}/`;
-              }
-              if(ids=="product_arrive_month"){
-                namelist += `${data[name][id][ids]}/`;
-              }
-              if(ids=="product_arrive_date"){
-                namelist += `${data[name][id][ids]}<br>`;
+                namelist += `${realshow[ll][ids]} &nbsp; <br>`;
               }
               if(ids=="set_product_name"){
-                namelist += `需求商品: ${data[name][id][ids]}<br>`;
+                namelist += `需求商品: ${realshow[ll][ids]}<br>`;
               }
               if(ids=="set_product_quantity"){
-                namelist += `數量: ${data[name][id][ids]} 件<br>`;
+                namelist += `數量: ${realshow[ll][ids]} 件 &nbsp; &nbsp; &nbsp; `;
+              }
+              if(ids=="product_arrive_year"){
+                namelist += `${realshow[ll][ids]}/`;
+              }
+              if(ids=="product_arrive_month"){
+                namelist += `${realshow[ll][ids]}/`;
+              }
+              if(ids=="product_arrive_date"){
+                namelist += `${realshow[ll][ids]}<br>`;
               }
             }
-          }
           
-          if(namelist!=''){
-            var contener = document.getElementById("show_need")
-            $('#show_need').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
-            +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
-            '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
-            // 等同於下列程式碼
-            // <div class="user1 product1">
-            //   <div class="w">
-            //     <div class="n">user1</div>namelist
-            //   </div>
-            //   <div class="gray">
-            //     <div class="chat_button">
-            //       <p class="chat_no">旅遊詳情</p>
-            //       <p class="chat_yes">進行聊天</p>
-            //     </div>
-            //   </div>
-            // </div>
+            if(namelist!=''){
+                var contener = document.getElementById("show_need")
+                $('#show_need').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
+                  +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
+                  '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+              //     // 等同於下列程式碼
+              //     // <div class="user1 product1">
+              //     //   <div class="w">
+              //     //     <div class="n">user1</div>namelist
+              //     //   </div>
+              //     //   <div class="gray">
+              //     //     <div class="chat_button">
+              //     //       <p class="chat_no">旅遊詳情</p>
+              //     //       <p class="chat_yes">進行聊天</p>
+              //     //     </div>
+              //     //   </div>
+              //     // </div>
+              }
           }
         }
+        //////////////////////////////////////////
+        // for(const id in data[name]){
+        //   let namelist = '';
+        //   if (id.substring(0,7)=="product")
+        //   {
+        //     for(const ids in data[name][id]){
+        //       // console.log("h23232");
+        //       if(ids=="shipping_address_country"){
+        //         namelist += `居住地: ${data[name][id][ids]},`;
+        //       }
+        //       if(ids=="shipping_address_city"){
+        //         namelist += `${data[name][id][ids]} &nbsp;`;
+        //       }
+        //       if(ids=="product_place_country"){
+        //         namelist += `商品地: ${data[name][id][ids]},`;
+        //       }
+        //       if(ids=="product_place_city"){
+        //         namelist += `${data[name][id][ids]} &nbsp; <br>`;
+        //       }
+        //       if(ids=="set_product_name"){
+        //         namelist += `需求商品: ${data[name][id][ids]}<br>`;
+        //       }
+        //       if(ids=="set_product_quantity"){
+        //         namelist += `數量: ${data[name][id][ids]} 件 &nbsp; &nbsp; &nbsp; `;
+        //       }
+        //       if(ids=="product_arrive_year"){
+        //         namelist += `${data[name][id][ids]}/`;
+        //       }
+        //       if(ids=="product_arrive_month"){
+        //         namelist += `${data[name][id][ids]}/`;
+        //       }
+        //       if(ids=="product_arrive_date"){
+        //         namelist += `${data[name][id][ids]}<br>`;
+        //       }
+        //     }
+        //   }
+        //   if(namelist!=''){
+        //     var contener = document.getElementById("show_need")
+        //     $('#show_need').append('<div class="'+name+' '+id+'"><div class="w"><img class="user_img" src="'+(await user_url(name))+'"/>'
+        //     +'<div><div class="n">'+name+'</div>'+namelist+'</div></div><div class="gray"><div class="chat_button">'+
+        //     '<p class="chat_no">旅遊詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+        //     // 等同於下列程式碼
+        //     // <div class="user1 product1">
+        //     //   <div class="w">
+        //     //     <div class="n">user1</div>namelist
+        //     //   </div>
+        //     //   <div class="gray">
+        //     //     <div class="chat_button">
+        //     //       <p class="chat_no">旅遊詳情</p>
+        //     //       <p class="chat_yes">進行聊天</p>
+        //     //     </div>
+        //     //   </div>
+        //     // </div>
+        //   }
+        // }
+
       }
     },
   })
@@ -929,14 +1026,14 @@ $(document).ready(function() {
       shipping_address_city: $('#request_data select[name=shipping_address_city]').val(),
       product_place_country: $('#request_data select[name=product_place_country]').val(),
       product_place_city: $('#request_data select[name=product_place_city]').val(),
-      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
-      product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
-      product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
       set_product_name: $('#request_data input[name=set_product_name]').val(),
       set_shop_name: $('#request_data input[name=set_shop_name]').val(),
       set_shop_address: $('#request_data input[name=set_shop_address]').val(),
       request_product_list: $('#request_data select[name=request_product_list]').val(),
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
+      product_arrive_year: $('#request_data select[name=product_arrive_year]').val(),
+      product_arrive_month: $('#request_data select[name=product_arrive_month]').val(),
+      product_arrive_date: $('#request_data select[name=product_arrive_date]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),
 
       //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
@@ -946,7 +1043,6 @@ $(document).ready(function() {
       //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
   })
-
 
 
   const socket = io();
@@ -1073,13 +1169,28 @@ $('#select_check4').click(function() {
 $('#cho_submit').click(function() {
   cho_submit=1;
   $("#choose").css({'display':'none'});
-  show("mainpage_schedule")
+  if(state[state.length-1] == "mainpage_schedule"){
+    to_mainpage_schedule()
+  }
+  else{
+    to_mainpage_need()
+  }
 });
-$('#cho_reset').click(function() {
-  //cho_submit=1;
+$('#cho_reset,.mid_luggage,.shopping_bag').click(function() {
+  cho_submit=0;
+  $("#select_check1").css({'display':'none'});
+  $("#select_check2").css({'display':'none'});
+  $("#select_check3").css({'display':'none'});
+  $("#select_check4").css({'display':'none'});
   $("#choose").css({'display':'none'});
-  show("mainpage_schedule")
+  if(state[state.length-1] == "mainpage_schedule"){
+    to_mainpage_schedule()
+  }
+  else{
+    to_mainpage_need()
+  }
 });
+
 // $(document).click(function (event) {
 //   //目標--點這些東西之外就會不見
 //   let testInput1 = $('#selbar');
