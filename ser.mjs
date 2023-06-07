@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
 
     // 建立讀取聊天紀錄的路由(ajax)
     app.get('/chat_history', (req, res) => {
-      fs.readFile(`${__dirname}/chat.txt`, 'utf8', (err, data) => {
+      fs.readFile(`${__dirname}/chat_records.json`, 'utf8', (err, data) => {
         if (err) {
           console.error(err);
           return res.status(500).send('Internal Server Error');
@@ -34,13 +34,22 @@ io.on('connection', (socket) => {
       });
     });
 
-  socket.on('chat message', (msg) => {
-    console.log('message: ' + msg)
-    io.emit('chat message', msg)
-    fs.appendFile(`${__dirname}/chat.txt`, `${msg}\n`, (err) => {
-      if (err) console.log(err)
-    })
-  })
+
+    socket.on('join room', (user_name) => {
+      loadChatHistory(user_name, (chatHistory) => {
+        socket.emit('chat history', chatHistory);
+      });
+    });
+
+    socket.on('chat message', (chatData) => {
+      console.log('message: ' + chatData.message);
+      saveChatRecord(chatData); // 儲存新訊息到本地聊天紀錄
+      io.emit('chat message', chatData); // 將訊息傳送給所有使用者，更新聊天室訊息
+    });
+
+    socket.on('update chat', (chatData) => {
+      io.emit('chat message', chatData); // 將訊息傳送給所有使用者，更新聊天室訊息
+    });
 
   socket.on('disconnect', () => {
     console.log('user disconnected')
@@ -50,6 +59,44 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(`listening on port: ${port}`)
 })
+
+function loadChatHistory(user_name, callback) {
+  fs.readFile(`${__dirname}/chat_records.json`, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    let chatRecords = {};
+    if (data) {
+      chatRecords = JSON.parse(data);
+    }
+    const chatHistory = chatRecords.users && chatRecords.users[user_name] ? chatRecords.users[user_name] : [];
+    callback(chatHistory);
+  });
+}
+
+function saveChatRecord(chatData) {
+  fs.readFile(`${__dirname}/chat_records.json`, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    let chatRecords = {};
+    if (data) {
+      chatRecords = JSON.parse(data);
+    }
+    const user_name = chatData.user_name;
+    if (!chatRecords.users || !chatRecords.users[user_name]) {
+      chatRecords.users = chatRecords.users || {};
+      chatRecords.users[user_name] = [];
+    }
+    chatRecords.users[user_name].push(chatData);
+    fs.writeFile(`${__dirname}/chat_records.json`, JSON.stringify(chatRecords), (err) => {
+      if (err) console.error(err);
+    });
+  });
+}
+
 
 // homepage
 app.post('/login', (req, res) => {

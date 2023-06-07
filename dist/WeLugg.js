@@ -6,34 +6,8 @@ var choose_box3=0;
 var choose_box4=0;
 var cho_submit=0;
 
-// chat_box
-//用ajax的方法把聊天紀錄補出來
-//loadChatHistory();
-const loadChatHistory = () => {
-  $.get('/chat_history', (data) => {
-    console.log(data)
-    const messages = data.trim().split('\n');
-    messages.forEach((message) => {
-      appendMessage(message);
-    });
-  });
-};
-loadChatHistory();
-//function appendMessage
-//把message加到畫面上
-const appendMessage = (message, isSelf) => {
-  const div = document.createElement('div');
-  const messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-  if (isSelf) {
-    messageDiv.classList.add('self-message');
-  } else {
-    messageDiv.classList.add('other-message');
-  }
-  messageDiv.style.display = 'inline-block';
-  div.appendChild(messageDiv);
-  $('#chat_content').append(div);
-}
+
+
 
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
@@ -636,11 +610,72 @@ $(document).ready(function() {
 
 
   const socket = io();
+
+// chat_box
+//function appendMessage
+//把message加到畫面上
+const appendMessage = (message, isSelf) => {
+  const div = document.createElement('div');
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+
+  messageDiv.classList.add('message');
+
+  if (isSelf) {
+    div.classList.add('self');
+  } else {
+    div.classList.add('other');
+  }
+  div.appendChild(messageDiv);
+  $('#chat_content').append(div);
+}
+
+
+//用ajax的方法把聊天紀錄補出來
+//loadChatHistory();
+const loadChatHistory = () => {
+  $.get('/chat_history', (data) => {
+    const chatRecords = JSON.parse(data);
+    const allMessages = [];
+
+    for (const username in chatRecords.users) {
+      const messages = chatRecords.users[username] || [];
+      const isSelf = (username === user_name);
+
+      messages.forEach((message) => {
+        allMessages.push({ ...message, isSelf });
+      });
+    }
+
+    allMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+    allMessages.forEach((message) => {
+      appendMessage(message.message, message.isSelf);
+    });
+  });
+};
+
+
+$('.chat_yes').click(function() {
+  loadChatHistory();
+});
+
+
+// 清空聊天內容的函式
+const clearChatContent = () => {
+  $('#chat_content').empty();
+};
+
   //一個傳送訊息的函数
   const sendMessage = () => {
     const message = $('#chat_box input[name="msg-input"]').val();
     if (message.trim() !== '') {
-      socket.emit('chat message', message);
+      const chatData = {
+        user_name: user_name,
+        timestamp: new Date().toISOString(),
+        message: message
+      };
+      socket.emit('chat message', chatData);
       $('#chat_box input[name="msg-input"]').val('');
     }
   }
@@ -650,8 +685,9 @@ $(document).ready(function() {
     event.preventDefault();
     sendMessage();
   });
-  socket.on('chat message', (msg) => {
-    appendMessage(msg);
+  socket.on('chat message', (chatData) => {
+    // appendMessage(msg);
+    appendMessage(chatData.message, chatData.user_name === user_name);
   });
 
   //按下傳送訊息後，聊天紀錄會自動跑到最下面
@@ -675,6 +711,7 @@ $(document).ready(function() {
   }
   // chat_box: back
   $('#chat_box .back').click(function(){
+    clearChatContent();
     state.pop()
     show(state.pop())
   })
