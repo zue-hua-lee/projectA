@@ -11,7 +11,6 @@ body{
 }
 
 /***************homepage***************/
-/***************homepage***************/
 #homepage1{
   position: absolute;
   width: 100vw;
@@ -162,26 +161,33 @@ body{
   border: none;
   border-bottom: 1px solid #ACACAC;
 }
+#homepage_name{
+  background: url(https://ppt.cc/frWlpx@.png) no-repeat center/contain;
+  position: absolute;
+  width: 2.6vh;
+  height: 2.6vh;
+  margin: 1.7vh 2vh;
+}
 #homepage_lock{
   background: url(https://ppt.cc/fBeFLx@.png) no-repeat center/contain;
   position: absolute;
-  width: 2.5vh;
-  height: 2.5vh;
-  margin: 1.6vh 2vh;
+  width: 2.6vh;
+  height: 2.6vh;
+  margin: 1.7vh 2vh;
 }
 #homepage_call{
-  background: url(https://ppt.cc/fl9vMx@.png) no-repeat center/contain;
+  background: url(https://ppt.cc/fgffZx@.png) no-repeat center/contain;
   position: absolute;
-  width: 2.5vh;
-  height: 2.5vh;
-  margin: 1.6vh 2vh;
+  width: 2.6vh;
+  height: 2.6vh;
+  margin: 1.7vh 2vh;
 }
 #homepage_mail{
-  background: url(https://ppt.cc/fi18Mx@.png) no-repeat center/contain;
+  background: url(https://ppt.cc/ffR9dx@.png) no-repeat center/contain;
   position: absolute;
-  width: 2.5vh;
-  height: 2.5vh;
-  margin: 1.6vh 2vh;
+  width: 2.6vh;
+  height: 2.6vh;
+  margin: 1.7vh 2vh;
 }
 #homepage2 button[name="register_submit"]{
   margin-top: 4.5vh;
@@ -196,7 +202,54 @@ body{
   color: #939191;
   white-space: nowrap;
 }
-
+/***************deal_success***************/
+#register_success{
+  width: 100%;
+  height: 100%;
+  background-color: #F6F3F3;
+}
+#register_success_card{
+  width: 84vw;
+  height: 84vh;
+  margin: 8vh 8vw;
+  background-color:#FFFFFF;
+  position: absolute;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#register_success_card img{
+  margin-top: 9vh;
+  height: 12vh;
+}
+#register_success_card p{
+  margin-top: 0.5vh;
+  font-size: 1.5vh;
+}
+#register_success_card .word{
+  margin: 4vh 0 0.5vh 0;
+  font-size: 3vh;
+  color:#7FD6D0;
+}
+#register_success_card button[name="to_personal"],
+#register_success_card button[name="to_mainpage"]{
+  width: 54.5vw;
+  padding: 1vh;
+  margin: 6vh 0 2.5vh 0;
+  border: none;
+  background-color:#556B94; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2.5vh;
+  letter-spacing: 0.1em;
+}
+#register_success_card button[name="to_mainpage"]{
+  margin: 0;
+  background-color:#7FD6D0; 
+}
 /***************user_menu***************/
 #user_menu {
   position: relative;
@@ -638,6 +691,269 @@ body{
   right: 10%;
   top: 83.2%;
 }
+/***************product_contant***************/
+#product_contant .title_list {
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  margin: 0.5vh 0 0 0;
+}
+#product_contant .select_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  border-radius: 5px;
+}
+#buyer {
+  position: absolute;
+  width: 100%;
+  height: 16.28%;
+  top: 20%;
+}
+#buyer_profile_img {
+  position: absolute;
+  width: 26.7%;
+  left: 17.3%;
+  top: 13.8%;
+}
+#buyer_name {
+  position: absolute;
+  font-size: 2vh;
+  width: 40%;
+  left: 49.11%;
+  top: 15%
+}
+#buyer_page {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 41.13%;
+}
+#buyer_chat {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 65.24%;
+}
+#buyer_product_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 3.93%;
+  top: 36.54%;
+  border-color: #D9D9D9;
+  border-width: 3px 0 0 0;
+  border-style: solid;
+}
+#buyer_product_title_contant {
+  position: absolute;
+  font-size: 1.5vh;
+}
+#buyer_product_contant {
+  position: absolute;
+  height: 51.5%;
+  width: 100%;
+  top: 40%;
+  overflow: scroll;
+}
+#buyer_product_contant::-webkit-scrollbar{
+  display: none;
+}
+#buyer_product_detail {
+  position: absolute;
+  height: 190%;
+  width: 100%;
+  top: 0%;
+}
+#buyer_product_img_place{
+  position: absolute;
+  width: 100%;
+  height: 26%;
+  top: 0%;
+
+  border-color: #D9D9D9;
+  border-width: 3px 0 3px 0;
+  border-style: solid;
+}
+.left_arrow {
+  position: absolute;
+  width: 8.65%;
+  top: 48.7%;
+  left: 4%;
+}
+.right_arrow {
+  position: absolute;
+  width: 8.65%;
+  top: 48.7%;
+  right: 4%;
+}
+#buyer_product_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+}
+#buyer_request_product {
+  position: absolute;
+  height: 25%;
+  width: 100%;
+  top: 27%;
+  padding: 0 8%;
+}
+#buyer_request_product .buyer_request_product_title {
+  position: absolute;
+  height: 10%;
+  left: 3.5%;
+}
+#buyer_request_product .buyer_sub_title9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 15%;
+}
+#buyer_request_product .buyer_sub_title10 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 30%;
+}
+#buyer_set_product_name {
+  flex-grow: 0.7;
+}
+#buyer_product_place_country, #buyer_product_place_city {
+  flex-grow: 0.2;
+}
+#buyer_request_product .buyer_sub_title11 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 45%;
+}
+#buyer_request_product .buyer_sub_title12 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 60%;
+}
+#buyer_request_product .buyer_sub_title13 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 75%;
+}
+#buyer_request_product .buyer_sub_title14 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 90%;
+}
+#buyer_request_product_list{
+  flex-grow: 0.7;
+}
+#buyer_set_shop_name, #buyer_set_shop_address, #buyer_set_product_quantity{
+  flex-grow: 0.5;
+}
+#buyer_shipping {
+  position: absolute;
+  height: 11%;
+  width: 100%;
+  top: 55%;
+  padding: 0 8%;
+}
+#buyer_shipping .buyer_shipping_title {
+  position: absolute;
+  height: 28%;
+  left: 3.5%;
+}
+#buyer_shipping .buyer_sub_title15 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 35%;
+}
+#buyer_shipping_address_country, #buyer_shipping_address_city, #buyer_product_arrive_year, #buyer_product_arrive_month, #buyer_product_arrive_date {
+  flex-grow: 0.2;
+}
+#buyer_shipping .buyer_sub_title16 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 65%;
+}
+#buyer_remark {
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  top: 67%;
+  padding: 0 8%;
+}
+#buyer_remark .buyer_remark_title {
+  position: absolute;
+  height: 15%;
+  left: 3.5%;
+}
+#buyer_remark .buyer_sub_title17 {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 70%;
+  width: 74%;
+  top: 25%;
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  border-radius: 10px;
+}
+
+#buyer_other_ptoduct {
+  position: absolute;
+  width: 27.73%;
+  right: 10%;
+  top: 90%;
+}
+/***************self_product_page***************/
+
+#self_product_img_place #self_product_img_mask {
+  display: none;
+  position: absolute;
+  background: url(https://ppt.cc/fVKlpx@.png) no-repeat center/contain;
+  width: 5vh;
+  height: 5vh;
+  margin: 3.5vh;
+  opacity: 0.7;
+  z-index: 10;
+}
+
 /***************main_page***************/
 #mainpage{
   width: 100%;
@@ -677,9 +993,19 @@ body{
   background-color: #FFFFFF;
   box-shadow: 1px 0px 12px rgba(0, 0, 0, 0.25);
   margin: 3vh 7vw;
-  padding: 10px 40px;
+  padding: 10px 20px;
   position: relative;
   z-index: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#show_schedule .user_img,
+#show_need .user_img,
+#chat_main .user_img{
+  margin-right: 2vw;
+  width: 7vh;
+  height: 7vh;
 }
 #show_schedule .w .n,
 #show_need .w .n,
@@ -813,7 +1139,10 @@ body{
   z-index: 3;
 }
 /***************deal_agree***************/
-#deal_agree{
+#deal_agree,
+#personal_page_unsaved,
+#change_personal_img,
+#upload_product_img{
   width: 100%;
   height: 100%;
   background-color: rgba(217, 217, 217, 0.7);
@@ -821,14 +1150,15 @@ body{
   justify-content: center;    
   align-items: center;  
   position: absolute;
-  z-index: 10;
+  top: 0;
+  z-index: 5;
 }
-#deal_box{
+#deal_box, #unsaved_box{
   width: 72vw;
   height: 15.8vh;
   position: relative;
 }
-#deal_box .deal_description{
+.deal_description{
   width: 100%;
   height: 50%;
   color: #5D5B5B;
@@ -840,14 +1170,14 @@ body{
   justify-content: center;    
   align-items: center;  
 }
-#deal_box .deal_button{
+.deal_button{
   width: 100%;
   height: 49%;
   display: flex;
   justify-content: space-between;
   margin-top: 1%;
 }
-#deal_box .deal_button p{
+.deal_button p{
   width: 49.5%;
   background-color: #FBFBFB;
   display: flex;
@@ -1136,7 +1466,397 @@ body{
   z-index: 6;
 }
 
+/************personal_page*************/
+#personal_page{
+  width: 100%;
+  height: 90.6vh;
+  position: relative;
+  overflow: auto;
+}
+#personal_box1{
+  width: 80vw;
+  margin: 1vh 10vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#personal_box_img{
+  position: relative;
+  width: 12vh;
+  height: 12vh;
+}
+#personal_box_img #personal_img{
+  border-radius: 50%;
+  width: 12vh;
+  height: 12vh;
+}
+#personal_box_img #personal_mask{
+  display: none;
+  position: absolute;
+  background: url(https://ppt.cc/fVKlpx@.png) no-repeat center/contain;
+  width: 5vh;
+  height: 5vh;
+  margin: 3.5vh;
+  opacity: 0.7;
+  z-index: 10;
+}
+#personal_box_img #personal_star{
+  background: url(https://ppt.cc/ftbLux@.png) no-repeat left/contain;
+  height: 2.3vh;
+  width: 20vw;
+  position: absolute;
+  left: 55%;
+  bottom: -1vh;
+}
+#personal_box1 .word1{
+  font-size: 2.3vh;
+  letter-spacing: 0.1em;
+  margin: 2vh 0 1vh 0;
+}
+#personal_box1 .word2{
+  font-size: 0.5vh;
+  letter-spacing: 0.1em;
+}
+#personal_box_state{
+  margin-top: 0.2vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#personal_state1{
+  background: url(https://ppt.cc/frC2Jx@.png) no-repeat left/contain;
+  width: 45%;
+  height: 3vh; 
+}
+#personal_state2{
+  background: url(https://ppt.cc/fD6GLx@.png) no-repeat right/contain;
+  width: 45%;
+  height: 3vh; 
+}
+#personal_box1_right{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#history_count{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+  font-size: 1.3vh;
+}
+#history_count .word{
+  font-size: 3vh;
+}
+#bm_credit_card,
+#bm_edit_personal,
+#bm_personal_totrip,
+#bm_personal_togood,
+#bm_personal_tochat{
+  background: #E8E8E8;
+  border-radius: 5px;
+  width: 80%;
+  padding-top: 0.5vh;
+  margin-top: 1.5vh;
+  font-size: 1vh;
+  text-align: center;
+}
+
+#personal_box2{
+  width: 80vw;
+  margin: 3vh 10vw;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #F7F7F7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+  font-size: 1.3vh;
+}
+#personal_box2 div{
+  margin: 1vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  white-space: nowrap;
+}
+#personal_box2 input[type="text"]{
+  color: #384244;
+  width: 70%;
+  padding: 5px;
+  background: #F7F7F7;
+  border: none;
+  border-bottom: solid 1px #F7F7F7;
+  text-align: right;
+}
+#history_contry_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+#history_contry_box img{
+  margin: 2px 1px;
+  height: 2vh;
+  border-radius: 10px;
+}
+#personal_comment{
+  background: #D4D4D4;
+  padding-top: 1vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  position: fixed;
+  bottom: 0;
+}
+#personal_comment .word{
+  width: 10vh;
+  padding: 0.5vh;
+  color: #FFFFFF;
+  font-size: 1.3vh;
+  letter-spacing: 0.1em;
+  border-top: 1px solid #FFFFFF;
+  text-align:center;
+}
+/**********change_personal_img*************/
+#change_img_box{
+  width: 72vw;
+  position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  font-size: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  text-align: center;
+  z-index: 6;
+}
+#change_img_box .word{
+  width: 100%;
+  margin-top: 2vh;
+}
+#change_img_button{
+  width: 100%;
+  font-size: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2vh;
+}
+#change_img1{
+  background: url(https://ppt.cc/fiJfsx@.png) no-repeat center/contain;
+  border-radius: 50%;
+  width: 7vh;
+  height: 7vh;
+  margin: 1vh;
+}
+#change_img2{
+  background: url(https://ppt.cc/fSrc0x@.png) no-repeat center/contain;
+  border-radius: 50%;
+  width: 7vh;
+  height: 7vh;
+  margin: 1vh;
+}
+/**********upload_img*************/
+input[type="file"]{display:none;}
+#upload_img_box{
+  width: 72vw;
+  padding: 2vh;
+  position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display:none;
+}
+#upload_img_box button{
+  width: 60%;
+  padding: 10px;
+  margin: 1vh;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+  font-size: 2.5vh;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  background: #7FD6D0;
+}
+#upload_product_box{
+  width: 72vw;
+  padding: 2vh;
+  position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#upload_product_box button{
+  width: 60%;
+  padding: 10px;
+  margin: 1vh;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+  font-size: 2.5vh;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  background: #7FD6D0;
+}
+
+/*after click shopping cart icon*/
+#aft_shopping_cart button[name="to_sellist"],
+#aft_shopping_cart button[name="to_buylist"]{
+  width: 54.5vw;
+  padding: 1vh;
+  margin-top: 27vh;
+  margin-left: 10vh;
+  border: none;
+  background-color:#7FD6D0; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2.5vh;
+  letter-spacing: 0.1em;
+}
+#aft_shopping_cart button[name="to_buylist"]{
+  background-color:#556B94; 
+  margin-top: 10vh;
+}
+
+#has_customer{
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+}
+
+#has_customer div{
+  width: 47%;
+  height: 40vh;
+  position: relative;
+  margin-top: 2%;
+  margin-left:2%;
+  background-color: #FFFFFF;
+}
+#has_customer .prd_img{
+  width: 100%;
+  height:auto;
+}
+#has_customer .prd_name{
+  width: 100%;
+  height: 5vh;
+  color:#403E3E;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_customer .prd_type{
+  position: relative;
+  width: 100%;
+  height:auto;
+  color:#7FD6D0;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  padding-top: 3%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_customer .prd_country{
+  position: relative;
+  width: 100%;
+  height:auto;
+  color:#424242;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  padding-top: 5%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_customer .prd_place{
+  position: relative;
+  width: 100%;
+  height: 12%;
+  color:#939191;
+  font-size: 1.5vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_customer .per_img{
+  width:30%;
+  height:auto;
+  margin-left: 5%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+#has_customer .btm{
+  width:50%;
+  height:auto;
+  margin-top: -37%;
+  margin-left: 40%;
+}
+#has_customer .btm .bn_up{
+  width:100%;
+  height:auto;
+  background-color: #7FD6D0;
+  color:#FFFFFF;
+  font-size: 1vh;
+  padding-top: 8%;
+  padding-bottom: 7%;
+  padding-left: 24%;
+  border-radius: 4px;
+}
+#has_customer .btm .bn_dn{
+  width:100%;
+  height:auto;
+  margin-top: 2%;
+  background-color: #E8E8E8;
+  font-size: 1vh;
+  color:#000000;
+  padding-top: 8%;
+  padding-bottom: 7%;
+  padding-left: 24%;
+  border-radius: 4px;
+}
+#subword{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding-left: 40%;
+}
+
+/* #homepage1{display:none} */
 #homepage2{display:none}
+#register_success{display:none}
+
+#personal_page{display:none}
+#personal_page_unsaved{display:none}
+#change_personal_img{display:none}
+#upload_img_box{display:none}
+#upload_product_img{display:none}
+
+#bm_personal_togood{display:none}
+#bm_personal_totrip{display:none}
+#bm_personal_tochat{display:none}
 
 #user_menu{display:none}
 #menu_bar{display:none}
@@ -1146,11 +1866,15 @@ body{
 #mainpage{display:none}
 #show_schedule{display:none}
 #show_need{display:none}
+#product_contant{display:none}
+#self_product{display:none}
+#self_product_page_unsaved{display:none}
 
 #add_new_journey{display:none}
 #add_new_request{display:none}
 #chat_main{display:none}
 #accept_case_list{display:none}
+#aft_shopping_cart{display:none}
 /* #accept_case_list #no_customer{display:none} */
 /* #accept_case_list #has_customer{display:none} */
 
@@ -1160,3 +1884,5 @@ body{
 #add_new_request{display:none}
 #blank{display:none}
 #blank2{display:none}
+
+#product_contant{display:none}
