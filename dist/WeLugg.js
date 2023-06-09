@@ -1021,6 +1021,12 @@ $(document).ready(function() {
   $('#aft_shopping_cart .to_sellist').click((event) => {
     show("accept_case_list")
   })
+  ///////////////////////////
+  $('#aft_shopping_cart .to_buylist').click((event) => {
+    show("accept_case_list")
+  })
+
+
   $('#menu_bar .chat_list').click((event) => {
     show("chat_main")
   })
@@ -1034,33 +1040,33 @@ $(document).ready(function() {
       show(state.pop())
     }
   })
-  // accept_case_list
-  var check_state1 = 0;
-  $(".cus_list_check1").click(function() {
-    if(check_state1 == 0)
-    {
-      $('.cus_list_check1').css({'opacity':'1'});
-      check_state1 = 1;
-    }
-    else if(check_state1 == 1)
-    {
-      $('.cus_list_check1').css({'opacity':'0'});
-      check_state1 = 0;
-    }
-  });
-  var check_state2 = 0;
-  $(".cus_list_check2").click(function() {
-    if(check_state2 == 0)
-    {
-      $('.cus_list_check2').css({'opacity':'1'});
-      check_state2 = 1;
-    }
-    else if(check_state2 == 1)
-    {
-      $('.cus_list_check2').css({'opacity':'0'});
-      check_state2 = 0;
-    }
-  });
+  // // accept_case_list
+  // var check_state1 = 0;
+  // $(".cus_list_check1").click(function() {
+  //   if(check_state1 == 0)
+  //   {
+  //     $('.cus_list_check1').css({'opacity':'1'});
+  //     check_state1 = 1;
+  //   }
+  //   else if(check_state1 == 1)
+  //   {
+  //     $('.cus_list_check1').css({'opacity':'0'});
+  //     check_state1 = 0;
+  //   }
+  // });
+  // var check_state2 = 0;
+  // $(".cus_list_check2").click(function() {
+  //   if(check_state2 == 0)
+  //   {
+  //     $('.cus_list_check2').css({'opacity':'1'});
+  //     check_state2 = 1;
+  //   }
+  //   else if(check_state2 == 1)
+  //   {
+  //     $('.cus_list_check2').css({'opacity':'0'});
+  //     check_state2 = 0;
+  //   }
+  // });
   // chatmain
   var prenum2 = 0;
   $('#chat_main').on('click', '#show_chatmain :nth-child(n) .w', function(){
