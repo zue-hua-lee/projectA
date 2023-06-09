@@ -859,13 +859,13 @@ $(document).ready(function() {
   });
   $uploadCrop_square = $('#aaa_demo').croppie({
     viewport: {
-      width: 180,
-      height: 100,
+      width: 250,
+      height: 139,
       type: 'square'
     },
     boundary: {
-      width: 180,
-      height: 150
+      width: 250,
+      height: 200
     },
     showZoomer: false,
   });
