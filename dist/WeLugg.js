@@ -760,6 +760,7 @@ $(document).ready(function() {
   });
   $('#change_personal_img').click(function() {
     $(this).css({'display':'none'})
+    $('#upload_img_box').css({'display':'none'})
   });
   $("#change_img_box").click(function(event){ 
     event.stopPropagation(); 
@@ -771,8 +772,7 @@ $(document).ready(function() {
     $('#upload_file').click()
   });
   $('#change_img2').click(function(event){ 
-    console.log("change_img2")
-    // all_display_none()
+    $('#camera_file').click()
   });
 
   // 上傳照片
@@ -875,12 +875,24 @@ $(document).ready(function() {
     $('#upload_img_box').css({'display':'flex'})
     readFile(this,1);
   });
+  $('#camera_file').on('change', function () {
+    $('#change_img_box').css({'display':'none'})
+    $('#upload_img_box').css({'display':'flex'})
+    readFile(this,1);
+  });
   $('#upload_result').on('click', function (ev) {
     cropAndUpload();
     $('#change_personal_img').css({'display':'none'});
     $('#upload_img_box').css({'display':'none'});
   });
+
   // 上傳商品照片
+  $('#upload_product_img').click(function() {
+    $(this).css({'display':'none'})
+  });
+  $("#upload_product_box").click(function(event){ 
+    event.stopPropagation(); 
+  });
   $('#upload_product_picture').click(function(event){ 
     $('#aaa_file').click()
   });
