@@ -647,6 +647,8 @@ function show(string) {
     all_display_none()
     state.push("self_product")
     $('#self_product').css({ 'display': 'block' })
+    $('#subpage_title').css({'display':'block'})
+    $('#subpage_title .subpage_word').html("你的委託商品")
     $('#menu_bar').css({ 'display': 'flex' })
   }
   else {
@@ -941,7 +943,7 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     let ss = nn.split(/\s/);
-    show("product_contant")
+    //show("product_contant")
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
 
@@ -977,14 +979,9 @@ $(document).ready(function() {
         add_product_img_state = 0;
       }
       
-      show("product_contant")
-      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
     })
 
-    // product_img[0] = "https://ppt.cc/fjLLEx@.png"
-    // product_img[1] = "https://ppt.cc/fCBEmx@.png"
-    // product_img[2] = "https://ppt.cc/fpJrYx@.png"
-    // product_img[3] = "https://ppt.cc/fvMcWx@.png"
+    show("product_contant")
   });
 
   // schedule 代購者頁面
@@ -1287,6 +1284,7 @@ $(document).ready(function() {
     console.log(add_product_img_state)
     console.log(add_product_img[add_product_img_state])
     $('#buyer_product_img').attr("src", add_product_img[add_product_img_state])
+    $('#self_product_img').attr("src", add_product_img[add_product_img_state])
   })
 
   $('.left_arrow').click((event) => {
@@ -1299,6 +1297,7 @@ $(document).ready(function() {
     console.log(add_product_img_state)
     console.log(add_product_img[add_product_img_state])
     $('#buyer_product_img').attr("src", add_product_img[add_product_img_state])
+    $('#self_product_img').attr("src", add_product_img[add_product_img_state])
   })
 
   //self_product_page
@@ -1538,18 +1537,52 @@ $('#cho_reset').click(function() {
 });
 
 $('#user_menu .bell').click(function () {
-  cho_submit = 0;
-  $("#select_check1").css({ 'display': 'none' });
-  $("#select_check2").css({ 'display': 'none' });
-  $("#select_check3").css({ 'display': 'none' });
-  $("#select_check4").css({ 'display': 'none' });
-  $("#choose").css({ 'display': 'none' });
-  if (state[state.length - 1] == "mainpage_schedule") {
-    to_mainpage_schedule()
-  }
-  else {
-    to_mainpage_need()
-  }
+
+  event.preventDefault()
+    $.post('./read_self_product', {
+      user_name: user_name,
+      product: "product0",
+    }, (data) => {
+      console.log(data)
+      console.log(data[6])
+      $('#self_set_product_name').val(data[0])
+      $('#self_product_place_country').val(data[1])
+      $('#self_product_place_city').val(data[2])
+      $('#self_set_shop_name').val(data[3])
+      $('#self_set_shop_address').val(data[4])
+      $('#self_product_list').val(data[5])
+      $('#self_set_product_quantity').val(data[6])
+      $('#self_shipping_address_country').val(data[7])
+      $('#self_shipping_address_city').val(data[8])
+      $('#self_product_arrive_year').val(data[9])
+      $('#self_product_arrive_month').val(data[10])
+      $('#self_product_arrive_date').val(data[11])
+      $('#self_request_remark').val(data[12])
+      add_product_img_num = 0;
+      for(var i=13; i < data.length; i++){
+        add_product_img[add_product_img_num] = data[i];
+        add_product_img_num++;
+      }
+
+      if(add_product_img[0]){
+        $('#self_product_img').attr("src", add_product_img[0])
+        add_product_img_state = 0;
+      }
+      
+    })
+  show("self_product")
+  // cho_submit = 0;
+  // $("#select_check1").css({ 'display': 'none' });
+  // $("#select_check2").css({ 'display': 'none' });
+  // $("#select_check3").css({ 'display': 'none' });
+  // $("#select_check4").css({ 'display': 'none' });
+  // $("#choose").css({ 'display': 'none' });
+  // if (state[state.length - 1] == "mainpage_schedule") {
+  //   to_mainpage_schedule()
+  // }
+  // else {
+  //   to_mainpage_need()
+  // }
 });
 
 // $(document).click(function (event) {
