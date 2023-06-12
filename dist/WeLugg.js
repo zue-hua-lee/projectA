@@ -760,6 +760,7 @@ $(document).ready(function() {
   });
   $('#change_personal_img').click(function() {
     $(this).css({'display':'none'})
+    $('#upload_img_box').css({'display':'none'})
   });
   $("#change_img_box").click(function(event){ 
     event.stopPropagation(); 
@@ -771,8 +772,7 @@ $(document).ready(function() {
     $('#upload_file').click()
   });
   $('#change_img2').click(function(event){ 
-    console.log("change_img2")
-    // all_display_none()
+    $('#camera_file').click()
   });
 
   // 上傳照片
@@ -859,13 +859,13 @@ $(document).ready(function() {
   });
   $uploadCrop_square = $('#aaa_demo').croppie({
     viewport: {
-      width: 180,
-      height: 100,
+      width: 250,
+      height: 139,
       type: 'square'
     },
     boundary: {
-      width: 180,
-      height: 150
+      width: 250,
+      height: 200
     },
     showZoomer: false,
   });
@@ -875,12 +875,24 @@ $(document).ready(function() {
     $('#upload_img_box').css({'display':'flex'})
     readFile(this,1);
   });
+  $('#camera_file').on('change', function () {
+    $('#change_img_box').css({'display':'none'})
+    $('#upload_img_box').css({'display':'flex'})
+    readFile(this,1);
+  });
   $('#upload_result').on('click', function (ev) {
     cropAndUpload();
     $('#change_personal_img').css({'display':'none'});
     $('#upload_img_box').css({'display':'none'});
   });
+
   // 上傳商品照片
+  $('#upload_product_img').click(function() {
+    $(this).css({'display':'none'})
+  });
+  $("#upload_product_box").click(function(event){ 
+    event.stopPropagation(); 
+  });
   $('#upload_product_picture').click(function(event){ 
     $('#aaa_file').click()
   });
@@ -1018,6 +1030,12 @@ $(document).ready(function() {
   $('#aft_shopping_cart .to_sellist').click((event) => {
     show("accept_case_list")
   })
+  ///////////////////////////
+  $('#aft_shopping_cart .to_buylist').click((event) => {
+    show("accept_case_list")
+  })
+
+
   $('#menu_bar .chat_list').click((event) => {
     show("chat_main")
   })
@@ -1031,33 +1049,33 @@ $(document).ready(function() {
       show(state.pop())
     }
   })
-  // accept_case_list
-  var check_state1 = 0;
-  $(".cus_list_check1").click(function() {
-    if(check_state1 == 0)
-    {
-      $('.cus_list_check1').css({'opacity':'1'});
-      check_state1 = 1;
-    }
-    else if(check_state1 == 1)
-    {
-      $('.cus_list_check1').css({'opacity':'0'});
-      check_state1 = 0;
-    }
-  });
-  var check_state2 = 0;
-  $(".cus_list_check2").click(function() {
-    if(check_state2 == 0)
-    {
-      $('.cus_list_check2').css({'opacity':'1'});
-      check_state2 = 1;
-    }
-    else if(check_state2 == 1)
-    {
-      $('.cus_list_check2').css({'opacity':'0'});
-      check_state2 = 0;
-    }
-  });
+  // // accept_case_list
+  // var check_state1 = 0;
+  // $(".cus_list_check1").click(function() {
+  //   if(check_state1 == 0)
+  //   {
+  //     $('.cus_list_check1').css({'opacity':'1'});
+  //     check_state1 = 1;
+  //   }
+  //   else if(check_state1 == 1)
+  //   {
+  //     $('.cus_list_check1').css({'opacity':'0'});
+  //     check_state1 = 0;
+  //   }
+  // });
+  // var check_state2 = 0;
+  // $(".cus_list_check2").click(function() {
+  //   if(check_state2 == 0)
+  //   {
+  //     $('.cus_list_check2').css({'opacity':'1'});
+  //     check_state2 = 1;
+  //   }
+  //   else if(check_state2 == 1)
+  //   {
+  //     $('.cus_list_check2').css({'opacity':'0'});
+  //     check_state2 = 0;
+  //   }
+  // });
   // chatmain
   var prenum2 = 0;
   $('#chat_main').on('click', '#show_chatmain :nth-child(n) .w', function(){
