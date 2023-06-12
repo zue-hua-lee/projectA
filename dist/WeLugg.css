@@ -536,6 +536,221 @@ body{
   right: 10%;
   top: 83%;
 }
+/***************trip_contant***************/
+#trip_contant .title_list {
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  margin: 0.5vh 0 0 0;
+}
+#trip_contant .select_list {
+  background-color: #F6F3F3;
+  border-color: #F6F3F3;
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  border-radius: 5px;
+}
+#seller {
+  position: absolute;
+  width: 100%;
+  height: 16.28%;
+  top: 20%;
+}
+#seller_profile_img {
+  position: absolute;
+  width: 26.7%;
+  left: 17.3%;
+  top: 13.8%;
+}
+#seller_name {
+  position: absolute;
+  font-size: 2vh;
+  width: 40%;
+  left: 49.11%;
+  top: 15%
+}
+#seller_page {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 41.13%;
+}
+#seller_chat {
+  position: absolute;
+  width: 33.33%;
+  left: 49.11%;
+  top: 65.24%;
+}
+#seller_trip_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 3.93%;
+  top: 36.54%;
+  border-color: #D9D9D9;
+  border-width: 3px 0 0 0;
+  border-style: solid;
+}
+#seller_trip_title_contant {
+  position: absolute;
+  font-size: 1.5vh;
+}
+#seller_trip_contant {
+  position: absolute;
+  height: 51.5%;
+  width: 100%;
+  top: 40%;
+  overflow: scroll;
+}
+#seller_trip_contant::-webkit-scrollbar{
+  display: none;
+}
+#seller_trip_detail {
+  position: absolute;
+  height: 190%;
+  width: 100%;
+  top: 0%;
+}
+#seller_trip_img_place{
+  position: absolute;
+  width: 100%;
+  height: 26%;
+  top: 0%;
+
+  border-color: #D9D9D9;
+  border-width: 3px 0 3px 0;
+  border-style: solid;
+}
+#seller_trip_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+}
+#seller_journey {
+  position: absolute;
+  height: 25%;
+  width: 100%;
+  top: 27%;
+  padding: 0 8%;
+}
+#seller_journey .seller_journey_title {
+  position: absolute;
+  height: 10%;
+  left: 3.5%;
+}
+#seller_journey .seller_sub_title1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 15%;
+}
+#seller_departure_country, #seller_departure_city {
+  flex-grow: 0.2;
+}
+#seller_journey .seller_sub_title2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 30%;
+}
+#seller_entry_country, #seller_entry_city {
+  flex-grow: 0.2;
+}
+#seller_entry_country .seller_sub_title3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 45%;
+}
+#seller_entry_country .seller_sub_title4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 60%;
+}
+#seller_product {
+  position: absolute;
+  height: 11%;
+  width: 100%;
+  top: 55%;
+  padding: 0 8%;
+}
+#seller_product .seller_product_title {
+  position: absolute;
+  height: 28%;
+  left: 3.5%;
+}
+#seller_product .seller_sub_title5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 35%;
+}
+#seller_product_list {
+  flex-grow: 0.4;
+}
+#seller_luggage .seller_sub_title7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 21%;
+  width: 54%;
+  top: 38%;
+}
+#seller_big_luggage {
+  position: absolute;
+  height: 75%;
+  left: 70%;
+  top: 17%;
+}
+#seller_cost {
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  top: 67%;
+  padding: 0 8%;
+}
+#seller_cost .seller_cost_title {
+  position: absolute;
+  height: 15%;
+  left: 3.5%;
+}
+#seller_cost .seller_sub_title8 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 31.51%;
+  width: 84%;
+  top: 26%;
+}
+#seller_other_trip {
+  position: absolute;
+  width: 27.73%;
+  right: 10%;
+  top: 90%;
+}
+
 /***************request_data***************/
 #request_data .title_list {
   color: #939191;
@@ -1024,10 +1239,10 @@ body{
   display: none;
   position: absolute;
   background: url(https://ppt.cc/fVKlpx@.png) no-repeat center/contain;
-  width: 5vh;
-  height: 5vh;
-  margin: 3.5vh;
-  opacity: 0.7;
+  width: 11.2%;
+  height: 20%;
+  top: 35%;
+  left: 45%;
   z-index: 10;
 }
 
@@ -1166,12 +1381,13 @@ body{
   border-radius: 10px;
 }
 
-#edit_product {
+#edit_self_product {
   position: absolute;
-  width: 27.73%;
   right: 10%;
   top: 92%;
 
+  padding: 10px 25px 10px 25px;
+  color: #FFFFFF;
   background-color: #556B94;
   border-radius: 10px;
 }
@@ -1363,6 +1579,7 @@ body{
 #deal_agree,
 #personal_page_unsaved,
 #change_personal_img,
+#self_product_page_unsaved,
 #upload_product_img{
   width: 100%;
   height: 100%;
@@ -2087,7 +2304,7 @@ input[type="file"]{display:none;}
 #mainpage{display:none}
 #show_schedule{display:none}
 #show_need{display:none}
-#product_contant{display:none}
+
 #self_product{display:none}
 #self_product_page_unsaved{display:none}
 
@@ -2107,3 +2324,4 @@ input[type="file"]{display:none;}
 #blank2{display:none}
 
 #product_contant{display:none}
+#trip_contant{display:none}

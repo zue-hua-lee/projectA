@@ -203,6 +203,36 @@ app.get('/journey_data', (req, res) => { //用get傳
   res.send("aaa")
 })
 
+//trip_contant
+app.post('/trip_contant', (req, res) => { //用get傳
+  fs.readFile('./data.json', function (err, data) {
+      if (err) throw err;
+      //將二進制數據轉換為字串符
+      //var stu_list = data.toString();
+      //將字符串轉換為 JSON 對象
+      data = JSON.parse(data);
+      //將傳來的資訊推送到數組對象中
+      let str = []
+      str[0] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_country"]
+      str[1] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_city"]
+      str[2] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_country"]
+      str[3] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_city"]
+      str[4] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_year"]
+      str[5] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_month"]
+      str[6] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_date"]
+      str[7] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_year"]
+      str[8] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_month"]
+      str[9] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_date"]
+      str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_list"]
+      str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["luggage_size_list"]
+      str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["luggage_space_list"]
+      str[13] = data[`${req.body.user_name}`][`${req.body.product}`]["set_tip"]
+
+      res.send(str)
+  })
+})
+
+
 // add_new_request
 app.get('/request_data', (req, res) => { //用get傳
     console.log(req.query.product_img)
@@ -380,19 +410,19 @@ app.post('/save_self_product', (req, res) => {
     if(err){return console.error(err)}
     data = JSON.parse(data)
 
-    data[req.query.user_name][req.body.product]['shipping_address_country'] = req.query.self_shipping_address_country
-    data[req.query.user_name][req.body.product]['shipping_address_city'] = req.query.self_shipping_address_city
-    data[req.query.user_name][req.body.product]['product_place_country'] = req.query.self_product_place_country
-    data[req.query.user_name][req.body.product]['product_place_city'] = req.query.self_product_place_city
-    data[req.query.user_name][req.body.product]['set_product_name'] = req.query.self_set_product_name
-    data[req.query.user_name][req.body.product]['set_shop_name'] = req.query.self_set_shop_name
-    data[req.query.user_name][req.body.product]['set_shop_address'] = req.query.self_set_shop_address
-    data[req.query.user_name][req.body.product]['request_product_list'] = req.query.self_product_list
-    data[req.query.user_name][req.body.product]['set_product_quantity'] = req.query.self_set_product_quantity
-    data[req.query.user_name][req.body.product]['product_arrive_year'] = req.query.self_product_arrive_year
-    data[req.query.user_name][req.body.product]['product_arrive_month'] = req.query.self_product_arrive_month
-    data[req.query.user_name][req.body.product]['product_arrive_date'] = req.query.self_product_arrive_date
-    data[req.query.user_name][req.body.product]['request_remark'] = req.query.self_request_remark
+    data[req.body.user_name][req.body.product]['shipping_address_country'] = req.body.self_shipping_address_country
+    data[req.body.user_name][req.body.product]['shipping_address_city'] = req.body.self_shipping_address_city
+    data[req.body.user_name][req.body.product]['product_place_country'] = req.body.self_product_place_country
+    data[req.body.user_name][req.body.product]['product_place_city'] = req.body.self_product_place_city
+    data[req.body.user_name][req.body.product]['set_product_name'] = req.body.self_set_product_name
+    data[req.body.user_name][req.body.product]['set_shop_name'] = req.body.self_set_shop_name
+    data[req.body.user_name][req.body.product]['set_shop_address'] = req.body.self_set_shop_address
+    data[req.body.user_name][req.body.product]['request_product_list'] = req.body.self_product_list
+    data[req.body.user_name][req.body.product]['set_product_quantity'] = req.body.self_set_product_quantity
+    data[req.body.user_name][req.body.product]['product_arrive_year'] = req.body.self_product_arrive_year
+    data[req.body.user_name][req.body.product]['product_arrive_month'] = req.body.self_product_arrive_month
+    data[req.body.user_name][req.body.product]['product_arrive_date'] = req.body.self_product_arrive_date
+    data[req.body.user_name][req.body.product]['request_remark'] = req.body.self_request_remark
 
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}

@@ -11,6 +11,7 @@ let add_product_img = [];
 
 
 
+
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
   $('#homepage2').css({'display':'none'})
@@ -42,6 +43,7 @@ function all_display_none() {
   $('#deal_success').css({ 'display': 'none' })
   $('#chat_box').css({ 'display': 'none' })
   $('#product_contant').css({ 'display': 'none' })
+  $('#trip_contant').css({ 'display': 'none' })
   $('#self_product').css({ 'display': 'none' })
 }
 
@@ -643,6 +645,13 @@ function show(string) {
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
   }
+  else if(string == "trip_contant"){
+    all_display_none()
+    state.push("trip_contant")
+    $('#trip_contant').css({'display':'block'})
+    $('#user_menu').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
+  }
   else if (string == "self_product") {
     all_display_none()
     state.push("self_product")
@@ -928,6 +937,48 @@ $(document).ready(function() {
     let ss = nn.split(/\s/);
     console.log(ss[0]) // user1
     console.log(ss[1]) // trip0
+
+    event.preventDefault()
+    $.post('./trip_contant', {
+      user_name: ss[0],
+      product: ss[1],
+    }, (data) => {
+      $('#seller_name').html(ss[0])
+      console.log(data)
+      console.log(data[6])
+      $('#seller_departure_country').html(data[0])
+      $('#seller_departure_city').html(data[1])
+      $('#seller_entry_country').html(data[2])
+      $('#seller_entry_city').html(data[3])
+      $('#seller_departure_year').html(data[4])
+      $('#seller_departure_month').html(data[5])
+      $('#seller_departure_date').html(data[6])
+      $('#seller_entry_year').html(data[7])
+      $('#seller_entry_month').html(data[8])
+      $('#seller_entry_date').html(data[9])
+      $('#seller_product_list').html(data[10])
+      $('#seller_luggage_size_list').html(data[11])
+      $('#seller_luggage_space_list').html(data[12])
+
+      index = data[12];
+      if(index=="20"){$("#seller_big_luggage").attr("src","https://ppt.cc/flWv0x@.png");}
+      else if(index=="40"){ $("#seller_big_luggage").attr("src","https://ppt.cc/fyz1fx@.png"); }
+      else if(index=="60"){ $("#seller_big_luggage").attr("src","https://ppt.cc/faeuHx@.png"); }
+      else if(index=="80"){ $("#seller_big_luggage").attr("src","https://ppt.cc/fOwTNx@.png"); }
+      else if(index=="100"){ $("#seller_big_luggage").attr("src","https://ppt.cc/fbY02x@.png"); }
+
+      $('#seller_set_tip').html(data[13])
+      
+      if(data[2]=="台灣"){$("#seller_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
+      else if(data[2]=="日本"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
+      else if(data[2]=="韓國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
+      else if(data[2]=="中國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+      else if(data[2]=="美國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+      else if(data[2]=="法國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+      else if(data[2]=="德國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+    })
+
+    show("trip_contant")
   });
 
   // mainpage-我是購買者
@@ -955,7 +1006,6 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     let ss = nn.split(/\s/);
-    //show("product_contant")
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
 
@@ -1043,6 +1093,9 @@ $(document).ready(function() {
   $('#subpage_title .case_back_button').click((event) => {
     if(state[state.length-1] == "personal_page_my" && edit_state){
       $('#personal_page_unsaved').css({'display':'flex'})
+    }
+    else if(state[state.length-1] == "self_product" && edit_product_state){
+      $('#self_product_page_unsaved').css({'display':'flex'})
     }
     else{
       state.pop()
@@ -1319,8 +1372,134 @@ $(document).ready(function() {
   })
 
   //self_product_page
+  $('#user_menu .bell').click(function () {
+
+    event.preventDefault()
+      $.post('./read_self_product', {
+        user_name: user_name,
+        product: "product0",
+      }, (data) => {
+        console.log(data)
+        console.log(data[2])
+        console.log(data[8])
+        $('#self_set_product_name').val(data[0])
+        $('#self_product_place_country').val(data[1])
+
+        if(data[1]=="台灣"){index = 1;}
+        else if(data[1]=="日本"){index = 2;}
+        else if(data[1]=="韓國"){index = 3;}
+        else if(data[1]=="中國"){index = 4;}
+        else if(data[1]=="美國"){index = 5;}
+        else if(data[1]=="法國"){index = 6;}
+        else if(data[1]=="德國"){index = 7;}
+        var Sinner='';
+        for(var i=0;i<city[index].length;i++){
+            Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+        }
+        $('#self_product_place_city').html(Sinner);
+        $('#self_product_place_city').val(data[2])
+
+        $('#self_set_shop_name').val(data[3])
+        $('#self_set_shop_address').val(data[4])
+        $('#self_product_list').val(data[5])
+        $('#self_set_product_quantity').val(data[6])
+        $('#self_shipping_address_country').val(data[7])
+
+        if(data[7]=="台灣"){index = 1;}
+        else if(data[7]=="日本"){index = 2;}
+        else if(data[7]=="韓國"){index = 3;}
+        else if(data[7]=="中國"){index = 4;}
+        else if(data[7]=="美國"){index = 5;}
+        else if(data[7]=="法國"){index = 6;}
+        else if(data[7]=="德國"){index = 7;}
+        Sinner='';
+        for(var i=0;i<city[index].length;i++){
+            Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+        }
+        $('#self_shipping_address_city').html(Sinner);
+        $('#self_shipping_address_city').val(data[8])
+
+        $('#self_product_arrive_year').val(data[9])
+        $('#self_product_arrive_month').val(data[10])
+
+        index = data[10]; //從1開始 第幾個選項(數字)
+        Sinner='';
+        if(index=='1' || index=='3' || index=='5' || index=='7' || index=='8' || index=='10' || index=='12'){
+            for(var i=1;i<=31;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='4' || index=='6' || index=='9' || index=='11'){
+            for(var i=1;i<=30;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='2'){
+            for(var i=1;i<=28;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        $('#self_product_arrive_date').html(Sinner);
+        $('#self_product_arrive_date').val(data[11])
+
+        $('#self_request_remark').val(data[12])
+        add_product_img_num = 0;
+        for(var i=13; i < data.length; i++){
+          add_product_img[add_product_img_num] = data[i];
+          add_product_img_num++;
+        }
+  
+        if(add_product_img[0]){
+          $('#self_product_img').attr("src", add_product_img[0])
+          add_product_img_state = 0;
+        }
+        
+      })
+    show("self_product")
+  });
+
+  $('#self_product_place_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#self_product_place_city').html(Sinner);
+  });
+
+  $('#self_shipping_address_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#self_shipping_address_city').html(Sinner);
+  });
+
+  $('#self_product_arrive_month').change(function(){
+      index = this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
+          for(var i=1;i<=31;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==4 || index==6 || index==9 || index==11){
+          for(var i=1;i<=30;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==2){
+          for(var i=1;i<=28;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+
+      $('#self_product_arrive_date').html(Sinner);
+  });
+
   var edit_product_state = 0;
-  $('#edit_product').click(async function () {
+  $('#edit_self_product').click(async function () {
     if (!edit_product_state) {
       $('#self_product input[type="text"]').attr("disabled", false);
       $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #939191'})
@@ -1336,7 +1515,7 @@ $(document).ready(function() {
       $('#self_product select').attr("disabled", true);
       $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
       $(this).text("編輯內容")
-      edit_state = 0
+      edit_product_state = 0
     }
   });
   
@@ -1354,8 +1533,8 @@ $(document).ready(function() {
     $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
     $('#self_product select').attr("disabled", true);
     $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
-    $(this).text("編輯內容")
-    edit_state = 0
+    $('#edit_self_product').text("編輯內容")
+    edit_product_state = 0;
   });
   
 
@@ -1554,54 +1733,6 @@ $('#cho_reset').click(function() {
   show("mainpage_schedule")
 });
 
-$('#user_menu .bell').click(function () {
-
-  event.preventDefault()
-    $.post('./read_self_product', {
-      user_name: user_name,
-      product: "product0",
-    }, (data) => {
-      console.log(data)
-      console.log(data[6])
-      $('#self_set_product_name').val(data[0])
-      $('#self_product_place_country').val(data[1])
-      $('#self_product_place_city').val(data[2])
-      $('#self_set_shop_name').val(data[3])
-      $('#self_set_shop_address').val(data[4])
-      $('#self_product_list').val(data[5])
-      $('#self_set_product_quantity').val(data[6])
-      $('#self_shipping_address_country').val(data[7])
-      $('#self_shipping_address_city').val(data[8])
-      $('#self_product_arrive_year').val(data[9])
-      $('#self_product_arrive_month').val(data[10])
-      $('#self_product_arrive_date').val(data[11])
-      $('#self_request_remark').val(data[12])
-      add_product_img_num = 0;
-      for(var i=13; i < data.length; i++){
-        add_product_img[add_product_img_num] = data[i];
-        add_product_img_num++;
-      }
-
-      if(add_product_img[0]){
-        $('#self_product_img').attr("src", add_product_img[0])
-        add_product_img_state = 0;
-      }
-      
-    })
-  show("self_product")
-  // cho_submit = 0;
-  // $("#select_check1").css({ 'display': 'none' });
-  // $("#select_check2").css({ 'display': 'none' });
-  // $("#select_check3").css({ 'display': 'none' });
-  // $("#select_check4").css({ 'display': 'none' });
-  // $("#choose").css({ 'display': 'none' });
-  // if (state[state.length - 1] == "mainpage_schedule") {
-  //   to_mainpage_schedule()
-  // }
-  // else {
-  //   to_mainpage_need()
-  // }
-});
 
 // $(document).click(function (event) {
 //   //目標--點這些東西之外就會不見
