@@ -544,6 +544,9 @@ body{
   margin: 0.5vh 0 0 0;
 }
 #trip_contant .select_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #F6F3F3;
   border-color: #F6F3F3;
   color: #939191;
@@ -632,14 +635,14 @@ body{
 }
 #seller_journey {
   position: absolute;
-  height: 25%;
+  height: 20%;
   width: 100%;
   top: 27%;
   padding: 0 8%;
 }
 #seller_journey .seller_journey_title {
   position: absolute;
-  height: 10%;
+  height: 14%;
   left: 3.5%;
 }
 #seller_journey .seller_sub_title1 {
@@ -649,7 +652,7 @@ body{
   position: absolute;
   height: 10%;
   width: 84%;
-  top: 15%;
+  top: 20%;
 }
 #seller_departure_country, #seller_departure_city {
   flex-grow: 0.2;
@@ -661,21 +664,12 @@ body{
   position: absolute;
   height: 10%;
   width: 84%;
-  top: 30%;
+  top: 40%;
 }
 #seller_entry_country, #seller_entry_city {
   flex-grow: 0.2;
 }
-#seller_entry_country .seller_sub_title3 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  height: 10%;
-  width: 84%;
-  top: 45%;
-}
-#seller_entry_country .seller_sub_title4 {
+#seller_journey .seller_sub_title3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -684,16 +678,31 @@ body{
   width: 84%;
   top: 60%;
 }
+#seller_departure_year, #seller_departure_month, #seller_departure_date {
+  flex-grow: 0.2;
+}
+#seller_journey .seller_sub_title4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 80%;
+}
+#seller_entry_year, #seller_entry_month, #seller_entry_date {
+  flex-grow: 0.2;
+}
 #seller_product {
   position: absolute;
-  height: 11%;
-  width: 100%;
-  top: 55%;
+  height: 8%;
+  width: 84%;
+  top: 48%;
   padding: 0 8%;
 }
 #seller_product .seller_product_title {
   position: absolute;
-  height: 28%;
+  height: 31%;
   left: 3.5%;
 }
 #seller_product .seller_sub_title5 {
@@ -703,9 +712,33 @@ body{
   position: absolute;
   height: 24.3%;
   width: 84%;
-  top: 35%;
+  top: 60%;
 }
 #seller_product_list {
+  flex-grow: 0.7;
+}
+#seller_luggage {
+  position: absolute;
+  height: 18%;
+  width: 100%;
+  top: 59%;
+  padding: 0 8%;
+}
+#seller_luggage .seller_luggage_title {
+  position: absolute;
+  height: 16%;
+  left: 3.5%;
+}
+#seller_luggage .seller_sub_title6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 21%;
+  width: 54%;
+  top: 25%;
+}
+#seller_luggage_size_list {
   flex-grow: 0.4;
 }
 #seller_luggage .seller_sub_title7 {
@@ -715,7 +748,10 @@ body{
   position: absolute;
   height: 21%;
   width: 54%;
-  top: 38%;
+  top: 50%;
+}
+#seller_luggage_space_list {
+  flex-grow: 0.6;
 }
 #seller_big_luggage {
   position: absolute;
@@ -727,7 +763,7 @@ body{
   position: absolute;
   height: 20%;
   width: 100%;
-  top: 67%;
+  top: 77%;
   padding: 0 8%;
 }
 #seller_cost .seller_cost_title {
@@ -742,13 +778,240 @@ body{
   position: absolute;
   height: 31.51%;
   width: 84%;
-  top: 26%;
+  top: 20%;
+}
+#seller_set_tip {
+  flex-grow: 0.7;
 }
 #seller_other_trip {
   position: absolute;
   width: 27.73%;
   right: 10%;
   top: 90%;
+}
+/***************self_trip_page***************/
+#self_trip .title_list {
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  margin: 0.5vh 0 0 0;
+}
+#self_trip .select_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F6F3F3;
+  border: solid 1px #F7F7F7;
+  color: #939191;
+  font-size: 1.5vh;
+  font-weight: 400;
+  border-radius: 5px;
+}
+#self_trip_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 3.93%;
+  top: 11.6%;
+  border-color: #D9D9D9;
+  border-width: 3px 0 0 0;
+  border-style: solid;
+}
+#self_trip_contant {
+  position: absolute;
+  height: 75.6%;
+  width: 100%;
+  top: 15%;
+  overflow: scroll;
+}
+#self_trip_contant::-webkit-scrollbar{
+  display: none;
+}
+#self_trip_detail {
+  position: absolute;
+  height: 135%;
+  width: 100%;
+  top: 0%;
+}
+#self_trip_img_place{
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  top: 0%;
+
+  border-color: #D9D9D9;
+  border-width: 3px 0 3px 0;
+  border-style: solid;
+}
+#self_trip_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+}
+
+#self_journey {
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  top: 27%;
+  padding: 0 8%;
+}
+#self_journey .self_journey_title {
+  position: absolute;
+  height: 14%;
+  left: 3.5%;
+}
+#self_journey .self_sub_title1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 20%;
+}
+#self_departure_country, #self_departure_city {
+  flex-grow: 0.2;
+}
+#self_journey .self_sub_title2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 40%;
+}
+#self_entry_country, #self_entry_city {
+  flex-grow: 0.2;
+}
+#self_journey .self_sub_title3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 60%;
+}
+#self_departure_year, #self_departure_month, #self_departure_date {
+  flex-grow: 0.2;
+}
+#self_journey .self_sub_title4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 10%;
+  width: 84%;
+  top: 80%;
+}
+#self_entry_year, #self_entry_month, #self_entry_date {
+  flex-grow: 0.2;
+}
+#self_trip_product {
+  position: absolute;
+  height: 8%;
+  width: 84%;
+  top: 48%;
+  padding: 0 8%;
+}
+#self_trip_product .self_trip_product_title {
+  position: absolute;
+  height: 31%;
+  left: 3.5%;
+}
+#self_trip_product .self_sub_title5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 24.3%;
+  width: 84%;
+  top: 60%;
+}
+#self_trip_product_list {
+  flex-grow: 0.7;
+}
+#self_luggage {
+  position: absolute;
+  height: 18%;
+  width: 100%;
+  top: 59%;
+  padding: 0 8%;
+}
+#self_luggage .self_luggage_title {
+  position: absolute;
+  height: 16%;
+  left: 3.5%;
+}
+#self_luggage .self_sub_title6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 21%;
+  width: 54%;
+  top: 25%;
+}
+#self_luggage_size_list {
+  flex-grow: 0.4;
+}
+#self_luggage .self_sub_title7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 21%;
+  width: 54%;
+  top: 50%;
+}
+#self_luggage_space_list {
+  flex-grow: 0.6;
+}
+#self_big_luggage {
+  position: absolute;
+  height: 75%;
+  left: 70%;
+  top: 17%;
+}
+#self_cost {
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  top: 77%;
+  padding: 0 8%;
+}
+#self_cost .self_cost_title {
+  position: absolute;
+  height: 15%;
+  left: 3.5%;
+}
+#self_cost .self_sub_title8 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 31.51%;
+  width: 84%;
+  top: 20%;
+}
+#self_set_tip {
+  flex-grow: 0.7;
+}
+
+#edit_self_trip {
+  position: absolute;
+  right: 10%;
+  top: 92%;
+
+  padding: 10px 25px 10px 25px;
+  color: #FFFFFF;
+  background-color: #7FD6D0;
+  border-radius: 10px;
 }
 
 /***************request_data***************/
@@ -1168,7 +1431,7 @@ body{
   align-items: center;
   justify-content: center;
   background-color: #F6F3F3;
-  border-color: #F6F3F3;
+  border: solid 1px #F7F7F7;
   color: #939191;
   font-size: 1.5vh;
   font-weight: 400;
@@ -1185,10 +1448,6 @@ body{
   border-color: #D9D9D9;
   border-width: 3px 0 0 0;
   border-style: solid;
-}
-#self_product_title_contant {
-  position: absolute;
-  font-size: 1.5vh;
 }
 #self_product_contant {
   position: absolute;
@@ -1579,6 +1838,7 @@ body{
 #deal_agree,
 #personal_page_unsaved,
 #change_personal_img,
+#self_trip_page_unsaved,
 #self_product_page_unsaved,
 #upload_product_img{
   width: 100%;
@@ -2304,6 +2564,9 @@ input[type="file"]{display:none;}
 #mainpage{display:none}
 #show_schedule{display:none}
 #show_need{display:none}
+
+#self_trip{display:none}
+#self_trip_page_unsaved{display:none}
 
 #self_product{display:none}
 #self_product_page_unsaved{display:none}

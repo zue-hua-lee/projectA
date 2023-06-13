@@ -213,20 +213,21 @@ app.post('/trip_contant', (req, res) => { //用get傳
       data = JSON.parse(data);
       //將傳來的資訊推送到數組對象中
       let str = []
-      str[0] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_country"]
-      str[1] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_city"]
-      str[2] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_country"]
-      str[3] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_city"]
-      str[4] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_year"]
-      str[5] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_month"]
-      str[6] = data[`${req.body.user_name}`][`${req.body.product}`]["departure_date"]
-      str[7] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_year"]
-      str[8] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_month"]
-      str[9] = data[`${req.body.user_name}`][`${req.body.product}`]["entry_date"]
-      str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_list"]
-      str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["luggage_size_list"]
-      str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["luggage_space_list"]
-      str[13] = data[`${req.body.user_name}`][`${req.body.product}`]["set_tip"]
+      str[0] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_country"]
+      str[1] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_city"]
+      str[2] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_country"]
+      str[3] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_city"]
+      str[4] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_year"]
+      str[5] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_month"]
+      str[6] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_date"]
+      str[7] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_year"]
+      str[8] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_month"]
+      str[9] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_date"]
+      str[10] = data[`${req.body.user_name}`][`${req.body.trip}`]["product_list"]
+      str[11] = data[`${req.body.user_name}`][`${req.body.trip}`]["luggage_size_list"]
+      str[12] = data[`${req.body.user_name}`][`${req.body.trip}`]["luggage_space_list"]
+      str[13] = data[`${req.body.user_name}`][`${req.body.trip}`]["set_tip"]
+      str[14] = data[`${req.body.user_name}`]["url"]
 
       res.send(str)
   })
@@ -297,7 +298,9 @@ app.post('/product_contant', (req, res) => { //用get傳
       str[10] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_month"]
       str[11] = data[`${req.body.user_name}`][`${req.body.product}`]["product_arrive_date"]
       str[12] = data[`${req.body.user_name}`][`${req.body.product}`]["request_remark"]
-      var url_place = 13
+      str[13] = data[`${req.body.user_name}`]["url"]
+      
+      var url_place = 14
 
       for(const id in data[`${req.body.user_name}`][`${req.body.product}`]){
         if(id.substring(0, 3) == "url"){
@@ -427,6 +430,57 @@ app.post('/save_self_product', (req, res) => {
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
       res.send("save self product success.")
+    })
+  })
+})
+
+// self_trip_page
+app.post('/read_self_trip', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    let str = []
+    str[0] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_country"]
+    str[1] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_city"]
+    str[2] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_country"]
+    str[3] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_city"]
+    str[4] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_year"]
+    str[5] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_month"]
+    str[6] = data[`${req.body.user_name}`][`${req.body.trip}`]["departure_date"]
+    str[7] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_year"]
+    str[8] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_month"]
+    str[9] = data[`${req.body.user_name}`][`${req.body.trip}`]["entry_date"]
+    str[10] = data[`${req.body.user_name}`][`${req.body.trip}`]["product_list"]
+    str[11] = data[`${req.body.user_name}`][`${req.body.trip}`]["luggage_size_list"]
+    str[12] = data[`${req.body.user_name}`][`${req.body.trip}`]["luggage_space_list"]
+    str[13] = data[`${req.body.user_name}`][`${req.body.trip}`]["set_tip"]
+
+    res.send(str)
+  })
+})
+app.post('/save_self_trip', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+
+    data[req.body.user_name][req.body.trip]['departure_country'] = req.body.self_departure_country
+    data[req.body.user_name][req.body.trip]['departure_city'] = req.body.self_departure_city
+    data[req.body.user_name][req.body.trip]['entry_country'] = req.body.self_entry_country
+    data[req.body.user_name][req.body.trip]['entry_city'] = req.body.self_entry_city
+    data[req.body.user_name][req.body.trip]['departure_year'] = req.body.self_departure_year
+    data[req.body.user_name][req.body.trip]['departure_month'] = req.body.self_departure_month
+    data[req.body.user_name][req.body.trip]['departure_date'] = req.body.self_departure_date
+    data[req.body.user_name][req.body.trip]['entry_year'] = req.body.self_entry_year
+    data[req.body.user_name][req.body.trip]['entry_month'] = req.body.self_entry_month
+    data[req.body.user_name][req.body.trip]['entry_date'] = req.body.self_entry_date
+    data[req.body.user_name][req.body.trip]['product_list'] = req.body.self_trip_product_list
+    data[req.body.user_name][req.body.trip]['luggage_size_list'] = req.body.self_luggage_size_list
+    data[req.body.user_name][req.body.trip]['luggage_space_list'] = req.body.self_luggage_space_list
+    data[req.body.user_name][req.body.trip]['set_tip'] = req.body.self_set_tip
+
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self trip success.")
     })
   })
 })
