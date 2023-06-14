@@ -13,7 +13,7 @@ const app = express()
 const port = 9484 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true}))
 
 app.use(bodyParser.json())
 
@@ -353,29 +353,6 @@ app.post('/save_personal', (req, res) => {
   })
 })
 
-// upload personal img
-import multer from 'multer'
-const upload = multer({ dest: "src/" });
-app.use("/src", express.static("src"));
-
-app.post("/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send("沒有選擇圖片");
-  }
-  const imageUrl = "/src/" + req.file.filename;
-  res.json({ url: imageUrl });
-});
-app.post('/store_personal_img', (req, res) => {
-  fs.readFile('./data.json', function (err, data) {
-    if(err){return console.error(err)}
-    data = JSON.parse(data)
-    data[`${req.body.name}`]["url"] = `${req.body.url}`
-    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
-      if(err){return console.error(err)}
-    })
-  })
-})
-
 // self_product_page
 app.post('/read_self_product', (req, res) => {
   fs.readFile('./data.json', function (err, data) {
@@ -427,6 +404,14 @@ app.post('/save_self_product', (req, res) => {
     data[req.body.user_name][req.body.product]['product_arrive_date'] = req.body.self_product_arrive_date
     data[req.body.user_name][req.body.product]['request_remark'] = req.body.self_request_remark
 
+    for(var i = 13; i < data[req.body.user_name][req.body.product].length; i++){
+      delete data[req.body.user_name][req.body.product][i]
+    }
+    if(req.body.self_product_img != null){
+      for(var i = 0; i < req.body.self_product_img.length; i++){
+        data[req.body.user_name][req.body.product]['url'+i] = req.body.self_product_img[i]
+      }
+    }
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
       res.send("save self product success.")
@@ -481,6 +466,29 @@ app.post('/save_self_trip', (req, res) => {
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
       res.send("save self trip success.")
+    })
+  })
+})
+
+// upload personal img
+import multer from 'multer'
+const upload = multer({ dest: "src/" });
+app.use("/src", express.static("src"));
+
+app.post("/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("沒有選擇圖片");
+  }
+  const imageUrl = "/src/" + req.file.filename;
+  res.json({ url: imageUrl });
+});
+app.post('/store_personal_img', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[`${req.body.name}`]["url"] = `${req.body.url}`
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
     })
   })
 })

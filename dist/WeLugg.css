@@ -1502,6 +1502,7 @@ body{
   height: 20%;
   top: 35%;
   left: 45%;
+  opacity: 0.7;
   z-index: 10;
 }
 
