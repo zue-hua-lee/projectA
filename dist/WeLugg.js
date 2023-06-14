@@ -1153,6 +1153,7 @@ $(document).ready(function() {
       $('#buyer_profile_img').attr("src",data[13])
 
       add_product_img_num = 0;
+      add_product_img = [];
       for(var i=14; i < data.length; i++){
         add_product_img[add_product_img_num] = data[i];
         add_product_img_num++;
@@ -1590,7 +1591,9 @@ $(document).ready(function() {
         $('#self_product_arrive_date').val(data[11])
 
         $('#self_request_remark').val(data[12])
+
         add_product_img_num = 0;
+        add_product_img = [];
         for(var i=13; i < data.length; i++){
           add_product_img[add_product_img_num] = data[i];
           add_product_img_num++;
@@ -1685,6 +1688,7 @@ $(document).ready(function() {
   });
 */
 
+/* 等著換觸發條件 不要刪掉！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！*/
   //self_trip_page
   $('#user_menu .bell').click(function () {
 
@@ -1720,20 +1724,20 @@ $(document).ready(function() {
         $('#self_departure_city').val(data[1])
 
         $('#self_entry_country').val(data[2])
-        if(data[2]=="台灣"){$("#seller_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
-        else if(data[2]=="日本"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
-        else if(data[2]=="韓國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
-        else if(data[2]=="中國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
-        else if(data[2]=="港澳"){ $("#seller_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
-        else if(data[2]=="泰國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
-        else if(data[2]=="越南"){ $("#seller_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
-        else if(data[2]=="馬來西亞"){ $("#seller_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
-        else if(data[2]=="新加坡"){ $("#seller_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
-        else if(data[2]=="美國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
-        else if(data[2]=="英國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
-        else if(data[2]=="法國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
-        else if(data[2]=="德國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
-        else if(data[2]=="加拿大"){ $("#seller_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
+        if(data[2]=="台灣"){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
+        else if(data[2]=="日本"){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
+        else if(data[2]=="韓國"){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
+        else if(data[2]=="中國"){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+        else if(data[2]=="港澳"){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+        else if(data[2]=="泰國"){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+        else if(data[2]=="越南"){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+        else if(data[2]=="馬來西亞"){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+        else if(data[2]=="新加坡"){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
+        else if(data[2]=="美國"){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+        else if(data[2]=="英國"){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
+        else if(data[2]=="法國"){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+        else if(data[2]=="德國"){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+        else if(data[2]=="加拿大"){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
 
         if(data[2]=="台灣"){index = 1;}
         else if(data[2]=="日本"){index = 2;}
@@ -1842,9 +1846,16 @@ $(document).ready(function() {
       else if(index==2){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
       else if(index==3){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
       else if(index==4){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
-      else if(index==5){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
-      else if(index==6){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
-      else if(index==7){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+      else if(index==5){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+      else if(index==6){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+      else if(index==7){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+      else if(index==8){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+      else if(index==9){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
+      else if(index==10){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+      else if(index==11){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
+      else if(index==12){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+      else if(index==13){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+      else if(index==14){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
   });
 
   $('#self_departure_month').change(function(){
