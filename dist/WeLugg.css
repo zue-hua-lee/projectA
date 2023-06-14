@@ -257,7 +257,7 @@ body{
   width: 100%;
   border-color: #D9D9D9;
   border-style: solid;
-  border-width: 0 0 0.5vh 0;
+  border-width: 0 0 0 0;
 }
 #top {
   position: relative;
@@ -379,6 +379,42 @@ body{
 #selbar .select_pic{
   height: 2vh;
   margin: 1.1vh;
+}
+/***************moreofmine***************/
+#moreofmine{
+  width: 100%;
+  height: 10vh;
+  background-color: #7FD6D0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1vh;
+  position: relative;
+}
+#moreofmine .moreofmine_dis{
+  color:#FFFFFF;
+  font-size: 1.5vh;
+  position: relative;
+  top: 1.1vh;
+  left: 2.2vh;
+}
+#moreofmine .moreofmine_content{
+  color:#FFFFFF;
+  font-size: 1.5vh;
+  position: relative;
+  top: 1.1vh;
+  left: 2.2vh;
+}
+#moreofmine .moreofmine_button{
+  background-color: #FFFFFF;
+  color:#151515;
+  width: 19vw;
+  height: 3vh;
+  font-size: 1.5vh;
+  position: absolute;
+  top: 5.1vh;
+  left: 34.2vh;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px 0px 5px 24px;
+  border-radius: 14px;
 }
 /***************journey_data***************/
 #journey_data .title_list {
@@ -1772,7 +1808,7 @@ body{
   z-index: 5;
 }
 /***************subpage***************/
-#chat_main, #accept_case_list{
+#chat_main, #accept_case_list, #buy_case_list{
   width: 100%;
   height: 80.6vh;
   background-color: #f6f6f6;
@@ -1781,6 +1817,9 @@ body{
 }
 #chat_main::-webkit-scrollbar,
 #accept_case_list::-webkit-scrollbar{
+  display: none;
+}
+#buy_case_list::-webkit-scrollbar{
   display: none;
 }
 #accept_case_list #no_customer{
@@ -2416,23 +2455,64 @@ input[type="file"]{display:none;}
 }
 
 /*after click shopping cart icon*/
+#aft_shopping_cart{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.7);
+  display: flex;
+  justify-content: center;    
+  align-items: center;  
+  position: absolute;
+  top: 0;
+  z-index: 5;
+}
+#aft_shopping_cart_box{
+  width: 66vw;
+  position: relative;
+  border-radius: 25px;
+  color: #5D5B5B;
+  background-color: #FBFBFB;
+  font-size: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  text-align: center;
+  z-index: 6;
+}
+#aft_shopping_cart_box .word{
+  width: 100%;
+  margin-top: 2.5vh;
+}
+#aft_shopping_cart_box .two_button{
+  width: 100%;
+  font-size: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  justify-content: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
 #aft_shopping_cart button[name="to_sellist"],
 #aft_shopping_cart button[name="to_buylist"]{
-  width: 54.5vw;
-  padding: 1vh;
-  margin-top: 27vh;
-  margin-left: 10vh;
+  display: flex;
+  width: 23vw;
+  height: 23vw;
+  position: relative;
+  z-index: 2;
+  padding:2vh;
   border: none;
   background-color:#7FD6D0; 
   border-radius: 8px;
   box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
   color:#FFFFFF;
-  font-size: 2.5vh;
+  font-size: 2.3vh;
   letter-spacing: 0.1em;
+  opacity: 100%;
+  margin: 1vh;
 }
 #aft_shopping_cart button[name="to_buylist"]{
   background-color:#556B94; 
-  margin-top: 10vh;
 }
 
 #has_customer{
@@ -2542,7 +2622,116 @@ input[type="file"]{display:none;}
   padding-left: 40%;
 }
 
+/* hasbuy */
+#has_buy{
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+}
+
+#has_buy div{
+  width: 47%;
+  height: 40vh;
+  position: relative;
+  margin-top: 2%;
+  margin-left:2%;
+  background-color: #FFFFFF;
+}
+#has_buy .prd_img{
+  width: 100%;
+  height:auto;
+}
+#has_buy .prd_name{
+  width: 100%;
+  height: 5vh;
+  color:#403E3E;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .prd_type{
+  position: relative;
+  width: 100%;
+  height:auto;
+  color:#7FD6D0;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  padding-top: 3%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .prd_country{
+  position: relative;
+  width: 100%;
+  height:auto;
+  color:#424242;
+  font-size: 1.9vh;
+  padding-left: 4%;
+  padding-top: 5%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .prd_place{
+  position: relative;
+  width: 100%;
+  height: 12%;
+  color:#939191;
+  font-size: 1.5vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .per_img{
+  width:30%;
+  height:auto;
+  margin-left: 5%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+#has_buy .btm{
+  width:50%;
+  height:auto;
+  margin-top: -37%;
+  margin-left: 40%;
+}
+#has_buy .btm .bn_up{
+  width:100%;
+  height:auto;
+  background-color: #7FD6D0;
+  color:#FFFFFF;
+  font-size: 1vh;
+  padding-top: 8%;
+  padding-bottom: 7%;
+  padding-left: 24%;
+  border-radius: 4px;
+}
+#has_buy .btm .bn_dn{
+  width:100%;
+  height:auto;
+  margin-top: 2%;
+  background-color: #E8E8E8;
+  font-size: 1vh;
+  color:#000000;
+  padding-top: 8%;
+  padding-bottom: 7%;
+  padding-left: 24%;
+  border-radius: 4px;
+}
+#subwordbuy{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding-left: 40%;
+}
+
 /* #homepage1{display:none} */
+
 #homepage2{display:none}
 #register_success{display:none}
 
@@ -2559,6 +2748,7 @@ input[type="file"]{display:none;}
 #user_menu{display:none}
 #menu_bar{display:none}
 #selbar{display:none}
+#moreofmine{display:none}
 #subpage_title{display:none}
 
 #mainpage{display:none}

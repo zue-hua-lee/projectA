@@ -26,6 +26,7 @@ function all_display_none() {
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
   $('#selbar').css({'display':'none'})
+  $('#moreofmine').css({'display':'none'})
   $('#subpage_title').css({'display':'none','background-color':'#7FD6D0'})
 
   $('#mainpage').css({'display':'none'})
@@ -64,7 +65,7 @@ function accept_case() {
       for (const name in data) {
         for (const id in data[name]) {
           let prd_name = '';
-          if (id.substring(0, 7) == "product") {
+          if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[name][id]["accept"] == 1 && data[name][id]["accepter"] == user_name) {
               for (const ids in data[name][id]) {
                 if (ids == "set_product_name") {
@@ -138,7 +139,7 @@ function buy_case() {
       console.log("hahhahahaaaa")
         for (const id in data[user_name]) {
           let prd_name = '';
-          if (id.substring(0, 7) == "product") {
+          if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[user_name][id]["accept"] == 1) {
               for (const ids in data[user_name][id]) {
                 if (ids == "set_product_name") {
@@ -213,6 +214,8 @@ function user_url(name) {
 function to_mainpage_need() {
   $('#user_menu .mid_luggage').css({ 'opacity': '0.5' });
   $('#user_menu .shopping_bag').css({ 'opacity': '1' });
+  $('#moreofmine').css({ 'background-color': '#556B94'  });
+  $('#moreofmine .moreofmine_dis').html('你需要的商品');
   $('#show_schedule').css({ 'display': 'block' });
   $('#show_need').css({ 'display': 'none' });
   $('#recommend_w').html('推薦代購者');
@@ -243,10 +246,32 @@ function to_mainpage_need() {
     type: 'POST',
     url: './list',
     success: async (data) => {
+
+      var count=0;
+      let moretoshow = '';
+      for(const id in data[user_name]){
+        if(count<2){
+          if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
+            count++;
+            for(const ids in data[user_name][id]){
+              if (ids == "set_product_name") {
+                moretoshow += `${data[user_name][id][ids]} <br>`;
+              }
+            }
+          }
+        }
+      }
+      if(count>0){
+        $('#moreofmine').css({ 'display': 'block' });
+        $('#moreofmine .moreofmine_content').html(moretoshow);
+        console.log(moretoshow)
+      }
+
+
       for (const name in data) {
         for (const id in data[name]) {
           let realshow = [];
-          if (id.substring(0, 4) == "trip") {
+          if (id.substring(0, 4) == "trip" && id.substring(0, 5) != "trip_" ) {
             var data_imp = 0;
             for (const ids in data[name][id]) {
               if (ids == "departure_country" && data[name][id][ids] == sel_country) {
@@ -340,6 +365,8 @@ function to_mainpage_need() {
 function to_mainpage_schedule() {
   $('#user_menu .mid_luggage').css({ 'opacity': '1' });
   $('#user_menu .shopping_bag').css({ 'opacity': '0.5' });
+  $('#moreofmine').css({ 'background-color': '#7FD6D0'  });
+  $('#moreofmine .moreofmine_dis').html('你的行程');
   $('#show_schedule').css({ 'display': 'none' });
   $('#show_need').css({ 'display': 'block' });
   $('#recommend_w').html('推薦購買者');
@@ -371,10 +398,57 @@ function to_mainpage_schedule() {
     url: './list',
     contentType: 'application/json',
     success: async (data) => {
+      var count=0;
+      let moretoshow = '';
+      for(const id in data[user_name]){
+        if(count<2){
+          if (id.substring(0, 4) == "trip" && id.substring(0, 5) != "trip_") {
+            count++;
+            for(const ids in data[user_name][id]){
+              if (ids == "departure_country") {
+                moretoshow += `${data[user_name][id][ids]},`;
+              }
+              if (ids == "departure_city") {
+                moretoshow += `${data[user_name][id][ids]} -> `;
+              }
+              if (ids == "entry_country") {
+                moretoshow += `${data[user_name][id][ids]},`;
+              }
+              if (ids == "entry_city") {
+                moretoshow += `${data[user_name][id][ids]}  `;
+              }
+              if (ids == "departure_year") {
+                moretoshow += `${data[user_name][id][ids]}/`;
+              }
+              if (ids == "departure_month") {
+                moretoshow += `${data[user_name][id][ids]}/`;
+              }
+              if (ids == "departure_date") {
+                moretoshow += `${data[user_name][id][ids]} - `;
+              }
+              if (ids == "entry_year") {
+                moretoshow += `${data[user_name][id][ids]}/`;
+              }
+              if (ids == "entry_month") {
+                moretoshow += `${data[user_name][id][ids]}/`;
+              }
+              if (ids == "entry_date") {
+                moretoshow += `${data[user_name][id][ids]} <br>`;
+              }
+            }
+          }
+        }
+      }
+      if(count>0){
+        $('#moreofmine').css({ 'display': 'block' });
+        $('#moreofmine .moreofmine_content').html(moretoshow);
+        console.log(moretoshow)
+      }
+
       for (const name in data) {
         for (const id in data[name]) {
           let realshow = [];
-          if (id.substring(0, 7) == "product") {
+          if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             var data_imp = 0;
             for (const ids in data[name][id]) {
               if (ids == "shipping_address_country" && data[name][id][ids] == sel_country) {
@@ -658,6 +732,7 @@ function show(string) {
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
+    // $('#moreofmine').css({'display':'block'})
     $('#user_menu .user_id').html("username:"+user_name)
     to_mainpage_schedule()
   }
@@ -668,6 +743,7 @@ function show(string) {
     $('#user_menu').css({'display':'block'})
     $('#menu_bar').css({'display':'flex'})
     $('#selbar').css({'display':'flex'})
+    // $('#moreofmine').css({'display':'block'})
     $('#user_menu .user_id').html("username:"+user_name)
     to_mainpage_need()
   }
@@ -686,15 +762,15 @@ function show(string) {
     $('#menu_bar').css({'display':'flex'})
   }
   /////
-  else if (string == "aft_shopping_cart") {
-    all_display_none()
-    state.push("aft_shopping_cart")
-    $('#aft_shopping_cart').css({ 'display': 'block' })
-    $('#subpage_title').css({ 'display': 'block' })
-    $('#subpage_title .subpage_word').html("交易清單")
-    $('#menu_bar').css({ 'display': 'flex' })
-    //$('#has_customer').css({ 'display': 'block' })
-  }
+  // else if (string == "aft_shopping_cart") {
+  //   all_display_none()
+  //   state.push("aft_shopping_cart")
+  //   $('#aft_shopping_cart').css({ 'display': 'block' })
+  //   //$('#subpage_title').css({ 'display': 'block' })
+  //   //$('#subpage_title .subpage_word').html("交易清單")
+  //   $('#menu_bar').css({ 'display': 'flex' })
+  //   //$('#has_customer').css({ 'display': 'block' })
+  // }
   else if (string == "accept_case_list") {
     all_display_none()
     state.push("accept_case_list")
@@ -711,6 +787,7 @@ function show(string) {
     state.push("buy_case_list")
     $('#buy_case_list').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#aft_shopping_cart').css({ 'display': 'none' })
     $('#subpage_title .subpage_word').html("我的購物清單")
     $('#menu_bar').css({ 'display': 'flex' })
@@ -1184,8 +1261,17 @@ $(document).ready(function() {
     show("personal_page_my")
   })
   $('#menu_bar .case_list').click((event) => {
-    show("aft_shopping_cart")
+    $('#aft_shopping_cart').css({'display':'flex'})
+    $('#aft_shopping_cart_box').css({'display':'flex'})
+    // $('#aft_shopping_cart').css({ 'display': 'block' })
   })
+  $("#aft_shopping_cart").click(function(event){ 
+    $('#aft_shopping_cart').css({'display':'none'})
+  });
+  $("#aft_shopping_cart_box").click(function(event){ 
+    event.stopPropagation(); 
+  });
+
   $('#aft_shopping_cart .to_sellist').click((event) => {
     show("accept_case_list")
   })
@@ -2017,6 +2103,7 @@ const clearChatContent = () => {
   $('#deal_success button[name="to_list"]').click(function() {
     $("#deal_success").css({'display':'none'});
     show("accept_case_list")
+    
   });
   $('#deal_success button[name="to_mainpage"]').click(function() {
     $("#deal_success").css({'display':'none'});
@@ -2076,18 +2163,42 @@ $('#select_check4').click(function() {
   choose_box4=0;
   $("#select_check4").css({'display':'none'});
 });
-$('#cho_submit').click(function() {
-  cho_submit=1;
-  $("#choose").css({'display':'none'});
-  show("mainpage_schedule")
-});
-$('#cho_reset').click(function() {
-  //cho_submit=1;
-  $("#choose").css({'display':'none'});
-  show("mainpage_schedule")
-});
+// $('#cho_submit').click(function() {
+//   cho_submit=1;
+//   $("#choose").css({'display':'none'});
+//   show("mainpage_schedule")
+// });
+// $('#cho_reset').click(function() {
+//   //cho_submit=1;
+//   $("#choose").css({'display':'none'});
+//   show("mainpage_schedule")
+  
+// });
 
-
+$('#cho_submit').click(function () {
+  cho_submit = 1;
+  $("#choose").css({ 'display': 'none' });
+  if (state[state.length - 1] == "mainpage_schedule") {
+    to_mainpage_schedule()
+  }
+  else {
+    to_mainpage_need()
+  }
+});
+$('#cho_reset,.mid_luggage,.shopping_bag').click(function () {
+  cho_submit = 0;
+  $("#select_check1").css({ 'display': 'none' });
+  $("#select_check2").css({ 'display': 'none' });
+  $("#select_check3").css({ 'display': 'none' });
+  $("#select_check4").css({ 'display': 'none' });
+  $("#choose").css({ 'display': 'none' });
+  if (state[state.length - 1] == "mainpage_schedule") {
+    to_mainpage_schedule()
+  }
+  else {
+    to_mainpage_need()
+  }
+});
 // $(document).click(function (event) {
 //   //目標--點這些東西之外就會不見
 //   let testInput1 = $('#selbar');

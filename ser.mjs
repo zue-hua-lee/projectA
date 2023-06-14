@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9444 // change the port number9444
+const port = 9421 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -193,6 +193,7 @@ app.get('/journey_data', (req, res) => { //用get傳
       data[req.query.user_name]['trip'+n]['luggage_space_list'] = req.query.luggage_space_list
       data[req.query.user_name]['trip'+n]['set_tip'] = req.query.set_tip
       data[req.query.user_name]['trip'+n]['accept'] = 0 //接受交易
+      data[req.query.user_name]['trip'+n]['accepter'] = "" //接受交易
       data[req.query.user_name]['trip_num'] = parseInt(n,10)+1 //總行程數+1
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
@@ -260,6 +261,7 @@ app.get('/request_data', (req, res) => { //用get傳
       data[req.query.user_name]['product'+n]['product_arrive_date'] = req.query.product_arrive_date
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
       data[req.query.user_name]['product'+n]['accept'] = 0 //接受交易
+      data[req.query.user_name]['product'+n]['accepter'] = "" //接受交易者
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
       if(req.query.product_img != null){
         for(var i = 0; i < req.query.product_img.length; i++){
