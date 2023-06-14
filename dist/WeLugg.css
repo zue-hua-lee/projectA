@@ -2575,6 +2575,7 @@ input[type="file"]{display:none;}
 #add_new_request{display:none}
 #chat_main{display:none}
 #accept_case_list{display:none}
+#buy_case_list{display:none}
 #aft_shopping_cart{display:none}
 /* #accept_case_list #no_customer{display:none} */
 /* #accept_case_list #has_customer{display:none} */
