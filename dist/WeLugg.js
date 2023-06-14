@@ -1080,9 +1080,16 @@ $(document).ready(function() {
       else if(data[2]=="日本"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
       else if(data[2]=="韓國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
       else if(data[2]=="中國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+      else if(data[2]=="港澳"){ $("#seller_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+      else if(data[2]=="泰國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+      else if(data[2]=="越南"){ $("#seller_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+      else if(data[2]=="馬來西亞"){ $("#seller_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+      else if(data[2]=="新加坡"){ $("#seller_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
       else if(data[2]=="美國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+      else if(data[2]=="英國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
       else if(data[2]=="法國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
       else if(data[2]=="德國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+      else if(data[2]=="加拿大"){ $("#seller_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
     })
 
     show("trip_contant")
@@ -1268,10 +1275,15 @@ $(document).ready(function() {
   city[3] = ['首爾','仁川','釜山','濟州','大邱','其他']; //韓國
   city[4] = ['北京','上海','深圳','廣州','成都','南京','重慶','武漢','其他']; //中國
   city[5] = ['香港','澳門']; //港澳
-
-  city[6] = ['紐約','洛杉磯','舊金山']; //美國
-  city[7] = ['巴黎','馬賽','里昂']; //法國
-  city[8] = ['慕尼黑','法蘭克福','柏林']; //德國
+  city[6] = ['曼谷','清邁','布吉','芭堤雅','蘇梅','華欣','其他']; //泰國
+  city[7] = ['胡志明','河內','海防','峴港','其他']; //越南
+  city[8] = ['吉隆坡','檳城','怡保','馬六甲','其他']; //馬來西亞
+  city[9] = ['新加坡']; //新加坡
+  city[10] = ['紐約','洛杉磯','芝加哥','華盛頓','費城','波士頓','舊金山','其他']; //美國
+  city[11] = ['倫敦','伯明翰','利茲','曼徹斯特','格拉斯哥','愛丁堡','利物浦','其他']; //英國
+  city[12] = ['巴黎','馬賽','里昂','其他']; //法國
+  city[13] = ['慕尼黑','漢堡','柏林','法蘭克福','其他']; //德國
+  city[14] = ['溫哥華','蒙特婁','多倫多','黃刀鎮','其他']; //加拿大
 
   $('#departure_country').change(function(){
       index=this.selectedIndex; //從1開始 第幾個選項(數字)
@@ -1504,9 +1516,16 @@ $(document).ready(function() {
         else if(data[1]=="日本"){index = 2;}
         else if(data[1]=="韓國"){index = 3;}
         else if(data[1]=="中國"){index = 4;}
-        else if(data[1]=="美國"){index = 5;}
-        else if(data[1]=="法國"){index = 6;}
-        else if(data[1]=="德國"){index = 7;}
+        else if(data[1]=="港澳"){index = 5;}
+        else if(data[1]=="泰國"){index = 6;}
+        else if(data[1]=="越南"){index = 7;}
+        else if(data[1]=="馬來西亞"){index = 8;}
+        else if(data[1]=="新加坡"){index = 9;}
+        else if(data[1]=="美國"){index = 10;}
+        else if(data[1]=="英國"){index = 11;}
+        else if(data[1]=="法國"){index = 12;}
+        else if(data[1]=="德國"){index = 13;}
+        else if(data[1]=="加拿大"){index = 14;}
         var Sinner='';
         for(var i=0;i<city[index].length;i++){
             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
@@ -1524,9 +1543,16 @@ $(document).ready(function() {
         else if(data[7]=="日本"){index = 2;}
         else if(data[7]=="韓國"){index = 3;}
         else if(data[7]=="中國"){index = 4;}
-        else if(data[7]=="美國"){index = 5;}
-        else if(data[7]=="法國"){index = 6;}
-        else if(data[7]=="德國"){index = 7;}
+        else if(data[7]=="港澳"){index = 5;}
+        else if(data[7]=="泰國"){index = 6;}
+        else if(data[7]=="越南"){index = 7;}
+        else if(data[7]=="馬來西亞"){index = 8;}
+        else if(data[7]=="新加坡"){index = 9;}
+        else if(data[7]=="美國"){index = 10;}
+        else if(data[7]=="英國"){index = 11;}
+        else if(data[7]=="法國"){index = 12;}
+        else if(data[7]=="德國"){index = 13;}
+        else if(data[7]=="加拿大"){index = 14;}
         Sinner='';
         for(var i=0;i<city[index].length;i++){
             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
@@ -1670,9 +1696,16 @@ $(document).ready(function() {
         else if(data[0]=="日本"){index = 2;}
         else if(data[0]=="韓國"){index = 3;}
         else if(data[0]=="中國"){index = 4;}
-        else if(data[0]=="美國"){index = 5;}
-        else if(data[0]=="法國"){index = 6;}
-        else if(data[0]=="德國"){index = 7;}
+        else if(data[0]=="港澳"){index = 5;}
+        else if(data[0]=="泰國"){index = 6;}
+        else if(data[0]=="越南"){index = 7;}
+        else if(data[0]=="馬來西亞"){index = 8;}
+        else if(data[0]=="新加坡"){index = 9;}
+        else if(data[0]=="美國"){index = 10;}
+        else if(data[0]=="英國"){index = 11;}
+        else if(data[0]=="法國"){index = 12;}
+        else if(data[0]=="德國"){index = 13;}
+        else if(data[0]=="加拿大"){index = 14;}
         var Sinner='';
         for(var i=0;i<city[index].length;i++){
             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
@@ -1681,21 +1714,35 @@ $(document).ready(function() {
         $('#self_departure_city').val(data[1])
 
         $('#self_entry_country').val(data[2])
-        if(data[2]=="台灣"){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
-        else if(data[2]=="日本"){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
-        else if(data[2]=="韓國"){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
-        else if(data[2]=="中國"){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
-        else if(data[2]=="美國"){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
-        else if(data[2]=="法國"){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
-        else if(data[2]=="德國"){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+        if(data[2]=="台灣"){$("#seller_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
+        else if(data[2]=="日本"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
+        else if(data[2]=="韓國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
+        else if(data[2]=="中國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+        else if(data[2]=="港澳"){ $("#seller_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+        else if(data[2]=="泰國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+        else if(data[2]=="越南"){ $("#seller_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+        else if(data[2]=="馬來西亞"){ $("#seller_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+        else if(data[2]=="新加坡"){ $("#seller_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
+        else if(data[2]=="美國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+        else if(data[2]=="英國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
+        else if(data[2]=="法國"){ $("#seller_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+        else if(data[2]=="德國"){ $("#seller_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+        else if(data[2]=="加拿大"){ $("#seller_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
 
         if(data[2]=="台灣"){index = 1;}
         else if(data[2]=="日本"){index = 2;}
         else if(data[2]=="韓國"){index = 3;}
         else if(data[2]=="中國"){index = 4;}
-        else if(data[2]=="美國"){index = 5;}
-        else if(data[2]=="法國"){index = 6;}
-        else if(data[2]=="德國"){index = 7;}
+        else if(data[2]=="港澳"){index = 5;}
+        else if(data[2]=="泰國"){index = 6;}
+        else if(data[2]=="越南"){index = 7;}
+        else if(data[2]=="馬來西亞"){index = 8;}
+        else if(data[2]=="新加坡"){index = 9;}
+        else if(data[2]=="美國"){index = 10;}
+        else if(data[2]=="英國"){index = 11;}
+        else if(data[2]=="法國"){index = 12;}
+        else if(data[2]=="德國"){index = 13;}
+        else if(data[2]=="加拿大"){index = 14;}
         Sinner='';
         for(var i=0;i<city[index].length;i++){
             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
