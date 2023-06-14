@@ -944,6 +944,9 @@ $(document).ready(function() {
             }
             else{
               console.log("所有圖片上傳完成！");
+              add_product_img = product_img
+              $('#self_product_img').attr("src", add_product_img[0])
+              add_product_img_state = 0
               resolve();
             }
           },
@@ -1004,6 +1007,9 @@ $(document).ready(function() {
     event.stopPropagation(); 
   });
   $('#upload_product_picture').click(function(event){ 
+    $('#aaa_file').click()
+  });
+  $('#self_product_img').click(function(event){ 
     $('#aaa_file').click()
   });
   $('#aaa_file').on('change', function () {
