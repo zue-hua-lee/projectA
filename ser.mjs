@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9423 // change the port number9444
+const port = 9444 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -60,6 +60,13 @@ io.on('connection', (socket) => {
     io.emit('check_back', username);
     // console.log(username);
   })
+  socket.on('done',(user_name) => {
+    console.log(user_name);
+    const user = user_name.toString();
+    io.emit('done_back', user);
+    console.log(user);
+  })
+
 })
 
 server.listen(port, () => {
@@ -321,24 +328,20 @@ app.post('/product_contant', (req, res) => { //用get傳
 })
 
 //deal request
-app.post('/deal_request', (req, res) => { //用get傳
+app.post('/deal_request', (req, res) => {
   fs.readFile('./data.json', function (err, data) {
-      if (err) throw err;
-      //將二進制數據轉換為字串符
-      //var stu_list = data.toString();
-      //將字符串轉換為 JSON 對象
-      data = JSON.parse(data);
-      //將傳來的資訊推送到數組對象中
-      data[req.body.user_name][req.body.product]['dealstate'] = 1
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
 
-      var str = JSON.stringify(data);
-      fs.writeFile('data.json', str, function (err) {
-          if (err) {console.error(err);}
-          console.log('Add new deal request...')
-      })
+    data[req.body.user_name][req.body.product]['dealstate'] = 1
+
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("Add new deal request.")
+    })
   })
-  res.send("bbb")
 })
+
 
 // main //select bar
 app.post('/list',(req,res)=>{
