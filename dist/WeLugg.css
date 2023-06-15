@@ -1817,6 +1817,12 @@ body{
   position: relative;
   overflow: auto;
 }
+#moreofmine_schedule::-webkit-scrollbar{
+  display: none;
+}
+#moreofmine_need::-webkit-scrollbar{
+  display: none;
+}
 #chat_main::-webkit-scrollbar,
 #accept_case_list::-webkit-scrollbar{
   display: none;
@@ -1910,6 +1916,23 @@ body{
   height: 40vh;
   position: relative;
 }
+#check_box{
+  display: none;
+  width: 85vw;
+  height: 40vh;
+  position: relative;
+  flex-direction: column;
+}
+.pay_money{
+  font-size: 135%;
+  color: #777777;
+  background-color: #ECECEC;
+  padding-left: 15px;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  padding-right: 100px;
+  border-radius: 10px;
+}
 .deal_description{
   width: 100%;
   height: 18%;
@@ -1971,7 +1994,7 @@ body{
 .money input{
   font-size: 2vh;
   border-radius: 8px;
-  background-color: rgba(217, 217, 217, 0.7);
+  background-color: #ECECEC;
   height: 35px;
 }
 .how_many{
@@ -2426,8 +2449,11 @@ body{
   height: 2vh;
   border-radius: 10px;
 }
+#personal_page::-webkit-scrollbar{
+  display: none;
+}
 #personal_comment{
-  background: #D4D4D4;
+  background: #FFFFFF;
   padding-top: 1vh;
   width: 100vw;
   display: flex;
@@ -2439,43 +2465,72 @@ body{
 #personal_comment .word{
   width: 10vh;
   padding: 0.5vh;
-  color: #FFFFFF;
-  font-size: 1.3vh;
+  color: #000000;
+  font-size: 1.5vh;
   letter-spacing: 0.1em;
-  border-top: 1px solid #FFFFFF;
+  border-top: 1px solid #000000;
   text-align: center;
 }
 #personal_comment .comment_character{
   width: 10vh;
-  padding: 0.5vh;
-  color: #556B94;
-  font-size: 1.3vh;
+  padding: 2vh 12.5vh 2vh 5.5vh;
+  color: #FFFFFF;
+  background-color: #556B94;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 1.5vh;
   letter-spacing: 0.1em;
   text-align: center;
 }
 #personal_comment .change_comment_character{
-  width: 10vh;
-  padding: 0.5vh;
-  background: url(https://ppt.cc/fD6GLx@.png);
+  position: absolute;
+  width: 3vh;
+  margin: 0.5vh;
+  top: 82vh;
+  right: 18vw;
 }
 #personal_comment .seller_comment{
   width: 80vw;
   margin: 3vh 10vw;
   padding: 0 5vw;
   display: none;
-  font-size: 1.3vh;
+  font-size: 1.5vh;
   letter-spacing: 0.1em;
   text-align: center;
+  flex-direction: column;
+}
+#personal_comment .seller_comment_box{
+  width: 70vw;
+  margin: 1vh 0vw;
+  background-color: #F0F0F0;
+  border-radius: 10px;
 }
 #personal_comment .buyer_comment{
   width: 80vw;
   margin: 3vh 10vw;
   padding: 0 5vw;
   display: flex;
-  font-size: 1.3vh;
+  font-size: 1.5vh;
   letter-spacing: 0.1em;
   text-align: center;
+  flex-direction: column;
 }
+#personal_comment .buyer_comment_box{
+  width: 70vw;
+  margin: 1vh 0vw;
+  background-color: #F0F0F0;
+  border-radius: 10px;
+}
+#personal_comment .total_star{
+  width: 50vw;
+}
+#personal_comment .writer_name{
+  color: #65A4B8;
+}
+#personal_comment .comment_word{
+  color: #000000;
+}
+
 /**********change_personal_img*************/
 #change_img_box{
   width: 72vw;
@@ -2701,6 +2756,17 @@ input[type="file"]{display:none;}
   margin-top: 4%;
   margin-bottom: 4%;
 }
+#has_customer .name{
+  position: relative;
+  width: 100%;
+  height: 7%;
+  color:#939191;
+  font-size: 1.8vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
 #has_customer .btm{
   width:50%;
   height:auto;
@@ -2825,6 +2891,17 @@ input[type="file"]{display:none;}
   height: 12%;
   color:#939191;
   font-size: 1.5vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .name{
+  position: relative;
+  width: 100%;
+  height: 7%;
+  color:#939191;
+  font-size: 1.8vh;
   padding: 4%;
   margin-top: 0%;
   margin-left: 0%;

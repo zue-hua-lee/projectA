@@ -11,6 +11,7 @@ let product_img = [];
 var accept_caselist_choose_state=0;
 var buy_caselist_choose_state=0;
 var comment_character = "";
+var check_window = false;
 
 
 
@@ -86,6 +87,7 @@ function accept_case() {
       for (const name in data) {
         for (const id in data[name]) {
           let prd_name = '';
+          var urlnum=0;
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[name][id]["accept"] == 1 && data[name][id]["accepter"] == user_name) {
               for (const ids in data[name][id]) {
@@ -115,13 +117,19 @@ function accept_case() {
                 if (ids == "set_shop_address") {
                   prd_place = `${data[name][id][ids]}`;
                 }
-
+                if(ids.substring(0,3) == "url"){
+                  src = `${data[name][id][ids]}`;
+                  urlnum=1;
+                }
               }
               if (prd_name != '') {
+                if(urlnum==0){
+                  src="https://ppt.cc/fT3wnx@.png"
+                }
                 var contener = document.getElementById("has_customer")
-                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
-                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
+                  '</div><div class="prd_place">' + prd_place + '</div><div class="name">'+name+'</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
                 // 等同於下列程式碼
                 //    <div class="user1 product0">
@@ -131,6 +139,7 @@ function accept_case() {
             //              <div class="prd_country">prd_country</div>
             //              <div class="prd_place">prd_place</div>
             //              <img class="prd_img" src="/src/user" />
+            //              <div class="name">name</div>
             //              <div class="btm">
                       //        <p class="bn_up">個人專頁</p>
                       //        <p class="bn_dn">進行聊天</p>
@@ -212,7 +221,7 @@ function buy_case() {
                 var contener = document.getElementById("has_buy")
                 $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
-                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
+                  '</div><div class="prd_place">' + prd_place + '</div><div class="name">'+accepter+'</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
                 // 等同於下列程式碼
                 //    <div class="user1 product0">
@@ -854,6 +863,11 @@ function read_personal_page(name){
     
     read_buyer_comment(name)
     read_seller_comment(name)
+
+    $('#personal_comment .comment_character').text('購買者評價');
+    $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+    $('#personal_comment .seller_comment').css({ 'display': 'none' });
+    $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
     comment_character = "buyer";
   })
 }
@@ -877,6 +891,7 @@ function save_personal_page(){
   })
 }
 function read_buyer_comment(name) {
+  $('#personal_comment .buyer_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -884,22 +899,23 @@ function read_buyer_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentB") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("buyer_comment")
-            $('#buyer_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .buyer_comment').append('<div class="buyer_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -914,6 +930,7 @@ function read_buyer_comment(name) {
   })
 }
 function read_seller_comment(name) {
+  $('#personal_comment .seller_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -921,22 +938,24 @@ function read_seller_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentA") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          console.log(data[name][id]["star"]);
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("seller_comment")
-            $('#seller_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .seller_comment').append('<div class="seller_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -1002,6 +1021,8 @@ function save_self_trip_page() {
   })
 }
 function show(string) {
+  console.log(state)
+
   if (string == "register_success") {
     all_display_none()
     state.push("register_success")
@@ -1160,7 +1181,7 @@ function show(string) {
     state.push("self_product")
     $('#self_product').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的委託商品")
+    $('#subpage_title .subpage_word').html("我的委託商品")
     $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1169,7 +1190,7 @@ function show(string) {
     state.push("self_trip")
     $('#self_trip').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的行程清單")
+    $('#subpage_title .subpage_word').html("我的行程清單")
     $('#subpage_title').css({ 'background-color': '#7FD6D0' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1220,6 +1241,13 @@ function show(string) {
   }
 }
 $('#bm_credit_card').click((event) => {
+  all_display_none()
+  $('#subpage_title').css({ 'display': 'block' })
+  $('#subpage_title').css({ 'background-color': '#556B94' })
+  $('#subpage_title .subpage_word').html("結帳")
+  $('#pay_blue').css({'display': 'block' })
+})
+$('#check_box .deal_yes').click((event) => {
   all_display_none()
   $('#subpage_title').css({ 'display': 'block' })
   $('#subpage_title').css({ 'background-color': '#556B94' })
@@ -1359,14 +1387,31 @@ $(document).ready(function() {
   $('#personal_comment .comment_character').click(function(event){ 
     if(comment_character == 'buyer'){
       $('#personal_comment .comment_character').text('代購者評價');
-      $('#personal_comment .comment_character').css({'color': '#7FD6D0'});
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
       $('#personal_comment .seller_comment').css({ 'display': 'flex' });
       $('#personal_comment .buyer_comment').css({ 'display': 'none' });
       comment_character = 'seller';
     }
     else if(comment_character == 'seller'){
       $('#personal_comment .comment_character').text('購買者評價');
-      $('#personal_comment .comment_character').css({'color': '#556B94'});
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
+  });
+
+  $('#personal_comment .change_comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
       $('#personal_comment .seller_comment').css({ 'display': 'none' });
       $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
       comment_character = 'buyer';
@@ -1532,6 +1577,13 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
     loadChatHistory();
+    if (check_window === true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    
+    };
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -1617,9 +1669,14 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     var num=$(this).parent().parent().parent().index()+1;
     $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1658,6 +1715,9 @@ $(document).ready(function() {
       if(add_product_img[0]){
         $('#buyer_product_img').attr("src", add_product_img[0])
         add_product_img_state = 0;
+      }
+      else{
+        $('#buyer_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
       }
     })
     show("product_contant")
@@ -1816,10 +1876,14 @@ $(document).ready(function() {
     }
   });
   $('#chat_main .chat_yes').click(function(){
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
-    
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
   });
 
 
@@ -2152,6 +2216,9 @@ $(document).ready(function() {
         if(add_product_img[0]){
           $('#self_product_img').attr("src", add_product_img[0])
           add_product_img_state = 0;
+        }
+        else{
+          $('#self_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
         }
         
       })
@@ -2574,7 +2641,10 @@ const loadChatHistory = () => {
       appendMessage(message.message, message.isSelf);
     });
   });
+
 };
+
+    
 
 
 // $('.chat_yes').click(function() {
@@ -2610,7 +2680,20 @@ const clearChatContent = () => {
     // appendMessage(msg);
     appendMessage(chatData.message, chatData.user_name === user_name);
   });
-
+  socket.on('check_back', (username) =>{
+    // console.log(username);
+    // console.log(user_name);
+    if (username !== user_name && state[state.length-1] == "chat_box"){
+      //action
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display': 'none'});
+      $('#check_box').css({'display': 'flex'});
+    }
+    else if (username !== user_name && state[state.length-1] != "chat_box"){
+      check_window = true;
+      // console.log(check_window);
+    }
+  })
   //按下傳送訊息後，聊天紀錄會自動跑到最下面
   const content = document.querySelector('#chat_content');
 
@@ -2646,11 +2729,15 @@ const clearChatContent = () => {
   $("#deal_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
   });
+  $("#check_box .deal_no").click(function() {
+    $("#deal_agree").css({'display':'none'});
+    check_window = flase;
+  });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
     $("#deal_agree").css({'display':'none'});
     $("#deal_banner").css({'display':'flex'});
-    
+    socket.emit('check', user_name);
     // all_display_none()
     // $("#deal_success").css({'display':'block'});
   });
