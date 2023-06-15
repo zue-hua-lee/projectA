@@ -12,8 +12,8 @@
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台北",
-            "entry_country": "美國",
-            "entry_city": "紐約",
+            "entry_country": "日本",
+            "entry_city": "東京",
             "departure_year": "2023",
             "departure_month": "1",
             "departure_date": "1",
@@ -23,9 +23,7 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100",
-            "accept":1,
-            "accepter":"user2"
+            "set_tip": "100"
         },
         "trip1": {
             "departure_country": "韓國",
@@ -41,15 +39,13 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100",
-            "accept":1,
-            "accepter":"user2"
+            "set_tip": "100"
         },
         "product0": {
             "shipping_address_country": "日本",
-            "shipping_address_city": "大阪",
+            "shipping_address_city": "東京",
             "product_place_country": "台灣",
-            "product_place_city": "高雄",
+            "product_place_city": "台北",
             "set_product_name": "123",
             "set_shop_name": "12345",
             "set_shop_address": "124235",
@@ -58,9 +54,7 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
-            "request_remark": "hihi",
-            "accept":1,
-            "accepter":"user2"
+            "request_remark": ""
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -75,9 +69,7 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "3",
             "product_arrive_date": "1",
-            "request_remark": "none",
-            "accept":1,
-            "accepter":"user2"
+            "request_remark": "none"
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -92,9 +84,7 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "9",
             "product_arrive_date": "1",
-            "request_remark": "",
-            "accept":1,
-            "accepter":"user2"
+            "request_remark": ""
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -109,9 +99,7 @@
             "product_arrive_year": "2024",
             "product_arrive_month": "8",
             "product_arrive_date": "1",
-            "request_remark": "",
-            "accept":1,
-            "accepter":"user2"
+            "request_remark": ""
         }
     },
     "user2": {
@@ -136,9 +124,7 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666",
-            "accept":1,
-            "accepter":"user3"
+            "set_tip": "66666"
         },
         "product0": {
             "shipping_address_country": "法國",
@@ -153,9 +139,7 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "8",
             "product_arrive_date": "12",
-            "request_remark": "",
-            "accept":1,
-            "accepter":"user1"
+            "request_remark": ""
         }
     },
     "user3": {
@@ -180,9 +164,7 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666",
-            "accept":1,
-            "accepter":"user1"
+            "set_tip": "66666"
         }
     }
 }
