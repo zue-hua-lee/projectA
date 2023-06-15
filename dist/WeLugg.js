@@ -865,6 +865,7 @@ function save_personal_page(){
   })
 }
 function read_buyer_comment(name) {
+  $('#personal_comment .buyer_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -872,22 +873,23 @@ function read_buyer_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentB") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("buyer_comment")
-            $('#buyer_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .buyer_comment').append('<div class="buyer_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -902,6 +904,7 @@ function read_buyer_comment(name) {
   })
 }
 function read_seller_comment(name) {
+  $('#personal_comment .seller_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -909,22 +912,24 @@ function read_seller_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentA") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          console.log(data[name][id]["star"]);
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("seller_comment")
-            $('#seller_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .seller_comment').append('<div class="seller_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -1324,14 +1329,31 @@ $(document).ready(function() {
   $('#personal_comment .comment_character').click(function(event){ 
     if(comment_character == 'buyer'){
       $('#personal_comment .comment_character').text('代購者評價');
-      $('#personal_comment .comment_character').css({'color': '#7FD6D0'});
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
       $('#personal_comment .seller_comment').css({ 'display': 'flex' });
       $('#personal_comment .buyer_comment').css({ 'display': 'none' });
       comment_character = 'seller';
     }
     else if(comment_character == 'seller'){
       $('#personal_comment .comment_character').text('購買者評價');
-      $('#personal_comment .comment_character').css({'color': '#556B94'});
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
+  });
+
+  $('#personal_comment .change_comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
       $('#personal_comment .seller_comment').css({ 'display': 'none' });
       $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
       comment_character = 'buyer';
