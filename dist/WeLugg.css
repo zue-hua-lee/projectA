@@ -1817,6 +1817,12 @@ body{
   position: relative;
   overflow: auto;
 }
+#moreofmine_schedule::-webkit-scrollbar{
+  display: none;
+}
+#moreofmine_need::-webkit-scrollbar{
+  display: none;
+}
 #chat_main::-webkit-scrollbar,
 #accept_case_list::-webkit-scrollbar{
   display: none;
@@ -2750,6 +2756,17 @@ input[type="file"]{display:none;}
   margin-top: 4%;
   margin-bottom: 4%;
 }
+#has_customer .name{
+  position: relative;
+  width: 100%;
+  height: 7%;
+  color:#939191;
+  font-size: 1.8vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
 #has_customer .btm{
   width:50%;
   height:auto;
@@ -2874,6 +2891,17 @@ input[type="file"]{display:none;}
   height: 12%;
   color:#939191;
   font-size: 1.5vh;
+  padding: 4%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #FFFFFF;
+}
+#has_buy .name{
+  position: relative;
+  width: 100%;
+  height: 7%;
+  color:#939191;
+  font-size: 1.8vh;
   padding: 4%;
   margin-top: 0%;
   margin-left: 0%;

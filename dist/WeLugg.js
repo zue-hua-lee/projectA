@@ -85,6 +85,7 @@ function accept_case() {
       for (const name in data) {
         for (const id in data[name]) {
           let prd_name = '';
+          var urlnum=0;
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[name][id]["accept"] == 1 && data[name][id]["accepter"] == user_name) {
               for (const ids in data[name][id]) {
@@ -114,13 +115,19 @@ function accept_case() {
                 if (ids == "set_shop_address") {
                   prd_place = `${data[name][id][ids]}`;
                 }
-
+                if(ids.substring(0,3) == "url"){
+                  src = `${data[name][id][ids]}`;
+                  urlnum=1;
+                }
               }
               if (prd_name != '') {
+                if(urlnum==0){
+                  src="https://ppt.cc/fT3wnx@.png"
+                }
                 var contener = document.getElementById("has_customer")
-                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                $('#has_customer').append('<div class="' + name + ' ' + id + '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
-                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
+                  '</div><div class="prd_place">' + prd_place + '</div><div class="name">'+name+'</div><img class="per_img" src="' + (await user_url(name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
                 // 等同於下列程式碼
                 //    <div class="user1 product0">
@@ -130,6 +137,7 @@ function accept_case() {
             //              <div class="prd_country">prd_country</div>
             //              <div class="prd_place">prd_place</div>
             //              <img class="prd_img" src="/src/user" />
+            //              <div class="name">name</div>
             //              <div class="btm">
                       //        <p class="bn_up">個人專頁</p>
                       //        <p class="bn_dn">進行聊天</p>
@@ -211,7 +219,7 @@ function buy_case() {
                 var contener = document.getElementById("has_buy")
                 $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
-                  '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
+                  '</div><div class="prd_place">' + prd_place + '</div><div class="name">'+accepter+'</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
                 // 等同於下列程式碼
                 //    <div class="user1 product0">
@@ -853,6 +861,11 @@ function read_personal_page(name){
     
     read_buyer_comment(name)
     read_seller_comment(name)
+
+    $('#personal_comment .comment_character').text('購買者評價');
+    $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+    $('#personal_comment .seller_comment').css({ 'display': 'none' });
+    $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
     comment_character = "buyer";
   })
 }
@@ -1166,7 +1179,7 @@ function show(string) {
     state.push("self_product")
     $('#self_product').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的委託商品")
+    $('#subpage_title .subpage_word').html("我的委託商品")
     $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1175,7 +1188,7 @@ function show(string) {
     state.push("self_trip")
     $('#self_trip').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的行程清單")
+    $('#subpage_title .subpage_word').html("我的行程清單")
     $('#subpage_title').css({ 'background-color': '#7FD6D0' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1678,6 +1691,9 @@ $(document).ready(function() {
         $('#buyer_product_img').attr("src", add_product_img[0])
         add_product_img_state = 0;
       }
+      else{
+        $('#buyer_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
+      }
     })
     show("product_contant")
   });
@@ -2175,6 +2191,9 @@ $(document).ready(function() {
         if(add_product_img[0]){
           $('#self_product_img').attr("src", add_product_img[0])
           add_product_img_state = 0;
+        }
+        else{
+          $('#self_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
         }
         
       })
