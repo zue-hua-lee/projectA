@@ -14,7 +14,6 @@ const port = 9423 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
-
 app.use(bodyParser.json())
 
 const server = http.createServer(app)
