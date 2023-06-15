@@ -1541,6 +1541,7 @@ $(document).ready(function() {
     loadChatHistory();
     if (check_window === true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     
@@ -1634,6 +1635,7 @@ $(document).ready(function() {
     loadChatHistory();
     if (check_window == true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     };
@@ -1837,6 +1839,7 @@ $(document).ready(function() {
     loadChatHistory();
     if (check_window == true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     };
@@ -2684,6 +2687,7 @@ const clearChatContent = () => {
   });
   $("#check_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
+    check_window = flase;
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
