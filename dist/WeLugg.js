@@ -9,6 +9,10 @@ var add_product_img_state;
 let add_product_img = [];
 let product_img = [];
 
+
+
+
+
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
   $('#homepage2').css({'display':'none'})
@@ -1145,6 +1149,14 @@ $(document).ready(function() {
   // 選不要儲存變更
   $("#personal_page_unsaved .deal_no").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
+    state.pop()
+    show(state.pop())
+    $('#personal_box2 input[type="text"]').attr("disabled", true);
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $('#bm_edit_personal').css({'background':'#E8E8E8','color':'#000000'})
+      $('#bm_edit_personal').text("編輯內容")
+    edit_state = 0
   });
   // 選同意儲存變更
   $("#personal_page_unsaved .deal_yes").click(async function() {
@@ -1345,6 +1357,7 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
+    loadChatHistory();
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -1432,6 +1445,7 @@ $(document).ready(function() {
     $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
     $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
+    loadChatHistory();
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1503,6 +1517,11 @@ $(document).ready(function() {
       show("add_new_journey")
     }
   })
+  $('#moreofmine_addsch').click((event) => {
+    if(state[state.length-1] == "moreofmine_schedule"){
+      show("add_new_journey")
+    }
+  })
   // need 購買者頁面
   $('#user_menu .mid_luggage').click((event) => {
     if(state[state.length-1] == "mainpage_need"){
@@ -1524,6 +1543,11 @@ $(document).ready(function() {
   })
   $('#bm_add_schedule').click((event) => {
     if(state[state.length-1] == "mainpage_need"){
+      show("add_new_request")
+    }
+  })
+  $('#moreofmine_addprd').click((event) => {
+    if(state[state.length-1] == "moreofmine_need"){
       show("add_new_request")
     }
   })
@@ -1619,7 +1643,9 @@ $(document).ready(function() {
   });
   $('#chat_main .chat_yes').click(function(){
     // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
+    
     show("chat_box")
+    loadChatHistory();
   });
 
 
@@ -1745,11 +1771,10 @@ $(document).ready(function() {
       luggage_space_list: $('#journey_data select[name=luggage_space_list]').val(),
       set_tip: $('#journey_data input[name=set_tip]').val(),
 
-      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
-      //name: $('#add input[name=name]').val(),
     }, (data) => {
-      show("mainpage_schedule")
-      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+      state.pop()
+      show(state.pop())
+      //show("mainpage_schedule")
     })
   })
 
@@ -1815,11 +1840,10 @@ $(document).ready(function() {
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),
       product_img: product_img,
-      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
-      //name: $('#add input[name=name]').val(),
     }, (data) => {
-      show("mainpage_need")
-      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+      state.pop()
+      show(state.pop())
+      //show("mainpage_need")
     })
   })
 
@@ -2019,6 +2043,14 @@ $(document).ready(function() {
   // 選不要儲存變更
   $("#self_product_page_unsaved .deal_no").click(function () {
     $("#self_product_page_unsaved").css({ 'display': 'none' });
+    state.pop()
+    show(state.pop())
+    $('#self_product input[type="text"]').attr("disabled", true);
+    $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+    $('#self_product select').attr("disabled", true);
+    $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
+    $('#edit_self_product').text("編輯內容")
+    edit_product_state = 0;
   });
   // 選同意儲存變更
   $("#self_product_page_unsaved .deal_yes").click(async function () {
@@ -2290,6 +2322,13 @@ $(document).ready(function() {
 //   // 選不要儲存變更
 //   $("#self_trip_page_unsaved .deal_no").click(function () {
 //     $("#self_trip_page_unsaved").css({ 'display': 'none' });
+//     state.pop()
+//     show(state.pop())
+//     $('#self_trip input[type="text"]').attr("disabled", true);
+//     $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+//     $('#self_trip select').attr("disabled", true);
+//     $('#edit_self_trip').text("編輯內容")
+//     edit_trip_state = 0;
 //   });
 //   // 選同意儲存變更
 //   $("#self_trip_page_unsaved .deal_yes").click(async function () {
@@ -2352,9 +2391,9 @@ const loadChatHistory = () => {
 };
 
 
-$('.chat_yes').click(function() {
-  loadChatHistory();
-});
+// $('.chat_yes').click(function() {
+//    loadChatHistory();
+// });
 
 
 // 清空聊天內容的函式
@@ -2407,9 +2446,10 @@ const clearChatContent = () => {
   }
   // chat_box: back
   $('#chat_box .back').click(function(){
-    clearChatContent();
+    
     state.pop()
     show(state.pop())
+    clearChatContent();
   })
   // chat_box: chat_deal
   $('#chat_deal').click(function(){
@@ -2422,10 +2462,11 @@ const clearChatContent = () => {
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
-    show("deal_success_green");
-  });
-  $("#bm_submit_pay").click(function() {
-    show("deal_success_blue");
+    $("#deal_agree").css({'display':'none'});
+    $("#deal_banner").css({'display':'flex'});
+    
+    // all_display_none()
+    // $("#deal_success").css({'display':'block'});
   });
   
   //deal_success
