@@ -2454,7 +2454,7 @@ body{
 }
 #personal_comment{
   background: #FFFFFF;
-  padding-top: 1vh;
+  padding-top: 2vh;
   width: 100vw;
   display: flex;
   flex-direction: column;

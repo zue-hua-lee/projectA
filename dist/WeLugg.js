@@ -1254,7 +1254,9 @@ $('#check_box .deal_yes').click((event) => {
   $('#subpage_title .subpage_word').html("結帳")
   $('#pay_blue').css({'display': 'block' })
 })
-
+$('#bm_submit_pay').click((event) => {
+  show("deal_success_blue")
+})
 
 // homepage
 $(document).ready(function() {

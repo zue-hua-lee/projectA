@@ -187,11 +187,6 @@
             "set_tip": "66666",
             "accept": 1,
             "accepter": "user2"
-        },
-        "commentB1": {
-            "writer_name": "user1",
-            "star": "2",
-            "word": "1"
         }
     }
 }
