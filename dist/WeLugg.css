@@ -1817,6 +1817,12 @@ body{
   position: relative;
   overflow: auto;
 }
+#moreofmine_schedule::-webkit-scrollbar{
+  display: none;
+}
+#moreofmine_need::-webkit-scrollbar{
+  display: none;
+}
 #chat_main::-webkit-scrollbar,
 #accept_case_list::-webkit-scrollbar{
   display: none;
