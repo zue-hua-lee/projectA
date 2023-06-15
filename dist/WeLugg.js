@@ -55,7 +55,8 @@ function all_display_none() {
   $('#product_contant').css({ 'display': 'none' })
   $('#trip_contant').css({ 'display': 'none' })
   $('#self_product').css({ 'display': 'none' })
-  $('#self_trip').css({ 'display': 'none' })
+  $('#self_trip').css({'display': 'none' })
+  $('#pay_blue').css({'display': 'none' })
 }
 
 function accept_case() {
@@ -962,7 +963,6 @@ function show(string) {
     $('#accept_case_list').css({ 'display': 'block' })
     $('#accept_case_list_choose').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
-    $('#aft_shopping_cart').css({ 'display': 'none' })
     $('#subpage_title .subpage_word').html("我的代購清單")
     $('#menu_bar').css({ 'display': 'flex' })
     $('#has_customer').css({ 'display': 'block' })
@@ -975,10 +975,8 @@ function show(string) {
     $('#buy_case_list_choose').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
     $('#subpage_title').css({ 'background-color': '#556B94' })
-    $('#aft_shopping_cart').css({ 'display': 'none' })
     $('#subpage_title .subpage_word').html("我的購物清單")
     $('#menu_bar').css({ 'display': 'flex' })
-    $('#has_customer').css({ 'display': 'block' })
     buy_case()
   }
   else if (string == "moreofmine_schedule") {
@@ -1044,10 +1042,30 @@ function show(string) {
     $('#subpage_title .subpage_word').html("你的行程清單")
     $('#menu_bar').css({ 'display': 'flex' })
   }
+  else if(string == "deal_success_green"){
+    all_display_none()
+    state.push("deal_success_green")
+    $("#deal_success").css({'display':'block'});
+    $('#background_top').css({'background-color':'#7FD6D0'});
+  }
+  else if(string == "deal_success_blue"){
+    all_display_none()
+    state.push("deal_success_blue")
+    $("#deal_success").css({'display':'block'});
+    $('#background_top').css({'background-color':'#556B94'});
+  }
   else {
     console.log("changing error.")
   }
 }
+$('#bm_credit_card').click((event) => {
+  all_display_none()
+  $('#subpage_title').css({ 'display': 'block' })
+  $('#subpage_title').css({ 'background-color': '#556B94' })
+  $('#subpage_title .subpage_word').html("結帳")
+  $('#pay_blue').css({'display': 'block' })
+})
+
 
 // homepage
 $(document).ready(function() {
@@ -2402,19 +2420,19 @@ const clearChatContent = () => {
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
-    all_display_none()
-    $("#deal_success").css({'display':'block'});
+    show("deal_success_green");
+  });
+  $("#bm_submit_pay").click(function() {
+    show("deal_success_blue");
   });
   
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
-    $("#deal_success").css({'display':'none'});
     show("accept_case_list")
-    
   });
-  $('#deal_success button[name="to_mainpage"]').click(function() {
-    $("#deal_success").css({'display':'none'});
-    show("mainpage_schedule")
+  $('#deal_success button[name="to_prechat"]').click(function() {
+    state.pop()
+    show(state.pop())
   });
 })
 

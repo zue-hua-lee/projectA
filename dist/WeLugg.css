@@ -1982,7 +1982,7 @@ body{
   color:#7FD6D0;
 }
 #deal_success_card button[name="to_list"],
-#deal_success_card button[name="to_mainpage"]{
+#deal_success_card button[name="to_prechat"]{
   width: 54.5vw;
   padding: 1vh;
   margin: 6vh 0 2.5vh 0;
@@ -1994,7 +1994,7 @@ body{
   font-size: 2.5vh;
   letter-spacing: 0.1em;
 }
-#deal_success_card button[name="to_mainpage"]{
+#deal_success_card button[name="to_prechat"]{
   margin: 0;
   background-color:#7FD6D0; 
 }
@@ -2837,9 +2837,108 @@ input[type="file"]{display:none;}
   margin-left: 70%;
   background-color: #FFFFFF;
 }
+/********pay_blue************/
+#pay_blue{
+  width: 100%;
+  height: 90.6vh;
+  position: relative;
+  overflow: auto;
+}
+#pay_blue_box{
+  width: 80vw;
+  margin: 3vh 10vw;
+  padding: 1vh 5vw;
+  background: #F7F7F7;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+  font-size: 1.3vh;
+}
+#pay_blue_box .pay_blue_subbox1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#pay_blue_box .pay_blue_subbox2{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 1.5vh;
+}
+#pay_blue_box .pay_blue_subbox3{
+  padding-bottom: 1.2vh;
+}
+#pay_blue_box .pay_blue_subbox4{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5vh;
+  font-weight: 600;
+  padding: 1vh 0;
+}
+#pay_blue_box #pay_icon1{
+  background: url(https://ppt.cc/fOXi7x@.png) no-repeat left/contain;
+  height: 2.5vh;
+  width: 8vw;
+}
+#pay_blue_box #pay_icon2{
+  background: url(https://ppt.cc/fAiDnx@.png) no-repeat left/contain;
+  height: 2.5vh;
+  width: 8vw;
+}
+#pay_blue_box #pay_pencil{
+  height: 2.5vh;
+  width: auto;
+}
+#pay_blue_box #pay_subimg{
+  width: auto;
+  height: 3vh;
+}
+
+#pay_blue_box .pay_word1{
+  font-weight: 600;
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+}
+#pay_blue_box .pay_word2{
+  font-weight: 400;
+  font-size: 0.8vh;
+  color: #939191;
+}
+#bm_submit_pay{
+  width: 40vw;
+  padding: 2vh;
+  margin: 0 30vw;
+  border: none;
+  background-color:#556B94; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+  position: absolute;
+  bottom: 12vh;
+  z-index: 5;
+}
+#bm_submit_score{
+  width: 40vw;
+  padding: 2vh;
+  margin: 0 30vw;
+  border: none;
+  background-color:#556B94; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
+  color:#FFFFFF;
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+  position: absolute;
+  bottom: 12vh;
+  z-index: 5;
+}
+
+
 
 /* #homepage1{display:none} */
-
 #homepage2{display:none}
 #register_success{display:none}
 
@@ -2893,3 +2992,5 @@ input[type="file"]{display:none;}
 
 #product_contant{display:none}
 #trip_contant{display:none}
+
+#pay_blue{display:none}
