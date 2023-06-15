@@ -1742,12 +1742,11 @@ $(document).ready(function() {
       luggage_size_list: $('#journey_data select[name=luggage_size_list]').val(),
       luggage_space_list: $('#journey_data select[name=luggage_space_list]').val(),
       set_tip: $('#journey_data input[name=set_tip]').val(),
-
-      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
-      //name: $('#add input[name=name]').val(),
+      
     }, (data) => {
-      show("mainpage_schedule")
-      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+      state.pop()
+      show(state.pop())
+      //show("mainpage_schedule")
     })
   })
 
@@ -1813,11 +1812,10 @@ $(document).ready(function() {
       set_product_quantity: $('#request_data input[name=set_product_quantity]').val(),
       request_remark: $('#request_data input[name=request_remark]').val(),
       product_img: product_img,
-      //ID: $('#add input[name=ID]').val(), //前面的fname和ser.js的req.query.fname為同者 後面的fname和exercise.html的name=fname為同者
-      //name: $('#add input[name=name]').val(),
     }, (data) => {
-      show("mainpage_need")
-      //$('#add-output').html(data) //讓html中#ajax-output那段的內容變更為data的內容
+      state.pop()
+      show(state.pop())
+      //show("mainpage_need")
     })
   })
 
