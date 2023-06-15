@@ -332,6 +332,8 @@ app.post('/read_personal', (req, res) => {
     array[3] = data[`${req.body.name}`]["mail"]
     array[4] = data[`${req.body.name}`]["phone"]
     array[5] = data[`${req.body.name}`]["url"]
+    array[6] = data[`${req.body.name}`]["trip_num"]
+    array[7] = data[`${req.body.name}`]["product_num"]
     res.send(array)
   })
 })

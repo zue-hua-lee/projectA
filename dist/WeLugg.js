@@ -814,6 +814,8 @@ function read_personal_page(name){
     $('#personal_box2 input[name="personal_mail"]').val(res[3])
     $('#personal_box2 input[name="personal_phone"]').val(res[4])
     $('#personal_img').css({'background':'url('+res[5]+') no-repeat center/contain'})
+    $('#history_count .word3').html(res[6])
+    $('#history_count .word4').html(res[7])
   })
 }
 function save_personal_page(){
@@ -2758,7 +2760,7 @@ $('#moreofmine .moreofmine_button').click(function () {
   }
 });
 
-var score;
+var score = 1;
 $('#star1').click(function () {
   score = 1;
   $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
