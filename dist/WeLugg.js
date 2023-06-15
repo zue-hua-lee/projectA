@@ -816,12 +816,16 @@ function to_mainpage_schedule() {
         for(const id in data[user_name]){
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if(data[user_name][id]["dealstate"]==1){
+              
               all_display_none()
               $('#moreofmine').css({ 'display': 'none' })
-              $('#subpage_title').css({ 'display': 'block' })
-              $('#subpage_title').css({ 'background-color': '#556B94' })
-              $('#subpage_title .subpage_word').html("結帳")
-              $('#pay_blue').css({'display': 'block' })
+              $('#deal_agree').css({'display':'flex'});
+              $('#deal_box').css({'display':'none'});
+              $('#check_box').css({'display': 'flex'});
+              // $('#subpage_title').css({ 'display': 'block' })
+              // $('#subpage_title').css({ 'background-color': '#556B94' })
+              // $('#subpage_title .subpage_word').html("結帳")
+              // $('#pay_blue').css({'display': 'block' })
               await showpay(id)
             }
           }
@@ -2786,6 +2790,8 @@ const clearChatContent = () => {
   $("#check_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
     check_window = flase;
+    state.pop()
+    show(state.pop())
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
