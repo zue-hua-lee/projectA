@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9444 // change the port number9444
+const port = 9466 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -53,6 +53,12 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('user disconnected')
+  })
+  //check
+  socket.on('check',(user_name) => {
+    const username = user_name.toString();
+    io.emit('check_back', username);
+    // console.log(username);
   })
 })
 

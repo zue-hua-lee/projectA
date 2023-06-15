@@ -8,6 +8,7 @@ var cho_submit = 0;
 var add_product_img_state;
 let add_product_img = [];
 let product_img = [];
+var check_window = false;
 
 
 
@@ -880,6 +881,8 @@ function save_self_trip_page() {
   })
 }
 function show(string) {
+  console.log(state)
+
   if (string == "register_success") {
     all_display_none()
     state.push("register_success")
@@ -1063,6 +1066,13 @@ function show(string) {
   }
 }
 $('#bm_credit_card').click((event) => {
+  all_display_none()
+  $('#subpage_title').css({ 'display': 'block' })
+  $('#subpage_title').css({ 'background-color': '#556B94' })
+  $('#subpage_title .subpage_word').html("結帳")
+  $('#pay_blue').css({'display': 'block' })
+})
+$('#check_box .deal_yes').click((event) => {
   all_display_none()
   $('#subpage_title').css({ 'display': 'block' })
   $('#subpage_title').css({ 'background-color': '#556B94' })
@@ -1356,6 +1366,12 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
     loadChatHistory();
+    if (check_window === true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    
+    };
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -1441,9 +1457,13 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     var num=$(this).parent().parent().parent().index()+1;
     $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1640,10 +1660,13 @@ $(document).ready(function() {
     }
   });
   $('#chat_main .chat_yes').click(function(){
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
-    
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
   });
 
 
@@ -2386,7 +2409,10 @@ const loadChatHistory = () => {
       appendMessage(message.message, message.isSelf);
     });
   });
+
 };
+
+    
 
 
 // $('.chat_yes').click(function() {
@@ -2422,7 +2448,20 @@ const clearChatContent = () => {
     // appendMessage(msg);
     appendMessage(chatData.message, chatData.user_name === user_name);
   });
-
+  socket.on('check_back', (username) =>{
+    // console.log(username);
+    // console.log(user_name);
+    if (username !== user_name && state[state.length-1] == "chat_box"){
+      //action
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display': 'none'});
+      $('#check_box').css({'display': 'flex'});
+    }
+    else if (username !== user_name && state[state.length-1] != "chat_box"){
+      check_window = true;
+      // console.log(check_window);
+    }
+  })
   //按下傳送訊息後，聊天紀錄會自動跑到最下面
   const content = document.querySelector('#chat_content');
 
@@ -2458,11 +2497,14 @@ const clearChatContent = () => {
   $("#deal_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
   });
+  $("#check_box .deal_no").click(function() {
+    $("#deal_agree").css({'display':'none'});
+  });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
     $("#deal_agree").css({'display':'none'});
     $("#deal_banner").css({'display':'flex'});
-    
+    socket.emit('check', user_name);
     // all_display_none()
     // $("#deal_success").css({'display':'block'});
   });

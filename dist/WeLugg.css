@@ -1910,6 +1910,23 @@ body{
   height: 40vh;
   position: relative;
 }
+#check_box{
+  display: none;
+  width: 85vw;
+  height: 40vh;
+  position: relative;
+  flex-direction: column;
+}
+.pay_money{
+  font-size: 135%;
+  color: #777777;
+  background-color: #ECECEC;
+  padding-left: 15px;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  padding-right: 100px;
+  border-radius: 10px;
+}
 .deal_description{
   width: 100%;
   height: 18%;
@@ -1971,7 +1988,7 @@ body{
 .money input{
   font-size: 2vh;
   border-radius: 8px;
-  background-color: rgba(217, 217, 217, 0.7);
+  background-color: #ECECEC;
   height: 35px;
 }
 .how_many{
