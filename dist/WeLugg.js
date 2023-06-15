@@ -11,6 +11,7 @@ let add_product_img = [];
 
 
 
+
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
   $('#homepage2').css({'display':'none'})
@@ -908,6 +909,7 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
+    loadChatHistory();
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -936,6 +938,7 @@ $(document).ready(function() {
     // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
     // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
+    loadChatHistory();
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1077,7 +1080,9 @@ $(document).ready(function() {
   });
   $('#chat_main .chat_yes').click(function(){
     // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
+    
     show("chat_box")
+    loadChatHistory();
   });
 
 
@@ -1389,9 +1394,9 @@ const loadChatHistory = () => {
 };
 
 
-$('.chat_yes').click(function() {
-  loadChatHistory();
-});
+// $('.chat_yes').click(function() {
+//    loadChatHistory();
+// });
 
 
 // 清空聊天內容的函式
@@ -1444,9 +1449,10 @@ const clearChatContent = () => {
   }
   // chat_box: back
   $('#chat_box .back').click(function(){
-    clearChatContent();
+    
     state.pop()
     show(state.pop())
+    clearChatContent();
   })
   // chat_box: chat_deal
   $('#chat_deal').click(function(){
@@ -1459,8 +1465,11 @@ const clearChatContent = () => {
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
-    all_display_none()
-    $("#deal_success").css({'display':'block'});
+    $("#deal_agree").css({'display':'none'});
+    $("#deal_banner").css({'display':'flex'});
+    
+    // all_display_none()
+    // $("#deal_success").css({'display':'block'});
   });
   
   //deal_success
