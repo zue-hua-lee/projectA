@@ -172,6 +172,23 @@
             "request_remark": "",
             "accept": 1,
             "accepter": "user1"
+        },
+        "product1": {
+            "shipping_address_country": "法國",
+            "shipping_address_city": "巴黎",
+            "product_place_country": "台灣",
+            "product_place_city": "台南",
+            "set_product_name": "623",
+            "set_shop_name": "hihi23",
+            "set_shop_address": "sdf",
+            "request_product_list": "Food",
+            "set_product_quantity": "4",
+            "product_arrive_year": "2023",
+            "product_arrive_month": "8",
+            "product_arrive_date": "12",
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user1"
         }
     },
     "user3": {
@@ -198,7 +215,7 @@
             "luggage_space_list": "40",
             "set_tip": "66666",
             "accept": 1,
-            "accepter": "user2"
+            "accepter": "user1"
         }
     }
 }
