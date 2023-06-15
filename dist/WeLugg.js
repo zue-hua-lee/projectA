@@ -273,7 +273,7 @@ function moreofmine_schedule() {
                 }
                 if (ids == "entry_country") {
                   trip_loc += ` ${data[user_name][id][ids]},`;
-                  if(data[user_name][id][ids]=="台灣"){src="https://ppt.cc/fa7zlx@.png"}
+                  if(data[user_name][id][ids]=="0"){src="https://ppt.cc/fa7zlx@.png"}
                   else if(data[user_name][id][ids]=="日本"){src="https://ppt.cc/fS5lRx@.png"}
                   else if(data[user_name][id][ids]=="韓國"){ src="https://ppt.cc/fDrVBx@.png"}
                   else if(data[user_name][id][ids]=="中國"){ src="https://ppt.cc/fhGq4x@.png" }

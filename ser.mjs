@@ -10,7 +10,11 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
+<<<<<<< HEAD
 const port = 9484 // change the port number9444
+=======
+const port = 9423 // change the port number9444
+>>>>>>> 97b5b2882a3413b758644f47bf6edaedc7079212
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
