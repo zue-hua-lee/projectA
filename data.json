@@ -23,7 +23,9 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 1,
+            "accepter": "user2"
         },
         "trip1": {
             "departure_country": "韓國",
@@ -39,7 +41,9 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product0": {
             "shipping_address_country": "日本",
@@ -72,7 +76,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "3",
             "product_arrive_date": "1",
-            "request_remark": "none"
+            "request_remark": "none",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -87,7 +93,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "9",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -102,7 +110,9 @@
             "product_arrive_year": "2024",
             "product_arrive_month": "8",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user2"
         }
     },
     "user2": {
@@ -127,7 +137,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 1,
+            "accepter": "user1"
         },
         "product0": {
             "shipping_address_country": "法國",
@@ -142,7 +154,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "8",
             "product_arrive_date": "12",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user1"
         }
     },
     "user3": {
@@ -167,7 +181,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 1,
+            "accepter": "user2"
         }
     }
 }
