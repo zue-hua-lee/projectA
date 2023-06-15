@@ -54,7 +54,10 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "hihi",
+            "accept":1,
+            "accepter":"user3",
+            "url0":"https://ppt.cc/fa7zlx@.png"
         },
         "product1": {
             "shipping_address_country": "美國",
