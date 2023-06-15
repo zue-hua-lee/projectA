@@ -500,14 +500,14 @@ app.post('/submit_score_green', (req, res) => {
     if(err){return console.error(err)}
     data = JSON.parse(data)
     for(var id in data[`${req.body.user_name}`]){
-      if (id.substring(0, 8) == "commentA" && id[8] > max_num){
-        max_num = id;
+      if (id.substring(0, 8) == "commentA" && parseInt(id.substring(8)) > max_num){
+        max_num = parseInt(id.substring(8));
       }
     }
-    data[`${req.body.user_name}`]["commentA"+(max_num+1)] = {}
-    data[`${req.body.user_name}`]["commentA"+(max_num+1)]["writer_name"] = `${req.body.writer_name}`
-    data[`${req.body.user_name}`]["commentA"+(max_num+1)]["star"] = `${req.body.score}`
-    data[`${req.body.user_name}`]["commentA"+(max_num+1)]["word"] = (`${req.body.comment_input}` != "")? `${req.body.comment_input}`:`${req.body.comment_state}`;
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)] = {}
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["writer_name"] = `${req.body.writer_name}`
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["star"] = `${req.body.score}`
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["word"] = (`${req.body.comment_input}` != "")? `${req.body.comment_input}`:`${req.body.comment_state}`;
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
     })
