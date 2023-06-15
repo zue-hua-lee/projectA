@@ -2746,7 +2746,7 @@ const clearChatContent = () => {
   
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
-    show("accept_case_list")
+    $(".case_list").click();
   });
   $('#deal_success button[name="to_prechat"]').click(function() {
     state.pop()
