@@ -7,8 +7,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 3,
-        "product_num": 4,
+        "trip_num": 1,
+        "product_num": 11,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台北",
@@ -61,7 +61,7 @@
             "request_remark": "hihi",
             "accept": 1,
             "accepter": "user3",
-            "url0": "https://ppt.cc/fa7zlx@.png"
+            "dealstate": 0
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -77,8 +77,9 @@
             "product_arrive_month": "3",
             "product_arrive_date": "1",
             "request_remark": "none",
-            "accept": 1,
-            "accepter": "user2"
+            "accept": 0,
+            "accepter": "",
+            "dealstate": 0
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -95,7 +96,8 @@
             "product_arrive_date": "1",
             "request_remark": "",
             "accept": 0,
-            "accepter": ""
+            "accepter": "",
+            "dealstate": 0
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -112,22 +114,8 @@
             "product_arrive_date": "1",
             "request_remark": "",
             "accept": 1,
-            "accepter": "user2"
-        },
-        "commentA1": {
-            "writer_name": "aaaa",
-            "star": "3",
-            "word": "溝通很好"
-        },
-        "commentA2": {
-            "writer_name": "aaaa",
-            "star": "0",
-            "word": "服務態度友善"
-        },
-        "commentA3": {
-            "writer_name": "aaaa",
-            "star": "5",
-            "word": "態度佳"
+            "accepter": "user2",
+            "dealstate": 0
         }
     },
     "user2": {
@@ -138,6 +126,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
+        "trip_num": 2,
+        "product_num": 22,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
@@ -171,24 +161,8 @@
             "product_arrive_date": "12",
             "request_remark": "",
             "accept": 1,
-            "accepter": "user1"
-        },
-        "product1": {
-            "shipping_address_country": "法國",
-            "shipping_address_city": "巴黎",
-            "product_place_country": "台灣",
-            "product_place_city": "台南",
-            "set_product_name": "623",
-            "set_shop_name": "hihi23",
-            "set_shop_address": "sdf",
-            "request_product_list": "Food",
-            "set_product_quantity": "4",
-            "product_arrive_year": "2023",
-            "product_arrive_month": "8",
-            "product_arrive_date": "12",
-            "request_remark": "",
-            "accept": 1,
-            "accepter": "user1"
+            "accepter": "user1",
+            "dealstate": 0
         }
     },
     "user3": {
@@ -199,6 +173,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
+        "trip_num": 3,
+        "product_num": 33,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
@@ -215,7 +191,7 @@
             "luggage_space_list": "40",
             "set_tip": "66666",
             "accept": 1,
-            "accepter": "user1"
+            "accepter": "user2"
         }
     }
 }

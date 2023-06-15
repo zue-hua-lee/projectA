@@ -63,7 +63,9 @@ function all_display_none() {
   $('#self_product').css({ 'display': 'none' })
   $('#self_trip').css({'display': 'none' })
   $('#pay_blue').css({'display': 'none' })
+
   $('#score_page_green').css({'display': 'none' })
+  $('#score_page_blue').css({'display': 'none' })
 }
 
 function accept_case() {
@@ -271,7 +273,7 @@ function moreofmine_schedule() {
                 }
                 if (ids == "entry_country") {
                   trip_loc += ` ${data[user_name][id][ids]},`;
-                  if(data[user_name][id][ids]=="台灣"){src="https://ppt.cc/fa7zlx@.png"}
+                  if(data[user_name][id][ids]=="0"){src="https://ppt.cc/fa7zlx@.png"}
                   else if(data[user_name][id][ids]=="日本"){src="https://ppt.cc/fS5lRx@.png"}
                   else if(data[user_name][id][ids]=="韓國"){ src="https://ppt.cc/fDrVBx@.png"}
                   else if(data[user_name][id][ids]=="中國"){ src="https://ppt.cc/fhGq4x@.png" }
@@ -1210,6 +1212,29 @@ function show(string) {
     $("#score_page_green").css({'display':'block'});
     $('#subpage_title').css({'display':'block'})
     $('#subpage_title .subpage_word').html("評價");
+    score = 1;
+    comment_state = 0;
+    $('#comment_card_box div').css({'background-color':"#7FD6D0",'color':'#FFFFFF','border-color':"#7FD6D0"});
+    $("#score_page_green .star1").attr("src","https://ppt.cc/fSPbVx@.png");
+    $("#score_page_green .star2").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_green .star3").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_green .star4").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_green .star5").attr("src","https://ppt.cc/fGRQsx@.png");
+  }
+  else if(string == "score_page_blue"){
+    all_display_none()
+    state.push("score_page_blue")
+    $("#score_page_blue").css({'display':'block'});
+    $('#subpage_title').css({'display':'block','background-color':'#556B94'})
+    $('#subpage_title .subpage_word').html("評價");
+    score = 1;
+    comment_state = 0;
+    $('#comment_card_box div').css({'background-color':"#556B94",'color':'#FFFFFF','border-color':"#556B94"});
+    $("#score_page_blue .star1").attr("src","https://ppt.cc/fJM9gx@.png");
+    $("#score_page_blue .star2").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_blue .star3").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_blue .star4").attr("src","https://ppt.cc/fGRQsx@.png");
+    $("#score_page_blue .star5").attr("src","https://ppt.cc/fGRQsx@.png");
   }
   else {
     console.log("changing error.")
@@ -1229,7 +1254,9 @@ $('#check_box .deal_yes').click((event) => {
   $('#subpage_title .subpage_word').html("結帳")
   $('#pay_blue').css({'display': 'block' })
 })
-
+$('#bm_submit_pay').click((event) => {
+  show("deal_success_blue")
+})
 
 // homepage
 $(document).ready(function() {
@@ -1554,6 +1581,7 @@ $(document).ready(function() {
     loadChatHistory();
     if (check_window === true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     
@@ -1642,11 +1670,12 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     var num=$(this).parent().parent().parent().index()+1;
-    $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
+    $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'flex'});
     show("chat_box")
     loadChatHistory();
     if (check_window == true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     };
@@ -1877,6 +1906,7 @@ $(document).ready(function() {
     loadChatHistory();
     if (check_window == true){
       $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
     };
@@ -2727,6 +2757,7 @@ const clearChatContent = () => {
   });
   $("#check_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
+    check_window = flase;
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
@@ -2739,7 +2770,7 @@ const clearChatContent = () => {
   
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
-    show("accept_case_list")
+    $(".case_list").click();
   });
   $('#deal_success button[name="to_prechat"]').click(function() {
     state.pop()
@@ -2908,12 +2939,10 @@ $('#buy_done').click(async function () {
     for(var q=0;q<delete_buy.length;q++){
       if(delete_buy[q]!="nun"){
         let ss = delete_buy[q].split(/\s/);
-        console.log(ss[2])
-        await buydone(ss)
+        $('#score_page_blue .score_word2').html(ss[2])
+        show("score_page_blue")
       }
     }
-    buy_caselist_choose_state=0;
-    show("buy_case_list")
   }
 });
 
@@ -2977,11 +3006,10 @@ $('#accept_done').click(async function () {
     for(var q=0;q<delete_schedule.length;q++){
       if(delete_schedule[q]!="nun"){
         let ss = delete_schedule[q].split(/\s/);
-        console.log(ss[1])
-        await scheduledone(ss)
+        $('#score_page_green .score_word2').html(ss[0])
+        show("score_page_green")
       }
     }
-    show("accept_case_list")
   }
 });
 /////////////////////////////////
@@ -2989,16 +3017,16 @@ $('#accept_case_list').on('click', '#has_customer :nth-child(n) .btm .bn_up', fu
   var nn = $(this).parent().parent().attr('class')
   console.log(nn)
   let ss = nn.split(/\s/);
-    read_personal_page(ss[0])
-    show("personal_page_other_green")
+  read_personal_page(ss[0])
+  show("personal_page_other_green")
 });
 
 $('#buy_case_list').on('click', '#has_buy :nth-child(n) .btm .bn_up', function(){
   var nn = $(this).parent().parent().attr('class')
   console.log(nn)
   let ss = nn.split(/\s/);
-    read_personal_page(ss[2])
-    show("personal_page_other_blue")
+  read_personal_page(ss[2])
+  show("personal_page_other_blue")
 });
 
 $('#moreofmine .moreofmine_button').click(function () {
@@ -3011,114 +3039,128 @@ $('#moreofmine .moreofmine_button').click(function () {
 });
 
 var score = 1;
-$('#star1').click(function () {
+var score_src;
+$('.star1').click(function () {
   score = 1;
-  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star2").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+  score_src = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "https://ppt.cc/fSPbVx@.png":"https://ppt.cc/fJM9gx@.png";
+  $(".star1").attr("src", score_src);
+  $(".star2").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star5").attr("src","https://ppt.cc/fGRQsx@.png");
 });
-$('#star2').click(function () {
+$('.star2').click(function () {
   score = 2;
-  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+  score_src = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "https://ppt.cc/fSPbVx@.png":"https://ppt.cc/fJM9gx@.png";
+  $(".star1").attr("src", score_src);
+  $(".star2").attr("src", score_src);
+  $(".star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star5").attr("src","https://ppt.cc/fGRQsx@.png");
 });
-$('#star3').click(function () {
+$('.star3').click(function () {
   score = 3;
-  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
-  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+  score_src = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "https://ppt.cc/fSPbVx@.png":"https://ppt.cc/fJM9gx@.png";
+  $(".star1").attr("src", score_src);
+  $(".star2").attr("src", score_src);
+  $(".star3").attr("src", score_src);
+  $(".star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $(".star5").attr("src","https://ppt.cc/fGRQsx@.png");
 });
-$('#star4').click(function () {
+$('.star4').click(function () {
   score = 4;
-  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+  score_src = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "https://ppt.cc/fSPbVx@.png":"https://ppt.cc/fJM9gx@.png";
+  $(".star1").attr("src", score_src);
+  $(".star2").attr("src", score_src);
+  $(".star3").attr("src", score_src);
+  $(".star4").attr("src", score_src);
+  $(".star5").attr("src","https://ppt.cc/fGRQsx@.png");
 });
-$('#star5').click(function () {
+$('.star5').click(function () {
   score = 5;
-  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
-  $("#star5").attr("src","https://ppt.cc/fSPbVx@.png");
+  score_src = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "https://ppt.cc/fSPbVx@.png":"https://ppt.cc/fJM9gx@.png";
+  $(".star1").attr("src", score_src);
+  $(".star2").attr("src", score_src);
+  $(".star3").attr("src", score_src);
+  $(".star4").attr("src", score_src);
+  $(".star5").attr("src", score_src);
 });
-let comment_state = 0;
-$('#comment_card1').click(function () {
+
+var score_color;
+var comment_state = 0;
+$('.comment_card1').click(function () { 
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 1){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 1;
   }
 });
-$('#comment_card2').click(function () {
+$('.comment_card2').click(function () {
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 2){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 2;
   }
 });
-$('#comment_card3').click(function () {
+$('.comment_card3').click(function () {
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 3){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 3;
   }
 });
-$('#comment_card4').click(function () {
+$('.comment_card4').click(function () {
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 4){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 4;
   }
 });
-$('#comment_card5').click(function () {
+$('.comment_card5').click(function () {
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 5){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 5;
   }
 });
-$('#comment_card6').click(function () {
+$('.comment_card6').click(function () {
+  score_color = ($(this).parent().parent().parent().attr('id') == "score_page_green")? "#7FD6D0":"#556B94";
   if(comment_state == 6){
     comment_state = 0;
-    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
   }
   else{
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $('#comment_card_box div').css({'background-color':score_color,'color':'#FFFFFF','border-color':score_color});
     $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
     comment_state = 6;
   }
 });
-$('#bm_submit_score').click(function (event) {
+$('#bm_submit_score_green').click(function (event) {
   event.preventDefault()
   if(comment_state == 1){
     comment_state = "非常專業"
@@ -3141,18 +3183,63 @@ $('#bm_submit_score').click(function (event) {
   else{
     comment_state = ""
   }
-  console.log($('#score_page_green .score_word2').html())
   $.post('./submit_score_green', {
-    user_name: user_name,
-    writer_name: $('#score_page_green .score_word2').html(),
+    user_name: $('#score_page_green .score_word2').html(),
+    writer_name: user_name,
     score: score,
     comment_state: comment_state,
     comment_input: $('#score_page_green input[name="comment_input"]').val(),
-  }, (res) => {
-    score = 0;
-    comment_state = 0;
-    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
-    show("mainpage_schedule")
+  }, async (res) => {
+    if(delete_schedule_num!=-1){
+      for(var q=0;q<delete_schedule.length;q++){
+        if(delete_schedule[q]!="nun"){
+          let ss = delete_schedule[q].split(/\s/);
+          await scheduledone(ss)
+          show("mainpage_schedule")
+        }
+      }
+    }
+  })
+});
+$('#bm_submit_score_blue').click(function (event) {
+  event.preventDefault()
+  if(comment_state == 1){
+    comment_state = "非常專業"
+  }
+  else if(comment_state == 2){
+    comment_state = "非常有耐心"
+  }
+  else if(comment_state == 3){
+    comment_state = "服務態度友善"
+  }
+  else if(comment_state == 4){
+    comment_state = "態度佳"
+  }
+  else if(comment_state == 5){
+    comment_state = "馬上回覆"
+  }
+  else if(comment_state == 6){
+    comment_state = "溝通很好"
+  }
+  else{
+    comment_state = ""
+  }
+  $.post('./submit_score_blue', {
+    user_name: $('#score_page_blue .score_word2').html(),
+    writer_name: user_name,
+    score: score,
+    comment_state: comment_state,
+    comment_input: $('#score_page_blue input[name="comment_input"]').val(),
+  }, async (res) => {
+    if(delete_buy_num!=-1){
+      for(var q=0;q<delete_buy.length;q++){
+        if(delete_buy[q]!="nun"){
+          let ss = delete_buy[q].split(/\s/);
+          await buydone(ss)
+          show("mainpage_schedule")
+        }
+      }
+    }
   })
 });
 

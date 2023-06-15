@@ -127,11 +127,20 @@
           <option value="日本">日本</option>
           <option value="韓國">韓國</option>
           <option value="中國">中國</option>
+          <option value="港澳">港澳</option>
+        </optgroup>
+        <optgroup label="東南亞">
+          <option value="泰國">泰國</option>
+          <option value="越南">越南</option>
+          <option value="馬來西亞">馬來西亞</option>
+          <option value="新加坡">新加坡</option>
         </optgroup>
         <optgroup label="歐美">
           <option value="美國">美國</option>
+          <option value="英國">英國</option>
           <option value="法國">法國</option>
           <option value="德國">德國</option>
+          <option value="加拿大">加拿大</option>
         </optgroup>
       </select>
     </form>
@@ -147,11 +156,20 @@
           <option value="日本">日本</option>
           <option value="韓國">韓國</option>
           <option value="中國">中國</option>
+          <option value="港澳">港澳</option>
+        </optgroup>
+        <optgroup label="東南亞">
+          <option value="泰國">泰國</option>
+          <option value="越南">越南</option>
+          <option value="馬來西亞">馬來西亞</option>
+          <option value="新加坡">新加坡</option>
         </optgroup>
         <optgroup label="歐美">
           <option value="美國">美國</option>
+          <option value="英國">英國</option>
           <option value="法國">法國</option>
           <option value="德國">德國</option>
+          <option value="加拿大">加拿大</option>
         </optgroup>
       </select>
     </form>
@@ -1200,11 +1218,11 @@
       <div id="deal_success_card">
         <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png">
         <p class="word">成功交易</p>
-        <p>你已成功與Vennesa Chen配對交易</p>
+        <p>你已成功完成配對交易</p>
         <p>請依時完成代購，並與購買者保持聯繫。</p>
         <p>如有任何問題可以聯絡客服人員。</p>
         <button type="submit" name="to_list">進入代購清單</button>
-        <button type="submit" name="to_mainpage">回首頁</button>
+        <button type="submit" name="to_prechat">返回聊天室</button>
       </div>
     </div>
 
@@ -1384,22 +1402,22 @@
       <div class="score_word1">本次交易如何？</div>
       <div class="score_word2">Venessa Chen</div>
       <div id="star_box">
-        <img id="star1" src="https://ppt.cc/fSPbVx@.png">
-        <img id="star2" src="https://ppt.cc/fGRQsx@.png">
-        <img id="star3" src="https://ppt.cc/fGRQsx@.png">
-        <img id="star4" src="https://ppt.cc/fGRQsx@.png">
-        <img id="star5" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star1" src="https://ppt.cc/fSPbVx@.png">
+        <img class="star2" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star3" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star4" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star5" src="https://ppt.cc/fGRQsx@.png">
       </div>
     </div>
     <div id="score_box1">
       <div class="score_word3">請給對方評語</div>
       <div id="comment_card_box">
-        <div id="comment_card1">非常專業</div>
-        <div id="comment_card2">非常有耐心</div>
-        <div id="comment_card3">服務態度友善</div>
-        <div id="comment_card4">態度佳</div>
-        <div id="comment_card5">馬上回覆</div>
-        <div id="comment_card6">溝通很好</div>
+        <div class="comment_card1">非常專業</div>
+        <div class="comment_card2">非常有耐心</div>
+        <div class="comment_card3">服務態度友善</div>
+        <div class="comment_card4">態度佳</div>
+        <div class="comment_card5">馬上回覆</div>
+        <div class="comment_card6">溝通很好</div>
       </div>
     </div>
     <div id="score_box2">
@@ -1411,7 +1429,42 @@
       </div>
       <input type="text" name="comment_input" placeholder="請輸入文字...">
     </div>
-    <button type="submit" id="bm_submit_score">送出</button>
+    <button type="submit" id="bm_submit_score_green">送出</button>
+  </div>
+
+  <div id="score_page_blue">
+    <div id="score_box1">
+      <div class="score_word1">本次交易如何？</div>
+      <div class="score_word2">Venessa Chen</div>
+      <div id="star_box">
+        <img class="star1" src="https://ppt.cc/fJM9gx@.png">
+        <img class="star2" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star3" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star4" src="https://ppt.cc/fGRQsx@.png">
+        <img class="star5" src="https://ppt.cc/fGRQsx@.png">
+      </div>
+    </div>
+    <div id="score_box1">
+      <div class="score_word3">請給對方評語</div>
+      <div id="comment_card_box">
+        <div class="comment_card1">非常專業</div>
+        <div class="comment_card2">非常有耐心</div>
+        <div class="comment_card3">服務態度友善</div>
+        <div class="comment_card4">態度佳</div>
+        <div class="comment_card5">馬上回覆</div>
+        <div class="comment_card6">溝通很好</div>
+      </div>
+    </div>
+    <div id="score_box2">
+      <div class="score_subbox1">
+        <div class="score_subbox2">
+          <div id="score_icon"></div>
+          <div class="score_word4">給予評論</div>
+        </div>
+      </div>
+      <input type="text" name="comment_input" placeholder="請輸入文字...">
+    </div>
+    <button type="submit" id="bm_submit_score_blue">送出</button>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
