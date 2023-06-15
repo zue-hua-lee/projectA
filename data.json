@@ -7,7 +7,7 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 2,
+        "trip_num": 3,
         "product_num": 4,
         "trip0": {
             "departure_country": "台灣",
@@ -59,9 +59,9 @@
             "product_arrive_month": "2",
             "product_arrive_date": "1",
             "request_remark": "hihi",
-            "accept":1,
-            "accepter":"user3",
-            "url0":"https://ppt.cc/fa7zlx@.png"
+            "accept": 2,
+            "accepter": "user3",
+            "url0": "https://ppt.cc/fa7zlx@.png"
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -77,8 +77,8 @@
             "product_arrive_month": "3",
             "product_arrive_date": "1",
             "request_remark": "none",
-            "accept": 1,
-            "accepter": "user2"
+            "accept": 0,
+            "accepter": ""
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -94,8 +94,8 @@
             "product_arrive_month": "9",
             "product_arrive_date": "1",
             "request_remark": "",
-            "accept": 1,
-            "accepter": "user2"
+            "accept": 0,
+            "accepter": ""
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -138,8 +138,8 @@
             "luggage_size_list": "21",
             "luggage_space_list": "40",
             "set_tip": "66666",
-            "accept": 1,
-            "accepter": "user1"
+            "accept": 0,
+            "accepter": ""
         },
         "product0": {
             "shipping_address_country": "法國",

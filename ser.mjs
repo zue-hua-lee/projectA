@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9444 // change the port number9444
+const port = 9422 // change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -509,6 +509,30 @@ app.post('/buydone', (req, res) => {
 })
 
 app.post('/scheduledone', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/scheduledel', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/buydel', (req, res) => {
   fs.readFile('./data.json', function (err, data) {
     if(err){return console.error(err)}
     data = JSON.parse(data)
