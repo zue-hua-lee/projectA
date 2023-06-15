@@ -596,3 +596,15 @@ app.post('/buydel', (req, res) => {
     })
   })
 })
+
+app.post('/showpay', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['dealstate'] = 0
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
