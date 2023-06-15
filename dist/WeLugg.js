@@ -861,6 +861,11 @@ function read_personal_page(name){
     
     read_buyer_comment(name)
     read_seller_comment(name)
+
+    $('#personal_comment .comment_character').text('購買者評價');
+    $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+    $('#personal_comment .seller_comment').css({ 'display': 'none' });
+    $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
     comment_character = "buyer";
   })
 }
@@ -1174,7 +1179,7 @@ function show(string) {
     state.push("self_product")
     $('#self_product').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的委託商品")
+    $('#subpage_title .subpage_word').html("我的委託商品")
     $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1183,7 +1188,7 @@ function show(string) {
     state.push("self_trip")
     $('#self_trip').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
-    $('#subpage_title .subpage_word').html("你的行程清單")
+    $('#subpage_title .subpage_word').html("我的行程清單")
     $('#subpage_title').css({ 'background-color': '#7FD6D0' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
@@ -1684,6 +1689,9 @@ $(document).ready(function() {
         $('#buyer_product_img').attr("src", add_product_img[0])
         add_product_img_state = 0;
       }
+      else{
+        $('#buyer_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
+      }
     })
     show("product_contant")
   });
@@ -2180,6 +2188,9 @@ $(document).ready(function() {
         if(add_product_img[0]){
           $('#self_product_img').attr("src", add_product_img[0])
           add_product_img_state = 0;
+        }
+        else{
+          $('#self_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
         }
         
       })
