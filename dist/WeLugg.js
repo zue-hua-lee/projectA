@@ -1668,7 +1668,7 @@ $(document).ready(function() {
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     var num=$(this).parent().parent().parent().index()+1;
-    $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
+    $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'flex'});
     show("chat_box")
     loadChatHistory();
     if (check_window == true){
