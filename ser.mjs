@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const port = 9444 // change the port number9444
+const port = 9484// change the port number9444
 
 app.use(express.static(`${__dirname}/dist`))
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -332,6 +332,8 @@ app.post('/read_personal', (req, res) => {
     array[3] = data[`${req.body.name}`]["mail"]
     array[4] = data[`${req.body.name}`]["phone"]
     array[5] = data[`${req.body.name}`]["url"]
+    array[6] = data[`${req.body.name}`]["trip_num"]
+    array[7] = data[`${req.body.name}`]["product_num"]
     res.send(array)
   })
 })
@@ -491,6 +493,75 @@ app.post('/store_personal_img', (req, res) => {
     data[`${req.body.name}`]["url"] = `${req.body.url}`
     fs.writeFile('./data.json', JSON.stringify(data), function (err) {
       if(err){return console.error(err)}
+    })
+  })
+})
+app.post('/submit_score_green', (req, res) => {
+  var max_num = 0;
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    for(var id in data[`${req.body.user_name}`]){
+      if (id.substring(0, 8) == "commentA" && parseInt(id.substring(8)) > max_num){
+        max_num = parseInt(id.substring(8));
+      }
+    }
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)] = {}
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["writer_name"] = `${req.body.writer_name}`
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["star"] = `${req.body.score}`
+    data[`${req.body.user_name}`]["commentA"+(parseInt(max_num)+1)]["word"] = (`${req.body.comment_input}` != "")? `${req.body.comment_input}`:`${req.body.comment_state}`;
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+    })
+    res.send("submit score_green seccuss.")
+  })
+})
+
+// 
+app.post('/buydone', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/scheduledone', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/scheduledel', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/buydel', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
     })
   })
 })

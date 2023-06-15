@@ -97,23 +97,23 @@
     </div>
   </div>
 
-    <div id="menu_bar">
-      <input class="home" type="image" src="https://ppt.cc/fYnODx@.png" alt="home">
-      <input class="user_profile" type="image" src="https://ppt.cc/fX072x@.png" alt="user_profile">
-      <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
-      <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
-    </div>
-    <div id="moreofmine">
-      <div class="moreofmine_dis">你的行程</div>
-      <div class="moreofmine_content"></div>
-      <div class="moreofmine_button">更多</div>
-    </div>
-    <div id="selbar"> 
-      <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
-      <span class="select_w">篩選</span>
-    </div>
-    <div id="blank"></div>
-    <div id="blank2"></div>
+  <div id="menu_bar">
+    <input class="home" type="image" src="https://ppt.cc/fYnODx@.png" alt="home">
+    <input class="user_profile" type="image" src="https://ppt.cc/fX072x@.png" alt="user_profile">
+    <input class="case_list" type="image" src="https://ppt.cc/fOR1jx@.png" alt="case_list">
+    <input class="chat_list" type="image" src="https://ppt.cc/fIABLx@.png" alt="chat_list">
+  </div>
+  <div id="moreofmine">
+    <div class="moreofmine_dis">你的行程</div>
+    <div class="moreofmine_content"></div>
+    <div class="moreofmine_button">更多</div>
+  </div>
+  <div id="selbar">
+    <img class="select_pic" src="https://ppt.cc/fG3Jtx@.png" alt="select icon.png" width="18px">
+    <span class="select_w">篩選</span>
+  </div>
+  <div id="blank"></div>
+  <div id="blank2"></div>
 
   <div id="choose">
     <form id="choose_place">
@@ -1074,20 +1074,20 @@
           </div>
         </div> -->
 
-      </div>
-      <div id="subword">- 往下拉更新 -</div>
-      <div id="accept_done">完成代購</div>
     </div>
+    <div id="subword">- 往下拉更新 -</div>
+    <button type="submit" id="accept_done">完成代購</button>
+  </div>
 
-    <div id="buy_case_list_choose">選擇</div>
-    <div id="buy_case_list">
-      <div id="no_buy">
-        <img src="https://ppt.cc/fsDkMx@.png" alt="backpic.png">
-        <p>你還沒設定行程喔</p>
-      </div>
-      <div id="has_buy">
-        
-        <!-- <div class="cus_list">
+  <div id="buy_case_list_choose">選擇</div>
+  <div id="buy_case_list">
+    <div id="no_buy">
+      <img src="https://ppt.cc/fsDkMx@.png" alt="backpic.png">
+      <p>你還沒設定行程喔</p>
+    </div>
+    <div id="has_buy">
+
+      <!-- <div class="cus_list">
           <img class="cus_list_head" src="https://ppt.cc/fJHuXx@.png" alt="headicon.png" >
           <div>
             <p class="cus_list_name">Vennesa Chen</p>
@@ -1127,7 +1127,7 @@
 
       </div>
       <div id="subwordbuy">- 往下拉更新 -</div>
-      <div id="buy_done">已收到商品</div>
+      <button type="submit" id="buy_done">已收到商品</button>
     </div>
     
     <div id="moreofmine_schedule">
@@ -1146,43 +1146,58 @@
       <div id="moreofmine_addprd">添加商品</div>
     </div>
 
-  <div id="deal_agree">
-    <div id="deal_box">
-      <div class="deal_description">你是否確定要成交?</div>
-      <div class="deal_button">
-        <p class="deal_no">取消</p>
-        <p class="deal_yes">成交</p>
+    <div id="deal_agree">
+      <div id="deal_box">
+        <div class="deal_description">商品明細單</div>
+        <div class="buy_list">
+          <div class="list_1">
+            <label class="item_name">日本, 東京, NewYork Perfect Cheese 東京車站店<br>New York Perfect Cheese 奶油芝士脆卷<input type="checkbox" name="item_check"></label>
+            
+          </div>
+          <div class="list_2">
+            <label class="item_name">日本, 東京, NewYork Perfect Cheese 東京車站店<br>Meister Cheese 四種芝士柑橘蜂蜜夾心餅<input type="checkbox" name="item_check"></label>
+            
+          </div>
+        </div>
+        <div class="money">
+          <p class="how_many">請填寫交易金額</p>
+          <input type="text" placeholder="  金額">
+        </div>
+        <div class="deal_button">
+          <p class="deal_no">取消</p>
+          <p class="deal_yes">成交</p>
+        </div>
       </div>
     </div>
-  </div>
+      
+    <div id="deal_success">
+      <div id="background_top"></div>
+      <div id="deal_success_card">
+        <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png">
+        <p class="word">成功交易</p>
+        <p>你已成功與Vennesa Chen配對交易</p>
+        <p>請依時完成代購，並與購買者保持聯繫。</p>
+        <p>如有任何問題可以聯絡客服人員。</p>
+        <button type="submit" name="to_list">進入代購清單</button>
+        <button type="submit" name="to_mainpage">回首頁</button>
+      </div>
+    </div>
 
-  <div id="deal_success">
-    <div id="background_top"></div>
-    <div id="deal_success_card">
-      <img src="https://ppt.cc/fJPXzx@.png" alt="logo.png">
-      <p class="word">成功交易</p>
-      <p>你已成功完成配對交易</p>
-      <p>請依時完成代購，並與購買者保持聯繫。</p>
-      <p>如有任何問題可以聯絡客服人員。</p>
-      <button type="submit" name="to_list">進入代購清單</button>
-      <button type="submit" name="to_prechat">返回聊天室</button>
+    <div id="chat_box">
+      <div id="chat_top">
+        <img src="https://ppt.cc/fe14cx@.png" class="back" alt="back" >
+        <img src="/src/user" class="head_img" alt="head img">
+        <h3>Nancy Lin<br>在線上</h3>
+        <button type="button" id="chat_deal">成交</button>
+      </div>
+      <div id="deal_banner"><p>您已提出成交, 請等待對方確認...</p></div>
+      <div id="chat_content"></div>
+      <div id="chat_bottom">
+        <img src="https://ppt.cc/flvILx@.png" class="add">
+        <input type="text" name="msg-input" placeholder="輸入私訊...">
+        <button type="submit" name="chat_submit">輸入</button>
+      </div>
     </div>
-  </div>
-
-  <div id="chat_box">
-    <div id="chat_top">
-      <img src="https://ppt.cc/fe14cx@.png" class="back" alt="back">
-      <img src="https://ppt.cc/fgoZ3x@.png" class="head_img" alt="head img">
-      <h3>Nancy Lin<br>在線上</h3>
-      <button type="button" id="chat_deal">成交</button>
-    </div>
-    <div id="chat_content"></div>
-    <div id="chat_bottom">
-      <img src="https://ppt.cc/flvILx@.png" class="add">
-      <input type="text" name="msg-input" placeholder="輸入私訊...">
-      <button type="submit" name="chat_submit">輸入</button>
-    </div>
-  </div>
 
   <div id="personal_page">
     <div id="personal_page_contant">
@@ -1202,18 +1217,18 @@
           </div>
         </div>
 
-        <div id="personal_box1_right">
-          <div id="history_count">
-            <div class="word">3</div>
-            <div>代購次數</div>
-          </div>
-          <div id="history_count">
-            <div class="word">30</div>
-            <div>購物次數</div>
-          </div><br>
-          <div id="bm_credit_card">銀行帳號/信用卡</div>
-          <div id="bm_personal_togood">商品內容</div>
-          <div id="bm_personal_totrip">旅程詳情</div>
+      <div id="personal_box1_right">
+        <div id="history_count">
+          <div class="word3">3</div>
+          <div>代購次數</div>
+        </div>
+        <div id="history_count">
+          <div class="word4">30</div>
+          <div>購物次數</div>
+        </div><br>
+        <div id="bm_credit_card">銀行帳號/信用卡</div>
+        <div id="bm_personal_togood">商品內容</div>
+        <div id="bm_personal_totrip">旅程詳情</div>
 
           <div id="bm_edit_personal">編輯內容</div>
           <div id="bm_personal_tochat">進行聊天</div>
@@ -1337,6 +1352,41 @@
       </div>
     </div>
     <button type="submit" id="bm_submit_pay">確認付款</button>
+  </div>
+
+  <div id="score_page_green">
+    <div id="score_box1">
+      <div class="score_word1">本次交易如何？</div>
+      <div class="score_word2">Venessa Chen</div>
+      <div id="star_box">
+        <img id="star1" src="https://ppt.cc/fSPbVx@.png">
+        <img id="star2" src="https://ppt.cc/fGRQsx@.png">
+        <img id="star3" src="https://ppt.cc/fGRQsx@.png">
+        <img id="star4" src="https://ppt.cc/fGRQsx@.png">
+        <img id="star5" src="https://ppt.cc/fGRQsx@.png">
+      </div>
+    </div>
+    <div id="score_box1">
+      <div class="score_word3">請給對方評語</div>
+      <div id="comment_card_box">
+        <div id="comment_card1">非常專業</div>
+        <div id="comment_card2">非常有耐心</div>
+        <div id="comment_card3">服務態度友善</div>
+        <div id="comment_card4">態度佳</div>
+        <div id="comment_card5">馬上回覆</div>
+        <div id="comment_card6">溝通很好</div>
+      </div>
+    </div>
+    <div id="score_box2">
+      <div class="score_subbox1">
+        <div class="score_subbox2">
+          <div id="score_icon"></div>
+          <div class="score_word4">給予評論</div>
+        </div>
+      </div>
+      <input type="text" name="comment_input" placeholder="請輸入文字...">
+    </div>
+    <button type="submit" id="bm_submit_score">送出</button>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

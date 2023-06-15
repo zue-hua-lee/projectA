@@ -7,8 +7,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 2,
-        "product_num": 4,
+        "trip_num": 1,
+        "product_num": 11,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台北",
@@ -23,7 +23,9 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 1,
+            "accepter": "user2"
         },
         "trip1": {
             "departure_country": "韓國",
@@ -39,7 +41,9 @@
             "product_list": "Food",
             "luggage_size_list": "20",
             "luggage_space_list": "20",
-            "set_tip": "100"
+            "set_tip": "100",
+            "accept": 1,
+            "accepter": "user2"
         },
         "product0": {
             "shipping_address_country": "日本",
@@ -54,7 +58,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "hihi",
+            "accept": 1,
+            "accepter": "user3"
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -69,7 +75,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "3",
             "product_arrive_date": "1",
-            "request_remark": "none"
+            "request_remark": "none",
+            "accept": 0,
+            "accepter": ""
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -84,7 +92,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "9",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 0,
+            "accepter": ""
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -99,7 +109,24 @@
             "product_arrive_year": "2024",
             "product_arrive_month": "8",
             "product_arrive_date": "1",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user2"
+        },
+        "commentA1": {
+            "writer_name": "aaaa",
+            "star": "3",
+            "word": "溝通很好"
+        },
+        "commentA2": {
+            "writer_name": "aaaa",
+            "star": "2",
+            "word": "服務態度友善"
+        },
+        "commentA3": {
+            "writer_name": "aaaa",
+            "star": "5",
+            "word": "態度佳"
         }
     },
     "user2": {
@@ -110,6 +137,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
+        "trip_num": 2,
+        "product_num": 22,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
@@ -124,7 +153,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 0,
+            "accepter": ""
         },
         "product0": {
             "shipping_address_country": "法國",
@@ -139,7 +170,9 @@
             "product_arrive_year": "2023",
             "product_arrive_month": "8",
             "product_arrive_date": "12",
-            "request_remark": ""
+            "request_remark": "",
+            "accept": 1,
+            "accepter": "user1"
         }
     },
     "user3": {
@@ -150,6 +183,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
+        "trip_num": 3,
+        "product_num": 33,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
@@ -164,7 +199,9 @@
             "product_list": "Apparel",
             "luggage_size_list": "21",
             "luggage_space_list": "40",
-            "set_tip": "66666"
+            "set_tip": "66666",
+            "accept": 1,
+            "accepter": "user2"
         }
     }
 }
