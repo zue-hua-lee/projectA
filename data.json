@@ -59,7 +59,7 @@
             "product_arrive_month": "2",
             "product_arrive_date": "1",
             "request_remark": "hihi",
-            "accept": 2,
+            "accept": 1,
             "accepter": "user3",
             "url0": "https://ppt.cc/fa7zlx@.png"
         },
@@ -77,8 +77,8 @@
             "product_arrive_month": "3",
             "product_arrive_date": "1",
             "request_remark": "none",
-            "accept": 0,
-            "accepter": ""
+            "accept": 1,
+            "accepter": "user2"
         },
         "product2": {
             "shipping_address_country": "美國",
