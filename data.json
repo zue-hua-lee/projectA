@@ -7,8 +7,8 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 1,
-        "product_num": 11,
+        "trip_num": 3,
+        "product_num": 4,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台北",
@@ -60,7 +60,8 @@
             "product_arrive_date": "1",
             "request_remark": "hihi",
             "accept": 1,
-            "accepter": "user3"
+            "accepter": "user3",
+            "url0": "https://ppt.cc/fa7zlx@.png"
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -120,7 +121,7 @@
         },
         "commentA2": {
             "writer_name": "aaaa",
-            "star": "2",
+            "star": "0",
             "word": "服務態度友善"
         },
         "commentA3": {
@@ -142,8 +143,6 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 2,
-        "product_num": 22,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
@@ -188,8 +187,6 @@
         "birth": "尚未填寫",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 3,
-        "product_num": 33,
         "trip0": {
             "departure_country": "台灣",
             "departure_city": "台南",
