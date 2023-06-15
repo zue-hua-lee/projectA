@@ -1729,6 +1729,9 @@ $(document).ready(function() {
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
 
+    $('#deal_request').css("background-color", "#7FD6D0")
+    $('#deal_request').html("送出成交請求")
+
     event.preventDefault()
     $.post('./product_contant', {
       user_name: ss[0],
@@ -1770,7 +1773,8 @@ $(document).ready(function() {
           user_name: ss[0],
           product: ss[1],
         }, (data) => {
-          
+          $('#deal_request').css("background-color", "#939191")
+          $('#deal_request').html("已送出")
         })
       })
     })
