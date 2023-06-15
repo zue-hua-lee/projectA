@@ -268,7 +268,6 @@ app.get('/request_data', (req, res) => { //用get傳
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
       data[req.query.user_name]['product'+n]['accept'] = 0 //接受交易
       data[req.query.user_name]['product'+n]['accepter'] = "" //接受交易者
-      data[req.query.user_name]['product'+n]['dealstate'] = 0 //接受交易者
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
       if(req.query.product_img != null){
         for(var i = 0; i < req.query.product_img.length; i++){
@@ -317,8 +316,8 @@ app.post('/product_contant', (req, res) => { //用get傳
           url_place++;
         }
       }
+      res.send(str)
   })
-  res.send('aaa')
 })
 
 //deal request
@@ -331,14 +330,14 @@ app.post('/deal_request', (req, res) => { //用get傳
       data = JSON.parse(data);
       //將傳來的資訊推送到數組對象中
       data[req.body.user_name][req.body.product]['dealstate'] = 1
-      
+
       var str = JSON.stringify(data);
       fs.writeFile('data.json', str, function (err) {
           if (err) {console.error(err);}
           console.log('Add new deal request...')
       })
   })
-  res.send("aaa")
+  res.send("bbb")
 })
 
 // main //select bar
@@ -541,30 +540,6 @@ app.post('/submit_score_green', (req, res) => {
       if(err){return console.error(err)}
     })
     res.send("submit score_green seccuss.")
-  })
-})
-app.post('/submit_score_blue', (req, res) => {
-  console.log(`${req.body.writer_name}`)
-  console.log(`${req.body.user_name}`)
-  console.log(`${req.body.score}`)
-  console.log(`${req.body.comment_input}`)
-  var max_num = 0;
-  fs.readFile('./data.json', function (err, data) {
-    if(err){return console.error(err)}
-    data = JSON.parse(data)
-    for(var id in data[`${req.body.user_name}`]){
-      if (id.substring(0, 8) == "commentB" && parseInt(id.substring(8)) > max_num){
-        max_num = parseInt(id.substring(8));
-      }
-    }
-    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)] = {}
-    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["writer_name"] = `${req.body.writer_name}`
-    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["star"] = `${req.body.score}`
-    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["word"] = (`${req.body.comment_input}` != "")? `${req.body.comment_input}`:`${req.body.comment_state}`;
-    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
-      if(err){return console.error(err)}
-    })
-    res.send("submit score_blue seccuss.")
   })
 })
 
