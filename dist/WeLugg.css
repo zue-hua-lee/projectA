@@ -1450,11 +1450,25 @@ body{
   border-radius: 10px;
 }
 
-#buyer_other_ptoduct {
+#deal_request {
   position: absolute;
-  width: 27.73%;
+  padding: 1.3vh 2vh 1.3vh 2vh;
+  font-size: 1.2vh;
+  color: #F7F7F7;
+  background-color: #7FD6D0;
+  left: 10%;
+  top: 90%;
+  border-radius: 10px;
+}
+#buyer_other_product {
+  position: absolute;
+  padding: 1.3vh 3vh 1.3vh 3vh;
+  font-size: 1.2vh;
+  color: #F7F7F7;
+  background-color: #7FD6D0;
   right: 10%;
   top: 90%;
+  border-radius: 10px;
 }
 /***************self_product_page***************/
 #self_product .title_list {
