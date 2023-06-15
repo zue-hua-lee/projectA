@@ -12,6 +12,7 @@ var accept_caselist_choose_state=0;
 var buy_caselist_choose_state=0;
 var comment_character = "";
 var check_window = false;
+var done_window = false;
 
 
 
@@ -816,12 +817,16 @@ function to_mainpage_schedule() {
         for(const id in data[user_name]){
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if(data[user_name][id]["dealstate"]==1){
+              
               all_display_none()
               $('#moreofmine').css({ 'display': 'none' })
-              $('#subpage_title').css({ 'display': 'block' })
-              $('#subpage_title').css({ 'background-color': '#556B94' })
-              $('#subpage_title .subpage_word').html("結帳")
-              $('#pay_blue').css({'display': 'block' })
+              $('#deal_agree').css({'display':'flex'});
+              $('#deal_box').css({'display':'none'});
+              $('#check_box').css({'display': 'flex'});
+              // $('#subpage_title').css({ 'display': 'block' })
+              // $('#subpage_title').css({ 'background-color': '#556B94' })
+              // $('#subpage_title .subpage_word').html("結帳")
+              // $('#pay_blue').css({'display': 'block' })
               await showpay(id)
             }
           }
@@ -1296,9 +1301,7 @@ $('#check_box .deal_yes').click((event) => {
   $('#subpage_title .subpage_word').html("結帳")
   $('#pay_blue').css({'display': 'block' })
 })
-$('#bm_submit_pay').click((event) => {
-  show("deal_success_blue")
-})
+
 
 // homepage
 $(document).ready(function() {
@@ -1626,8 +1629,11 @@ $(document).ready(function() {
       $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
-    
-    };
+    }
+    if (done_window === true){
+      show("deal_success_green")
+      done_window = false;
+    }
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -1720,7 +1726,11 @@ $(document).ready(function() {
       $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
-    };
+    }
+    if (done_window === true){
+      show("deal_success_green")
+      done_window = false;
+    }
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1728,6 +1738,9 @@ $(document).ready(function() {
     let ss = nn.split(/\s/);
     console.log(ss[0]) // user1
     console.log(ss[1]) // product0
+
+    $('#deal_request').css("background-color", "#7FD6D0")
+    $('#deal_request').html("送出成交請求")
 
     event.preventDefault()
     $.post('./product_contant', {
@@ -1770,7 +1783,8 @@ $(document).ready(function() {
           user_name: ss[0],
           product: ss[1],
         }, (data) => {
-          
+          $('#deal_request').css("background-color", "#939191")
+          $('#deal_request').html("已送出")
         })
       })
     })
@@ -1937,7 +1951,11 @@ $(document).ready(function() {
       $('#deal_box').css({'display':'none'});
       $('#check_box').css({'display': 'flex'});
       check_window = false;
-    };
+    }
+    if (done_window === true){
+      show("deal_success_green")
+      done_window = false;
+    }
   });
 
 
@@ -2748,6 +2766,17 @@ const clearChatContent = () => {
       // console.log(check_window);
     }
   })
+  socket.on('done_back', (username) =>{
+
+     if (username !== user_name && state[state.length-1] == "chat_box"){
+      //action
+      show("deal_success_green")
+     }
+     else if (username !== user_name && state[state.length-1] != "chat_box"){
+       done_window = true;
+       // console.log(check_window);
+     }
+  });
   //按下傳送訊息後，聊天紀錄會自動跑到最下面
   const content = document.querySelector('#chat_content');
 
@@ -2786,6 +2815,8 @@ const clearChatContent = () => {
   $("#check_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
     check_window = flase;
+    state.pop()
+    show(state.pop())
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
@@ -2796,6 +2827,11 @@ const clearChatContent = () => {
     // $("#deal_success").css({'display':'block'});
   });
   
+  $('#bm_submit_pay').click((event) => {
+    show("deal_success_blue")
+    socket.emit('done', user_name);
+  })
+
   //deal_success
   $('#deal_success button[name="to_list"]').click(function() {
     $(".case_list").click();
