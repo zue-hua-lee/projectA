@@ -26,6 +26,10 @@ function all_display_none() {
   $("#choose").css({ 'display': 'none' });
   $("#blank").css({'display':'none'});
   $('#moreofmine').css({'display':'none'})
+  $('#moreofmine_schedule').css({'display':'none'})
+  $('#moreofmine_schedule #myschedule').css({'display':'none'})
+  $('#moreofmine_need').css({'display':'none'})
+  $('#moreofmine_need #myneed').css({'display':'none'})
   $('#mainpage').css({'height': '69.24vh'});
   $('#subpage_title').css({'display':'none','background-color':'#7FD6D0'})
 
@@ -37,9 +41,11 @@ function all_display_none() {
   $('#add_new_request').css({ 'display': 'none' })
   $('#chat_main').css({ 'display': 'none' })
   $('#accept_case_list').css({ 'display': 'none' })
+  $('#accept_case_list_choose').css({ 'display': 'none' })
   $('#accept_case_list #no_customer').css({ 'display': 'none' })
   $('#accept_case_list #has_customer').css({ 'display': 'none' })
   $('#buy_case_list').css({ 'display': 'none' })
+  $('#buy_case_list_choose').css({ 'display': 'none' })
   $('#buy_case_list #no_buy').css({ 'display': 'none' })
   $('#buy_case_list #has_buy').css({ 'display': 'none' })
   $('#aft_shopping_cart').css({ 'display': 'none' })
@@ -54,6 +60,7 @@ function all_display_none() {
 
 function accept_case() {
   $('#accept_case_list').css({ 'display': 'block' });
+  $('#accept_case_list_choose').css({ 'display': 'block' });
   $('#accept_case_list #has_customer').css({ 'display': 'flex' })
   $('#accept_case_list #has_customer').html('');
   $.ajax({
@@ -123,8 +130,10 @@ function accept_case() {
     },
   })
 }
+
 function buy_case() {
   $('#buy_case_list').css({ 'display': 'block' });
+  $('#buy_case_list_choose').css({ 'display': 'block' });
   $('#buy_case_list #has_buy').css({ 'display': 'flex' })
   $('#buy_case_list #has_buy').html('');
   $.ajax({
@@ -162,11 +171,13 @@ function buy_case() {
                 if (ids == "set_shop_address") {
                   prd_place = `${data[user_name][id][ids]}`;
                 }
-
+                if (ids == "accepter") {
+                  accepter = `${data[user_name][id][ids]}`;
+                }
               }
               if (prd_name != '') {
                 var contener = document.getElementById("has_buy")
-                $('#has_buy').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
                   '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
@@ -193,6 +204,183 @@ function buy_case() {
     },
   })
 }
+
+function moreofmine_schedule() {
+  $('#moreofmine_schedule').css({ 'display': 'block' });
+  $('#moreofmine_schedule #myschedule').css({ 'display': 'flex' })
+  $('#moreofmine_schedule #myschedule').html('');
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+        for (const id in data[user_name]) {
+          let trip_loc = '';
+          let trip_date = '';
+          let lug = '';
+          let src = '';
+          let type = '';
+          let tip = '';
+          if (id.substring(0, 4) == "trip" && id.substring(0, 5) != "trip_") {
+            if (data[user_name][id]["accept"] != 2) {
+              for (const ids in data[user_name][id]) {
+                if (ids == "departure_country") {
+                  trip_loc += `${data[user_name][id][ids]},`;
+                }
+                if (ids == "departure_city") {
+                  trip_loc += `${data[user_name][id][ids]} -> `;
+                }
+                if (ids == "entry_country") {
+                  trip_loc += ` ${data[user_name][id][ids]},`;
+                  if(data[user_name][id][ids]=="台灣"){src="https://ppt.cc/fa7zlx@.png"}
+                  else if(data[user_name][id][ids]=="日本"){src="https://ppt.cc/fS5lRx@.png"}
+                  else if(data[user_name][id][ids]=="韓國"){ src="https://ppt.cc/fDrVBx@.png"}
+                  else if(data[user_name][id][ids]=="中國"){ src="https://ppt.cc/fhGq4x@.png" }
+                  else if(data[user_name][id][ids]=="港澳"){ src="https://ppt.cc/ftcWyx@.png" }
+                  else if(data[user_name][id][ids]=="泰國"){ src="https://ppt.cc/fGkiHx@.png" }
+                  else if(data[user_name][id][ids]=="越南"){ src="https://ppt.cc/fcomvx@.png" }
+                  else if(data[user_name][id][ids]=="馬來西亞"){ src="https://ppt.cc/f0bNox@.png"}
+                  else if(data[user_name][id][ids]=="新加坡"){ src="https://ppt.cc/fX9nQx@.png" }
+                  else if(data[user_name][id][ids]=="美國"){src="https://ppt.cc/f8cxwx@.png" }
+                  else if(data[user_name][id][ids]=="英國"){ src="https://ppt.cc/fS8plx@.png" }
+                  else if(data[user_name][id][ids]=="法國"){ src="https://ppt.cc/f2ejAx@.png" }
+                  else if(data[user_name][id][ids]=="德國"){ src="https://ppt.cc/fdBU1x@.png" }
+                  else if(data[user_name][id][ids]=="加拿大"){ src="https://ppt.cc/fLkXAx@.png" }
+                }
+                if (ids == "entry_city") {
+                  trip_loc += ` ${data[user_name][id][ids]}<br>`;
+                }
+                if (ids == "departure_year") {
+                  trip_date += `${data[user_name][id][ids]}/`;
+                }
+                if (ids == "departure_month") {
+                  trip_date += ` ${data[user_name][id][ids]}/`;
+                }
+                if (ids == "departure_date") {
+                  trip_date += ` ${data[user_name][id][ids]} - `;
+                }
+                if (ids == "entry_year") {
+                  trip_date += `${data[user_name][id][ids]}/`;
+                }
+                if (ids == "entry_month") {
+                  trip_date += ` ${data[user_name][id][ids]}/`;
+                }
+                if (ids == "entry_date") {
+                  trip_date += ` ${data[user_name][id][ids]}<br>`;
+                }
+                if (ids == "luggage_size_list") {
+                  lug += ` 行李${data[user_name][id][ids]}吋/`;
+                }
+                if (ids == "luggage_space_list") {
+                  lug += ` ${data[user_name][id][ids]}%<br>`;
+                }
+                if (ids == "product_list") {
+                  if(data[user_name][id][ids] == "food"){
+                    type = `食物類`;
+                  }
+                  else if(data[user_name][id][ids] == "Apparel"){
+                    type = `服飾類`;
+                  }
+                  else if(data[user_name][id][ids] == "Cosmetic"){
+                    type = `彩妝保養類`;
+                  }
+                  else{
+                    type = `生活用品類`;
+                  }
+                }
+                if (ids == "set_tip") {
+                  tip = `代購小費: ${data[user_name][id][ids]}`;
+                }
+              }
+              if (trip_loc != '') {
+                var contener = document.getElementById("myschedule")
+                $('#myschedule').append('<div class="' + user_name + ' ' + id +'"><img class="prd_img" src="'+src+'">' +
+                  '<div class="trip_loc">' + trip_loc + '</div><div class="trip_date">' + trip_date + '</div><div class="lug">' + lug +
+                  '</div><div class="type">' + type + '</div><div class="tip">' + tip + '</div><img class="garb" src="https://ppt.cc/fcrYSx@.png" /></div>');
+                // 等同於下列程式碼
+                //    <div class="user1 trip0">
+                //          <img class="prd_img" src="/src/user" />
+                //          <div class="trip_loc">trip_loc</div>
+                //          <div class="trip_date">trip_date</div>
+                //          <div class="lug">lug</div>
+                //          <div class="type">type</div>
+                //          <div class="tip">tip</div>
+                //          <img class="garb" src="https://ppt.cc/fcrYSx@.png" />
+                //    </div>
+
+              }
+            }
+        }
+      }
+    },
+  })
+}
+
+function moreofmine_need() {
+  $('#moreofmine_need').css({ 'display': 'block' });
+  $('#moreofmine_need #myneed').css({ 'display': 'flex' })
+  $('#moreofmine_need #myneed').html('');
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      for (const id in data[user_name]) {
+        let prd_name = '';
+        if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
+          if (data[user_name][id]["accept"] != 2) {
+            for (const ids in data[user_name][id]) {
+              if (ids == "set_product_name") {
+                prd_name = ` ${data[user_name][id][ids]}`;
+              }
+              if (ids == "request_product_list") {
+                if(data[user_name][id][ids] == "food"){
+                  prd_type = `食物類`;
+                }
+                else if(data[user_name][id][ids] == "Apparel"){
+                  prd_type = `服飾類`;
+                }
+                else if(data[user_name][id][ids] == "Cosmetic"){
+                  prd_type = `彩妝保養類`;
+                }
+                else{
+                  prd_type = `生活用品類`;
+                }
+              }
+              if (ids == "product_place_country") {
+                prd_country = `${data[user_name][id][ids]},`;
+              }
+              if (ids == "product_place_city") {
+                prd_country += `${data[user_name][id][ids]}`;
+              }
+              if (ids == "set_shop_address") {
+                prd_place = `${data[user_name][id][ids]}`;
+              }
+              if (ids == "accepter") {
+                accepter = `${data[user_name][id][ids]}`;
+              }
+            }
+            if (prd_name != '') {
+              var contener = document.getElementById("myneed")
+              $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
+                '</div><div class="prd_place">' + prd_place + '</div></div>');
+              // 等同於下列程式碼
+              //    <div class="user1 product0">
+              //          <img class="prd_img" src="/src/user" />
+              //          <div class="prd_name">prd_name</div>
+              //          <div class="prd_type">prd_type</div>
+              //          <div class="prd_country">prd_country</div>
+              //          <div class="prd_place">prd_place</div>
+              //    </div>
+
+            }
+          }
+
+        }
+      }
+    },
+  })
+}
+
 function user_url(name) {
   return new Promise(function (resolve, reject) {
     event.preventDefault()
@@ -524,7 +712,7 @@ function to_mainpage_schedule() {
               var contener = document.getElementById("show_need")
               $('#show_need').append('<div class="' + name + ' ' + id + '"><div class="w"><img class="user_img" src="' + (await user_url(name)) + '"/>'
                 + '<div><div class="n">' + name + '</div>' + namelist + '</div></div><div class="gray"><div class="chat_button">' +
-                '<p class="chat_no">代購詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
+                '<p class="chat_no">需求詳情</p><p class="chat_yes">進行聊天</p></div></div></div>');
               //     // 等同於下列程式碼
               //     // <div class="user1 product1">
               //     //   <div class="w">
@@ -772,6 +960,7 @@ function show(string) {
     all_display_none()
     state.push("accept_case_list")
     $('#accept_case_list').css({ 'display': 'block' })
+    $('#accept_case_list_choose').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
     $('#aft_shopping_cart').css({ 'display': 'none' })
     $('#subpage_title .subpage_word').html("我的代購清單")
@@ -783,6 +972,7 @@ function show(string) {
     all_display_none()
     state.push("buy_case_list")
     $('#buy_case_list').css({ 'display': 'block' })
+    $('#buy_case_list_choose').css({ 'display': 'block' })
     $('#subpage_title').css({ 'display': 'block' })
     $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#aft_shopping_cart').css({ 'display': 'none' })
@@ -790,6 +980,26 @@ function show(string) {
     $('#menu_bar').css({ 'display': 'flex' })
     $('#has_customer').css({ 'display': 'block' })
     buy_case()
+  }
+  else if (string == "moreofmine_schedule") {
+    all_display_none()
+    state.push("moreofmine_schedule")
+    $('#moreofmine_schedule').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'background-color': '#7FD6D0' })
+    $('#subpage_title .subpage_word').html("我的行程清單")
+    $('#menu_bar').css({ 'display': 'flex' })
+    moreofmine_schedule()
+  }
+  else if (string == "moreofmine_need") {
+    all_display_none()
+    state.push("moreofmine_need")
+    $('#moreofmine_need').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'display': 'block' })
+    $('#subpage_title').css({ 'background-color': '#556B94' })
+    $('#subpage_title .subpage_word').html("我的委託商品")
+    $('#menu_bar').css({ 'display': 'flex' })
+    moreofmine_need()
   }
   else if(string == "chat_main"){
     all_display_none()
@@ -1198,9 +1408,9 @@ $(document).ready(function() {
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
-    // var num=$(this).parent().parent().parent().index()+1;
-    // $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
+    var num=$(this).parent().parent().parent().index()+1;
+    $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
+    $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
     console.log(nn)
   });
@@ -1372,6 +1582,7 @@ $(document).ready(function() {
   //     check_state2 = 0;
   //   }
   // });
+
   // chatmain
   var prenum2 = 0;
   $('#chat_main').on('click', '#show_chatmain :nth-child(n) .w', function(){
@@ -2306,3 +2517,63 @@ $('#cho_reset').click(function () {
 //   if (!testInput1.is(event.target) && !testInput2.is(event.target) && !testInput3.is(event.target) && !testInput4.is(event.target))
 //     $("#choose").slideUp(4);
 // });
+
+//select to define done
+var buy_caselist_choose_state=0;
+$('#buy_case_list_choose').click(function () {
+  if(buy_caselist_choose_state==0){
+    $("#buy_case_list_choose").css({ 'background-color': '#D1D1D1' });
+    $("#buy_done").css({ 'display': 'block' });
+    buy_caselist_choose_state=1;
+    $('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
+      var nn = $(this).attr('class')
+      console.log(nn)
+      if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+      $(this).css({ 'border': '4px solid #556B94' });
+
+    });
+  }
+  else{
+    $("#buy_case_list_choose").css({ 'background-color': '#FFFFFF' });
+    $("#buy_done").css({ 'display': 'none' });
+    buy_caselist_choose_state=0;
+  }
+});
+var accept_caselist_choose_state=0;
+$('#accept_case_list_choose').click(function () {
+  if(accept_caselist_choose_state==0){
+    $("#accept_case_list_choose").css({ 'background-color': '#D1D1D1' });
+    $("#accept_done").css({ 'display': 'block' });
+    accept_caselist_choose_state=1;
+  }
+  else{
+    $("#accept_case_list_choose").css({ 'background-color': '#FFFFFF' });
+    $("#accept_done").css({ 'display': 'none' });
+    accept_caselist_choose_state=0;
+  }
+});
+
+$('#accept_case_list').on('click', '#has_customer :nth-child(n) .btm .bn_up', function(){
+  var nn = $(this).parent().parent().attr('class')
+  console.log(nn)
+  let ss = nn.split(/\s/);
+    read_personal_page(ss[0])
+    show("personal_page_other_green")
+});
+
+$('#buy_case_list').on('click', '#has_buy :nth-child(n) .btm .bn_up', function(){
+  var nn = $(this).parent().parent().attr('class')
+  console.log(nn)
+  let ss = nn.split(/\s/);
+    read_personal_page(ss[2])
+    show("personal_page_other_blue")
+});
+
+$('#moreofmine .moreofmine_button').click(function () {
+  if(state[state.length-1] == "mainpage_schedule"){
+    show("moreofmine_schedule")
+  }
+  else{
+    show("moreofmine_need")
+  }
+});

@@ -60,7 +60,8 @@
             "product_arrive_date": "1",
             "request_remark": "hihi",
             "accept":1,
-            "accepter":"user2"
+            "accepter":"user3",
+            "url0":"https://ppt.cc/fa7zlx@.png"
         },
         "product1": {
             "shipping_address_country": "美國",
