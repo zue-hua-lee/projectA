@@ -145,6 +145,7 @@ function buy_case() {
           let prd_name = '';
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[user_name][id]["accept"] == 1) {
+              console.log(id)
               for (const ids in data[user_name][id]) {
                 if (ids == "set_product_name") {
                   prd_name = ` ${data[user_name][id][ids]}`;
@@ -1340,6 +1341,7 @@ $(document).ready(function() {
       prenum = 0;
     }
   });
+
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
@@ -2538,6 +2540,9 @@ $('#cho_reset').click(function () {
 
 //select to define done
 var buy_caselist_choose_state=0;
+var delete_buy=[];
+var delete_buy_num=-1;
+var isin=-1;
 $('#buy_case_list_choose').click(function () {
   if(buy_caselist_choose_state==0){
     $("#buy_case_list_choose").css({ 'background-color': '#D1D1D1' });
@@ -2545,10 +2550,25 @@ $('#buy_case_list_choose').click(function () {
     buy_caselist_choose_state=1;
     $('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
       var nn = $(this).attr('class')
-      console.log(nn)
       if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
-      $(this).css({ 'border': '4px solid #556B94' });
-
+      {
+        for(var q=0;q<delete_buy.length;q++){
+          if(nn==delete_buy[q]){
+            isin=q;
+            break;
+          }
+        }
+        if(isin==-1){
+          $(this).css({ 'border': '4px solid #556B94' });
+          delete_buy_num++;
+          delete_buy[delete_buy_num]=nn;
+        }
+        else{
+          $(this).css({ 'border': '0px solid #556B94' });
+          delete_buy[isin]="nun";
+          isin=-1;
+        }
+      }
     });
   }
   else{
@@ -2557,12 +2577,62 @@ $('#buy_case_list_choose').click(function () {
     buy_caselist_choose_state=0;
   }
 });
+function buydone(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./buydone', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
+
+$('#buy_done').click(async function () {
+  if(delete_buy_num!=-1){
+    for(var q=0;q<delete_buy.length;q++){
+      if(delete_buy[q]!="nun"){
+        let ss = delete_buy[q].split(/\s/);
+        console.log(ss[2])
+        await buydone(ss)
+      }
+    }
+    show("buy_case_list")
+  }
+});
+
 var accept_caselist_choose_state=0;
+var delete_schedule=[];
+var delete_schedule_num=-1;
+var isin_sch=-1;
 $('#accept_case_list_choose').click(function () {
   if(accept_caselist_choose_state==0){
     $("#accept_case_list_choose").css({ 'background-color': '#D1D1D1' });
     $("#accept_done").css({ 'display': 'block' });
     accept_caselist_choose_state=1;
+    $('#accept_case_list').on('click', '#has_customer :nth-child(n)', function(){
+      var nn = $(this).attr('class')
+      if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+      {
+        for(var q=0;q<delete_schedule.length;q++){
+          if(nn==delete_schedule[q]){
+            isin_sch=q;
+            break;
+          }
+        }
+        if(isin_sch==-1){
+          $(this).css({ 'border': '4px solid #7FD6D0' });
+          delete_schedule_num++;
+          delete_schedule[delete_schedule_num]=nn;
+        }
+        else{
+          $(this).css({ 'border': '0px solid #7FD6D0' });
+          delete_schedule[isin_sch]="nun";
+          isin_sch=-1;
+        }
+      }
+    });
   }
   else{
     $("#accept_case_list_choose").css({ 'background-color': '#FFFFFF' });
@@ -2570,7 +2640,31 @@ $('#accept_case_list_choose').click(function () {
     accept_caselist_choose_state=0;
   }
 });
+function scheduledone(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./scheduledone', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
 
+$('#accept_done').click(async function () {
+  if(delete_schedule_num!=-1){
+    for(var q=0;q<delete_schedule.length;q++){
+      if(delete_schedule[q]!="nun"){
+        let ss = delete_schedule[q].split(/\s/);
+        console.log(ss[1])
+        await scheduledone(ss)
+      }
+    }
+    show("accept_case_list")
+  }
+});
+/////////////////////////////////
 $('#accept_case_list').on('click', '#has_customer :nth-child(n) .btm .bn_up', function(){
   var nn = $(this).parent().parent().attr('class')
   console.log(nn)
