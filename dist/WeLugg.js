@@ -23,7 +23,10 @@ function all_display_none() {
   $('#user_menu').css({'display':'none'})
   $('#menu_bar').css({'display':'none'})
   $('#selbar').css({'display':'none'})
+  $("#choose").css({ 'display': 'none' });
+  $("#blank").css({'display':'none'});
   $('#moreofmine').css({'display':'none'})
+  $('#mainpage').css({'height': '69.24vh'});
   $('#subpage_title').css({'display':'none','background-color':'#7FD6D0'})
 
   $('#mainpage').css({'display':'none'})
@@ -120,7 +123,6 @@ function accept_case() {
     },
   })
 }
-
 function buy_case() {
   $('#buy_case_list').css({ 'display': 'block' });
   $('#buy_case_list #has_buy').css({ 'display': 'flex' })
@@ -191,7 +193,6 @@ function buy_case() {
     },
   })
 }
-
 function user_url(name) {
   return new Promise(function (resolve, reject) {
     event.preventDefault()
@@ -255,7 +256,11 @@ function to_mainpage_need() {
       if(count>0){
         $('#moreofmine').css({ 'display': 'block' });
         $('#moreofmine .moreofmine_content').html(moretoshow);
-        console.log(moretoshow)
+        $('#mainpage').css({'height': '59.24vh'});
+      }
+      else{
+        $('#moreofmine').css({ 'display': 'none' });
+        $('#mainpage').css({'height': '69.24vh'});
       }
 
 
@@ -432,7 +437,12 @@ function to_mainpage_schedule() {
       if(count>0){
         $('#moreofmine').css({ 'display': 'block' });
         $('#moreofmine .moreofmine_content').html(moretoshow);
+        $('#mainpage').css({'height': '59.24vh'});
         console.log(moretoshow)
+      }
+      else{
+        $('#moreofmine').css({ 'display': 'none' });
+        $('#mainpage').css({'height': '69.24vh'});
       }
 
       for (const name in data) {
@@ -590,14 +600,14 @@ function to_mainpage_schedule() {
     },
   })
 }
-function read_personal_page(){
+function read_personal_page(name){
   event.preventDefault()
   $.post('./read_personal', {
-    name: user_name,
+    name: name,
   }, (res) => {
-    $('#subpage_title .subpage_word').html(user_name)
-    $('#personal_box1 .word1').html(user_name)
-    $('#personal_box2 input[name="personal_name"]').val(user_name)
+    $('#subpage_title .subpage_word').html(name)
+    $('#personal_box1 .word1').html(name)
+    $('#personal_box2 input[name="personal_name"]').val(name)
     $('#personal_box2 input[name="personal_gender"]').val(res[0])
     $('#personal_box2 input[name="personal_born"]').val(res[1])
     $('#personal_box2 input[name="personal_birth"]').val(res[2])
@@ -692,7 +702,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_credit_card').css({'display':'block'})
     $('#bm_edit_personal').css({'display':'block'})
-    read_personal_page()
+    read_personal_page(user_name)
   }
   else if(string == "personal_page_other_green"){
     all_display_none()
@@ -702,7 +712,6 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_togood').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
-    read_personal_page()
   }
   else if(string == "personal_page_other_blue"){
     all_display_none()
@@ -712,7 +721,6 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_totrip').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
-    read_personal_page()
   }
   else if(string == "mainpage_schedule"){
     all_display_none()
@@ -1169,6 +1177,10 @@ $(document).ready(function() {
 
     show("trip_contant")
   });
+  $('#seller_page').click((event) => {
+    read_personal_page(user_name)
+    show("personal_page_other_blue")
+  })
 
   // mainpage-我是購買者
   var prenum1 = 0;
@@ -1204,8 +1216,6 @@ $(document).ready(function() {
       product: ss[1],
     }, (data) => {
       $('#buyer_name').html(ss[0])
-      console.log(data)
-      console.log(data[6])
       $('#buyer_set_product_name').html(data[0])
       $('#buyer_product_place_country').html(data[1])
       $('#buyer_product_place_city').html(data[2])
@@ -1223,26 +1233,40 @@ $(document).ready(function() {
 
       add_product_img = [];
       add_product_img_num = 0;
-      add_product_img = [];
       for(var i=14; i < data.length; i++){
         add_product_img[add_product_img_num] = data[i];
         add_product_img_num++;
       }
-
       if(add_product_img[0]){
         $('#buyer_product_img').attr("src", add_product_img[0])
         add_product_img_state = 0;
       }
-      
     })
-
     show("product_contant")
   });
+  $('#buyer_page').click((event) => {
+    read_personal_page(user_name)
+    show("personal_page_other_green")
+  })
 
   // schedule 代購者頁面
   $('#user_menu .shopping_bag').click((event) => {
-    if(state[state.length-1] == "mainpage_schedule")
+    if(state[state.length-1] == "mainpage_schedule"){
+      cho_submit = 0;
+      $("#select_check1").css({ 'display': 'none' });
+      $("#select_check2").css({ 'display': 'none' });
+      $("#select_check3").css({ 'display': 'none' });
+      $("#select_check4").css({ 'display': 'none' });
+      $("#choose").css({ 'display': 'none' });
+      $("#blank").css({'display':'none'});
+
+      $('#choose select[name=select_country]').prop('selectedIndex', 0);
+      $('#choose select[name=select_product_country]').prop('selectedIndex', 0);
+      $('#choose select[name=select_year]').prop('selectedIndex', 0);
+      $('#choose select[name=select_month]').prop('selectedIndex', 0);
+      $('#choose select[name=select_type]').prop('selectedIndex', 0);
       show("mainpage_need")
+    }
   })
   $('#bm_add_schedule').click((event) => {
     if(state[state.length-1] == "mainpage_schedule"){
@@ -1251,8 +1275,22 @@ $(document).ready(function() {
   })
   // need 購買者頁面
   $('#user_menu .mid_luggage').click((event) => {
-    if(state[state.length-1] == "mainpage_need")
+    if(state[state.length-1] == "mainpage_need"){
+      cho_submit = 0;
+      $("#select_check1").css({ 'display': 'none' });
+      $("#select_check2").css({ 'display': 'none' });
+      $("#select_check3").css({ 'display': 'none' });
+      $("#select_check4").css({ 'display': 'none' });
+      $("#choose").css({ 'display': 'none' });
+      $("#blank").css({'display':'none'});
+
+      $('#choose select[name=select_country]').prop('selectedIndex', 0);
+      $('#choose select[name=select_product_country]').prop('selectedIndex', 0);
+      $('#choose select[name=select_year]').prop('selectedIndex', 0);
+      $('#choose select[name=select_month]').prop('selectedIndex', 0);
+      $('#choose select[name=select_type]').prop('selectedIndex', 0);
       show("mainpage_schedule")
+    }
   })
   $('#bm_add_schedule').click((event) => {
     if(state[state.length-1] == "mainpage_need"){
@@ -2173,19 +2211,12 @@ const clearChatContent = () => {
 $('#selbar').click(function() {
     $("#choose").css({'display':'block'});
     $("#blank").css({'display':'block'});
-    $("#blank2").css({'display':'block'});
 });
 
 //let select bar disappear
 $('#blank').click(function() {
   $("#choose").css({'display':'none'});
   $("#blank").css({'display':'none'});
-  $("#blank2").css({'display':'none'});
-});
-$('#blank2').click(function() {
-  $("#choose").css({'display':'none'});
-  $("#blank").css({'display':'none'});
-  $("#blank2").css({'display':'none'});
 });
 
 $('#select_checkbox1').click(function() {
@@ -2236,6 +2267,7 @@ $('#select_check4').click(function() {
 $('#cho_submit').click(function () {
   cho_submit = 1;
   $("#choose").css({ 'display': 'none' });
+  $("#blank").css({'display':'none'});
   if (state[state.length - 1] == "mainpage_schedule") {
     to_mainpage_schedule()
   }
@@ -2243,18 +2275,26 @@ $('#cho_submit').click(function () {
     to_mainpage_need()
   }
 });
-$('#cho_reset,.mid_luggage,.shopping_bag').click(function () {
+$('#cho_reset').click(function () {
   cho_submit = 0;
   $("#select_check1").css({ 'display': 'none' });
   $("#select_check2").css({ 'display': 'none' });
   $("#select_check3").css({ 'display': 'none' });
   $("#select_check4").css({ 'display': 'none' });
   $("#choose").css({ 'display': 'none' });
-  if (state[state.length - 1] == "mainpage_schedule") {
-    to_mainpage_schedule()
+  $("#blank").css({'display':'none'});
+
+  $('#choose select[name=select_country]').prop('selectedIndex', 0);
+  $('#choose select[name=select_product_country]').prop('selectedIndex', 0);
+  $('#choose select[name=select_year]').prop('selectedIndex', 0);
+  $('#choose select[name=select_month]').prop('selectedIndex', 0);
+  $('#choose select[name=select_type]').prop('selectedIndex', 0);
+
+  if (state[state.length-1] == "mainpage_schedule") {
+    show("mainpage_schedule")
   }
   else {
-    to_mainpage_need()
+    show("mainpage_need")
   }
 });
 // $(document).click(function (event) {
