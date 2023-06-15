@@ -317,8 +317,28 @@ app.post('/product_contant', (req, res) => { //用get傳
           url_place++;
         }
       }
-      res.send(str)
   })
+  res.send('aaa')
+})
+
+//deal request
+app.post('/deal_request', (req, res) => { //用get傳
+  fs.readFile('./data.json', function (err, data) {
+      if (err) throw err;
+      //將二進制數據轉換為字串符
+      //var stu_list = data.toString();
+      //將字符串轉換為 JSON 對象
+      data = JSON.parse(data);
+      //將傳來的資訊推送到數組對象中
+      data[req.body.user_name][req.body.product]['dealstate'] = 1
+      
+      var str = JSON.stringify(data);
+      fs.writeFile('data.json', str, function (err) {
+          if (err) {console.error(err);}
+          console.log('Add new deal request...')
+      })
+  })
+  res.send("aaa")
 })
 
 // main //select bar

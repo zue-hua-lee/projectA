@@ -1763,6 +1763,30 @@ $(document).ready(function() {
       else{
         $('#buyer_product_img').attr("src", "https://ppt.cc/fT3wnx@.png")
       }
+
+      $('#deal_request').click((event) => {
+        event.preventDefault()
+        $.post('./deal_request', {
+          user_name: ss[0],
+          product: ss[1],
+        }, (data) => {
+          $('#buyer_name').html(ss[0])
+          $('#buyer_set_product_name').html(data[0])
+          $('#buyer_product_place_country').html(data[1])
+          $('#buyer_product_place_city').html(data[2])
+          $('#buyer_set_shop_name').html(data[3])
+          $('#buyer_set_shop_address').html(data[4])
+          $('#buyer_request_product_list').html(data[5])
+          $('#buyer_set_product_quantity').html(data[6])
+          $('#buyer_shipping_address_country').html(data[7])
+          $('#buyer_shipping_address_city').html(data[8])
+          $('#buyer_product_arrive_year').html(data[9])
+          $('#buyer_product_arrive_month').html(data[10])
+          $('#buyer_product_arrive_date').html(data[11])
+          $('#buyer_request_remark').html(data[12])
+          $('#buyer_profile_img').attr("src",data[13])
+        })
+      })
     })
     show("product_contant")
   });
