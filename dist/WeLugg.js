@@ -11,6 +11,7 @@ let product_img = [];
 var accept_caselist_choose_state=0;
 var buy_caselist_choose_state=0;
 var comment_character = "";
+var check_window = false;
 
 
 
@@ -883,6 +884,7 @@ function save_personal_page(){
   })
 }
 function read_buyer_comment(name) {
+  $('#personal_comment .buyer_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -890,22 +892,23 @@ function read_buyer_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentB") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("buyer_comment")
-            $('#buyer_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .buyer_comment').append('<div class="buyer_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -920,6 +923,7 @@ function read_buyer_comment(name) {
   })
 }
 function read_seller_comment(name) {
+  $('#personal_comment .seller_comment').html('');
   $.ajax({
     type: 'POST',
     url: './list',
@@ -927,22 +931,24 @@ function read_seller_comment(name) {
       for (const id in data[name]) {
         let writer_name = '';
         let star = '';
-        let word = '';
+        let comment_word = '';
         if (id.substring(0, 8) == "commentA") {
           writer_name = ` ${data[name][id]["writer_name"]}`;
           star = ` ${data[name][id]["star"]}`;
-          word = ` ${data[name][id]["word"]}`;
-          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
-          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
-          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
-          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
-          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
-          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          console.log(data[name][id]["star"]);
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
 
           if (writer_name != '' ) {
             var contener = document.getElementById("seller_comment")
-            $('#seller_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
-              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            $('#personal_comment .seller_comment').append('<div class="seller_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
             // 等同於下列程式碼
             //    <div class="user2 commentB1">
             //      <img class="total_star" src="total_star" />
@@ -1008,6 +1014,8 @@ function save_self_trip_page() {
   })
 }
 function show(string) {
+  console.log(state)
+
   if (string == "register_success") {
     all_display_none()
     state.push("register_success")
@@ -1209,6 +1217,13 @@ $('#bm_credit_card').click((event) => {
   $('#subpage_title .subpage_word').html("結帳")
   $('#pay_blue').css({'display': 'block' })
 })
+$('#check_box .deal_yes').click((event) => {
+  all_display_none()
+  $('#subpage_title').css({ 'display': 'block' })
+  $('#subpage_title').css({ 'background-color': '#556B94' })
+  $('#subpage_title .subpage_word').html("結帳")
+  $('#pay_blue').css({'display': 'block' })
+})
 
 
 // homepage
@@ -1342,14 +1357,31 @@ $(document).ready(function() {
   $('#personal_comment .comment_character').click(function(event){ 
     if(comment_character == 'buyer'){
       $('#personal_comment .comment_character').text('代購者評價');
-      $('#personal_comment .comment_character').css({'color': '#7FD6D0'});
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
       $('#personal_comment .seller_comment').css({ 'display': 'flex' });
       $('#personal_comment .buyer_comment').css({ 'display': 'none' });
       comment_character = 'seller';
     }
     else if(comment_character == 'seller'){
       $('#personal_comment .comment_character').text('購買者評價');
-      $('#personal_comment .comment_character').css({'color': '#556B94'});
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
+  });
+
+  $('#personal_comment .change_comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
       $('#personal_comment .seller_comment').css({ 'display': 'none' });
       $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
       comment_character = 'buyer';
@@ -1515,6 +1547,12 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
     loadChatHistory();
+    if (check_window === true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    
+    };
   });
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_no', function(){
     var nn = $(this).parent().parent().parent().attr('class')
@@ -1600,9 +1638,13 @@ $(document).ready(function() {
     var nn = $(this).parent().parent().parent().attr('class')
     var num=$(this).parent().parent().parent().index()+1;
     $('#show_chatmain :nth-child('+num+') .gray .chat_button .chat_yes').css({'display':'block'});
-    $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
     console.log(nn)
   });
   $('#mainpage').on('click', '#show_need :nth-child(n) .chat_no', function(){
@@ -1799,10 +1841,13 @@ $(document).ready(function() {
     }
   });
   $('#chat_main .chat_yes').click(function(){
-    // $(location).attr('href','http://luffy.ee.ncku.edu.tw:9867/')
-    
     show("chat_box")
     loadChatHistory();
+    if (check_window == true){
+      $('#deal_agree').css({'display':'flex'});
+      $('#check_box').css({'display': 'flex'});
+      check_window = false;
+    };
   });
 
 
@@ -2557,7 +2602,10 @@ const loadChatHistory = () => {
       appendMessage(message.message, message.isSelf);
     });
   });
+
 };
+
+    
 
 
 // $('.chat_yes').click(function() {
@@ -2593,7 +2641,20 @@ const clearChatContent = () => {
     // appendMessage(msg);
     appendMessage(chatData.message, chatData.user_name === user_name);
   });
-
+  socket.on('check_back', (username) =>{
+    // console.log(username);
+    // console.log(user_name);
+    if (username !== user_name && state[state.length-1] == "chat_box"){
+      //action
+      $('#deal_agree').css({'display':'flex'});
+      $('#deal_box').css({'display': 'none'});
+      $('#check_box').css({'display': 'flex'});
+    }
+    else if (username !== user_name && state[state.length-1] != "chat_box"){
+      check_window = true;
+      // console.log(check_window);
+    }
+  })
   //按下傳送訊息後，聊天紀錄會自動跑到最下面
   const content = document.querySelector('#chat_content');
 
@@ -2629,11 +2690,14 @@ const clearChatContent = () => {
   $("#deal_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
   });
+  $("#check_box .deal_no").click(function() {
+    $("#deal_agree").css({'display':'none'});
+  });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
     $("#deal_agree").css({'display':'none'});
     $("#deal_banner").css({'display':'flex'});
-    
+    socket.emit('check', user_name);
     // all_display_none()
     // $("#deal_success").css({'display':'block'});
   });
@@ -2817,7 +2881,6 @@ $('#buy_done').click(async function () {
     show("buy_case_list")
   }
 });
-
 
 var delete_schedule=[];
 var delete_schedule_num=-1;
@@ -3020,9 +3083,6 @@ $('#comment_card6').click(function () {
     comment_state = 6;
   }
 });
-$('#accept_done').click(function () {
-  show("score_page_green")
-});
 $('#bm_submit_score').click(function (event) {
   event.preventDefault()
   if(comment_state == 1){
@@ -3046,9 +3106,10 @@ $('#bm_submit_score').click(function (event) {
   else{
     comment_state = ""
   }
+  console.log($('#score_page_green .score_word2').html())
   $.post('./submit_score_green', {
     user_name: user_name,
-    writer_name: "aaaa",
+    writer_name: $('#score_page_green .score_word2').html(),
     score: score,
     comment_state: comment_state,
     comment_input: $('#score_page_green input[name="comment_input"]').val(),
