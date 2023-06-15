@@ -8,6 +8,7 @@ var cho_submit = 0;
 var add_product_img_state;
 let add_product_img = [];
 let product_img = [];
+var comment_character = "";
 
 function all_display_none() {
   $('#homepage1').css({'display':'none'})
@@ -803,6 +804,10 @@ function read_personal_page(name){
     $('#personal_box2 input[name="personal_mail"]').val(res[3])
     $('#personal_box2 input[name="personal_phone"]').val(res[4])
     $('#personal_img').css({'background':'url('+res[5]+') no-repeat center/contain'})
+
+    read_buyer_comment(name)
+    read_seller_comment(name)
+    comment_character = "buyer";
   })
 }
 function save_personal_page(){
@@ -822,6 +827,80 @@ function save_personal_page(){
       $('#personal_box1 .word1').html(user_name)
       resolve()
     })
+  })
+}
+function read_buyer_comment(name) {
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      for (const id in data[name]) {
+        let writer_name = '';
+        let star = '';
+        let word = '';
+        if (id.substring(0, 8) == "commentB") {
+          writer_name = ` ${data[name][id]["writer_name"]}`;
+          star = ` ${data[name][id]["star"]}`;
+          word = ` ${data[name][id]["word"]}`;
+          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+
+          if (writer_name != '' ) {
+            var contener = document.getElementById("buyer_comment")
+            $('#buyer_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            // 等同於下列程式碼
+            //    <div class="user2 commentB1">
+            //      <img class="total_star" src="total_star" />
+            //      <div class="writer_name">writer_name</div>
+            //      <div class="word">word</div>
+            //    </div>
+
+          }
+        }
+      }
+    },
+  })
+}
+function read_seller_comment(name) {
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      for (const id in data[name]) {
+        let writer_name = '';
+        let star = '';
+        let word = '';
+        if (id.substring(0, 8) == "commentA") {
+          writer_name = ` ${data[name][id]["writer_name"]}`;
+          star = ` ${data[name][id]["star"]}`;
+          word = ` ${data[name][id]["word"]}`;
+          if(star = "0"){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(star = "1"){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(star = "2"){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(star = "3"){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(star = "4"){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(star = "5"){ total_star = "https://ppt.cc/fAVpsx@.png" }
+
+          if (writer_name != '' ) {
+            var contener = document.getElementById("seller_comment")
+            $('#seller_comment').append('<div class="' + writer_name + ' ' + id + '"><img class="total_star" src="' + 'https://ppt.cc/f6L57x@.png'+'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="word">' + word + '</div></div>');
+            // 等同於下列程式碼
+            //    <div class="user2 commentB1">
+            //      <img class="total_star" src="total_star" />
+            //      <div class="writer_name">writer_name</div>
+            //      <div class="word">word</div>
+            //    </div>
+
+          }
+        }
+      }
+    },
   })
 }
 function save_self_product_page() {
@@ -891,6 +970,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_credit_card').css({'display':'block'})
     $('#bm_edit_personal').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
     read_personal_page(user_name)
   }
   else if(string == "personal_page_other_green"){
@@ -901,6 +981,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_togood').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
   }
   else if(string == "personal_page_other_blue"){
     all_display_none()
@@ -910,6 +991,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_totrip').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
   }
   else if(string == "mainpage_schedule"){
     all_display_none()
@@ -1192,6 +1274,24 @@ $(document).ready(function() {
   });
   $('#change_img2').click(function(event){ 
     $('#camera_file').click()
+  });
+
+  //讀取評論
+  $('#personal_comment .comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
   });
 
   // 上傳照片
