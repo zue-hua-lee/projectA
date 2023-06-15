@@ -50,9 +50,9 @@
             "shipping_address_city": "東京",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "123",
-            "set_shop_name": "12345",
-            "set_shop_address": "124235",
+            "set_product_name": "法國麵包",
+            "set_shop_name": "La Boulangerie Française",
+            "set_shop_address": "台北市松山區虎林街115號",
             "request_product_list": "Food",
             "set_product_quantity": "14",
             "product_arrive_year": "2023",
@@ -61,16 +61,16 @@
             "request_remark": "hihi",
             "accept": 1,
             "accepter": "Yuyu551",
-            "dealstate":0
+            "dealstate": 0
         },
         "product1": {
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
             "product_place_country": "中國",
             "product_place_city": "北京",
-            "set_product_name": "456",
-            "set_shop_name": "6789",
-            "set_shop_address": "6789",
+            "set_product_name": "超好吃小籠包",
+            "set_shop_name": "上海市浦東新區世紀大道100號",
+            "set_shop_address": "上海市浦東新區世紀大道100號",
             "request_product_list": "Apparel",
             "set_product_quantity": "11",
             "product_arrive_year": "2023",
@@ -79,16 +79,16 @@
             "request_remark": "none",
             "accept": 1,
             "accepter": "Yuyu551",
-            "dealstate":0
+            "dealstate": 0
         },
         "product2": {
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "2333",
-            "set_shop_name": "hihi233",
-            "set_shop_address": "sdfdd",
+            "set_product_name": "綠茶拿鐵",
+            "set_shop_name": "茶葉世家",
+            "set_shop_address": "台北市大安區忠孝東路四段100號",
             "request_product_list": "Apparel",
             "set_product_quantity": "4",
             "product_arrive_year": "2023",
@@ -97,16 +97,16 @@
             "request_remark": "",
             "accept": 1,
             "accepter": "雞仔",
-            "dealstate":0
+            "dealstate": 0
         },
         "product3": {
             "shipping_address_country": "法國",
             "shipping_address_city": "巴黎",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "2",
-            "set_shop_name": "hihi",
-            "set_shop_address": "sdfdd",
+            "set_product_name": "手工蛋糕",
+            "set_shop_name": "甜蜜烘培坊",
+            "set_shop_address": "新北市板橋區文化路二段50號",
             "request_product_list": "Apparel",
             "set_product_quantity": "2",
             "product_arrive_year": "2024",
@@ -115,7 +115,7 @@
             "request_remark": "",
             "accept": 0,
             "accepter": "",
-            "dealstate":0
+            "dealstate": 0
         },
         "commentA1": {
             "writer_name": "Yuyu551",
@@ -151,7 +151,7 @@
         "birth": "1995/4/7",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 17,
+        "trip_num": 18,
         "product_num": 3,
         "trip0": {
             "departure_country": "台灣",
@@ -176,9 +176,9 @@
             "shipping_address_city": "巴黎",
             "product_place_country": "台灣",
             "product_place_city": "台南",
-            "set_product_name": "62323",
-            "set_shop_name": "hihi23",
-            "set_shop_address": "sdf",
+            "set_product_name": "新鮮大龍蝦",
+            "set_shop_name": "港都海鮮屋",
+            "set_shop_address": "台南市中西區民權路一段80號",
             "request_product_list": "Food",
             "set_product_quantity": "4",
             "product_arrive_year": "2023",
@@ -187,7 +187,7 @@
             "request_remark": "",
             "accept": 1,
             "accepter": "Nancy Lin",
-            "dealstate":0
+            "dealstate": 0
         },
         "commentA1": {
             "writer_name": "Nancy Lin",
@@ -213,6 +213,24 @@
             "writer_name": "Nancy Lin",
             "star": "4",
             "word": "馬上回覆"
+        },
+        "trip17": {
+            "departure_country": "日本",
+            "departure_city": "東京",
+            "entry_country": "日本",
+            "entry_city": "東京",
+            "departure_year": "2024",
+            "departure_month": "2",
+            "departure_date": "1",
+            "entry_year": "2024",
+            "entry_month": "3",
+            "entry_date": "1",
+            "product_list": "Apparel",
+            "luggage_size_list": "21",
+            "luggage_space_list": "60",
+            "set_tip": "1",
+            "accept": 0,
+            "accepter": ""
         }
     },
     "雞仔": {
@@ -248,27 +266,27 @@
             "shipping_address_city": "東京",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "123",
-            "set_shop_name": "12345",
-            "set_shop_address": "124235",
+            "set_product_name": "New York Perfect Cheese 奶油芝士脆卷",
+            "set_shop_name": "NewYork Perfect Cheese",
+            "set_shop_address": "23 Princeton Street, Honeoye,ny, 14471 United States",
             "request_product_list": "Food",
             "set_product_quantity": "14",
             "product_arrive_year": "2023",
             "product_arrive_month": "2",
             "product_arrive_date": "1",
-            "request_remark": "hihi",
+            "request_remark": "",
             "accept": 1,
             "accepter": "Yuyu551",
-            "dealstate":0
+            "dealstate": 0
         },
         "product1": {
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
             "product_place_country": "中國",
             "product_place_city": "北京",
-            "set_product_name": "456",
-            "set_shop_name": "6789",
-            "set_shop_address": "6789",
+            "set_product_name": "Meister Cheese 四種芝士柑橘蜂蜜夾心餅",
+            "set_shop_name": "NewYork Perfect Cheese",
+            "set_shop_address": "23 Princeton Street, Honeoye,ny, 14471 United States",
             "request_product_list": "Apparel",
             "set_product_quantity": "11",
             "product_arrive_year": "2023",
@@ -277,16 +295,16 @@
             "request_remark": "none",
             "accept": 1,
             "accepter": "Yuyu551",
-            "dealstate":0
+            "dealstate": 0
         },
         "product2": {
             "shipping_address_country": "美國",
             "shipping_address_city": "紐約",
             "product_place_country": "台灣",
-            "product_place_city": "台北",
-            "set_product_name": "2333",
-            "set_shop_name": "hihi233",
-            "set_shop_address": "sdfdd",
+            "product_place_city": "新北",
+            "set_product_name": "手工蛋糕",
+            "set_shop_name": "甜蜜烘培坊",
+            "set_shop_address": "新北市板橋區文化路二段50號",
             "request_product_list": "Apparel",
             "set_product_quantity": "4",
             "product_arrive_year": "2023",
@@ -295,16 +313,16 @@
             "request_remark": "",
             "accept": 1,
             "accepter": "Nancy Lin",
-            "dealstate":0
+            "dealstate": 0
         },
         "product3": {
             "shipping_address_country": "法國",
             "shipping_address_city": "巴黎",
             "product_place_country": "台灣",
             "product_place_city": "台北",
-            "set_product_name": "2",
-            "set_shop_name": "hihi",
-            "set_shop_address": "sdfdd",
+            "set_product_name": "手工蛋糕",
+            "set_shop_name": "甜蜜烘培坊",
+            "set_shop_address": "新北市板橋區文化路二段50號",
             "request_product_list": "Apparel",
             "set_product_quantity": "2",
             "product_arrive_year": "2024",
@@ -313,7 +331,7 @@
             "request_remark": "",
             "accept": 0,
             "accepter": "",
-            "dealstate":0
+            "dealstate": 0
         },
         "commentA1": {
             "writer_name": "Nancy Lin",
