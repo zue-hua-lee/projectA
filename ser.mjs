@@ -60,6 +60,13 @@ io.on('connection', (socket) => {
     io.emit('check_back', username);
     // console.log(username);
   })
+  socket.on('done',(user_name) => {
+    console.log(user_name);
+    const user = user_name.toString();
+    io.emit('done_back', user);
+    console.log(user);
+  })
+
 })
 
 server.listen(port, () => {
