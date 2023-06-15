@@ -66,12 +66,17 @@ function all_display_none() {
 }
 
 function accept_case() {
-  $('#accept_case_list').css({ 'display': 'block' });
-  $('#accept_case_list_choose').css({ 'display': 'block' });
-  $('#accept_case_list #has_customer').css({ 'display': 'flex' })
-  $('#accept_case_list #has_customer').html('');
   accept_caselist_choose_state=0;
   clicknum=0;
+  delete_schedule=[];
+  delete_schedule_num=-1;
+  isin_sch=-1;
+  $('#accept_case_list').css({ 'display': 'block' });
+  $('#accept_case_list_choose').css({ 'display': 'block' });
+  $('#accept_case_list #has_customer').css({ 'display': 'flex' });
+  $('#accept_case_list #has_customer').html('');
+  $('#accept_case_list_choose').css({ 'background-color': '#ffffff' });
+  $('#accept_done').css({ 'display': 'none' });
   $.ajax({
     type: 'POST',
     url: './list',
@@ -145,6 +150,11 @@ function buy_case() {
   $('#buy_case_list_choose').css({ 'display': 'block' });
   $('#buy_case_list #has_buy').css({ 'display': 'flex' })
   $('#buy_case_list #has_buy').html('');
+  $('#buy_case_list_choose').css({ 'background-color': '#ffffff' });
+  $('#buy_done').css({ 'display': 'none' });
+  delete_buy=[];
+  delete_buy_num=-1;
+  isin=-1;
   buy_caselist_choose_state=0;
   clicknum_b=0;
   $.ajax({
@@ -2762,36 +2772,38 @@ $('#buy_case_list_choose').click(function () {
     $("#buy_case_list_choose").css({ 'background-color': '#D1D1D1' });
     $("#buy_done").css({ 'display': 'block' });
     buy_caselist_choose_state=1;
-    $('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
-      var nn = $(this).attr('class')
-      if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
-      {
-        for(var q=0;q<delete_buy.length;q++){
-          if(nn==delete_buy[q]){
-            isin=q;
-            break;
-          }
-        }
-        if(isin==-1 && clicknum_b==0){
-          $(this).css({ 'border': '4px solid #556B94' });
-          delete_buy_num++;
-          delete_buy[delete_buy_num]=nn;
-          clicknum_b=1;
-        }
-        else if(isin!=-1 && clicknum_b!=0){
-          $(this).css({ 'border': '0px solid #556B94' });
-          delete_buy[isin]="nun";
-          isin=-1;
-          clicknum_b=0;
-        }
-      }
-    });
   }
   else{
     $("#buy_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#buy_done").css({ 'display': 'none' });
     buy_caselist_choose_state=0;
     clicknum_b=0;
+  }
+});
+$('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
+  if(buy_caselist_choose_state==1){
+  var nn = $(this).attr('class')
+  if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+  {
+    for(var q=0;q<delete_buy.length;q++){
+      if(nn==delete_buy[q]){
+        isin=q;
+        break;
+      }
+    }
+    if(isin==-1 && clicknum_b==0){
+      $(this).css({ 'border': '4px solid #556B94' });
+      delete_buy_num++;
+      delete_buy[delete_buy_num]=nn;
+      clicknum_b=1;
+    }
+    else if(isin!=-1 && clicknum_b!=0){
+      $(this).css({ 'border': '0px solid #556B94' });
+      delete_buy[isin]="nun";
+      isin=-1;
+      clicknum_b=0;
+    }
+  }
   }
 });
 function buydone(ss){
@@ -2820,7 +2832,6 @@ $('#buy_done').click(async function () {
   }
 });
 
-
 var delete_schedule=[];
 var delete_schedule_num=-1;
 var isin_sch=-1;
@@ -2830,36 +2841,38 @@ $('#accept_case_list_choose').click(function () {
     $("#accept_case_list_choose").css({ 'background-color': '#D1D1D1' });
     $("#accept_done").css({ 'display': 'block' });
     accept_caselist_choose_state=1;
-    $('#accept_case_list').on('click', '#has_customer :nth-child(n)', function(){
-      var nn = $(this).attr('class')
-      if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
-      {
-        for(var q=0;q<delete_schedule.length;q++){
-          if(nn==delete_schedule[q]){
-            isin_sch=q;
-            break;
-          }
-        }
-        if(isin_sch==-1 && clicknum==0){
-          $(this).css({ 'border': '4px solid #7FD6D0' });
-          delete_schedule_num++;
-          delete_schedule[delete_schedule_num]=nn;
-          clicknum=1;
-        }
-        else if(isin_sch!=-1 && clicknum!=0){
-          $(this).css({ 'border': '0px solid #7FD6D0' });
-          delete_schedule[isin_sch]="nun";
-          isin_sch=-1;
-          clicknum=0;
-        }
-      }
-    });
   }
   else{
     $("#accept_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#accept_done").css({ 'display': 'none' });
     accept_caselist_choose_state=0;
     clicknum=0;
+  }
+});
+$('#accept_case_list').on('click', '#has_customer :nth-child(n)', function(){
+  if(accept_caselist_choose_state==1){
+    var nn = $(this).attr('class')
+    if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+    {
+      for(var q=0;q<delete_schedule.length;q++){
+        if(nn==delete_schedule[q]){
+          isin_sch=q;
+          break;
+        }
+      }
+      if(isin_sch==-1 && clicknum==0){
+        $(this).css({ 'border': '4px solid #7FD6D0' });
+        delete_schedule_num++;
+        delete_schedule[delete_schedule_num]=nn;
+        clicknum=1;
+      }
+      else if(isin_sch!=-1 && clicknum!=0){
+        $(this).css({ 'border': '0px solid #7FD6D0' });
+        delete_schedule[isin_sch]="nun";
+        isin_sch=-1;
+        clicknum=0;
+      }
+    }
   }
 });
 function scheduledone(ss){
@@ -2883,7 +2896,6 @@ $('#accept_done').click(async function () {
         await scheduledone(ss)
       }
     }
-    accept_caselist_choose_state=0;
     show("accept_case_list")
   }
 });
@@ -3021,9 +3033,6 @@ $('#comment_card6').click(function () {
     comment_state = 6;
   }
 });
-$('#accept_done').click(function () {
-  show("score_page_green")
-});
 $('#bm_submit_score').click(function (event) {
   event.preventDefault()
   if(comment_state == 1){
@@ -3047,9 +3056,10 @@ $('#bm_submit_score').click(function (event) {
   else{
     comment_state = ""
   }
+  console.log($('#score_page_green .score_word2').html())
   $.post('./submit_score_green', {
     user_name: user_name,
-    writer_name: "aaaa",
+    writer_name: $('#score_page_green .score_word2').html(),
     score: score,
     comment_state: comment_state,
     comment_input: $('#score_page_green input[name="comment_input"]').val(),
