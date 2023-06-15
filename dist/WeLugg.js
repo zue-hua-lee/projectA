@@ -148,6 +148,7 @@ function buy_case() {
     success: async (data) => {
         for (const id in data[user_name]) {
           let prd_name = '';
+          var urlnum=0;
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[user_name][id]["accept"] == 1) {
               console.log(id)
@@ -181,10 +182,18 @@ function buy_case() {
                 if (ids == "accepter") {
                   accepter = `${data[user_name][id][ids]}`;
                 }
+                if (ids.substring(0, 3) == "url") {
+                  urlnum++;
+                  src = `${data[user_name][id]["url0"]}`;
+                }
               }
+
               if (prd_name != '') {
+                if(urlnum==0){
+                  src="https://ppt.cc/fT3wnx@.png"
+                }
                 var contener = document.getElementById("has_buy")
-                $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
                   '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
@@ -332,6 +341,7 @@ function moreofmine_need() {
     success: async (data) => {
       for (const id in data[user_name]) {
         let prd_name = '';
+        let urlnum = 0;
         if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
           if (data[user_name][id]["accept"] != 2) {
             for (const ids in data[user_name][id]) {
@@ -364,10 +374,18 @@ function moreofmine_need() {
               if (ids == "accepter") {
                 accepter = `${data[user_name][id][ids]}`;
               }
+              if (ids.substring(0, 3) == "url") {
+                urlnum++;
+                src = `${data[user_name][id]["url0"]}`;
+              }
             }
             if (prd_name != '') {
+              if(urlnum==0)
+              {
+                src="https://ppt.cc/fT3wnx@.png"
+              }
               var contener = document.getElementById("myneed")
-              $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+              $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="'+src+'"/>' +
                 '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
                 '</div><div class="prd_place">' + prd_place + '</div><img class="garbage" src="https://ppt.cc/fcrYSx@.png" /></div></div>');
               // 等同於下列程式碼
