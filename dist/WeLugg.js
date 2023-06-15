@@ -2798,7 +2798,6 @@ $('#buy_done').click(async function () {
   }
 });
 
-
 var delete_schedule=[];
 var delete_schedule_num=-1;
 var isin_sch=-1;
@@ -2853,17 +2852,12 @@ function scheduledone(ss){
 }
 
 $('#accept_done').click(async function () {
-  if(delete_schedule_num!=-1){
-    for(var q=0;q<delete_schedule.length;q++){
-      if(delete_schedule[q]!="nun"){
-        let ss = delete_schedule[q].split(/\s/);
-        console.log(ss[1])
-        await scheduledone(ss)
-      }
-    }
-    accept_caselist_choose_state=0;
-    show("accept_case_list")
+  if(delete_schedule != [] && delete_schedule[delete_schedule.length-1] != "nun"){
+      let ss = delete_schedule[delete_schedule.length-1].split(/\s/);
+      $('#score_page_green .score_word2').html(ss[0])
+      show("score_page_green")
   }
+  // accept_caselist_choose_state=0;
 });
 /////////////////////////////////
 $('#accept_case_list').on('click', '#has_customer :nth-child(n) .btm .bn_up', function(){
@@ -2999,9 +2993,6 @@ $('#comment_card6').click(function () {
     comment_state = 6;
   }
 });
-$('#accept_done').click(function () {
-  show("score_page_green")
-});
 $('#bm_submit_score').click(function (event) {
   event.preventDefault()
   if(comment_state == 1){
@@ -3025,9 +3016,10 @@ $('#bm_submit_score').click(function (event) {
   else{
     comment_state = ""
   }
+  console.log($('#score_page_green .score_word2').html())
   $.post('./submit_score_green', {
     user_name: user_name,
-    writer_name: "aaaa",
+    writer_name: $('#score_page_green .score_word2').html(),
     score: score,
     comment_state: comment_state,
     comment_input: $('#score_page_green input[name="comment_input"]').val(),
