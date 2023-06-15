@@ -363,7 +363,7 @@ function moreofmine_need() {
               var contener = document.getElementById("myneed")
               $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
                 '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
-                '</div><div class="prd_place">' + prd_place + '</div></div>');
+                '</div><div class="prd_place">' + prd_place + '</div><img class="garbage" src="https://ppt.cc/fcrYSx@.png" /></div></div>');
               // 等同於下列程式碼
               //    <div class="user1 product0">
               //          <img class="prd_img" src="/src/user" />
