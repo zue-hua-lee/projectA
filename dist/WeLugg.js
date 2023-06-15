@@ -8,9 +8,10 @@ var cho_submit = 0;
 var add_product_img_state;
 let add_product_img = [];
 let product_img = [];
+var accept_caselist_choose_state=0;
+var buy_caselist_choose_state=0;
+var comment_character = "";
 var check_window = false;
-
-
 
 
 
@@ -62,13 +63,21 @@ function all_display_none() {
   $('#self_product').css({ 'display': 'none' })
   $('#self_trip').css({'display': 'none' })
   $('#pay_blue').css({'display': 'none' })
+  $('#score_page_green').css({'display': 'none' })
 }
 
 function accept_case() {
+  accept_caselist_choose_state=0;
+  clicknum=0;
+  delete_schedule=[];
+  delete_schedule_num=-1;
+  isin_sch=-1;
   $('#accept_case_list').css({ 'display': 'block' });
   $('#accept_case_list_choose').css({ 'display': 'block' });
-  $('#accept_case_list #has_customer').css({ 'display': 'flex' })
+  $('#accept_case_list #has_customer').css({ 'display': 'flex' });
   $('#accept_case_list #has_customer').html('');
+  $('#accept_case_list_choose').css({ 'background-color': '#ffffff' });
+  $('#accept_done').css({ 'display': 'none' });
   $.ajax({
     type: 'POST',
     url: './list',
@@ -142,14 +151,23 @@ function buy_case() {
   $('#buy_case_list_choose').css({ 'display': 'block' });
   $('#buy_case_list #has_buy').css({ 'display': 'flex' })
   $('#buy_case_list #has_buy').html('');
+  $('#buy_case_list_choose').css({ 'background-color': '#ffffff' });
+  $('#buy_done').css({ 'display': 'none' });
+  delete_buy=[];
+  delete_buy_num=-1;
+  isin=-1;
+  buy_caselist_choose_state=0;
+  clicknum_b=0;
   $.ajax({
     type: 'POST',
     url: './list',
     success: async (data) => {
         for (const id in data[user_name]) {
           let prd_name = '';
+          var urlnum=0;
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             if (data[user_name][id]["accept"] == 1) {
+              console.log(id)
               for (const ids in data[user_name][id]) {
                 if (ids == "set_product_name") {
                   prd_name = ` ${data[user_name][id][ids]}`;
@@ -180,10 +198,18 @@ function buy_case() {
                 if (ids == "accepter") {
                   accepter = `${data[user_name][id][ids]}`;
                 }
+                if (ids.substring(0, 3) == "url") {
+                  urlnum++;
+                  src = `${data[user_name][id]["url0"]}`;
+                }
               }
+
               if (prd_name != '') {
+                if(urlnum==0){
+                  src="https://ppt.cc/fT3wnx@.png"
+                }
                 var contener = document.getElementById("has_buy")
-                $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+                $('#has_buy').append('<div class="' + user_name + ' ' + id + ' ' + accepter+ '"><img class="prd_img" src="'+src+'"/>' +
                   '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
                   '</div><div class="prd_place">' + prd_place + '</div><img class="per_img" src="' + (await user_url(user_name)) + '"/>' +
                   '<div class="btm"><p class="bn_up">個人專頁</p><p class="bn_dn">進行聊天</p></div></div>');
@@ -227,7 +253,7 @@ function moreofmine_schedule() {
           let type = '';
           let tip = '';
           if (id.substring(0, 4) == "trip" && id.substring(0, 5) != "trip_") {
-            if (data[user_name][id]["accept"] != 2) {
+            if (data[user_name][id]["accept"] != 2 ) {
               for (const ids in data[user_name][id]) {
                 if (ids == "departure_country") {
                   trip_loc += `${data[user_name][id][ids]},`;
@@ -331,6 +357,7 @@ function moreofmine_need() {
     success: async (data) => {
       for (const id in data[user_name]) {
         let prd_name = '';
+        let urlnum = 0;
         if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
           if (data[user_name][id]["accept"] != 2) {
             for (const ids in data[user_name][id]) {
@@ -363,10 +390,18 @@ function moreofmine_need() {
               if (ids == "accepter") {
                 accepter = `${data[user_name][id][ids]}`;
               }
+              if (ids.substring(0, 3) == "url") {
+                urlnum++;
+                src = `${data[user_name][id]["url0"]}`;
+              }
             }
             if (prd_name != '') {
+              if(urlnum==0)
+              {
+                src="https://ppt.cc/fT3wnx@.png"
+              }
               var contener = document.getElementById("myneed")
-              $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="https://ppt.cc/f6L57x@.png"/>' +
+              $('#myneed').append('<div class="' + user_name + ' ' + id + '"><img class="prd_img" src="'+src+'"/>' +
                 '<div class="prd_name">' + prd_name + '</div><div class="prd_type">' + prd_type + '</div><div class="prd_country">' + prd_country +
                 '</div><div class="prd_place">' + prd_place + '</div><img class="garbage" src="https://ppt.cc/fcrYSx@.png" /></div></div>');
               // 等同於下列程式碼
@@ -377,6 +412,7 @@ function moreofmine_need() {
               //          <div class="prd_country">prd_country</div>
               //          <div class="prd_place">prd_place</div>
               //    </div>
+
 
             }
           }
@@ -463,6 +499,7 @@ function to_mainpage_need() {
           let realshow = [];
           if (id.substring(0, 4) == "trip" && id.substring(0, 5) != "trip_" ) {
             var data_imp = 0;
+            if(data[name][id]["accept"]!=2){
             for (const ids in data[name][id]) {
               if (ids == "departure_country" && data[name][id][ids] == sel_country) {
                 data_imp++;
@@ -495,6 +532,7 @@ function to_mainpage_need() {
                 data_imp++;
               }
             }
+          }
             if (data_imp == 5) {
               realshow[realshow.length] = data[name][id];
             }
@@ -632,7 +670,7 @@ function to_mainpage_schedule() {
         $('#moreofmine').css({ 'display': 'block' });
         $('#moreofmine .moreofmine_content').html(moretoshow);
         $('#mainpage').css({'height': '59.24vh'});
-        console.log(moretoshow)
+        // console.log(moretoshow)
       }
       else{
         $('#moreofmine').css({ 'display': 'none' });
@@ -644,6 +682,7 @@ function to_mainpage_schedule() {
           let realshow = [];
           if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
             var data_imp = 0;
+            if(data[name][id]["accept"]==0){
             for (const ids in data[name][id]) {
               if (ids == "shipping_address_country" && data[name][id][ids] == sel_country) {
                 data_imp++;
@@ -676,6 +715,7 @@ function to_mainpage_schedule() {
                 data_imp++;
               }
             }
+          }
 
             if (data_imp == 5) {
               realshow[realshow.length] = data[name][id];
@@ -808,6 +848,12 @@ function read_personal_page(name){
     $('#personal_box2 input[name="personal_mail"]').val(res[3])
     $('#personal_box2 input[name="personal_phone"]').val(res[4])
     $('#personal_img').css({'background':'url('+res[5]+') no-repeat center/contain'})
+    $('#history_count .word3').html(res[6])
+    $('#history_count .word4').html(res[7])
+    
+    read_buyer_comment(name)
+    read_seller_comment(name)
+    comment_character = "buyer";
   })
 }
 function save_personal_page(){
@@ -827,6 +873,85 @@ function save_personal_page(){
       $('#personal_box1 .word1').html(user_name)
       resolve()
     })
+  })
+}
+function read_buyer_comment(name) {
+  $('#personal_comment .buyer_comment').html('');
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      for (const id in data[name]) {
+        let writer_name = '';
+        let star = '';
+        let comment_word = '';
+        if (id.substring(0, 8) == "commentB") {
+          writer_name = ` ${data[name][id]["writer_name"]}`;
+          star = ` ${data[name][id]["star"]}`;
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
+
+          if (writer_name != '' ) {
+            var contener = document.getElementById("buyer_comment")
+            $('#personal_comment .buyer_comment').append('<div class="buyer_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
+            // 等同於下列程式碼
+            //    <div class="user2 commentB1">
+            //      <img class="total_star" src="total_star" />
+            //      <div class="writer_name">writer_name</div>
+            //      <div class="word">word</div>
+            //    </div>
+
+          }
+        }
+      }
+    },
+  })
+}
+function read_seller_comment(name) {
+  $('#personal_comment .seller_comment').html('');
+  $.ajax({
+    type: 'POST',
+    url: './list',
+    success: async (data) => {
+      for (const id in data[name]) {
+        let writer_name = '';
+        let star = '';
+        let comment_word = '';
+        if (id.substring(0, 8) == "commentA") {
+          writer_name = ` ${data[name][id]["writer_name"]}`;
+          star = ` ${data[name][id]["star"]}`;
+          comment_word = ` ${data[name][id]["word"]}`;
+
+          console.log(data[name][id]["star"]);
+          if(data[name][id]["star"] == 0){ total_star = "https://ppt.cc/fRdl6x@.png" }
+          else if(data[name][id]["star"] == 1){ total_star = "https://ppt.cc/f2bf5x@.png" }
+          else if(data[name][id]["star"] == 2){ total_star = "https://ppt.cc/fj2N1x@.png" }
+          else if(data[name][id]["star"] == 3){ total_star = "https://ppt.cc/fB1bPx@.png" }
+          else if(data[name][id]["star"] == 4){ total_star = "https://ppt.cc/fcnyWx@.png" }
+          else if(data[name][id]["star"] == 5){ total_star = "https://ppt.cc/fAVpsx@.png" }
+
+          if (writer_name != '' ) {
+            var contener = document.getElementById("seller_comment")
+            $('#personal_comment .seller_comment').append('<div class="seller_comment_box" id="' + writer_name + ' ' + id + '"><img class="total_star" src="' + total_star +'"/>' +
+              '<div class="writer_name">' + writer_name + '</div><div class="comment_word">' + comment_word + '</div></div>');
+            // 等同於下列程式碼
+            //    <div class="user2 commentB1">
+            //      <img class="total_star" src="total_star" />
+            //      <div class="writer_name">writer_name</div>
+            //      <div class="word">word</div>
+            //    </div>
+
+          }
+        }
+      }
+    },
   })
 }
 function save_self_product_page() {
@@ -898,6 +1023,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_credit_card').css({'display':'block'})
     $('#bm_edit_personal').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
     read_personal_page(user_name)
   }
   else if(string == "personal_page_other_green"){
@@ -908,6 +1034,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_togood').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
   }
   else if(string == "personal_page_other_blue"){
     all_display_none()
@@ -917,6 +1044,7 @@ function show(string) {
     $('#personal_page').css({'display':'block'})
     $('#bm_personal_totrip').css({'display':'block'})
     $('#bm_personal_tochat').css({'display':'block'})
+    $('#menu_bar').css({'display':'flex'})
   }
   else if(string == "mainpage_schedule"){
     all_display_none()
@@ -1039,6 +1167,7 @@ function show(string) {
     $('#self_product').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
     $('#subpage_title .subpage_word').html("你的委託商品")
+    $('#subpage_title').css({ 'background-color': '#556B94' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
   else if (string == "self_trip") {
@@ -1047,6 +1176,7 @@ function show(string) {
     $('#self_trip').css({ 'display': 'block' })
     $('#subpage_title').css({'display':'block'})
     $('#subpage_title .subpage_word').html("你的行程清單")
+    $('#subpage_title').css({ 'background-color': '#7FD6D0' })
     $('#menu_bar').css({ 'display': 'flex' })
   }
   else if(string == "deal_success_green"){
@@ -1060,6 +1190,13 @@ function show(string) {
     state.push("deal_success_blue")
     $("#deal_success").css({'display':'block'});
     $('#background_top').css({'background-color':'#556B94'});
+  }
+  else if(string == "score_page_green"){
+    all_display_none()
+    state.push("score_page_green")
+    $("#score_page_green").css({'display':'block'});
+    $('#subpage_title').css({'display':'block'})
+    $('#subpage_title .subpage_word').html("評價");
   }
   else {
     console.log("changing error.")
@@ -1206,6 +1343,41 @@ $(document).ready(function() {
   });
   $('#change_img2').click(function(event){ 
     $('#camera_file').click()
+  });
+
+  //讀取評論
+  $('#personal_comment .comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
+  });
+
+  $('#personal_comment .change_comment_character').click(function(event){ 
+    if(comment_character == 'buyer'){
+      $('#personal_comment .comment_character').text('代購者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#7FD6D0'});
+      $('#personal_comment .seller_comment').css({ 'display': 'flex' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'none' });
+      comment_character = 'seller';
+    }
+    else if(comment_character == 'seller'){
+      $('#personal_comment .comment_character').text('購買者評價');
+      $('#personal_comment .comment_character').css({'background-color': '#556B94'});
+      $('#personal_comment .seller_comment').css({ 'display': 'none' });
+      $('#personal_comment .buyer_comment').css({ 'display': 'flex' });
+      comment_character = 'buyer';
+    }
   });
 
   // 上傳照片
@@ -1362,6 +1534,7 @@ $(document).ready(function() {
       prenum = 0;
     }
   });
+
   $('#mainpage').on('click', '#show_schedule :nth-child(n) .chat_yes', function(){
     var nn = $(this).parent().parent().parent().attr('class')
     show("chat_box")
@@ -1898,12 +2071,17 @@ $(document).ready(function() {
 
 /* 等著換觸發條件 不要刪掉！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！*/
   //self_product_page
-  $('#user_menu .bell').click(function () {
 
-    event.preventDefault()
+  $('#moreofmine_need').on('click', '#myneed :nth-child(n)', function(){
+    var nn = $(this).attr('class')
+    console.log(nn)
+    if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='garbage')
+    {
+      let ss = nn.split(/\s/);
+      event.preventDefault()
       $.post('./read_self_product', {
         user_name: user_name,
-        product: "product0",
+        product: ss[1],
       }, (data) => {
         console.log(data)
         console.log(data[2])
@@ -1998,8 +2176,9 @@ $(document).ready(function() {
         
       })
     show("self_product")
+    }
   });
-
+  
   $('#self_product_place_country').change(function(){
       index=this.selectedIndex; //從1開始 第幾個選項(數字)
       var Sinner='';
@@ -2090,279 +2269,285 @@ $(document).ready(function() {
 
 // /* 等著換觸發條件 不要刪掉！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！*/
 //   //self_trip_page
-//   $('#user_menu .bell').click(function () {
 
-//     event.preventDefault()
-//       $.post('./read_self_trip', {
-//         user_name: user_name,
-//         trip: "trip0",
-//       }, (data) => {
-//         console.log(data)
-//         console.log(data[2])
-//         console.log(data[8])
-//         $('#self_departure_country').val(data[0])
+$('#moreofmine_schedule').on('click', '#myschedule :nth-child(n)', function(){
+  var nn = $(this).attr('class')
+  console.log(nn)
+  if(nn!='prd_img' && nn!='trip_loc'&& nn!='trip_date'&& nn!='lug'&& nn!='type'&& nn!='tip' && nn!='grab')
+  {
+    let ss = nn.split(/\s/);
+    event.preventDefault()
+      $.post('./read_self_trip', {
+        user_name: user_name,
+        trip: ss[1],
+      }, (data) => {
+        console.log(data)
+        console.log(data[2])
+        console.log(data[8])
+        $('#self_departure_country').val(data[0])
 
-//         if(data[0]=="台灣"){index = 1;}
-//         else if(data[0]=="日本"){index = 2;}
-//         else if(data[0]=="韓國"){index = 3;}
-//         else if(data[0]=="中國"){index = 4;}
-//         else if(data[0]=="港澳"){index = 5;}
-//         else if(data[0]=="泰國"){index = 6;}
-//         else if(data[0]=="越南"){index = 7;}
-//         else if(data[0]=="馬來西亞"){index = 8;}
-//         else if(data[0]=="新加坡"){index = 9;}
-//         else if(data[0]=="美國"){index = 10;}
-//         else if(data[0]=="英國"){index = 11;}
-//         else if(data[0]=="法國"){index = 12;}
-//         else if(data[0]=="德國"){index = 13;}
-//         else if(data[0]=="加拿大"){index = 14;}
-//         var Sinner='';
-//         for(var i=0;i<city[index].length;i++){
-//             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
-//         }
-//         $('#self_departure_city').html(Sinner);
-//         $('#self_departure_city').val(data[1])
+        if(data[0]=="台灣"){index = 1;}
+        else if(data[0]=="日本"){index = 2;}
+        else if(data[0]=="韓國"){index = 3;}
+        else if(data[0]=="中國"){index = 4;}
+        else if(data[0]=="港澳"){index = 5;}
+        else if(data[0]=="泰國"){index = 6;}
+        else if(data[0]=="越南"){index = 7;}
+        else if(data[0]=="馬來西亞"){index = 8;}
+        else if(data[0]=="新加坡"){index = 9;}
+        else if(data[0]=="美國"){index = 10;}
+        else if(data[0]=="英國"){index = 11;}
+        else if(data[0]=="法國"){index = 12;}
+        else if(data[0]=="德國"){index = 13;}
+        else if(data[0]=="加拿大"){index = 14;}
+        var Sinner='';
+        for(var i=0;i<city[index].length;i++){
+            Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+        }
+        $('#self_departure_city').html(Sinner);
+        $('#self_departure_city').val(data[1])
 
-//         $('#self_entry_country').val(data[2])
-//         if(data[2]=="台灣"){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
-//         else if(data[2]=="日本"){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
-//         else if(data[2]=="韓國"){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
-//         else if(data[2]=="中國"){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
-//         else if(data[2]=="港澳"){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
-//         else if(data[2]=="泰國"){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
-//         else if(data[2]=="越南"){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
-//         else if(data[2]=="馬來西亞"){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
-//         else if(data[2]=="新加坡"){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
-//         else if(data[2]=="美國"){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
-//         else if(data[2]=="英國"){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
-//         else if(data[2]=="法國"){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
-//         else if(data[2]=="德國"){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
-//         else if(data[2]=="加拿大"){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
+        $('#self_entry_country').val(data[2])
+        if(data[2]=="台灣"){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
+        else if(data[2]=="日本"){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
+        else if(data[2]=="韓國"){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
+        else if(data[2]=="中國"){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+        else if(data[2]=="港澳"){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+        else if(data[2]=="泰國"){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+        else if(data[2]=="越南"){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+        else if(data[2]=="馬來西亞"){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+        else if(data[2]=="新加坡"){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
+        else if(data[2]=="美國"){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+        else if(data[2]=="英國"){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
+        else if(data[2]=="法國"){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+        else if(data[2]=="德國"){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+        else if(data[2]=="加拿大"){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
 
-//         if(data[2]=="台灣"){index = 1;}
-//         else if(data[2]=="日本"){index = 2;}
-//         else if(data[2]=="韓國"){index = 3;}
-//         else if(data[2]=="中國"){index = 4;}
-//         else if(data[2]=="港澳"){index = 5;}
-//         else if(data[2]=="泰國"){index = 6;}
-//         else if(data[2]=="越南"){index = 7;}
-//         else if(data[2]=="馬來西亞"){index = 8;}
-//         else if(data[2]=="新加坡"){index = 9;}
-//         else if(data[2]=="美國"){index = 10;}
-//         else if(data[2]=="英國"){index = 11;}
-//         else if(data[2]=="法國"){index = 12;}
-//         else if(data[2]=="德國"){index = 13;}
-//         else if(data[2]=="加拿大"){index = 14;}
-//         Sinner='';
-//         for(var i=0;i<city[index].length;i++){
-//             Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
-//         }
-//         $('#self_entry_city').html(Sinner);
-//         $('#self_entry_city').val(data[3])
+        if(data[2]=="台灣"){index = 1;}
+        else if(data[2]=="日本"){index = 2;}
+        else if(data[2]=="韓國"){index = 3;}
+        else if(data[2]=="中國"){index = 4;}
+        else if(data[2]=="港澳"){index = 5;}
+        else if(data[2]=="泰國"){index = 6;}
+        else if(data[2]=="越南"){index = 7;}
+        else if(data[2]=="馬來西亞"){index = 8;}
+        else if(data[2]=="新加坡"){index = 9;}
+        else if(data[2]=="美國"){index = 10;}
+        else if(data[2]=="英國"){index = 11;}
+        else if(data[2]=="法國"){index = 12;}
+        else if(data[2]=="德國"){index = 13;}
+        else if(data[2]=="加拿大"){index = 14;}
+        Sinner='';
+        for(var i=0;i<city[index].length;i++){
+            Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+        }
+        $('#self_entry_city').html(Sinner);
+        $('#self_entry_city').val(data[3])
 
-//         $('#self_departure_year').val(data[4])
-//         $('#self_departure_month').val(data[5])
+        $('#self_departure_year').val(data[4])
+        $('#self_departure_month').val(data[5])
 
-//         index = data[5]; //從1開始 第幾個選項(數字)
-//         Sinner='';
-//         if(index=='1' || index=='3' || index=='5' || index=='7' || index=='8' || index=='10' || index=='12'){
-//             for(var i=1;i<=31;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         else if(index=='4' || index=='6' || index=='9' || index=='11'){
-//             for(var i=1;i<=30;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         else if(index=='2'){
-//             for(var i=1;i<=28;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         $('#self_departure_date').html(Sinner);
-//         $('#self_departure_date').val(data[6])
+        index = data[5]; //從1開始 第幾個選項(數字)
+        Sinner='';
+        if(index=='1' || index=='3' || index=='5' || index=='7' || index=='8' || index=='10' || index=='12'){
+            for(var i=1;i<=31;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='4' || index=='6' || index=='9' || index=='11'){
+            for(var i=1;i<=30;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='2'){
+            for(var i=1;i<=28;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        $('#self_departure_date').html(Sinner);
+        $('#self_departure_date').val(data[6])
 
-//         $('#self_entry_year').val(data[7])
-//         $('#self_entry_month').val(data[8])
+        $('#self_entry_year').val(data[7])
+        $('#self_entry_month').val(data[8])
 
-//         index = data[8]; //從1開始 第幾個選項(數字)
-//         Sinner='';
-//         if(index=='1' || index=='3' || index=='5' || index=='7' || index=='8' || index=='10' || index=='12'){
-//             for(var i=1;i<=31;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         else if(index=='4' || index=='6' || index=='9' || index=='11'){
-//             for(var i=1;i<=30;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         else if(index=='2'){
-//             for(var i=1;i<=28;i++){
-//                 Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//             }
-//         }
-//         $('#self_entry_date').html(Sinner);
-//         $('#self_entry_date').val(data[9])
+        index = data[8]; //從1開始 第幾個選項(數字)
+        Sinner='';
+        if(index=='1' || index=='3' || index=='5' || index=='7' || index=='8' || index=='10' || index=='12'){
+            for(var i=1;i<=31;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='4' || index=='6' || index=='9' || index=='11'){
+            for(var i=1;i<=30;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        else if(index=='2'){
+            for(var i=1;i<=28;i++){
+                Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+            }
+        }
+        $('#self_entry_date').html(Sinner);
+        $('#self_entry_date').val(data[9])
 
-//         $('#self_trip_product_list').val(data[10])
-//         $('#self_luggage_size_list').val(data[11])
-//         $('#self_luggage_space_list').val(data[12])
+        $('#self_trip_product_list').val(data[10])
+        $('#self_luggage_size_list').val(data[11])
+        $('#self_luggage_space_list').val(data[12])
         
-//         index = data[12];
-//         if(index=="20"){$("#self_big_luggage").attr("src","https://ppt.cc/flWv0x@.png");}
-//         else if(index=="40"){ $("#self_big_luggage").attr("src","https://ppt.cc/fyz1fx@.png"); }
-//         else if(index=="60"){ $("#self_big_luggage").attr("src","https://ppt.cc/faeuHx@.png"); }
-//         else if(index=="80"){ $("#self_big_luggage").attr("src","https://ppt.cc/fOwTNx@.png"); }
-//         else if(index=="100"){ $("#self_big_luggage").attr("src","https://ppt.cc/fbY02x@.png"); }
+        index = data[12];
+        if(index=="20"){$("#self_big_luggage").attr("src","https://ppt.cc/flWv0x@.png");}
+        else if(index=="40"){ $("#self_big_luggage").attr("src","https://ppt.cc/fyz1fx@.png"); }
+        else if(index=="60"){ $("#self_big_luggage").attr("src","https://ppt.cc/faeuHx@.png"); }
+        else if(index=="80"){ $("#self_big_luggage").attr("src","https://ppt.cc/fOwTNx@.png"); }
+        else if(index=="100"){ $("#self_big_luggage").attr("src","https://ppt.cc/fbY02x@.png"); }
 
-//         $('#self_set_tip').val(data[13])
+        $('#self_set_tip').val(data[13])
 
 
         
-//       })
-//     show("self_trip")
-//   });
+      })
+    show("self_trip")
+  }
+});
 
-//   $('#self_departure_country').change(function(){
-//       index=this.selectedIndex; //從1開始 第幾個選項(數字)
-//       var Sinner='';
-//       for(var i=0;i<city[index].length;i++){
-//           Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
-//       }
-//       $('#self_departure_city').html(Sinner);
-//   });
+  $('#self_departure_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#self_departure_city').html(Sinner);
+  });
 
-//   $('#self_entry_country').change(function(){
-//       index=this.selectedIndex; //從1開始 第幾個選項(數字)
-//       var Sinner='';
-//       for(var i=0;i<city[index].length;i++){
-//           Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
-//       }
-//       $('#self_entry_city').html(Sinner);
+  $('#self_entry_country').change(function(){
+      index=this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      for(var i=0;i<city[index].length;i++){
+          Sinner=Sinner+'<option value='+city[index][i]+'>'+city[index][i]+'</option>';
+      }
+      $('#self_entry_city').html(Sinner);
 
-//       if(index==1){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
-//       else if(index==2){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
-//       else if(index==3){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
-//       else if(index==4){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
-//       else if(index==5){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
-//       else if(index==6){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
-//       else if(index==7){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
-//       else if(index==8){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
-//       else if(index==9){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
-//       else if(index==10){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
-//       else if(index==11){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
-//       else if(index==12){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
-//       else if(index==13){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
-//       else if(index==14){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
-//   });
+      if(index==1){$("#self_trip_img").attr("src","https://ppt.cc/fa7zlx@.png");}
+      else if(index==2){ $("#self_trip_img").attr("src","https://ppt.cc/fS5lRx@.png"); }
+      else if(index==3){ $("#self_trip_img").attr("src","https://ppt.cc/fDrVBx@.png"); }
+      else if(index==4){ $("#self_trip_img").attr("src","https://ppt.cc/fhGq4x@.png"); }
+      else if(index==5){ $("#self_trip_img").attr("src","https://ppt.cc/ftcWyx@.png"); }
+      else if(index==6){ $("#self_trip_img").attr("src","https://ppt.cc/fGkiHx@.png"); }
+      else if(index==7){ $("#self_trip_img").attr("src","https://ppt.cc/fcomvx@.png"); }
+      else if(index==8){ $("#self_trip_img").attr("src","https://ppt.cc/f0bNox@.png"); }
+      else if(index==9){ $("#self_trip_img").attr("src","https://ppt.cc/fX9nQx@.png"); }
+      else if(index==10){ $("#self_trip_img").attr("src","https://ppt.cc/f8cxwx@.png"); }
+      else if(index==11){ $("#self_trip_img").attr("src","https://ppt.cc/fS8plx@.png"); }
+      else if(index==12){ $("#self_trip_img").attr("src","https://ppt.cc/f2ejAx@.png"); }
+      else if(index==13){ $("#self_trip_img").attr("src","https://ppt.cc/fdBU1x@.png"); }
+      else if(index==14){ $("#self_trip_img").attr("src","https://ppt.cc/fLkXAx@.png"); }
+  });
 
-//   $('#self_departure_month').change(function(){
-//       index = this.selectedIndex; //從1開始 第幾個選項(數字)
-//       var Sinner='';
-//       if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
-//           for(var i=1;i<=31;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
-//       else if(index==4 || index==6 || index==9 || index==11){
-//           for(var i=1;i<=30;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
-//       else if(index==2){
-//           for(var i=1;i<=28;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
+  $('#self_departure_month').change(function(){
+      index = this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
+          for(var i=1;i<=31;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==4 || index==6 || index==9 || index==11){
+          for(var i=1;i<=30;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==2){
+          for(var i=1;i<=28;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
 
-//       $('#self_departure_date').html(Sinner);
-//   });
+      $('#self_departure_date').html(Sinner);
+  });
 
-//   $('#self_entry_month').change(function(){
-//       index = this.selectedIndex; //從1開始 第幾個選項(數字)
-//       var Sinner='';
-//       if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
-//           for(var i=1;i<=31;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
-//       else if(index==4 || index==6 || index==9 || index==11){
-//           for(var i=1;i<=30;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
-//       else if(index==2){
-//           for(var i=1;i<=28;i++){
-//               Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
-//           }
-//       }
+  $('#self_entry_month').change(function(){
+      index = this.selectedIndex; //從1開始 第幾個選項(數字)
+      var Sinner='';
+      if(index==1 || index==3 || index==5 || index==7 || index==8 || index==10 || index==12){
+          for(var i=1;i<=31;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==4 || index==6 || index==9 || index==11){
+          for(var i=1;i<=30;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
+      else if(index==2){
+          for(var i=1;i<=28;i++){
+              Sinner=Sinner+'<option value='+i+'>'+i+"日"+'</option>';
+          }
+      }
 
-//       $('#self_entry_date').html(Sinner);
-//   });
+      $('#self_entry_date').html(Sinner);
+  });
 
-//   $('#self_luggage_space_list').change(function(){
-//     index = this.selectedIndex; //從1開始 第幾個選項(數字)
-//     if(index==1){
-//         $("#self_big_luggage").attr("src","https://ppt.cc/flWv0x@.png");
-//     }
-//     else if(index==2){
-//         $("#self_big_luggage").attr("src","https://ppt.cc/fyz1fx@.png");
-//     }
-//     else if(index==3){
-//         $("#self_big_luggage").attr("src","https://ppt.cc/faeuHx@.png");
-//     }
-//     else if(index==4){
-//         $("#self_big_luggage").attr("src","https://ppt.cc/fOwTNx@.png");
-//     }
-//     else if(index==5){
-//         $("#self_big_luggage").attr("src","https://ppt.cc/fbY02x@.png");
-//     }
-//   });
+  $('#self_luggage_space_list').change(function(){
+    index = this.selectedIndex; //從1開始 第幾個選項(數字)
+    if(index==1){
+        $("#self_big_luggage").attr("src","https://ppt.cc/flWv0x@.png");
+    }
+    else if(index==2){
+        $("#self_big_luggage").attr("src","https://ppt.cc/fyz1fx@.png");
+    }
+    else if(index==3){
+        $("#self_big_luggage").attr("src","https://ppt.cc/faeuHx@.png");
+    }
+    else if(index==4){
+        $("#self_big_luggage").attr("src","https://ppt.cc/fOwTNx@.png");
+    }
+    else if(index==5){
+        $("#self_big_luggage").attr("src","https://ppt.cc/fbY02x@.png");
+    }
+  });
 
-//   var edit_trip_state = 0;
-//   $('#edit_self_trip').click(async function () {
-//     if (!edit_trip_state) {
-//       $('#self_trip input[type="text"]').attr("disabled", false);
-//       $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #939191'})
-//       $('#self_trip select').attr("disabled", false);
-//       $(this).text("儲存變更")
-//       edit_trip_state = 1
-//     }
-//     else {
-//       await save_self_trip_page()
-//       $('#self_trip input[type="text"]').attr("disabled", true);
-//       $('#self_trip input[type="text"]').css({ 'border': 'solid 1px #F7F7F7'})
-//       $('#self_trip select').attr("disabled", true);
-//       $(this).text("編輯內容")
-//       edit_trip_state = 0
-//     }
-//   });
+  var edit_trip_state = 0;
+  $('#edit_self_trip').click(async function () {
+    if (!edit_trip_state) {
+      $('#self_trip input[type="text"]').attr("disabled", false);
+      $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #939191'})
+      $('#self_trip select').attr("disabled", false);
+      $(this).text("儲存變更")
+      edit_trip_state = 1
+    }
+    else {
+      await save_self_trip_page()
+      $('#self_trip input[type="text"]').attr("disabled", true);
+      $('#self_trip input[type="text"]').css({ 'border': 'solid 1px #F7F7F7'})
+      $('#self_trip select').attr("disabled", true);
+      $(this).text("編輯內容")
+      edit_trip_state = 0
+    }
+  });
   
-//   // 選不要儲存變更
-//   $("#self_trip_page_unsaved .deal_no").click(function () {
-//     $("#self_trip_page_unsaved").css({ 'display': 'none' });
-//     state.pop()
-//     show(state.pop())
-//     $('#self_trip input[type="text"]').attr("disabled", true);
-//     $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
-//     $('#self_trip select').attr("disabled", true);
-//     $('#edit_self_trip').text("編輯內容")
-//     edit_trip_state = 0;
-//   });
-//   // 選同意儲存變更
-//   $("#self_trip_page_unsaved .deal_yes").click(async function () {
-//     $("#self_trip_page_unsaved").css({ 'display': 'none' });
-//     await save_self_trip_page()
-//     state.pop()
-//     show(state.pop())
-//     $('#self_trip input[type="text"]').attr("disabled", true);
-//     $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
-//     $('#self_trip select').attr("disabled", true);
-//     $('#edit_self_trip').text("編輯內容")
-//     edit_trip_state = 0;
-//   });
+  // 選不要儲存變更
+  $("#self_trip_page_unsaved .deal_no").click(function () {
+    $("#self_trip_page_unsaved").css({ 'display': 'none' });
+    state.pop()
+    show(state.pop())
+    $('#self_trip input[type="text"]').attr("disabled", true);
+    $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+    $('#self_trip select').attr("disabled", true);
+    $('#edit_self_trip').text("編輯內容")
+    edit_trip_state = 0;
+  });
+  // 選同意儲存變更
+  $("#self_trip_page_unsaved .deal_yes").click(async function () {
+    $("#self_trip_page_unsaved").css({ 'display': 'none' });
+    await save_self_trip_page()
+    state.pop()
+    show(state.pop())
+    $('#self_trip input[type="text"]').attr("disabled", true);
+    $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+    $('#self_trip select').attr("disabled", true);
+    $('#edit_self_trip').text("編輯內容")
+    edit_trip_state = 0;
+  });
  
 
   const socket = io();
@@ -2620,27 +2805,79 @@ $('#cho_reset').click(function () {
 // });
 
 //select to define done
-var buy_caselist_choose_state=0;
+var delete_buy=[];
+var delete_buy_num=-1;
+var isin=-1;
+var clicknum_b=0;
 $('#buy_case_list_choose').click(function () {
   if(buy_caselist_choose_state==0){
     $("#buy_case_list_choose").css({ 'background-color': '#D1D1D1' });
     $("#buy_done").css({ 'display': 'block' });
     buy_caselist_choose_state=1;
-    $('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
-      var nn = $(this).attr('class')
-      console.log(nn)
-      if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
-      $(this).css({ 'border': '4px solid #556B94' });
-
-    });
   }
   else{
     $("#buy_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#buy_done").css({ 'display': 'none' });
     buy_caselist_choose_state=0;
+    clicknum_b=0;
   }
 });
-var accept_caselist_choose_state=0;
+$('#buy_case_list').on('click', '#has_buy :nth-child(n)', function(){
+  if(buy_caselist_choose_state==1){
+  var nn = $(this).attr('class')
+  if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+  {
+    for(var q=0;q<delete_buy.length;q++){
+      if(nn==delete_buy[q]){
+        isin=q;
+        break;
+      }
+    }
+    if(isin==-1 && clicknum_b==0){
+      $(this).css({ 'border': '4px solid #556B94' });
+      delete_buy_num++;
+      delete_buy[delete_buy_num]=nn;
+      clicknum_b=1;
+    }
+    else if(isin!=-1 && clicknum_b!=0){
+      $(this).css({ 'border': '0px solid #556B94' });
+      delete_buy[isin]="nun";
+      isin=-1;
+      clicknum_b=0;
+    }
+  }
+  }
+});
+function buydone(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./buydone', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
+
+$('#buy_done').click(async function () {
+  if(delete_buy_num!=-1){
+    for(var q=0;q<delete_buy.length;q++){
+      if(delete_buy[q]!="nun"){
+        let ss = delete_buy[q].split(/\s/);
+        console.log(ss[2])
+        await buydone(ss)
+      }
+    }
+    buy_caselist_choose_state=0;
+    show("buy_case_list")
+  }
+});
+
+var delete_schedule=[];
+var delete_schedule_num=-1;
+var isin_sch=-1;
+var clicknum=0;
 $('#accept_case_list_choose').click(function () {
   if(accept_caselist_choose_state==0){
     $("#accept_case_list_choose").css({ 'background-color': '#D1D1D1' });
@@ -2651,9 +2888,60 @@ $('#accept_case_list_choose').click(function () {
     $("#accept_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#accept_done").css({ 'display': 'none' });
     accept_caselist_choose_state=0;
+    clicknum=0;
   }
 });
+$('#accept_case_list').on('click', '#has_customer :nth-child(n)', function(){
+  if(accept_caselist_choose_state==1){
+    var nn = $(this).attr('class')
+    if(nn!='prd_img' && nn!='prd_name'&& nn!='prd_type'&& nn!='prd_country'&& nn!='prd_place'&& nn!='per_img'&& nn!='btm')
+    {
+      for(var q=0;q<delete_schedule.length;q++){
+        if(nn==delete_schedule[q]){
+          isin_sch=q;
+          break;
+        }
+      }
+      if(isin_sch==-1 && clicknum==0){
+        $(this).css({ 'border': '4px solid #7FD6D0' });
+        delete_schedule_num++;
+        delete_schedule[delete_schedule_num]=nn;
+        clicknum=1;
+      }
+      else if(isin_sch!=-1 && clicknum!=0){
+        $(this).css({ 'border': '0px solid #7FD6D0' });
+        delete_schedule[isin_sch]="nun";
+        isin_sch=-1;
+        clicknum=0;
+      }
+    }
+  }
+});
+function scheduledone(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./scheduledone', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
 
+$('#accept_done').click(async function () {
+  if(delete_schedule_num!=-1){
+    for(var q=0;q<delete_schedule.length;q++){
+      if(delete_schedule[q]!="nun"){
+        let ss = delete_schedule[q].split(/\s/);
+        console.log(ss[1])
+        await scheduledone(ss)
+      }
+    }
+    show("accept_case_list")
+  }
+});
+/////////////////////////////////
 $('#accept_case_list').on('click', '#has_customer :nth-child(n) .btm .bn_up', function(){
   var nn = $(this).parent().parent().attr('class')
   console.log(nn)
@@ -2678,3 +2966,190 @@ $('#moreofmine .moreofmine_button').click(function () {
     show("moreofmine_need")
   }
 });
+
+var score = 1;
+$('#star1').click(function () {
+  score = 1;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star2').click(function () {
+  score = 2;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star3').click(function () {
+  score = 3;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star4').click(function () {
+  score = 4;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star5').click(function () {
+  score = 5;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star5").attr("src","https://ppt.cc/fSPbVx@.png");
+});
+let comment_state = 0;
+$('#comment_card1').click(function () {
+  if(comment_state == 1){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 1;
+  }
+});
+$('#comment_card2').click(function () {
+  if(comment_state == 2){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 2;
+  }
+});
+$('#comment_card3').click(function () {
+  if(comment_state == 3){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 3;
+  }
+});
+$('#comment_card4').click(function () {
+  if(comment_state == 4){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 4;
+  }
+});
+$('#comment_card5').click(function () {
+  if(comment_state == 5){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 5;
+  }
+});
+$('#comment_card6').click(function () {
+  if(comment_state == 6){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 6;
+  }
+});
+$('#bm_submit_score').click(function (event) {
+  event.preventDefault()
+  if(comment_state == 1){
+    comment_state = "非常專業"
+  }
+  else if(comment_state == 2){
+    comment_state = "非常有耐心"
+  }
+  else if(comment_state == 3){
+    comment_state = "服務態度友善"
+  }
+  else if(comment_state == 4){
+    comment_state = "態度佳"
+  }
+  else if(comment_state == 5){
+    comment_state = "馬上回覆"
+  }
+  else if(comment_state == 6){
+    comment_state = "溝通很好"
+  }
+  else{
+    comment_state = ""
+  }
+  console.log($('#score_page_green .score_word2').html())
+  $.post('./submit_score_green', {
+    user_name: user_name,
+    writer_name: $('#score_page_green .score_word2').html(),
+    score: score,
+    comment_state: comment_state,
+    comment_input: $('#score_page_green input[name="comment_input"]').val(),
+  }, (res) => {
+    score = 0;
+    comment_state = 0;
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    show("mainpage_schedule")
+  })
+});
+
+function scheduledel(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./scheduledel', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
+
+$('#moreofmine_schedule').on('click', '#myschedule :nth-child(n) .garb', async function(){
+  var nn = $(this).parent().attr('class')
+  console.log(nn)
+  let ss = nn.split(/\s/);
+  await scheduledel(ss)
+  show("moreofmine_schedule")
+});
+
+function buydel(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./buydel', {
+      user: ss[0],
+      product: ss[1],
+    }, (res) => {
+      resolve()
+    })
+  })
+}
+
+$('#moreofmine_need').on('click', '#myneed :nth-child(n) .garbage', async function(){
+  var nn = $(this).parent().attr('class')
+  console.log(nn)
+  let ss = nn.split(/\s/);
+  await buydel(ss)
+  show("moreofmine_need")
+});
+
