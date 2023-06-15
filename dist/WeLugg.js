@@ -2814,9 +2814,8 @@ const clearChatContent = () => {
   });
   $("#check_box .deal_no").click(function() {
     $("#deal_agree").css({'display':'none'});
-    check_window = flase;
-    state.pop()
-    show(state.pop())
+    check_window = false;
+    show("mainpage_schedule")
   });
   //選同意交易
   $("#deal_box .deal_yes").click(function() {
