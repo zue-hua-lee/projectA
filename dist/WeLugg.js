@@ -1148,6 +1148,14 @@ $(document).ready(function() {
   // 選不要儲存變更
   $("#personal_page_unsaved .deal_no").click(function() {
     $("#personal_page_unsaved").css({'display':'none'});
+    state.pop()
+    show(state.pop())
+    $('#personal_box2 input[type="text"]').attr("disabled", true);
+      $('#personal_box2 input[type="text"]').css({'border-bottom':'solid 1px #F7F7F7','text-align':'right'})
+      $('#personal_box_img #personal_mask').css({'display':'none'})
+      $('#bm_edit_personal').css({'background':'#E8E8E8','color':'#000000'})
+      $('#bm_edit_personal').text("編輯內容")
+    edit_state = 0
   });
   // 選同意儲存變更
   $("#personal_page_unsaved .deal_yes").click(async function() {
@@ -1507,6 +1515,11 @@ $(document).ready(function() {
       show("add_new_journey")
     }
   })
+  $('#moreofmine_addsch').click((event) => {
+    if(state[state.length-1] == "moreofmine_schedule"){
+      show("add_new_journey")
+    }
+  })
   // need 購買者頁面
   $('#user_menu .mid_luggage').click((event) => {
     if(state[state.length-1] == "mainpage_need"){
@@ -1528,6 +1541,11 @@ $(document).ready(function() {
   })
   $('#bm_add_schedule').click((event) => {
     if(state[state.length-1] == "mainpage_need"){
+      show("add_new_request")
+    }
+  })
+  $('#moreofmine_addprd').click((event) => {
+    if(state[state.length-1] == "moreofmine_need"){
       show("add_new_request")
     }
   })
@@ -1750,7 +1768,7 @@ $(document).ready(function() {
       luggage_size_list: $('#journey_data select[name=luggage_size_list]').val(),
       luggage_space_list: $('#journey_data select[name=luggage_space_list]').val(),
       set_tip: $('#journey_data input[name=set_tip]').val(),
-      
+
     }, (data) => {
       state.pop()
       show(state.pop())
@@ -2023,6 +2041,14 @@ $(document).ready(function() {
   // 選不要儲存變更
   $("#self_product_page_unsaved .deal_no").click(function () {
     $("#self_product_page_unsaved").css({ 'display': 'none' });
+    state.pop()
+    show(state.pop())
+    $('#self_product input[type="text"]').attr("disabled", true);
+    $('#self_product input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+    $('#self_product select').attr("disabled", true);
+    $('#self_product_img_place #self_product_img_mask').css({ 'display': 'none' })
+    $('#edit_self_product').text("編輯內容")
+    edit_product_state = 0;
   });
   // 選同意儲存變更
   $("#self_product_page_unsaved .deal_yes").click(async function () {
@@ -2294,6 +2320,13 @@ $(document).ready(function() {
 //   // 選不要儲存變更
 //   $("#self_trip_page_unsaved .deal_no").click(function () {
 //     $("#self_trip_page_unsaved").css({ 'display': 'none' });
+//     state.pop()
+//     show(state.pop())
+//     $('#self_trip input[type="text"]').attr("disabled", true);
+//     $('#self_trip input[type="text"]').css({ 'border-bottom': 'solid 1px #F7F7F7'})
+//     $('#self_trip select').attr("disabled", true);
+//     $('#edit_self_trip').text("編輯內容")
+//     edit_trip_state = 0;
 //   });
 //   // 選同意儲存變更
 //   $("#self_trip_page_unsaved .deal_yes").click(async function () {
