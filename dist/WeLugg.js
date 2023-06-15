@@ -8,7 +8,8 @@ var cho_submit = 0;
 var add_product_img_state;
 let add_product_img = [];
 let product_img = [];
-
+var accept_caselist_choose_state=0;
+var buy_caselist_choose_state=0;
 
 
 
@@ -69,6 +70,8 @@ function accept_case() {
   $('#accept_case_list_choose').css({ 'display': 'block' });
   $('#accept_case_list #has_customer').css({ 'display': 'flex' })
   $('#accept_case_list #has_customer').html('');
+  accept_caselist_choose_state=0;
+  clicknum=0;
   $.ajax({
     type: 'POST',
     url: './list',
@@ -142,6 +145,8 @@ function buy_case() {
   $('#buy_case_list_choose').css({ 'display': 'block' });
   $('#buy_case_list #has_buy').css({ 'display': 'flex' })
   $('#buy_case_list #has_buy').html('');
+  buy_caselist_choose_state=0;
+  clicknum_b=0;
   $.ajax({
     type: 'POST',
     url: './list',
@@ -2625,10 +2630,10 @@ $('#cho_reset').click(function () {
 // });
 
 //select to define done
-var buy_caselist_choose_state=0;
 var delete_buy=[];
 var delete_buy_num=-1;
 var isin=-1;
+var clicknum_b=0;
 $('#buy_case_list_choose').click(function () {
   if(buy_caselist_choose_state==0){
     $("#buy_case_list_choose").css({ 'background-color': '#D1D1D1' });
@@ -2644,15 +2649,17 @@ $('#buy_case_list_choose').click(function () {
             break;
           }
         }
-        if(isin==-1){
+        if(isin==-1 && clicknum_b==0){
           $(this).css({ 'border': '4px solid #556B94' });
           delete_buy_num++;
           delete_buy[delete_buy_num]=nn;
+          clicknum_b=1;
         }
-        else{
+        else if(isin!=-1 && clicknum_b!=0){
           $(this).css({ 'border': '0px solid #556B94' });
           delete_buy[isin]="nun";
           isin=-1;
+          clicknum_b=0;
         }
       }
     });
@@ -2661,6 +2668,7 @@ $('#buy_case_list_choose').click(function () {
     $("#buy_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#buy_done").css({ 'display': 'none' });
     buy_caselist_choose_state=0;
+    clicknum_b=0;
   }
 });
 function buydone(ss){
@@ -2684,14 +2692,16 @@ $('#buy_done').click(async function () {
         await buydone(ss)
       }
     }
+    buy_caselist_choose_state=0;
     show("buy_case_list")
   }
 });
 
-var accept_caselist_choose_state=0;
+
 var delete_schedule=[];
 var delete_schedule_num=-1;
 var isin_sch=-1;
+var clicknum=0;
 $('#accept_case_list_choose').click(function () {
   if(accept_caselist_choose_state==0){
     $("#accept_case_list_choose").css({ 'background-color': '#D1D1D1' });
@@ -2707,15 +2717,17 @@ $('#accept_case_list_choose').click(function () {
             break;
           }
         }
-        if(isin_sch==-1){
+        if(isin_sch==-1 && clicknum==0){
           $(this).css({ 'border': '4px solid #7FD6D0' });
           delete_schedule_num++;
           delete_schedule[delete_schedule_num]=nn;
+          clicknum=1;
         }
-        else{
+        else if(isin_sch!=-1 && clicknum!=0){
           $(this).css({ 'border': '0px solid #7FD6D0' });
           delete_schedule[isin_sch]="nun";
           isin_sch=-1;
+          clicknum=0;
         }
       }
     });
@@ -2724,6 +2736,7 @@ $('#accept_case_list_choose').click(function () {
     $("#accept_case_list_choose").css({ 'background-color': '#FFFFFF' });
     $("#accept_done").css({ 'display': 'none' });
     accept_caselist_choose_state=0;
+    clicknum=0;
   }
 });
 function scheduledone(ss){
@@ -2747,6 +2760,7 @@ $('#accept_done').click(async function () {
         await scheduledone(ss)
       }
     }
+    accept_caselist_choose_state=0;
     show("accept_case_list")
   }
 });
