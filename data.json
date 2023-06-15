@@ -128,7 +128,7 @@
             "word": "服務態度非常友善"
         },
         "commentA3": {
-            "writer_name": "Venessa Chen",
+            "writer_name": "Venessa_Chen",
             "star": "5",
             "word": "非常專業"
         },
@@ -186,11 +186,11 @@
             "product_arrive_date": "12",
             "request_remark": "",
             "accept": 1,
-            "accepter": "Nancy Lin",
+            "accepter": "Nancy_Lin",
             "dealstate": 0
         },
         "commentA1": {
-            "writer_name": "Nancy Lin",
+            "writer_name": "Nancy_Lin",
             "star": "4",
             "word": "非常有耐心"
         },
@@ -200,7 +200,7 @@
             "word": "服務態度非常友善"
         },
         "commentA3": {
-            "writer_name": "Venessa Chen",
+            "writer_name": "Venessa_Chen",
             "star": "5",
             "word": "非常專業"
         },
@@ -210,7 +210,7 @@
             "word": "馬上回覆"
         },
         "commentB1": {
-            "writer_name": "Nancy Lin",
+            "writer_name": "Nancy_Lin",
             "star": "4",
             "word": "馬上回覆"
         },
@@ -259,7 +259,7 @@
             "luggage_space_list": "40",
             "set_tip": "66666",
             "accept": 1,
-            "accepter": "Nancy Lin"
+            "accepter": "Nancy_Lin"
         },
         "product0": {
             "shipping_address_country": "日本",
@@ -312,7 +312,7 @@
             "product_arrive_date": "1",
             "request_remark": "",
             "accept": 1,
-            "accepter": "Nancy Lin",
+            "accepter": "Nancy_Lin",
             "dealstate": 0
         },
         "product3": {
@@ -334,7 +334,7 @@
             "dealstate": 0
         },
         "commentA1": {
-            "writer_name": "Nancy Lin",
+            "writer_name": "Nancy_Lin",
             "star": "4",
             "word": "非常有耐心"
         },
@@ -344,7 +344,7 @@
             "word": "服務態度非常友善"
         },
         "commentA3": {
-            "writer_name": "Venessa Chen",
+            "writer_name": "Venessa_Chen",
             "star": "5",
             "word": "非常專業"
         },
@@ -354,7 +354,7 @@
             "word": "馬上回覆"
         },
         "commentB1": {
-            "writer_name": "Nancy Lin",
+            "writer_name": "Nancy_Lin",
             "star": "4",
             "word": "馬上回覆"
         }
