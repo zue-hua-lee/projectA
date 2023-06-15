@@ -514,3 +514,52 @@ app.post('/submit_score_green', (req, res) => {
     res.send("submit score_green seccuss.")
   })
 })
+
+// 
+app.post('/buydone', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/scheduledone', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/scheduledel', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
+
+app.post('/buydel', (req, res) => {
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    data[req.body.user][req.body.product]['accept'] = 2
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+      res.send("save self product success.")
+    })
+  })
+})
