@@ -599,6 +599,19 @@ function to_mainpage_need() {
     },
   })
 }
+
+function showpay(ss){
+  return new Promise(function (resolve, reject) {
+    event.preventDefault()
+    $.post('./showpay', {
+      user: user_name,
+      product: ss,
+    }, (res) => {
+      resolve()
+    })
+  })
+}
+
 function to_mainpage_schedule() {
   $('#user_menu .mid_luggage').css({ 'opacity': '1' });
   $('#user_menu .shopping_bag').css({ 'opacity': '0.5' });
@@ -635,6 +648,21 @@ function to_mainpage_schedule() {
     url: './list',
     contentType: 'application/json',
     success: async (data) => {
+
+      // for(const id in data[user_name]){
+      //   if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
+      //     if(data[user_name][id]["dealstate"]==1){
+      //       all_display_none()
+      //       $('#moreofmine').css({ 'display': 'none' })
+      //       $('#subpage_title').css({ 'display': 'block' })
+      //       $('#subpage_title').css({ 'background-color': '#556B94' })
+      //       $('#subpage_title .subpage_word').html("結帳")
+      //       $('#pay_blue').css({'display': 'block' })
+      //       await showpay(id)
+      //     }
+      //   }
+      // }
+
       var count=0;
       let moretoshow = '';
       for(const id in data[user_name]){
@@ -781,6 +809,20 @@ function to_mainpage_schedule() {
               //     //     </div>
               //     //   </div>
               //     // </div>
+            }
+          }
+        }
+
+        for(const id in data[user_name]){
+          if (id.substring(0, 7) == "product" && id.substring(0, 8) != "product_") {
+            if(data[user_name][id]["dealstate"]==1){
+              all_display_none()
+              $('#moreofmine').css({ 'display': 'none' })
+              $('#subpage_title').css({ 'display': 'block' })
+              $('#subpage_title').css({ 'background-color': '#556B94' })
+              $('#subpage_title .subpage_word').html("結帳")
+              $('#pay_blue').css({'display': 'block' })
+              await showpay(id)
             }
           }
         }
