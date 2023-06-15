@@ -113,6 +113,21 @@
             "request_remark": "",
             "accept": 1,
             "accepter": "user2"
+        },
+        "commentA1": {
+            "writer_name": "aaaa",
+            "star": "3",
+            "word": "溝通很好"
+        },
+        "commentA2": {
+            "writer_name": "aaaa",
+            "star": "0",
+            "word": "服務態度友善"
+        },
+        "commentA3": {
+            "writer_name": "aaaa",
+            "star": "5",
+            "word": "態度佳"
         }
     },
     "user2": {

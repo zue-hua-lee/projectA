@@ -2702,17 +2702,19 @@ input[type="file"]{display:none;}
   padding-left: 39%;
 }
 #accept_done{
+  width: 40vw;
+  padding: 2vh;
+  margin: 0 30vw;
+  border: none;
   background-color: #7FD6D0;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
   color:#FFFFFF;
-  width:50vw;
-  height:8vh;
-  padding:30px 0px 30px 59px;
-  font-size: 2.3vh;
-  position:relative;
-  left:25vw;
-  top:1vh;
-  border-radius: 13px;
-  margin-bottom: 5vh;
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+  position: fixed;
+  bottom: 12vh;
+  z-index: 5;
 }
 
 /* hasbuy */
@@ -2836,17 +2838,19 @@ input[type="file"]{display:none;}
   padding-left: 39%;
 }
 #buy_done{
-  background-color: #556B94;
+  width: 40vw;
+  padding: 2vh;
+  margin: 0 30vw;
+  border: none;
+  background-color:#556B94; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
   color:#FFFFFF;
-  width:50vw;
-  height:8vh;
-  padding:30px 0px 30px 48px;
-  font-size: 2.3vh;
-  position:relative;
-  left:25vw;
-  top:1vh;
-  border-radius: 13px;
-  margin-bottom: 5vh;
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+  position: fixed;
+  bottom: 12vh;
+  z-index: 5;
 }
 
 /* moreofmine */
@@ -3012,7 +3016,7 @@ input[type="file"]{display:none;}
   margin-bottom: 5vh;
 }
 /********pay_blue************/
-#pay_blue{
+#pay_blue, #score_page_green{
   width: 100%;
   height: 90.6vh;
   position: relative;
@@ -3028,7 +3032,8 @@ input[type="file"]{display:none;}
   border-radius: 22px;
   font-size: 1.3vh;
 }
-#pay_blue_box .pay_blue_subbox1{
+#pay_blue_box .pay_blue_subbox1,
+#score_box2 .score_subbox1{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -3069,10 +3074,12 @@ input[type="file"]{display:none;}
   height: 3vh;
 }
 
-#pay_blue_box .pay_word1{
+#pay_blue_box .pay_word1,
+#score_box2 .score_word4{
   font-weight: 600;
   font-size: 2vh;
   letter-spacing: 0.1em;
+  margin: 3px 0;
 }
 #pay_blue_box .pay_word2{
   font-weight: 400;
@@ -3090,22 +3097,102 @@ input[type="file"]{display:none;}
   color:#FFFFFF;
   font-size: 2vh;
   letter-spacing: 0.1em;
-  position: absolute;
+  position: fixed;
   bottom: 12vh;
   z-index: 5;
+}
+/**************score_page**************/
+#score_box1{
+  width: 80vw;
+  margin: 3vh 10vw;
+  padding: 1vh 5vw;
+  position: relative;
+}
+#score_page_green .score_word1{
+  font-weight: 600;
+  font-size: 2.2vh;
+}
+#score_page_green .score_word2{
+  font-weight: 400;
+  font-size: 1.2vh;
+  color: #939191;
+}
+#star_box{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+#star_box img{
+  width: 5vh;
+  height: 5vh;
+}
+#score_page_green .score_word3{
+  font-weight: 600;
+  font-size: 1.8vh;
+  margin-bottom: 1vh;
+}
+#comment_card_box div{
+  width: 32vw;
+  padding: 0.5vh 0;
+  margin: 0.5vh 0;
+  font-size: 1.8vh;
+  background-color: #7FD6D0;
+  border: 1px solid #7FD6D0;
+  border-radius: 8px;
+  color: #FFFFFF;
+  text-align: center;
+  white-space: nowrap;
+}
+#comment_card_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+#score_box2{
+  width: 80vw;
+  margin: 3vh 10vw;
+  padding: 1vh 5vw;
+  background: #FAFAFA;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+  font-size: 1.3vh;
+}
+#score_box2 .score_subbox2{
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  margin-bottom: 1.5vh;
+}
+#score_box2 #score_icon{
+  background: url(https://ppt.cc/fQdTPx@.png) no-repeat left/contain;
+  height: 2.5vh;
+  width: 8vw;
+}
+#score_box2 input[type="text"]{
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 1vh;
+  font-size: 1.2vh;
+  background: #E8E8E8;
+  border: 1px solid #E8E8E8;
+  border-radius: 8px;
+  overflow-wrap: break-word;
 }
 #bm_submit_score{
   width: 40vw;
   padding: 2vh;
   margin: 0 30vw;
   border: none;
-  background-color:#556B94; 
+  background-color:#7FD6D0; 
   border-radius: 8px;
   box-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 0.2);
   color:#FFFFFF;
   font-size: 2vh;
   letter-spacing: 0.1em;
-  position: absolute;
+  position: fixed;
   bottom: 12vh;
   z-index: 5;
 }
@@ -3168,3 +3255,4 @@ input[type="file"]{display:none;}
 #trip_contant{display:none}
 
 #pay_blue{display:none}
+#score_page_green{display:none}

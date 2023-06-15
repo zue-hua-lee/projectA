@@ -61,6 +61,7 @@ function all_display_none() {
   $('#self_product').css({ 'display': 'none' })
   $('#self_trip').css({'display': 'none' })
   $('#pay_blue').css({'display': 'none' })
+  $('#score_page_green').css({'display': 'none' })
 }
 
 function accept_case() {
@@ -1083,6 +1084,13 @@ function show(string) {
     state.push("deal_success_blue")
     $("#deal_success").css({'display':'block'});
     $('#background_top').css({'background-color':'#556B94'});
+  }
+  else if(string == "score_page_green"){
+    all_display_none()
+    state.push("score_page_green")
+    $("#score_page_green").css({'display':'block'});
+    $('#subpage_title').css({'display':'block'})
+    $('#subpage_title .subpage_word').html("評價");
   }
   else {
     console.log("changing error.")
@@ -2766,6 +2774,154 @@ $('#moreofmine .moreofmine_button').click(function () {
   else{
     show("moreofmine_need")
   }
+});
+
+var score;
+$('#star1').click(function () {
+  score = 1;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star2').click(function () {
+  score = 2;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star3').click(function () {
+  score = 3;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fGRQsx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star4').click(function () {
+  score = 4;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star5").attr("src","https://ppt.cc/fGRQsx@.png");
+});
+$('#star5').click(function () {
+  score = 5;
+  $("#star1").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star2").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star3").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star4").attr("src","https://ppt.cc/fSPbVx@.png");
+  $("#star5").attr("src","https://ppt.cc/fSPbVx@.png");
+});
+let comment_state = 0;
+$('#comment_card1').click(function () {
+  if(comment_state == 1){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 1;
+  }
+});
+$('#comment_card2').click(function () {
+  if(comment_state == 2){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 2;
+  }
+});
+$('#comment_card3').click(function () {
+  if(comment_state == 3){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 3;
+  }
+});
+$('#comment_card4').click(function () {
+  if(comment_state == 4){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 4;
+  }
+});
+$('#comment_card5').click(function () {
+  if(comment_state == 5){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 5;
+  }
+});
+$('#comment_card6').click(function () {
+  if(comment_state == 6){
+    comment_state = 0;
+    $(this).css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+  }
+  else{
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    $(this).css({'background-color':'#FFFFFF','color':'#ABB2B1','border-color':'#ABB2B1'});
+    comment_state = 6;
+  }
+});
+$('#accept_done').click(function () {
+  show("score_page_green")
+});
+$('#bm_submit_score').click(function (event) {
+  event.preventDefault()
+  if(comment_state == 1){
+    comment_state = "非常專業"
+  }
+  else if(comment_state == 2){
+    comment_state = "非常有耐心"
+  }
+  else if(comment_state == 3){
+    comment_state = "服務態度友善"
+  }
+  else if(comment_state == 4){
+    comment_state = "態度佳"
+  }
+  else if(comment_state == 5){
+    comment_state = "馬上回覆"
+  }
+  else if(comment_state == 6){
+    comment_state = "溝通很好"
+  }
+  else{
+    comment_state = ""
+  }
+  $.post('./submit_score_green', {
+    user_name: user_name,
+    writer_name: "aaaa",
+    score: score,
+    comment_state: comment_state,
+    comment_input: $('#score_page_green input[name="comment_input"]').val(),
+  }, (res) => {
+    score = 0;
+    comment_state = 0;
+    $('#comment_card_box div').css({'background-color':'#7FD6D0','color':'#FFFFFF','border-color':'#7FD6D0'});
+    show("mainpage_schedule")
+  })
 });
 
 function scheduledel(ss){
