@@ -60,7 +60,8 @@
             "product_arrive_date": "1",
             "request_remark": "hihi",
             "accept": 1,
-            "accepter": "user3"
+            "accepter": "user3",
+            "dealstate": 0
         },
         "product1": {
             "shipping_address_country": "美國",
@@ -77,7 +78,8 @@
             "product_arrive_date": "1",
             "request_remark": "none",
             "accept": 0,
-            "accepter": ""
+            "accepter": "",
+            "dealstate": 0
         },
         "product2": {
             "shipping_address_country": "美國",
@@ -94,7 +96,8 @@
             "product_arrive_date": "1",
             "request_remark": "",
             "accept": 0,
-            "accepter": ""
+            "accepter": "",
+            "dealstate": 0
         },
         "product3": {
             "shipping_address_country": "法國",
@@ -111,7 +114,8 @@
             "product_arrive_date": "1",
             "request_remark": "",
             "accept": 1,
-            "accepter": "user2"
+            "accepter": "user2",
+            "dealstate": 0
         },
         "commentA1": {
             "writer_name": "aaaa",
@@ -172,7 +176,8 @@
             "product_arrive_date": "12",
             "request_remark": "",
             "accept": 1,
-            "accepter": "user1"
+            "accepter": "user1",
+            "dealstate": 0
         }
     },
     "user3": {
