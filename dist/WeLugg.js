@@ -1178,7 +1178,7 @@ $(document).ready(function() {
     show("trip_contant")
   });
   $('#seller_page').click((event) => {
-    read_personal_page(ss[0])
+    read_personal_page($('#seller_name').text())
     show("personal_page_other_blue")
   })
 
@@ -1245,7 +1245,7 @@ $(document).ready(function() {
     show("product_contant")
   });
   $('#buyer_page').click((event) => {
-    read_personal_page(ss[0])
+    read_personal_page($('#buyer_name').text())
     show("personal_page_other_green")
   })
 
