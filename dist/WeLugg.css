@@ -3127,7 +3127,7 @@ input[type="file"]{display:none;}
   margin-bottom: 5vh;
 }
 /********pay_blue************/
-#pay_blue, #score_page_green{
+#pay_blue, #score_page_green, #score_page_blue{
   width: 100%;
   height: 90.6vh;
   position: relative;
@@ -3219,11 +3219,13 @@ input[type="file"]{display:none;}
   padding: 1vh 5vw;
   position: relative;
 }
-#score_page_green .score_word1{
+#score_page_green .score_word1,
+#score_page_blue .score_word1{
   font-weight: 600;
   font-size: 2.2vh;
 }
-#score_page_green .score_word2{
+#score_page_green .score_word2,
+#score_page_blue .score_word1{
   font-weight: 400;
   font-size: 1.2vh;
   color: #939191;
@@ -3237,12 +3239,14 @@ input[type="file"]{display:none;}
   width: 5vh;
   height: 5vh;
 }
-#score_page_green .score_word3{
+#score_page_green .score_word3,
+#score_page_blue .score_word1{
   font-weight: 600;
   font-size: 1.8vh;
   margin-bottom: 1vh;
 }
-#comment_card_box div{
+#score_page_green #comment_card_box div,
+#score_page_blue #comment_card_box div{
   width: 32vw;
   padding: 0.5vh 0;
   margin: 0.5vh 0;
@@ -3253,6 +3257,10 @@ input[type="file"]{display:none;}
   color: #FFFFFF;
   text-align: center;
   white-space: nowrap;
+}
+#score_page_blue #comment_card_box div{
+  background-color: #556B94;
+  border: 1px solid #556B94;
 }
 #comment_card_box{
   display: flex;
@@ -3277,8 +3285,13 @@ input[type="file"]{display:none;}
   align-items: top;
   margin-bottom: 1.5vh;
 }
-#score_box2 #score_icon{
+#score_page_green #score_icon{
   background: url(https://ppt.cc/fQdTPx@.png) no-repeat left/contain;
+  height: 2.5vh;
+  width: 8vw;
+}
+#score_page_blue #score_icon{
+  background: url(https://ppt.cc/fgeyYx@.png) no-repeat left/contain;
   height: 2.5vh;
   width: 8vw;
 }
@@ -3292,7 +3305,8 @@ input[type="file"]{display:none;}
   border-radius: 8px;
   overflow-wrap: break-word;
 }
-#bm_submit_score{
+#bm_submit_score_blue,
+#bm_submit_score_green{
   width: 40vw;
   padding: 2vh;
   margin: 0 30vw;
@@ -3307,7 +3321,9 @@ input[type="file"]{display:none;}
   bottom: 12vh;
   z-index: 5;
 }
-
+#bm_submit_score_blue{
+  background-color:#556B94; 
+}
 
 
 /* #homepage1{display:none} */
@@ -3367,4 +3383,4 @@ input[type="file"]{display:none;}
 
 #pay_blue{display:none}
 #score_page_green{display:none}
-#score_page_green{display:none}
+#score_page_blue{display:none}

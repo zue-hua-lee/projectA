@@ -522,6 +522,30 @@ app.post('/submit_score_green', (req, res) => {
     res.send("submit score_green seccuss.")
   })
 })
+app.post('/submit_score_blue', (req, res) => {
+  console.log(`${req.body.writer_name}`)
+  console.log(`${req.body.user_name}`)
+  console.log(`${req.body.score}`)
+  console.log(`${req.body.comment_input}`)
+  var max_num = 0;
+  fs.readFile('./data.json', function (err, data) {
+    if(err){return console.error(err)}
+    data = JSON.parse(data)
+    for(var id in data[`${req.body.user_name}`]){
+      if (id.substring(0, 8) == "commentB" && parseInt(id.substring(8)) > max_num){
+        max_num = parseInt(id.substring(8));
+      }
+    }
+    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)] = {}
+    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["writer_name"] = `${req.body.writer_name}`
+    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["star"] = `${req.body.score}`
+    data[`${req.body.user_name}`]["commentB"+(parseInt(max_num)+1)]["word"] = (`${req.body.comment_input}` != "")? `${req.body.comment_input}`:`${req.body.comment_state}`;
+    fs.writeFile('./data.json', JSON.stringify(data), function (err) {
+      if(err){return console.error(err)}
+    })
+    res.send("submit score_blue seccuss.")
+  })
+})
 
 // 
 app.post('/buydone', (req, res) => {
