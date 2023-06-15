@@ -268,6 +268,7 @@ app.get('/request_data', (req, res) => { //用get傳
       data[req.query.user_name]['product'+n]['request_remark'] = req.query.request_remark
       data[req.query.user_name]['product'+n]['accept'] = 0 //接受交易
       data[req.query.user_name]['product'+n]['accepter'] = "" //接受交易者
+      data[req.query.user_name]['product'+n]['dealstate'] = 0 //接受交易者
       data[req.query.user_name]['product_num'] = parseInt(n,10)+1 //總商品數+1
       if(req.query.product_img != null){
         for(var i = 0; i < req.query.product_img.length; i++){
