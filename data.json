@@ -189,6 +189,24 @@
             "accepter": "Nancy_Lin",
             "dealstate": 0
         },
+        "product1": {
+            "shipping_address_country": "法國",
+            "shipping_address_city": "巴黎",
+            "product_place_country": "台灣",
+            "product_place_city": "台南",
+            "set_product_name": "新鮮大龍蝦",
+            "set_shop_name": "港都海鮮屋",
+            "set_shop_address": "台南市中西區民權路一段80號",
+            "request_product_list": "Food",
+            "set_product_quantity": "4",
+            "product_arrive_year": "2023",
+            "product_arrive_month": "8",
+            "product_arrive_date": "12",
+            "request_remark": "",
+            "accept": 0,
+            "accepter": "",
+            "dealstate": 0
+        },
         "commentA1": {
             "writer_name": "Nancy_Lin",
             "star": "4",
