@@ -241,7 +241,7 @@
         "birth": "2023/6/16",
         "mail": "e1234567@gmail.com",
         "phone": "091234567",
-        "trip_num": 3,
+        "trip_num": 10,
         "product_num": 33,
         "trip0": {
             "departure_country": "台灣",
