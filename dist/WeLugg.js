@@ -1287,13 +1287,13 @@ function show(string) {
     console.log("changing error.")
   }
 }
-$('#bm_credit_card').click((event) => {
-  all_display_none()
-  $('#subpage_title').css({ 'display': 'block' })
-  $('#subpage_title').css({ 'background-color': '#556B94' })
-  $('#subpage_title .subpage_word').html("結帳")
-  $('#pay_blue').css({'display': 'block' })
-})
+// $('#bm_credit_card').click((event) => {
+//   all_display_none()
+//   $('#subpage_title').css({ 'display': 'block' })
+//   $('#subpage_title').css({ 'background-color': '#556B94' })
+//   $('#subpage_title .subpage_word').html("結帳")
+//   $('#pay_blue').css({'display': 'block' })
+// })
 $('#check_box .deal_yes').click((event) => {
   all_display_none()
   $('#subpage_title').css({ 'display': 'block' })
