@@ -2392,7 +2392,7 @@ $(document).ready(function() {
 $('#moreofmine_schedule').on('click', '#myschedule :nth-child(n)', function(){
   var nn = $(this).attr('class')
   console.log(nn)
-  if(nn!='prd_img' && nn!='trip_loc'&& nn!='trip_date'&& nn!='lug'&& nn!='type'&& nn!='tip' && nn!='grab')
+  if(nn!='prd_img' && nn!='trip_loc'&& nn!='trip_date'&& nn!='lug'&& nn!='type'&& nn!='tip' && nn!='garb')
   {
     let ss = nn.split(/\s/);
     event.preventDefault()
